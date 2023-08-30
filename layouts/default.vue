@@ -3,6 +3,7 @@
     <div class="planet"></div>
     <Header />
     <slot />
+    <Footer />
   </div>
 </template>
 

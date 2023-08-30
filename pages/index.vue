@@ -2706,6 +2706,7 @@ onMounted(() => {
     }
   }
 }
+
 section.intro-container {
   padding-bottom: 1.111em;
 
@@ -2832,6 +2833,54 @@ section.catalog-info-container {
   }
 }
 
+.catalog-games-container {
+  padding-bottom: 1.25rem;
+
+  h3 {
+    border-bottom: 0;
+    border-top: 1px solid #dedede;
+    color: #44a5ab;
+    font-size: 1.5rem;
+    margin: 1.25rem 0;
+    padding: 0.4rem 0.2rem;
+    text-shadow: 0 0 0 transparent;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+  & > div {
+    padding: 1.25rem 1.25rem 0;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+  }
+
+  .games-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    margin: -0.9375rem -0.9375rem 0 0;
+
+    .game {
+      flex: 1;
+    }
+
+    .game.card {
+      display: block;
+      max-width: inherit;
+    }
+  }
+
+  .button-container {
+        box-sizing: border-box;
+        padding: 1.25rem;
+        text-align: center;
+        width: 100%;
+      }
+}
+
 @media (min-width: 576px) {
   .special-event-img {
     right: -30px;
@@ -2875,6 +2924,24 @@ section.catalog-info-container {
         flex-direction: column-reverse;
       }
     }
+  }
+
+  .catalog-games-container {
+    h3 {
+      margin: 1.364rem 0;
+    }
+
+    & > div {
+      padding: 1.364rem 1.364rem 0;
+    }
+
+    .games-container {
+      margin: -0.6818rem;
+    }
+
+    .button-container {
+          padding: 1.364rem;
+        }
   }
 }
 
@@ -2956,6 +3023,17 @@ section.catalog-info-container {
     }
   }
 }
+
+@media (min-width: 1175px) {
+  .catalog-games-container {
+    .games-container {
+      .game:nth-child(n + 13) {
+        display: none;
+      }
+    }
+  }
+}
+
 @media (min-width: 1366px) {
   section.intro-container {
     padding-bottom: 2.727em;
@@ -2981,6 +3059,25 @@ section.catalog-info-container {
     top: -8px;
     width: 190px !important;
     z-index: 1 !important;
+  }
+}
+
+@media (min-width: 1439px) {
+  .catalog-games-container {
+    .games-container {
+      .game:nth-child(n + 13) {
+        display: block;
+      }
+    }
+  }
+}
+@media (min-width: 1750px) {
+  .catalog-games-container {
+    .games-container {
+      .game:nth-child(n + 10) {
+        display: none;
+      }
+    }
   }
 }
 </style>

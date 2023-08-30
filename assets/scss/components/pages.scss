@@ -17,12 +17,12 @@ body.home {
   position: absolute;
   top: 0;
   width: 100%;
-  background: url("images/planets/planet-green.png") 0 -150px no-repeat;
+  background: url("/images/planets/planet-green.png") 0 -150px no-repeat;
 }
 
 body.error .planet,
 body.home .planet {
-  background: url("images/planets/planet-green.png") 0 -150px no-repeat;
+  background: url("/images/planets/planet-green.png") 0 -150px no-repeat;
 }
 
 body.about {
@@ -30,7 +30,7 @@ body.about {
 }
 
 body.about .planet {
-  background: url("images/planets/planet-green.png") -150px -150px no-repeat;
+  background: url("/images/planets/planet-green.png") -150px -150px no-repeat;
 }
 
 body.publishers {
@@ -42,24 +42,24 @@ body.developers {
 }
 
 body.developers .planet {
-  background: url("images/planets/planet-saturn.png") -250px -150px no-repeat;
+  background: url("/images/planets/planet-saturn.png") -250px -150px no-repeat;
 }
 
 body.publishers .planet {
-  background: url("images/planets/planet-astroids.png") -250px -150px no-repeat;
+  background: url("/images/planets/planet-astroids.png") -250px -150px no-repeat;
 }
 
 body.sdk {
   background: linear-gradient(270deg, #fc6926, #ef0e74, #fc6926);
 }
 body.sdk .planet {
-  background: url("images/planets/planet-saturn.png") -200px 50px no-repeat;
+  background: url("/images/planets/planet-saturn.png") -200px 50px no-repeat;
 }
 body.rss {
   background: linear-gradient(270deg, #240d47, #5c3997, #240d47);
 }
 body.rss .planet {
-  background: url("images/planets/planet-astroids.png") -250px -150px no-repeat;
+  background: url("/images/planets/planet-astroids.png") -250px -150px no-repeat;
 }
 
 .about .main-wrapper,
@@ -79,7 +79,7 @@ body.rss .planet {
 .rss .main-wrapper:before,
 .sdk .main-wrapper:before {
   animation: animationStars 24s linear infinite;
-  background: url("images/planets/stars.svg") 0 0 repeat;
+  background: url("/images/planets/stars.svg") 0 0 repeat;
   background-size: 100%;
   content: "";
   height: 800px;
@@ -99,7 +99,7 @@ body.rss .planet {
 .rss .main-wrapper:after,
 .sdk .main-wrapper:after {
   animation: animationStarsAfter 24s linear infinite;
-  background: url("images/planets/stars.svg") 0 0 repeat;
+  background: url("/images/planets/stars.svg") 0 0 repeat;
   background-size: 100%;
   content: "";
   height: 800px;
@@ -118,7 +118,7 @@ body.rss .planet {
 .publishers section:first-of-type:before,
 .rss section:first-of-type:before,
 .sdk section:first-of-type:before {
-  background: url("images/shape-bg.svg") no-repeat 100% 0;
+  background: url("/images/shape-bg.svg") no-repeat 100% 0;
   background-size: cover;
   content: "";
   height: 100%;

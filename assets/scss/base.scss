@@ -25,7 +25,6 @@ hgroup,
 main,
 menu,
 nav,
-section,
 summary {
   display: block;
 }
@@ -232,27 +231,6 @@ header small {
   transform: translateX(-50%);
 }
 
-section {
-  position: relative;
-
-  &:first-of-type {
-    padding-top: 4.167em;
-  }
-
-  article {
-    padding: 2.2222em 0.278em 0.556em;
-    text-align: center;
-
-    p {
-      padding: 1.111em;
-    }
-
-    .gd-button {
-      width: calc(86% - 2.222em);
-    }
-  }
-}
-
 small {
   font-family: "Squada One", cursive;
   font-size: 0.8em;
@@ -411,81 +389,6 @@ form select {
   width: 100%;
 }
 
-section.intro-container {
-  padding-bottom: 1.111em;
-
-  header {
-    h1 {
-      border-bottom: 1px solid #44a5ab;
-      border-top: 1px solid #44a5ab;
-
-      a {
-        color: #fff;
-        text-decoration: none;
-      }
-    }
-
-    small {
-      border: none;
-      color: #fc8f28;
-      margin: 0;
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-    }
-  }
-
-  article:first-of-type {
-    padding-bottom: 20px;
-
-    p a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: lighter;
-    }
-  }
-
-  .cta {
-    display: flex;
-    margin: 22px 0;
-    padding: 0;
-    position: relative;
-    width: 100% !important;
-
-    &-txt {
-      padding: 12px;
-    }
-
-    .joinus-home {
-      margin-left: auto;
-      padding: 12px;
-      text-align: center;
-      width: 100%;
-
-      small {
-        display: block;
-        font-size: 1em;
-        line-height: 150%;
-        text-transform: uppercase;
-      }
-
-      a {
-        background-color: #512e85;
-        margin-top: 12px;
-        width: 100%;
-      }
-    }
-
-    p {
-      margin: 0;
-      padding: 0;
-      width: auto;
-    }
-  }
-}
-
 .wrapper {
   margin: auto;
   position: relative;
@@ -509,54 +412,9 @@ section.intro-container {
   .gd-button.flat:hover {
     background-color: #ff8c1c;
   }
-
-  section {
-    &:first-of-type {
-      padding-top: 3.409em;
-    }
-
-    article {
-      p {
-        padding: 0;
-      }
-
-      .gd-button {
-        min-width: 220px;
-        width: auto;
-      }
-    }
-  }
-
-  section.intro-container {
-    padding-bottom: 2.727em;
-
-    .cta {
-      p {
-        padding: 12px;
-      }
-    }
-  }
 }
 
 @media (min-width: 1025px) {
-  section.intro-container {
-    article:first-of-type {
-      padding-top: 0;
-    }
-
-    .cta {
-      width: 70%;
-
-      .joinus-home {
-        width: 30%;
-      }
-
-      p {
-        margin: 0;
-      }
-    }
-  }
-
   .wrapper {
     width: 900px;
   }
@@ -573,20 +431,6 @@ section.intro-container {
 
   header small {
     font-size: 1.091em;
-  }
-
-  section.intro-container {
-    padding-bottom: 2.727em;
-  }
-
-  section {
-    &:first-of-type {
-      padding-top: 4.167em;
-    }
-
-    article {
-      padding: 2.727em 1.136em 3.409em;
-    }
   }
 
   .wrapper {

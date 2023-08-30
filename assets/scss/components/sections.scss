@@ -1,0 +1,56 @@
+section,
+summary {
+  display: block;
+}
+
+section {
+  position: relative;
+
+  &:first-of-type {
+    padding-top: 4.167em;
+  }
+
+  article {
+    padding: 2.2222em 0.278em 0.556em;
+    text-align: center;
+
+    p {
+      padding: 1.111em;
+    }
+
+    .gd-button {
+      width: calc(86% - 2.222em);
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  section {
+    &:first-of-type {
+      padding-top: 3.409em;
+    }
+
+    article {
+      p {
+        padding: 0;
+      }
+
+      .gd-button {
+        min-width: 220px;
+        width: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: 1366px) {
+  section {
+    &:first-of-type {
+      padding-top: 4.167em;
+    }
+
+    article {
+      padding: 2.727em 1.136em 3.409em;
+    }
+  }
+}

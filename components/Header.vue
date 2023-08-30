@@ -6,7 +6,7 @@
         <IconTime v-show="isShowMenuMobile" class="rotate" />
       </div>
       <div class="mobile-navigation slide-right" v-show="isShowMenuMobile">
-        <NuxtLink href="/games" class=""> Games </NuxtLink>
+        <NuxtLink href="/games" class="active"> Games </NuxtLink>
         <NuxtLink href="/solutions/white-label" class=""> White Label Solution </NuxtLink>
         <NuxtLink href="/about" class=""> About </NuxtLink>
         <NuxtLink href="/publishers" class=""> Publishers </NuxtLink>
@@ -29,7 +29,7 @@
         <img src="/images/logos/logo-white.svg" alt="logo" class="logo-full" />
       </NuxtLink>
       <div class="desktop-navigation">
-        <NuxtLink to="/games" class="gd-button"> Games </NuxtLink>
+        <NuxtLink to="/games" class="gd-button active"> Games </NuxtLink>
         <NuxtLink to="/solutions/white-label" class="gd-button"> Products for Publishers </NuxtLink>
         <NuxtLink to="/about" class="gd-button"> About </NuxtLink>
         <NuxtLink to="/publishers" class="gd-button"> Publishers </NuxtLink>
@@ -113,7 +113,7 @@ nav {
     svg {
       width: 30px;
       height: 30px;
-      fill: #b7f9ff;
+      fill: #512e85;
       transform: rotate(0deg);
       transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
     }
@@ -175,6 +175,19 @@ nav {
     }
   }
 }
+
+.about nav .menu-icon svg,
+.error nav .menu-icon svg,
+.home nav .menu-icon svg {
+  fill: #b7f9ff;
+}
+
+.about nav a,
+.error nav a,
+.home nav a {
+  color: #fff;
+}
+
 @media (min-width: 640px) {
   nav {
     font-size: 18px;
@@ -189,6 +202,7 @@ nav {
     }
   }
 }
+
 @media (min-width: 1025px) {
   nav {
     .wrapper {
@@ -214,7 +228,7 @@ nav {
       a {
         background: transparent;
         border-bottom-color: transparent;
-        color: #fff;
+        color: #512e85;
         font-family: "Squada One", cursive;
         font-size: 0.864em;
         padding: 0.273em 0.818em;

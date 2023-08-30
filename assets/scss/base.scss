@@ -5,6 +5,14 @@ html {
 }
 body {
   margin: 0;
+  background: #fff;
+  color: #999;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 180%;
+  -webkit-text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
 }
 article,
 aside,
@@ -173,22 +181,6 @@ th {
   padding: 0;
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  background: #fff;
-  color: #999;
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  letter-spacing: 1px;
-  line-height: 180%;
-  -webkit-text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
-}
-
-body.home {
-  background: linear-gradient(270deg, #24b3c0, #1b3786, #24b3c0);
-}
-
 h1,
 h2,
 h3,
@@ -209,9 +201,55 @@ header small {
   text-transform: uppercase;
 }
 
-p {
-  font-size: 1em;
-  margin: 0.556em auto;
+header {
+  position: relative;
+}
+header:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+header small {
+  border-bottom: 0;
+  border-top: 1px solid transparent;
+  color: #fff;
+  font-size: 1.091em;
+  letter-spacing: 1px;
+  padding: 0.591em 0.045em;
+  text-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.5);
+  margin: 0.67em 0;
+}
+
+header h1,
+header h2,
+header h3,
+header small {
+  clear: left;
+  float: left;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+}
+
+section {
+  position: relative;
+
+  &:first-of-type {
+    padding-top: 4.167em;
+  }
+
+  article {
+    padding: 2.2222em 0.278em 0.556em;
+    text-align: center;
+
+    p {
+      padding: 1.111em;
+    }
+
+    .gd-button {
+      width: calc(86% - 2.222em);
+    }
+  }
 }
 
 small {
@@ -220,6 +258,12 @@ small {
   letter-spacing: 1px;
   text-transform: capitalize;
 }
+
+p {
+  font-size: 1em;
+  margin: 0.556em auto;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -282,7 +326,6 @@ form select {
   letter-spacing: 1px;
   outline: none;
   padding: 0.7em 1.4em;
-  -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: uppercase;
   transition: box-shadow 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25), transform 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25);
@@ -341,7 +384,6 @@ form select {
           color: #fff;
           display: block;
           font-size: inherit;
-          -webkit-text-decoration: none;
           text-decoration: none;
           transform: none !important;
           transition: background 0.1s ease;
@@ -368,6 +410,87 @@ form select {
   width: 100%;
 }
 
+section.intro-container {
+  padding-bottom: 1.111em;
+
+  header {
+    h1 {
+      border-bottom: 1px solid #44a5ab;
+      border-top: 1px solid #44a5ab;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+
+    small {
+      border: none;
+      color: #fc8f28;
+      margin: 0;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+
+  article:first-of-type {
+    padding-bottom: 20px;
+
+    p a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: lighter;
+    }
+  }
+
+  .cta {
+    display: flex;
+    margin: 22px 0;
+    padding: 0;
+    position: relative;
+    width: 100% !important;
+
+    &-txt {
+      padding: 12px;
+    }
+
+    .joinus-home {
+      margin-left: auto;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+
+      small {
+        display: block;
+        font-size: 1em;
+        line-height: 150%;
+        text-transform: uppercase;
+      }
+
+      a {
+        background-color: #512e85;
+        margin-top: 12px;
+        width: 100%;
+      }
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      width: auto;
+    }
+  }
+}
+
+.wrapper {
+  margin: auto;
+  position: relative;
+  width: 100%;
+}
+
 @media (min-width: 640px) {
   body {
     font-size: 22px;
@@ -385,6 +508,57 @@ form select {
   .gd-button.flat:hover {
     background-color: #ff8c1c;
   }
+
+  section {
+    &:first-of-type {
+      padding-top: 3.409em;
+    }
+
+    article {
+      p {
+        padding: 0;
+      }
+
+      .gd-button {
+        min-width: 220px;
+        width: auto;
+      }
+    }
+  }
+
+  section.intro-container {
+    padding-bottom: 2.727em;
+
+    .cta {
+      p {
+        padding: 12px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  section.intro-container {
+    article:first-of-type {
+      padding-top: 0;
+    }
+
+    .cta {
+      width: 70%;
+
+      .joinus-home {
+        width: 30%;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .wrapper {
+    width: 900px;
+  }
 }
 
 @media (min-width: 1366px) {
@@ -394,5 +568,27 @@ form select {
   h4,
   header small {
     font-size: 2.545em;
+  }
+
+  header small {
+    font-size: 1.091em;
+  }
+
+  section.intro-container {
+    padding-bottom: 2.727em;
+  }
+
+  section {
+    &:first-of-type {
+      padding-top: 4.167em;
+    }
+
+    article {
+      padding: 2.727em 1.136em 3.409em;
+    }
+  }
+
+  .wrapper {
+    width: 1280px;
   }
 }

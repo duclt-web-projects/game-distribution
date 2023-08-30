@@ -11,6 +11,15 @@ body.error,
 body.home {
   background: linear-gradient(270deg, #24b3c0, #1b3786, #24b3c0);
 }
+
+.planet {
+  height: calc(100% - 579px);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: url("images/planets/planet-green.png") 0 -150px no-repeat;
+}
+
 body.error .planet,
 body.home .planet {
   background: url("images/planets/planet-green.png") 0 0 no-repeat;

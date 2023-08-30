@@ -1,5 +1,6 @@
 <template>
   <div class="main-wrapper">
+    <div class="planet"></div>
     <Header />
     <slot />
   </div>

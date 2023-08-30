@@ -1,51 +1,42 @@
 <template>
-  <div class="planet"></div>
-  <div data-v-6a74dd97="">
-    <section data-v-6a74dd97="" class="intro-container">
-      <div data-v-6a74dd97="" class="wrapper">
-        <article data-v-6a74dd97="">
-          <header data-v-6a74dd97="">
-            <small data-v-6a74dd97=""><a data-v-6a74dd97="" href="/games" class="">GameDistribution</a></small>
-            <h1 data-v-6a74dd97="">
-              <a data-v-6a74dd97="" href="/games" class=""> Connecting Games &amp; Players</a>
+  <div>
+    <section class="intro-container">
+      <div class="wrapper">
+        <article>
+          <header>
+            <small><a href="/games" class="">GameDistribution</a></small>
+            <h1>
+              <a href="/games" class=""> Connecting Games &amp; Players</a>
             </h1>
-            <article data-v-6a74dd97="" class="christmas">
-              <a
-                data-v-6a74dd97=""
-                href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano"
-                class=""
-                target="_self"
+            <article class="christmas">
+              <a href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano" class="" target="_self"
                 ><img
-                  data-v-6a74dd97=""
                   src="https://img.gamedistribution.com/promotions/ubisoft-promotions-logo.png"
-                  class="special-event-Img"
+                  class="special-event-img"
                   style="width: 231px"
               /></a>
             </article>
           </header>
-          <p data-v-6a74dd97="">
-            <a data-v-6a74dd97="" href="/games" class="" target="_self"
+          <p>
+            <a href="/games" class="" target="_self"
               >GameDistribution is the biggest broker of high quality, cross-platform games. We connect the best game
               developers to the biggest publishers.</a
             >
           </p>
         </article>
-        <div data-v-6a74dd97="" class="promo-container">
-          <div data-v-6a74dd97="" class="promo-left">
-            <div data-v-6a74dd97="" class="promo-tile-item">
-              <div data-v-6a74dd97="" class="promo-featured is-orange">
-                <div data-v-6a74dd97="" class="promo-info">
-                  <h3 data-v-6a74dd97="">
-                    <a data-v-6a74dd97="" href="/games/the-smurfs-cooking" class="" title="The Smurfs Cooking"
-                      >The Smurfs Cooking</a
-                    >
+        <div class="promo-container">
+          <div class="promo-left">
+            <div class="promo-tile-item">
+              <div class="promo-featured is-orange">
+                <div class="promo-info">
+                  <h3>
+                    <a href="/games/the-smurfs-cooking" class="" title="The Smurfs Cooking">The Smurfs Cooking</a>
                   </h3>
-                  <small data-v-6a74dd97="">
+                  <small>
                     By
-                    <a data-v-6a74dd97="" href="/games?company=IMPS" class="" title="IMPS">IMPS</a></small
+                    <a href="/games?company=IMPS" class="" title="IMPS">IMPS</a></small
                   >
                   <svg
-                    data-v-6a74dd97=""
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +46,6 @@
                     xml:space="preserve"
                   >
                     <path
-                      data-v-6a74dd97=""
                       d="M36.1,0H13.5H3.4C1.5,0,0,1.6,0.1,3.5c0.1,1.8,1.7,3.2,3.5,
                   3.2h17.2h0.5c1.6,0,3,1.1,3.3,2.6c0.4,2.1-1.2,4-3.3,4h-3.5c-1.6,
                   0-3,1.1-3.3,2.6c-0.4,2.1,1.2,4,3.2,4h12.8c1.6,0,3,1.1,3.3,
@@ -65,153 +55,136 @@
                     ></path>
                   </svg>
                 </div>
-                <div data-v-6a74dd97="" class="promo-image">
-                  <div data-v-6a74dd97="" class="image is-2by1">
+                <div class="promo-image">
+                  <div class="image is-2by1">
                     <img
-                      data-v-6a74dd97=""
                       src="https://img.gamedistribution.com/featured/ec7df258c06147e6a5b2325ee02cf5b3.jpg"
                       alt="The Smurfs Cooking"
                     />
                   </div>
-                  <div data-v-6a74dd97="" class="pills" style="">
-                    <a data-v-6a74dd97="" href="/games?tag=casual" class="pill transparent" title="casual">casual</a>
+                  <div class="pills" style="">
+                    <a href="/games?tag=casual" class="pill transparent" title="casual">casual</a>
                   </div>
                 </div>
               </div>
             </div>
-            <div data-v-6a74dd97="" class="promo-columns">
-              <div data-v-6a74dd97="" class="promo-tile-item">
-                <div data-v-6a74dd97="" class="promo-normal is-orange">
-                  <div data-v-6a74dd97="" class="promo-info">
-                    <h4 data-v-6a74dd97="">
-                      <a data-v-6a74dd97="" href="/games/the-mergest-kingdom" class="" title="The Smurfs Cooking"
-                        >The Mergest Kingdom</a
-                      >
+            <div class="promo-columns">
+              <div class="promo-tile-item">
+                <div class="promo-normal is-orange">
+                  <div class="promo-info">
+                    <h4>
+                      <a href="/games/the-mergest-kingdom" class="" title="The Smurfs Cooking">The Mergest Kingdom</a>
                     </h4>
-                    <small data-v-6a74dd97="">
+                    <small>
                       By
-                      <a
-                        data-v-6a74dd97=""
-                        href="/games?company=Clever%20Apps%20Pte.%20Ltd."
-                        class=""
-                        title="Clever Apps Pte. Ltd."
+                      <a href="/games?company=Clever%20Apps%20Pte.%20Ltd." class="" title="Clever Apps Pte. Ltd."
                         >Clever Apps Pte. Ltd.</a
                       ></small
                     >
                   </div>
-                  <div data-v-6a74dd97="" class="promo-image">
-                    <div data-v-6a74dd97="" class="image is-4by3">
+                  <div class="promo-image">
+                    <div class="image is-4by3">
                       <img
-                        data-v-6a74dd97=""
                         src="https://img.gamedistribution.com/b5203bfef51242c39690c761321d769f-512x384.jpeg"
                         alt="The Mergest Kingdom"
                       />
                     </div>
-                    <div data-v-6a74dd97="" class="pills" style="">
-                      <a data-v-6a74dd97="" href="/games?tag=build" class="pill transparent" title="build">build</a
-                      ><a data-v-6a74dd97="" href="/games?tag=builder" class="pill transparent" title="builder"
-                        >builder</a
-                      >
+                    <div class="pills" style="">
+                      <a href="/games?tag=build" class="pill transparent" title="build">build</a
+                      ><a href="/games?tag=builder" class="pill transparent" title="builder">builder</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-tile-item">
-                <div data-v-6a74dd97="" class="promo-normal is-purple">
-                  <div data-v-6a74dd97="" class="promo-image">
-                    <div data-v-6a74dd97="" class="image is-4by3">
+              <div class="promo-tile-item">
+                <div class="promo-normal is-purple">
+                  <div class="promo-image">
+                    <div class="image is-4by3">
                       <img
-                        data-v-6a74dd97=""
                         src="https://img.gamedistribution.com/c8608aa5e1ee4f61967844ba20a279e9-512x384.jpg"
                         alt="Rabbids Volcano Panic"
                       />
                     </div>
-                    <div data-v-6a74dd97="" class="pills" style="">
-                      <a data-v-6a74dd97="" href="/games?tag=nano" class="pill transparent" title="nano">nano</a>
+                    <div class="pills" style="">
+                      <a href="/games?tag=nano" class="pill transparent" title="nano">nano</a>
                     </div>
                   </div>
-                  <div data-v-6a74dd97="" class="promo-info">
-                    <h4 data-v-6a74dd97="">
-                      <a data-v-6a74dd97="" href="/games/rabbids-volcano-panic" class="" title="Rabbids Volcano Panic"
+                  <div class="promo-info">
+                    <h4>
+                      <a href="/games/rabbids-volcano-panic" class="" title="Rabbids Volcano Panic"
                         >Rabbids Volcano Panic</a
                       >
                     </h4>
-                    <small data-v-6a74dd97="">
+                    <small>
                       By
-                      <a data-v-6a74dd97="" href="/games?company=Ubisoft" class="" title="Ubisoft">Ubisoft</a></small
+                      <a href="/games?company=Ubisoft" class="" title="Ubisoft">Ubisoft</a></small
                     >
                   </div>
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-tile-item">
-                <div data-v-6a74dd97="" class="promo-normal is-orange">
-                  <div data-v-6a74dd97="" class="promo-info">
-                    <h4 data-v-6a74dd97="">
-                      <a data-v-6a74dd97="" href="/games/asphalt-retro" class="" title="Asphalt Retro">Asphalt Retro</a>
+              <div class="promo-tile-item">
+                <div class="promo-normal is-orange">
+                  <div class="promo-info">
+                    <h4>
+                      <a href="/games/asphalt-retro" class="" title="Asphalt Retro">Asphalt Retro</a>
                     </h4>
-                    <small data-v-6a74dd97="">
+                    <small>
                       By
-                      <a data-v-6a74dd97="" href="/games?company=Gameloft%20SE" class="" title="Gameloft SE"
-                        >Gameloft SE</a
-                      ></small
+                      <a href="/games?company=Gameloft%20SE" class="" title="Gameloft SE">Gameloft SE</a></small
                     >
                   </div>
-                  <div data-v-6a74dd97="" class="promo-image">
-                    <div data-v-6a74dd97="" class="image is-4by3">
+                  <div class="promo-image">
+                    <div class="image is-4by3">
                       <img
-                        data-v-6a74dd97=""
                         src="https://img.gamedistribution.com/2c122cee7ef04222a962449e32a34e98-512x384.jpeg"
                         alt="Asphalt Retro"
                       />
                     </div>
-                    <div data-v-6a74dd97="" class="pills" style="">
-                      <a data-v-6a74dd97="" href="/games?tag=cars" class="pill transparent" title="cars">cars</a
-                      ><a data-v-6a74dd97="" href="/games?tag=racing" class="pill transparent" title="racing">racing</a>
+                    <div class="pills" style="">
+                      <a href="/games?tag=cars" class="pill transparent" title="cars">cars</a
+                      ><a href="/games?tag=racing" class="pill transparent" title="racing">racing</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div data-v-6a74dd97="" class="promo-right">
-            <div data-v-6a74dd97="" class="promo-list-item">
-              <div data-v-6a74dd97="" class="promo-image">
-                <div data-v-6a74dd97="" class="image is-4by3">
+          <div class="promo-right">
+            <div class="promo-list-item">
+              <div class="promo-image">
+                <div class="image is-4by3">
                   <img
-                    data-v-6a74dd97=""
                     src="https://img.gamedistribution.com/1d9e7e2883e144d293c0894e230b5441-512x384.jpg"
                     alt="Mob Control"
                   />
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-info">
-                <h4 data-v-6a74dd97="">
-                  <a data-v-6a74dd97="" href="/games/mob-control" class="" title="Mob Control">Mob Control</a>
+              <div class="promo-info">
+                <h4>
+                  <a href="/games/mob-control" class="" title="Mob Control">Mob Control</a>
                 </h4>
-                <small data-v-6a74dd97="">
+                <small>
                   By
-                  <a data-v-6a74dd97="" href="/games?company=VOODOO" class="" title="VOODOO">VOODOO</a></small
+                  <a href="/games?company=VOODOO" class="" title="VOODOO">VOODOO</a></small
                 >
               </div>
             </div>
-            <div data-v-6a74dd97="" class="promo-list-item">
-              <div data-v-6a74dd97="" class="promo-image">
-                <div data-v-6a74dd97="" class="image is-4by3">
+            <div class="promo-list-item">
+              <div class="promo-image">
+                <div class="image is-4by3">
                   <img
-                    data-v-6a74dd97=""
                     src="https://img.gamedistribution.com/0dd92ae2a7214f289608049167f2ebd4-512x384.jpeg"
                     alt="Jewels Blitz 5"
                   />
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-info">
-                <h4 data-v-6a74dd97="">
-                  <a data-v-6a74dd97="" href="/games/jewels-blitz-5" class="" title="Jewels Blitz 5">Jewels Blitz 5</a>
+              <div class="promo-info">
+                <h4>
+                  <a href="/games/jewels-blitz-5" class="" title="Jewels Blitz 5">Jewels Blitz 5</a>
                 </h4>
-                <small data-v-6a74dd97="">
+                <small>
                   By
                   <a
-                    data-v-6a74dd97=""
                     href="/games?company=SOFTGAMES%20%E2%80%93%20Mobile%20Entertainment%20Services%20GmbH"
                     class=""
                     title="SOFTGAMES – Mobile Entertainment Services GmbH"
@@ -220,120 +193,105 @@
                 >
               </div>
             </div>
-            <div data-v-6a74dd97="" class="promo-list-item">
-              <div data-v-6a74dd97="" class="promo-image">
-                <div data-v-6a74dd97="" class="image is-4by3">
+            <div class="promo-list-item">
+              <div class="promo-image">
+                <div class="image is-4by3">
                   <img
-                    data-v-6a74dd97=""
                     src="https://img.gamedistribution.com/d4ac0ead7ff5403eb3aa6ab620b0b959-512x384.jpeg"
                     alt="Gold Tower Defense"
                   />
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-info">
-                <h4 data-v-6a74dd97="">
-                  <a data-v-6a74dd97="" href="/games/gold-tower-defense" class="" title="Gold Tower Defense"
-                    >Gold Tower Defense</a
-                  >
+              <div class="promo-info">
+                <h4>
+                  <a href="/games/gold-tower-defense" class="" title="Gold Tower Defense">Gold Tower Defense</a>
                 </h4>
-                <small data-v-6a74dd97="">
+                <small>
                   By
-                  <a data-v-6a74dd97="" href="/games?company=BUSIDOL" class="" title="BUSIDOL">BUSIDOL</a></small
+                  <a href="/games?company=BUSIDOL" class="" title="BUSIDOL">BUSIDOL</a></small
                 >
               </div>
             </div>
-            <div data-v-6a74dd97="" class="promo-list-item">
-              <div data-v-6a74dd97="" class="promo-image">
-                <div data-v-6a74dd97="" class="image is-4by3">
+            <div class="promo-list-item">
+              <div class="promo-image">
+                <div class="image is-4by3">
                   <img
-                    data-v-6a74dd97=""
                     src="https://img.gamedistribution.com/8f006852782547a7b8dbf392f7883e9e-512x384.jpeg"
                     alt="Atari Breakout"
                   />
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-info">
-                <h4 data-v-6a74dd97="">
-                  <a data-v-6a74dd97="" href="/games/atari-breakout" class="" title="Atari Breakout">Atari Breakout</a>
+              <div class="promo-info">
+                <h4>
+                  <a href="/games/atari-breakout" class="" title="Atari Breakout">Atari Breakout</a>
                 </h4>
-                <small data-v-6a74dd97="">
+                <small>
                   By
-                  <a data-v-6a74dd97="" href="/games?company=Atari" class="" title="Atari">Atari</a></small
+                  <a href="/games?company=Atari" class="" title="Atari">Atari</a></small
                 >
               </div>
             </div>
-            <div data-v-6a74dd97="" class="promo-list-item">
-              <div data-v-6a74dd97="" class="promo-image">
-                <div data-v-6a74dd97="" class="image is-4by3">
+            <div class="promo-list-item">
+              <div class="promo-image">
+                <div class="image is-4by3">
                   <img
-                    data-v-6a74dd97=""
                     src="https://img.gamedistribution.com/56da8a54fe204845b34ccff750d4a60b-512x384.jpeg"
                     alt="Fireboy &amp; Watergirl 6: Fairy Tales"
                   />
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-info">
-                <h4 data-v-6a74dd97="">
+              <div class="promo-info">
+                <h4>
                   <a
-                    data-v-6a74dd97=""
                     href="/games/fireboy-watergirl-6-fairy-tales"
                     class=""
                     title="Fireboy &amp; Watergirl 6: Fairy Tales"
                     >Fireboy &amp; Watergirl 6: Fairy Tales</a
                   >
                 </h4>
-                <small data-v-6a74dd97="">
+                <small>
                   By
-                  <a data-v-6a74dd97="" href="/games?company=Septimaniac" class="" title="Septimaniac"
-                    >Septimaniac</a
-                  ></small
+                  <a href="/games?company=Septimaniac" class="" title="Septimaniac">Septimaniac</a></small
                 >
               </div>
             </div>
-            <div data-v-6a74dd97="" class="promo-list-item">
-              <div data-v-6a74dd97="" class="promo-image">
-                <div data-v-6a74dd97="" class="image is-4by3">
-                  <img
-                    data-v-6a74dd97=""
-                    src="https://img.gamedistribution.com/d1362abc246f43bdb5c26643aec2b61b-512x384.jpeg"
-                    alt="Pou"
-                  />
+            <div class="promo-list-item">
+              <div class="promo-image">
+                <div class="image is-4by3">
+                  <img src="https://img.gamedistribution.com/d1362abc246f43bdb5c26643aec2b61b-512x384.jpeg" alt="Pou" />
                 </div>
               </div>
-              <div data-v-6a74dd97="" class="promo-info">
-                <h4 data-v-6a74dd97=""><a data-v-6a74dd97="" href="/games/pou" class="" title="Pou">Pou</a></h4>
-                <small data-v-6a74dd97="">
+              <div class="promo-info">
+                <h4><a href="/games/pou" class="" title="Pou">Pou</a></h4>
+                <small>
                   By
-                  <a data-v-6a74dd97="" href="/games?company=Zakeh%20Limited" class="" title="Zakeh Limited"
-                    >Zakeh Limited</a
-                  ></small
+                  <a href="/games?company=Zakeh%20Limited" class="" title="Zakeh Limited">Zakeh Limited</a></small
                 >
               </div>
             </div>
-            <div data-v-6a74dd97="" class="promo-tags">
-              <div data-v-6a74dd97=""><small data-v-6a74dd97="">Top Tags</small></div>
-              <a data-v-6a74dd97="" href="/games?tag=casual" class="pill" title="casual">casual</a
-              ><a data-v-6a74dd97="" href="/games?tag=build" class="pill" title="build">build</a
-              ><a data-v-6a74dd97="" href="/games?tag=builder" class="pill" title="builder">builder</a
-              ><a data-v-6a74dd97="" href="/games?tag=nano" class="pill" title="nano">nano</a
-              ><a data-v-6a74dd97="" href="/games?tag=cars" class="pill" title="cars">cars</a
-              ><a data-v-6a74dd97="" href="/games?tag=racing" class="pill" title="racing">racing</a
-              ><a data-v-6a74dd97="" href="/games?tag=multiplayer" class="pill" title="multiplayer">multiplayer</a
-              ><a data-v-6a74dd97="" href="/games?tag=bejeweled" class="pill" title="bejeweled">bejeweled</a
-              ><a data-v-6a74dd97="" href="/games?tag=brainteaser" class="pill" title="brainteaser">brainteaser</a
-              ><a data-v-6a74dd97="" href="/games?tag=1player" class="pill" title="1player">1player</a>
+            <div class="promo-tags">
+              <div><small>Top Tags</small></div>
+              <a href="/games?tag=casual" class="pill" title="casual">casual</a
+              ><a href="/games?tag=build" class="pill" title="build">build</a
+              ><a href="/games?tag=builder" class="pill" title="builder">builder</a
+              ><a href="/games?tag=nano" class="pill" title="nano">nano</a
+              ><a href="/games?tag=cars" class="pill" title="cars">cars</a
+              ><a href="/games?tag=racing" class="pill" title="racing">racing</a
+              ><a href="/games?tag=multiplayer" class="pill" title="multiplayer">multiplayer</a
+              ><a href="/games?tag=bejeweled" class="pill" title="bejeweled">bejeweled</a
+              ><a href="/games?tag=brainteaser" class="pill" title="brainteaser">brainteaser</a
+              ><a href="/games?tag=1player" class="pill" title="1player">1player</a>
             </div>
           </div>
         </div>
-        <article data-v-6a74dd97="" class="cta">
-          <div data-v-6a74dd97="" class="cta-txt">
-            <p data-v-6a74dd97="">We connect the best game developers to the biggest publishers.</p>
+        <article class="cta">
+          <div class="cta-txt">
+            <p>We connect the best game developers to the biggest publishers.</p>
           </div>
-          <div data-v-6a74dd97="" class="joinus-home">
-            <div data-v-6a74dd97=""><small data-v-6a74dd97="">Are you not connected yet?</small></div>
-            <div data-v-6a74dd97="">
+          <div class="joinus-home">
+            <div><small>Are you not connected yet?</small></div>
+            <div>
               <a
-                data-v-6a74dd97=""
                 href="https://developer.gamedistribution.com/register/publisher/"
                 target="_blank"
                 title="Join us"
@@ -345,21 +303,21 @@
         </article>
       </div>
     </section>
-    <section data-v-6a74dd97="" class="catalog-info-container">
-      <div data-v-6a74dd97="" class="wrapper">
-        <article data-v-6a74dd97="">
-          <header data-v-6a74dd97="">
-            <small data-v-6a74dd97=""><span data-v-6a74dd97="">Connecting Games &amp; Players</span></small>
-            <h2 data-v-6a74dd97="">Games Catalog</h2>
+    <section class="catalog-info-container">
+      <div class="wrapper">
+        <article>
+          <header>
+            <small><span>Connecting Games &amp; Players</span></small>
+            <h2>Games Catalog</h2>
           </header>
-          <p data-v-6a74dd97="">
+          <p>
             GameDistribution is the biggest broker of high quality, cross-platform games. We connect the best game
             developers to the biggest publishers.
           </p>
         </article>
       </div>
-      <div data-v-6a74dd97="" class="catalog-games-container">
-        <div data-v-393c7dd6="" data-v-6a74dd97="">
+      <div class="catalog-games-container">
+        <div data-v-393c7dd6="">
           <h3 data-v-393c7dd6="">Top Picks</h3>
           <div data-v-393c7dd6="" class="games-container">
             <div data-v-108e2dda="" data-v-393c7dd6="" class="game card">
@@ -758,7 +716,7 @@
             </div>
           </div>
         </div>
-        <div data-v-393c7dd6="" data-v-6a74dd97="">
+        <div data-v-393c7dd6="">
           <h3 data-v-393c7dd6="">Exclusive games</h3>
           <div data-v-393c7dd6="" class="games-container">
             <div data-v-108e2dda="" data-v-393c7dd6="" class="game card">
@@ -1121,7 +1079,7 @@
             </div>
           </div>
         </div>
-        <div data-v-393c7dd6="" data-v-6a74dd97="">
+        <div data-v-393c7dd6="">
           <h3 data-v-393c7dd6="">Top games</h3>
           <div data-v-393c7dd6="" class="games-container">
             <div data-v-108e2dda="" data-v-393c7dd6="" class="game card">
@@ -1904,7 +1862,7 @@
             </div>
           </div>
         </div>
-        <div data-v-393c7dd6="" data-v-6a74dd97="">
+        <div data-v-393c7dd6="">
           <h3 data-v-393c7dd6="">Best new games</h3>
           <div data-v-393c7dd6="" class="games-container">
             <div data-v-108e2dda="" data-v-393c7dd6="" class="game card">
@@ -2287,13 +2245,13 @@
             </div>
           </div>
         </div>
-        <div data-v-393c7dd6="" data-v-6a74dd97="">
+        <div data-v-393c7dd6="">
           <h3 data-v-393c7dd6="">In-game purchase</h3>
           <div data-v-393c7dd6="" class="games-container"></div>
         </div>
-        <div data-v-6a74dd97="">
-          <div data-v-6a74dd97="" class="button-container">
-            <a data-v-6a74dd97="" href="/games" class="gd-button" target="_self" title="">Games catalog</a>
+        <div>
+          <div class="button-container">
+            <a href="/games" class="gd-button" target="_self" title="">Games catalog</a>
           </div>
         </div>
       </div>
@@ -2308,11 +2266,49 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.planet {
-  height: calc(100% - 579px);
+.special-event-img {
+  padding: 0;
   position: absolute;
-  top: 0;
-  width: 100%;
-  background: url("images/planets/planet-green.png") 0 -150px no-repeat;
+  right: 6px;
+  top: 78px;
+  transition: transform 0.2s;
+  width: 126px !important;
+  z-index: 0 !important;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+@media (min-width: 576px) {
+  .special-event-img {
+    right: -30px;
+    top: 20px;
+    width: 190px !important;
+    z-index: -1 !important;
+  }
+}
+@media (min-width: 900px) {
+  .special-event-img {
+    right: -78px;
+    top: 7px;
+    width: 190px !important;
+    z-index: 1 !important;
+  }
+}
+@media (min-width: 900px) and (min-width: 1300px) and (min-width: 900px) {
+  .special-event-img[data-v-2a183b29] {
+    right: -80px;
+    top: -8px;
+    width: 190px !important;
+    z-index: 1 !important;
+  }
+}
+@media (min-width: 900px) and (min-width: 1300px) {
+  .special-event-img {
+    right: -80px;
+    top: -8px;
+    width: 190px !important;
+    z-index: 1 !important;
+  }
 }
 </style>

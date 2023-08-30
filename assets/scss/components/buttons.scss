@@ -1,0 +1,43 @@
+.pill {
+  background-color: #512e85;
+  border: 1px solid #512e85;
+  border-radius: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 150%;
+  margin-bottom: 0.2rem;
+  margin-right: 0.278em;
+  padding: 0.3rem 1rem;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: #7349ba;
+    border-color: #5c3997;
+  }
+
+  &:active {
+    background-color: #ffa64f;
+    border-color: #ff8c1c;
+  }
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}
+
+.pill.transparent {
+  background-color: hsla(0, 0%, 100%, 0.3);
+  border: 1px solid #fff;
+
+  &:hover {
+    background-color: #7349ba;
+    border-color: #5c3997;
+  }
+}

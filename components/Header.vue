@@ -214,7 +214,7 @@ nav {
       a {
         background: transparent;
         border-bottom-color: transparent;
-        color: #512e85;
+        color: #fff;
         font-family: "Squada One", cursive;
         font-size: 0.864em;
         padding: 0.273em 0.818em;
@@ -259,7 +259,7 @@ nav {
     }
 
     .mobile-navigation {
-      /* display: none; */
+      display: none;
     }
   }
 }

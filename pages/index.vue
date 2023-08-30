@@ -2302,7 +2302,7 @@
 </template>
 
 <script setup>
-onBeforeMount(() => {
+onMounted(() => {
   document.body.classList.add("home");
 });
 </script>

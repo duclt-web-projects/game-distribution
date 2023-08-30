@@ -1,0 +1,170 @@
+body.about,
+body.developers,
+body.error,
+body.home,
+body.publishers,
+body.rss,
+body.sdk {
+  color: #fff;
+}
+body.error,
+body.home {
+  background: linear-gradient(270deg, #24b3c0, #1b3786, #24b3c0);
+}
+body.error .planet,
+body.home .planet {
+  background: url("images/planets/planet-green.png") 0 0 no-repeat;
+}
+
+body.about {
+  background: linear-gradient(270deg, #24b3c0, #1b3786, #24b3c0);
+}
+
+body.about .planet {
+  background: url("images/planets/planet-green.png") -150px -150px no-repeat;
+}
+
+body.publishers {
+  background: linear-gradient(270deg, #240d47, #5c3997, #240d47);
+}
+
+body.developers {
+  background: linear-gradient(270deg, #fc6926, #ef0e74, #fc6926);
+}
+
+body.developers .planet {
+  background: url("images/planets/planet-saturn.png") -250px -150px no-repeat;
+}
+
+body.publishers .planet {
+  background: url("images/planets/planet-astroids.png") -250px -150px no-repeat;
+}
+
+body.sdk {
+  background: linear-gradient(270deg, #fc6926, #ef0e74, #fc6926);
+}
+body.sdk .planet {
+  background: url("images/planets/planet-saturn.png") -200px 50px no-repeat;
+}
+body.rss {
+  background: linear-gradient(270deg, #240d47, #5c3997, #240d47);
+}
+body.rss .planet {
+  background: url("images/planets/planet-astroids.png") -250px -150px no-repeat;
+}
+
+.about .main-wrapper,
+.developers .main-wrapper,
+.error .main-wrapper,
+.home .main-wrapper,
+.publishers .main-wrapper,
+.rss .main-wrapper,
+.sdk .main-wrapper {
+  background: linear-gradient(270deg, transparent 50%, transparent 60%, #000);
+}
+.about .main-wrapper:before,
+.developers .main-wrapper:before,
+.error .main-wrapper:before,
+.home .main-wrapper:before,
+.publishers .main-wrapper:before,
+.rss .main-wrapper:before,
+.sdk .main-wrapper:before {
+  animation: animationStars 24s linear infinite;
+  background: url("images/planets/stars.svg") 0 0 repeat;
+  background-size: 100%;
+  content: "";
+  height: 800px;
+  left: -25%;
+  opacity: 0;
+  position: absolute;
+  top: -200px;
+  width: 100%;
+  will-change: transform;
+}
+
+.about .main-wrapper:after,
+.developers .main-wrapper:after,
+.error .main-wrapper:after,
+.home .main-wrapper:after,
+.publishers .main-wrapper:after,
+.rss .main-wrapper:after,
+.sdk .main-wrapper:after {
+  animation: animationStarsAfter 24s linear infinite;
+  background: url("images/planets/stars.svg") 0 0 repeat;
+  background-size: 100%;
+  content: "";
+  height: 800px;
+  left: -25%;
+  opacity: 0;
+  position: absolute;
+  top: -200px;
+  width: 100%;
+  will-change: transform;
+}
+
+.about section:first-of-type:before,
+.developers section:first-of-type:before,
+.error section:first-of-type:before,
+.home section:first-of-type:before,
+.publishers section:first-of-type:before,
+.rss section:first-of-type:before,
+.sdk section:first-of-type:before {
+  background: url("images/shape-bg.svg") no-repeat 100% 0;
+  background-size: cover;
+  content: "";
+  height: 100%;
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+@media (min-width: 640px) {
+  .about .main-wrapper:before,
+  .developers .main-wrapper:before,
+  .error .main-wrapper:before,
+  .home .main-wrapper:before,
+  .publishers .main-wrapper:before,
+  .rss .main-wrapper:before,
+  .sdk .main-wrapper:before {
+    width: 50%;
+  }
+
+  .about .main-wrapper:after,
+  .developers .main-wrapper:after,
+  .error .main-wrapper:after,
+  .home .main-wrapper:after,
+  .publishers .main-wrapper:after,
+  .rss .main-wrapper:after,
+  .sdk .main-wrapper:after {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1366px) {
+  body.error .planet,
+  body.home .planet {
+    background-position: 0 100px;
+  }
+
+  body.about .planet {
+    background-position: -150px 100px;
+  }
+
+  body.publishers .planet {
+    background-position: -250px 100px;
+  }
+
+  body.developers .planet {
+    background-position: -250px 100px;
+  }
+
+  body.sdk .planet {
+    background-position: -200px 150px;
+  }
+
+  body.rss .planet {
+    background-position: -250px 100px;
+  }
+}

@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap");
-@import "./animation.scss";
-
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -371,55 +368,6 @@ form select {
   width: 100%;
 }
 
-.about .main-wrapper,
-.developers .main-wrapper,
-.error .main-wrapper,
-.home .main-wrapper,
-.publishers .main-wrapper,
-.rss .main-wrapper,
-.sdk .main-wrapper {
-  background: linear-gradient(270deg, transparent 50%, transparent 60%, #000);
-}
-.about .main-wrapper:before,
-.developers .main-wrapper:before,
-.error .main-wrapper:before,
-.home .main-wrapper:before,
-.publishers .main-wrapper:before,
-.rss .main-wrapper:before,
-.sdk .main-wrapper:before {
-  animation: animationStars 24s linear infinite;
-  background: url(/images/planets/stars.svg) 0 0 repeat;
-  background-size: 100%;
-  content: "";
-  height: 800px;
-  left: -25%;
-  opacity: 0;
-  position: absolute;
-  top: -200px;
-  width: 100%;
-  will-change: transform;
-}
-
-.about .main-wrapper:after,
-.developers .main-wrapper:after,
-.error .main-wrapper:after,
-.home .main-wrapper:after,
-.publishers .main-wrapper:after,
-.rss .main-wrapper:after,
-.sdk .main-wrapper:after {
-  animation: animationStarsAfter 24s linear infinite;
-  background: url(/images/planets/stars.svg) 0 0 repeat;
-  background-size: 100%;
-  content: "";
-  height: 800px;
-  left: -25%;
-  opacity: 0;
-  position: absolute;
-  top: -200px;
-  width: 100%;
-  will-change: transform;
-}
-
 @media (min-width: 640px) {
   body {
     font-size: 22px;
@@ -436,26 +384,6 @@ form select {
   .gd-button.flat.active,
   .gd-button.flat:hover {
     background-color: #ff8c1c;
-  }
-
-  .about .main-wrapper:before,
-  .developers .main-wrapper:before,
-  .error .main-wrapper:before,
-  .home .main-wrapper:before,
-  .publishers .main-wrapper:before,
-  .rss .main-wrapper:before,
-  .sdk .main-wrapper:before {
-    width: 50%;
-  }
-
-  .about .main-wrapper:after,
-  .developers .main-wrapper:after,
-  .error .main-wrapper:after,
-  .home .main-wrapper:after,
-  .publishers .main-wrapper:after,
-  .rss .main-wrapper:after,
-  .sdk .main-wrapper:after {
-    width: 50%;
   }
 }
 

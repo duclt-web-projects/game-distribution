@@ -21,3 +21,48 @@
     transform: translateX(0);
   }
 }
+
+@keyframes animationStars {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.7);
+  }
+  3% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  53% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes animationStarsAfter {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  47% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(0.7);
+  }
+  77% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}

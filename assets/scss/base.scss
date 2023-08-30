@@ -1,0 +1,470 @@
+@import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap");
+@import "./animation.scss";
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-family: sans-serif;
+}
+body {
+  margin: 0;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+[hidden],
+template {
+  display: none;
+}
+a {
+  background-color: transparent;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+b,
+strong {
+  font-weight: 700;
+}
+dfn {
+  font-style: italic;
+}
+h1,
+header small {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+mark {
+  background: #ff0;
+  color: #000;
+}
+small {
+  font-size: 80%;
+}
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+img {
+  border: 0;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+figure {
+  margin: 1em 40px;
+}
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+pre {
+  overflow: auto;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+button {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+input {
+  line-height: normal;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+legend {
+  border: 0;
+  padding: 0;
+}
+textarea {
+  overflow: auto;
+}
+optgroup {
+  font-weight: 700;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td,
+th {
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background: #fff;
+  color: #999;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 180%;
+  -webkit-text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+}
+
+body.home {
+  background: linear-gradient(270deg, #24b3c0, #1b3786, #24b3c0);
+}
+
+h1,
+h2,
+h3,
+h4,
+header small {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  color: #fff;
+  display: inline-block;
+  font-family: "Squada One", cursive;
+  font-size: 2.556em;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1em;
+  margin: 0;
+  padding: 13px 1px;
+  text-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1em;
+  margin: 0.556em auto;
+}
+
+small {
+  font-family: "Squada One", cursive;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  color: #999;
+  list-style: none;
+}
+form input[type="email"],
+form input[type="number"],
+form input[type="password"],
+form input[type="search"],
+form input[type="text"],
+form input[type="url"],
+form select,
+form textarea {
+  background-color: #dedede;
+  border: 0;
+  box-sizing: border-box;
+  color: #512e85;
+  font-size: 0.8em;
+  height: 40px;
+  outline: 0;
+  padding: 0 15px;
+  width: 100%;
+}
+form textarea {
+  height: inherit;
+  line-height: 150%;
+  padding: 9px 15px;
+}
+form select {
+  border-radius: 0;
+  color: #999;
+}
+::-webkit-input-placeholder {
+  color: #999;
+}
+::-moz-placeholder {
+  color: #999;
+}
+:-ms-input-placeholder {
+  color: #999;
+}
+:-moz-placeholder {
+  color: #999;
+}
+
+.gd-button {
+  background-color: #44a5ab;
+  border: none;
+  border-bottom: 0.4em solid #175d7a;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.909em;
+  font-weight: 500;
+  letter-spacing: 1px;
+  outline: none;
+  padding: 0.7em 1.4em;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: box-shadow 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25), transform 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  white-space: nowrap;
+  width: auto;
+  will-change: transform;
+
+  &:active {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.13);
+    transform: translateY(-5px);
+
+    ul {
+      background: #ff7f03;
+      border-bottom-color: #ad131a;
+      color: #fff;
+    }
+  }
+
+  &.flat {
+    border: none;
+    flex: 0;
+    font-size: 1rem;
+    margin-left: 0.9375rem;
+    padding: 0 2rem;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &--has-dropdown {
+    box-shadow: none !important;
+    transform: none !important;
+
+    ul.gd-button_dropdown {
+      background: inherit;
+      border-bottom: inherit;
+      margin: 0;
+      opacity: 0;
+      padding: 0;
+      pointer-events: none;
+      position: absolute !important;
+      right: 0;
+      top: 100%;
+
+      li {
+        margin: 0;
+        padding: 0;
+
+        a {
+          box-shadow: none !important;
+          color: #fff;
+          display: block;
+          font-size: inherit;
+          -webkit-text-decoration: none;
+          text-decoration: none;
+          transform: none !important;
+          transition: background 0.1s ease;
+
+          &:hover {
+            background: hsla(0, 0%, 100%, 0.25);
+          }
+        }
+      }
+    }
+
+    &:hover {
+      ul.gd-button_dropdown {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+.main-wrapper {
+  height: auto;
+  position: relative;
+  width: 100%;
+}
+
+.about .main-wrapper,
+.developers .main-wrapper,
+.error .main-wrapper,
+.home .main-wrapper,
+.publishers .main-wrapper,
+.rss .main-wrapper,
+.sdk .main-wrapper {
+  background: linear-gradient(270deg, transparent 50%, transparent 60%, #000);
+}
+.about .main-wrapper:before,
+.developers .main-wrapper:before,
+.error .main-wrapper:before,
+.home .main-wrapper:before,
+.publishers .main-wrapper:before,
+.rss .main-wrapper:before,
+.sdk .main-wrapper:before {
+  animation: animationStars 24s linear infinite;
+  background: url(/images/planets/stars.svg) 0 0 repeat;
+  background-size: 100%;
+  content: "";
+  height: 800px;
+  left: -25%;
+  opacity: 0;
+  position: absolute;
+  top: -200px;
+  width: 100%;
+  will-change: transform;
+}
+
+.about .main-wrapper:after,
+.developers .main-wrapper:after,
+.error .main-wrapper:after,
+.home .main-wrapper:after,
+.publishers .main-wrapper:after,
+.rss .main-wrapper:after,
+.sdk .main-wrapper:after {
+  animation: animationStarsAfter 24s linear infinite;
+  background: url(/images/planets/stars.svg) 0 0 repeat;
+  background-size: 100%;
+  content: "";
+  height: 800px;
+  left: -25%;
+  opacity: 0;
+  position: absolute;
+  top: -200px;
+  width: 100%;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 22px;
+  }
+
+  p {
+    margin: 1.818em auto 2.727em;
+  }
+
+  .gd-button {
+    font-size: 0.909em;
+  }
+
+  .gd-button.flat.active,
+  .gd-button.flat:hover {
+    background-color: #ff8c1c;
+  }
+
+  .about .main-wrapper:before,
+  .developers .main-wrapper:before,
+  .error .main-wrapper:before,
+  .home .main-wrapper:before,
+  .publishers .main-wrapper:before,
+  .rss .main-wrapper:before,
+  .sdk .main-wrapper:before {
+    width: 50%;
+  }
+
+  .about .main-wrapper:after,
+  .developers .main-wrapper:after,
+  .error .main-wrapper:after,
+  .home .main-wrapper:after,
+  .publishers .main-wrapper:after,
+  .rss .main-wrapper:after,
+  .sdk .main-wrapper:after {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1366px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  header small {
+    font-size: 2.545em;
+  }
+}

@@ -2110,8 +2110,8 @@ div.algolia-multisearch-filter {
   padding-top: 18px;
 
   .game {
-        flex: 1;
-      }
+    flex: 1;
+  }
 }
 
 .games-container.list-view-grid {
@@ -2121,10 +2121,10 @@ div.algolia-multisearch-filter {
 }
 
 .games-container.list-view-table {
-    display: flex;
-    flex-direction: column;
-    margin: 0 -1.2rem;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 0 -1.2rem;
+}
 
 @media (min-width: 640px) {
   .slides-container {

@@ -737,7 +737,7 @@
                 <button title="Show Grid" class="gd-button flat list-view-grid list-view-grid"></button>
                 <form class="search-box__form">
                   <div class="input-group">
-                    <i aria-hidden="true" class="fa fa-search"></i>
+                    <IconSearch />
                     <input type="search" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false"
                       placeholder="Search games..." class="search-input-field" style="background-color: white" />
                   </div>
@@ -1241,7 +1241,7 @@
               <span><span class="refinement-list-header">Categories</span>
                 <form>
                   <div class="input-group">
-                    <i aria-hidden="true" class="fa fa-search"></i>
+                    <IconSearch />
                     <input type="search" placeholder="Filter..." autocorrect="off" autocapitalize="off" autocomplete="off"
                       spellcheck="false" name="category-filter" class="refinement-list-search" />
                   </div>
@@ -1321,7 +1321,7 @@
               <span><span class="refinement-list-header">Companies</span>
                 <form>
                   <div class="input-group">
-                    <i aria-hidden="true" class="fa fa-search"></i>
+                    <IconSearch />
                     <input type="search" placeholder="Filter..." autocorrect="off" autocapitalize="off" autocomplete="off"
                       spellcheck="false" name="category-filter" class="refinement-list-search" />
                   </div>
@@ -1415,7 +1415,7 @@
               <span><span class="refinement-list-header">Languages</span>
                 <form>
                   <div class="input-group">
-                    <i aria-hidden="true" class="fa fa-search"></i>
+                    <IconSearch />
                     <input type="search" placeholder="Filter..." autocorrect="off" autocapitalize="off" autocomplete="off"
                       spellcheck="false" name="category-filter" class="refinement-list-search" />
                   </div>
@@ -1472,510 +1472,6 @@
                     value="Korean" />
                   <span class="ais-refinement-list__value">Korean</span> <span class="badge">341</span></label>
               </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Chinese (Simplified)" />
-                  <span class="ais-refinement-list__value">Chinese (Simplified)</span>
-                  <span class="badge">293</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Japanese" />
-                  <span class="ais-refinement-list__value">Japanese</span> <span class="badge">269</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Vietnamese" />
-                  <span class="ais-refinement-list__value">Vietnamese</span>
-                  <span class="badge">269</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Hindi" />
-                  <span class="ais-refinement-list__value">Hindi</span> <span class="badge">258</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Arabic" />
-                  <span class="ais-refinement-list__value">Arabic</span> <span class="badge">254</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Malay" />
-                  <span class="ais-refinement-list__value">Malay</span> <span class="badge">247</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Afrikaans" />
-                  <span class="ais-refinement-list__value">Afrikaans</span>
-                  <span class="badge">244</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Chinese (Traditional)" />
-                  <span class="ais-refinement-list__value">Chinese (Traditional)</span>
-                  <span class="badge">235</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Simple English" />
-                  <span class="ais-refinement-list__value">Simple English</span>
-                  <span class="badge">232</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Indonesian" />
-                  <span class="ais-refinement-list__value">Indonesian</span>
-                  <span class="badge">215</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Thai" />
-                  <span class="ais-refinement-list__value">Thai</span> <span class="badge">183</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Polish" />
-                  <span class="ais-refinement-list__value">Polish</span> <span class="badge">117</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Swedish" />
-                  <span class="ais-refinement-list__value">Swedish</span> <span class="badge">52</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Norwegian (Nynorsk)" />
-                  <span class="ais-refinement-list__value">Norwegian (Nynorsk)</span>
-                  <span class="badge">46</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Czech" />
-                  <span class="ais-refinement-list__value">Czech</span> <span class="badge">33</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Slovak" />
-                  <span class="ais-refinement-list__value">Slovak</span> <span class="badge">33</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Danish" />
-                  <span class="ais-refinement-list__value">Danish</span> <span class="badge">32</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Hungarian" />
-                  <span class="ais-refinement-list__value">Hungarian</span> <span class="badge">32</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Romanian" />
-                  <span class="ais-refinement-list__value">Romanian</span> <span class="badge">32</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Slovenian" />
-                  <span class="ais-refinement-list__value">Slovenian</span> <span class="badge">30</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Finnish" />
-                  <span class="ais-refinement-list__value">Finnish</span> <span class="badge">28</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Norwegian (BokmÃ¥l)" />
-                  <span class="ais-refinement-list__value">Norwegian (BokmÃ¥l)</span>
-                  <span class="badge">28</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Persian" />
-                  <span class="ais-refinement-list__value">Persian</span> <span class="badge">28</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Serbian" />
-                  <span class="ais-refinement-list__value">Serbian</span> <span class="badge">25</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Croatian" />
-                  <span class="ais-refinement-list__value">Croatian</span> <span class="badge">22</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Ukrainian" />
-                  <span class="ais-refinement-list__value">Ukrainian</span> <span class="badge">11</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Greek" />
-                  <span class="ais-refinement-list__value">Greek</span> <span class="badge">8</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Belarusian" />
-                  <span class="ais-refinement-list__value">Belarusian</span> <span class="badge">6</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Armenian" />
-                  <span class="ais-refinement-list__value">Armenian</span> <span class="badge">5</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Asturian" />
-                  <span class="ais-refinement-list__value">Asturian</span> <span class="badge">5</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Bulgarian" />
-                  <span class="ais-refinement-list__value">Bulgarian</span> <span class="badge">5</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Albanian" />
-                  <span class="ais-refinement-list__value">Albanian</span> <span class="badge">4</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Alemannic" />
-                  <span class="ais-refinement-list__value">Alemannic</span> <span class="badge">4</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Bengali" />
-                  <span class="ais-refinement-list__value">Bengali</span> <span class="badge">4</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Latvian" />
-                  <span class="ais-refinement-list__value">Latvian</span> <span class="badge">4</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Amharic" />
-                  <span class="ais-refinement-list__value">Amharic</span> <span class="badge">3</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Aragonese" />
-                  <span class="ais-refinement-list__value">Aragonese</span> <span class="badge">3</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Aromanian" />
-                  <span class="ais-refinement-list__value">Aromanian</span> <span class="badge">3</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Azerbaijani" />
-                  <span class="ais-refinement-list__value">Azerbaijani</span>
-                  <span class="badge">3</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Catalan" />
-                  <span class="ais-refinement-list__value">Catalan</span> <span class="badge">3</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Hebrew" />
-                  <span class="ais-refinement-list__value">Hebrew</span> <span class="badge">3</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Javanese" />
-                  <span class="ais-refinement-list__value">Javanese</span> <span class="badge">3</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Basque" />
-                  <span class="ais-refinement-list__value">Basque</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Belarusian (TaraÅ¡kievica)" />
-                  <span class="ais-refinement-list__value">Belarusian (TaraÅ¡kievica)</span>
-                  <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Bishnupriya Manipuri" />
-                  <span class="ais-refinement-list__value">Bishnupriya Manipuri</span>
-                  <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Bosnian" />
-                  <span class="ais-refinement-list__value">Bosnian</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Breton" />
-                  <span class="ais-refinement-list__value">Breton</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Buginese" />
-                  <span class="ais-refinement-list__value">Buginese</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Burmese" />
-                  <span class="ais-refinement-list__value">Burmese</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Cantonese" />
-                  <span class="ais-refinement-list__value">Cantonese</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Cebuano" />
-                  <span class="ais-refinement-list__value">Cebuano</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Chuvash" />
-                  <span class="ais-refinement-list__value">Chuvash</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Esperanto" />
-                  <span class="ais-refinement-list__value">Esperanto</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Estonian" />
-                  <span class="ais-refinement-list__value">Estonian</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Galician" />
-                  <span class="ais-refinement-list__value">Galician</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Georgian" />
-                  <span class="ais-refinement-list__value">Georgian</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Gujarati" />
-                  <span class="ais-refinement-list__value">Gujarati</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Icelandic" />
-                  <span class="ais-refinement-list__value">Icelandic</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Ido" />
-                  <span class="ais-refinement-list__value">Ido</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Kannada" />
-                  <span class="ais-refinement-list__value">Kannada</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Kazakh" />
-                  <span class="ais-refinement-list__value">Kazakh</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Kurdish" />
-                  <span class="ais-refinement-list__value">Kurdish</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Lombard" />
-                  <span class="ais-refinement-list__value">Lombard</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Low Saxon" />
-                  <span class="ais-refinement-list__value">Low Saxon</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Luxembourgish" />
-                  <span class="ais-refinement-list__value">Luxembourgish</span>
-                  <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Malagasy" />
-                  <span class="ais-refinement-list__value">Malagasy</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Malayalam" />
-                  <span class="ais-refinement-list__value">Malayalam</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Neapolitan" />
-                  <span class="ais-refinement-list__value">Neapolitan</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Nepali" />
-                  <span class="ais-refinement-list__value">Nepali</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Newar / Nepal Bhasa" />
-                  <span class="ais-refinement-list__value">Newar / Nepal Bhasa</span>
-                  <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Piedmontese" />
-                  <span class="ais-refinement-list__value">Piedmontese</span>
-                  <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Quechua" />
-                  <span class="ais-refinement-list__value">Quechua</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Swahili" />
-                  <span class="ais-refinement-list__value">Swahili</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Tagalog" />
-                  <span class="ais-refinement-list__value">Tagalog</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Urdu" />
-                  <span class="ais-refinement-list__value">Urdu</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="VolapÃ¼k" />
-                  <span class="ais-refinement-list__value">VolapÃ¼k</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Walloon" />
-                  <span class="ais-refinement-list__value">Walloon</span> <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Waray-Waray" />
-                  <span class="ais-refinement-list__value">Waray-Waray</span>
-                  <span class="badge">2</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Haitian" />
-                  <span class="ais-refinement-list__value">Haitian</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Interlingua" />
-                  <span class="ais-refinement-list__value">Interlingua</span>
-                  <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Irish" />
-                  <span class="ais-refinement-list__value">Irish</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Latin" />
-                  <span class="ais-refinement-list__value">Latin</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Lithuanian" />
-                  <span class="ais-refinement-list__value">Lithuanian</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Macedonian" />
-                  <span class="ais-refinement-list__value">Macedonian</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Marathi" />
-                  <span class="ais-refinement-list__value">Marathi</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Occitan" />
-                  <span class="ais-refinement-list__value">Occitan</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Samogitian" />
-                  <span class="ais-refinement-list__value">Samogitian</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Serbo-Croatian" />
-                  <span class="ais-refinement-list__value">Serbo-Croatian</span>
-                  <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Sicilian" />
-                  <span class="ais-refinement-list__value">Sicilian</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Sundanese" />
-                  <span class="ais-refinement-list__value">Sundanese</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Tamil" />
-                  <span class="ais-refinement-list__value">Tamil</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Tatar" />
-                  <span class="ais-refinement-list__value">Tatar</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Telugu" />
-                  <span class="ais-refinement-list__value">Telugu</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Welsh" />
-                  <span class="ais-refinement-list__value">Welsh</span> <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="West Frisian" />
-                  <span class="ais-refinement-list__value">West Frisian</span>
-                  <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Western Panjabi" />
-                  <span class="ais-refinement-list__value">Western Panjabi</span>
-                  <span class="badge">1</span></label>
-              </div>
-              <div class="checkbox">
-                <label class="ais-refinement-list__label"><input type="checkbox" class="ais-refinement-list__checkbox"
-                    value="Zazaki" />
-                  <span class="ais-refinement-list__value">Zazaki</span> <span class="badge">1</span></label>
-              </div>
             </div>
           </div>
         </div>
@@ -1985,6 +1481,8 @@
 </template>
 
 <script setup>
+import IconSearch from "@/assets/icon/Search.vue"
+
 onMounted(() => {
   document.body.classList.add("games");
 });
@@ -2139,6 +1637,188 @@ onMounted(() => {
   }
 }
 
+.columns {
+  flex-direction: row-reverse;
+
+  .column {
+    margin: 1.25rem;
+    position: relative;
+
+    &:last-of-type {
+      display: none;
+    }
+  }
+}
+
+div.algolia-multisearch-filter {
+  margin-bottom: 1.25rem;
+  position: relative;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  form {
+    margin: 0.1rem 0 0.75rem;
+    position: relative;
+
+    svg {
+      fill: #512e85;
+      left: 10px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-55%);
+    }
+
+    input {
+      box-sizing: border-box;
+      font-weight: 300;
+      padding-left: 40px;
+    }
+  }
+
+  .refinement-list-header {
+    border-top: 1px solid #dedede;
+    color: #4e96a0;
+    display: block;
+    font-family: "Squada One", cursive;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    line-height: 1em;
+    margin-bottom: 0;
+    margin-top: 2px;
+    padding: 0.4rem 0.2rem;
+    text-shadow: 0 0 0 transparent;
+    text-transform: uppercase;
+  }
+
+  button {
+    background: none;
+    color: #dedede;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      color: #b3b3b3;
+    }
+
+    :active {
+      color: #ff8c1c;
+    }
+  }
+}
+
+.ais-refinement-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .footer {
+    display: block;
+    flex: 1;
+  }
+
+  .checkbox {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    -webkit-font-smoothing: subpixel-antialiased;
+    cursor: pointer;
+    display: -webkit-box;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    label {
+      cursor: pointer;
+      display: block;
+      font-size: 1rem;
+      height: 45px;
+      padding: 0 1rem 0 0.2rem;
+      transition: all 0.2s linear;
+      width: 100%;
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+
+      &:active {
+        span:first-of-type {
+          color: #512e85;
+        }
+      }
+
+      &:hover {
+        .badge {
+          background-color: #683bab;
+          color: #fff;
+        }
+
+        span:first-of-type {
+          color: #512e85;
+        }
+      }
+    }
+
+    input[type="checkbox"] {
+      display: inline;
+      margin: 0 0.5rem 0 0;
+    }
+
+    .badge {
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+    }
+
+    &:nth-child(-n + 11) {
+      display: block;
+    }
+
+    &:first-of-type {
+      margin-top: 0.3rem;
+    }
+
+    &:last-of-type {
+      .checkbox {
+        label {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .checkbox.ais-refinement-list__item--active {
+    label {
+      span:first-of-type {
+        color: #512e85;
+      }
+
+      &:hover {
+
+        &:after,
+        span:first-of-type {
+          color: #5c5b63;
+        }
+      }
+
+      &:active {
+
+        &:after,
+        span:first-of-type {
+          color: #512e85;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: 640px) {
   .slides-container {
     background-position: 0.9375rem 0;
@@ -2159,6 +1839,25 @@ onMounted(() => {
 
   .company-logo.no-company {
     display: block;
+  }
+
+  .columns {
+    display: flex;
+
+    .column {
+      flex: 1;
+      margin: 1.364rem;
+
+      &:last-of-type {
+        display: block;
+        margin: 1.364rem;
+        max-width: 220px;
+      }
+    }
+  }
+
+  div.algolia-multisearch-filter {
+    margin-bottom: 1.364rem;
   }
 }
 </style>

@@ -709,10 +709,10 @@
                 <div class="tools-container_filters-item">
                   <div class="filter__select-item">
                     <div class="filter__select-item_header">
-                      <i class="fa fa-calendar"></i>
+                      <IconCalendar />
                       <div class="filter__select-item_header-selected">
                         <span>Select...</span>
-                        <i class="fa fa-angle-down"></i>
+                        <IconAngleDown />
                       </div>
                     </div>
                     <div class="filter__select-item_dropdown">
@@ -734,7 +734,9 @@
               </div>
               <div class="tools-container_actions">
                 <button title="Reset Filter" class="gd-button flat reset-filter" style="display: none"></button>
-                <button title="Show Grid" class="gd-button flat list-view-grid list-view-grid"></button>
+                <button title="Show Grid" class="gd-button flat list-view-grid list-view-grid">
+                  <IconGrid />
+                </button>
                 <form class="search-box__form">
                   <div class="input-group">
                     <IconSearch />
@@ -794,7 +796,6 @@
                     <a class="page-link">&gt;&gt;</a>
                   </li>
                 </ul>
-                <p class="VuePagination__count VuePagination__count">Showing 1 to 20 of 18,817 records</p>
               </nav>
             </div>
             <div class="games-container list-view-grid">
@@ -1232,7 +1233,6 @@
                     <a class="page-link">&gt;&gt;</a>
                   </li>
                 </ul>
-                <p class="VuePagination__count VuePagination__count">Showing 1 to 20 of 18,817 records</p>
               </nav>
             </div>
           </div>
@@ -1482,6 +1482,10 @@
 
 <script setup>
 import IconSearch from "@/assets/icon/Search.vue"
+import IconCalendar from "@/assets/icon/Calendar.vue"
+import IconAngleDown from "@/assets/icon/AngleDown.vue"
+import IconList from "@/assets/icon/List.vue"
+import IconGrid from "@/assets/icon/Grid.vue"
 
 onMounted(() => {
   document.body.classList.add("games");
@@ -1817,7 +1821,310 @@ div.algolia-multisearch-filter {
       }
     }
   }
+
+  &:last-of-type {
+    .checkbox {
+      left: auto;
+      text-transform: uppercase;
+    }
+  }
 }
+
+.tools-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 1.25rem;
+
+  &_filters {
+    align-items: center;
+    display: none;
+    padding-right: 20px;
+
+    &-item {
+      align-items: center;
+      display: inline-flex;
+      margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &_actions {
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .span {
+    color: #fd7f1a;
+    display: none;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 1%;
+  }
+
+  form {
+    flex: 1;
+    margin-left: 0.9375rem;
+    position: relative;
+
+    svg {
+      color: #512e85;
+      left: 10px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-55%);
+    }
+
+    input {
+      box-sizing: border-box;
+      font-weight: 300;
+      padding-left: 40px;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    padding: 0.1rem 0.7rem 0;
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  button.reset-filter {
+    padding-top: 0;
+  }
+}
+
+.filter-part {
+  background-color: #1d649a;
+  background-position-x: right;
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.pop-logo {
+  display: none;
+  margin-right: 10px;
+  width: 40px;
+}
+
+.filter__select-item {
+  min-width: 250px;
+  position: relative;
+
+  &_header {
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    padding: 0 11px;
+
+    svg {
+      fill: #999;
+
+      &:first-child {
+        margin-top: -2px;
+      }
+    }
+  }
+
+  &_header-selected {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+    width: 100%;
+
+    span {
+      font-size: 15px;
+    }
+
+    svg {
+      padding-left: 5px;
+    }
+  }
+
+  &_dropdown {
+    background: #dedede;
+    left: 0;
+    max-height: 500px;
+    opacity: 0;
+    overflow: auto;
+    pointer-events: none;
+    position: absolute;
+    top: 39px;
+    width: 100%;
+    z-index: 50;
+
+    &-item {
+      align-items: center;
+      border-bottom: 1px solid #cecece;
+      color: #000;
+      cursor: pointer;
+      display: flex;
+      font-size: 15px;
+      line-height: 11px;
+      padding: 10px 13px;
+
+      svg {
+        fill: #45a5aa;
+        font-size: 10px;
+        margin-right: 3px;
+      }
+
+      &:hover {
+        background: #d8d8d8;
+      }
+    }
+
+    .active--item {
+      background: #d8d8d8;
+    }
+  }
+
+  &:hover {
+    .filter__select-item_dropdown {
+      opacity: 1;
+      pointer-events: inherit;
+    }
+  }
+}
+
+.VuePagination {
+  ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+    padding: 1.818em 0 0;
+
+    li.page-item {
+      display: none;
+      margin: 0 0.1em;
+      padding: 0;
+    }
+
+    li.page-item.active {
+      a {
+        background-color: #512e85;
+        color: #fff;
+        cursor: default;
+      }
+    }
+
+    li.page-item.VuePagination__pagination-item-next-page,
+    li.page-item.VuePagination__pagination-item-prev-page,
+    li.page-item.ais-pagination__item--first,
+    li.page-item.ais-pagination__item--last {
+      display: block;
+
+      a {
+        background-color: #44a5ab;
+        border-color: #44a5ab;
+        color: #fff;
+      }
+
+      &:hover {
+        a {
+          background-color: #74c3c8;
+          border-color: #74c3c8;
+        }
+      }
+
+      &:active {
+        a {
+          background-color: #512e85;
+          border-color: #512e85;
+        }
+      }
+
+      &.disabled {
+        a {
+          background-color: #999;
+          border-color: #999;
+          cursor: default;
+        }
+
+        &:hover,
+        &:active {
+          a {
+            background-color: #999;
+            border-color: #999;
+          }
+        }
+      }
+    }
+
+    a {
+      background-color: #fff;
+      border: 3px solid #512e85;
+      color: #512e85;
+      display: inline-block;
+      flex: 1;
+      font-size: 0.636em;
+      font-weight: 500;
+      height: 29px;
+      line-height: 29px;
+      margin-right: 0.182em;
+      max-width: 29px;
+      min-width: 29px;
+      text-align: center;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+      width: 29px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #512e85;
+        color: #fff;
+      }
+
+      &:active {
+        background-color: #44a5ab;
+        border-color: #44a5ab;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    &__count {
+      display: none;
+    }
+  }
+}
+
+.games-container {
+  display: flex;
+  padding-top: 18px;
+
+  .game {
+        flex: 1;
+      }
+}
+
+.games-container.list-view-grid {
+  flex-direction: row;
+  flex-flow: wrap;
+  margin: -0.9375rem -0.9375rem 0 0;
+}
+
+.games-container.list-view-table {
+    display: flex;
+    flex-direction: column;
+    margin: 0 -1.2rem;
+  }
 
 @media (min-width: 640px) {
   .slides-container {
@@ -1858,6 +2165,52 @@ div.algolia-multisearch-filter {
 
   div.algolia-multisearch-filter {
     margin-bottom: 1.364rem;
+  }
+
+  .tools-container {
+    form {
+      margin-left: 0.6818rem;
+    }
+  }
+
+  .VuePagination {
+    ul {
+      li.page-item {
+        display: block;
+      }
+    }
+  }
+
+  .games-container.list-view-grid {
+    margin: -0.6818rem;
+  }
+
+  .games-container.list-view-table {
+    margin: 0;
+  }
+}
+
+@media (min-width: 960px) {
+  .tools-container {
+    &_filters {
+      display: block;
+    }
+
+    &_actions {
+      max-width: 300px;
+    }
+  }
+
+  .pop-logo {
+    display: block;
+  }
+}
+
+@media (min-width: 1120px) {
+  .tools-container {
+    .span {
+      display: block;
+    }
   }
 }
 </style>

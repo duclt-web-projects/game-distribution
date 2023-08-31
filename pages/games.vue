@@ -3,6 +3,7 @@
     <div class="wrapper">
       <div class="content">
         <!---->
+        <GamesSlide />
         <div>
           <div class="collection-header">
             <div></div>
@@ -1566,6 +1567,7 @@ const customNavigation = {
 
 
 onMounted(() => {
+  document.body.className = "";
   document.body.classList.add("games");
 });
 </script>

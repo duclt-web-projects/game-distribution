@@ -1669,6 +1669,7 @@
 
 <script setup>
 onMounted(() => {
+  document.body.className = "";
   document.body.classList.add("home");
 });
 </script>

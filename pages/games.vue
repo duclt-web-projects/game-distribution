@@ -8,7 +8,7 @@
             <div></div>
             <div>
               <div>
-                <a href="/games?collection=exclusiveGame" class="gd-button flat">More</a>
+                <a href="/games?collection=exclusiveGame" class="xg-button flat">More</a>
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@
             <div></div>
             <div>
               <div>
-                <a href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano" class="gd-button flat">More</a>
+                <a href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano" class="xg-button flat">More</a>
               </div>
             </div>
           </div>
@@ -267,7 +267,7 @@
             <div></div>
             <div>
               <div>
-                <a href="/games?collection=featuredGame" class="gd-button flat">More</a>
+                <a href="/games?collection=featuredGame" class="xg-button flat">More</a>
               </div>
             </div>
           </div>
@@ -367,7 +367,7 @@
             <div></div>
             <div>
               <div>
-                <a href="/games?collection=topPicksGame" class="gd-button flat">More</a>
+                <a href="/games?collection=topPicksGame" class="xg-button flat">More</a>
               </div>
             </div>
           </div>
@@ -467,7 +467,7 @@
             <div></div>
             <div>
               <div>
-                <a href="/games?condition=tags%3A%22IAPs%22" class="gd-button flat">More</a>
+                <a href="/games?condition=tags%3A%22IAPs%22" class="xg-button flat">More</a>
               </div>
             </div>
           </div>
@@ -566,7 +566,7 @@
             <div></div>
             <div>
               <div>
-                <a href="/games?condition=company%3A%22Gameloft%20SE%22" class="gd-button flat">More</a>
+                <a href="/games?condition=company%3A%22Gameloft%20SE%22" class="xg-button flat">More</a>
               </div>
             </div>
           </div>
@@ -668,7 +668,7 @@
             <div></div>
             <div>
               <div>
-                <a href="/games?collection=bestGame" class="gd-button flat">More</a>
+                <a href="/games?collection=bestGame" class="xg-button flat">More</a>
               </div>
             </div>
           </div>
@@ -796,8 +796,8 @@
                 </div>
               </div>
               <div class="tools-container_actions">
-                <button title="Reset Filter" class="gd-button flat reset-filter" style="display: none"></button>
-                <button title="Show Grid" class="gd-button flat list-view-grid">
+                <button title="Reset Filter" class="xg-button flat reset-filter" style="display: none"></button>
+                <button title="Show Grid" class="xg-button flat list-view-grid">
                   <IconGrid />
                 </button>
                 <form class="search-box__form">

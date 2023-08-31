@@ -291,7 +291,7 @@ form select {
   color: #999;
 }
 
-.gd-button {
+.xg-button {
   background-color: #44a5ab;
   border: none;
   border-bottom: 0.4em solid #175d7a;
@@ -343,7 +343,7 @@ form select {
     box-shadow: none !important;
     transform: none !important;
 
-    ul.gd-button_dropdown {
+    ul.xg-button_dropdown {
       background: inherit;
       border-bottom: inherit;
       margin: 0;
@@ -375,7 +375,7 @@ form select {
     }
 
     &:hover {
-      ul.gd-button_dropdown {
+      ul.xg-button_dropdown {
         opacity: 1;
         pointer-events: all;
       }
@@ -404,12 +404,12 @@ form select {
     margin: 1.818em auto 2.727em;
   }
 
-  .gd-button {
+  .xg-button {
     font-size: 0.909em;
   }
 
-  .gd-button.flat.active,
-  .gd-button.flat:hover {
+  .xg-button.flat.active,
+  .xg-button.flat:hover {
     background-color: #ff8c1c;
   }
 }

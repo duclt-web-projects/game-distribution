@@ -6,12 +6,12 @@
         <IconTime v-show="isShowMenuMobile" class="rotate" />
       </div>
       <div class="mobile-navigation slide-right" v-show="isShowMenuMobile">
-        <NuxtLink href="/games" class="active"> Games </NuxtLink>
-        <NuxtLink href="/solutions/white-label" class=""> White Label Solution </NuxtLink>
-        <NuxtLink href="/about" class=""> About </NuxtLink>
-        <NuxtLink href="/publishers" class=""> Publishers </NuxtLink>
-        <NuxtLink href="/developers" class=""> Developers </NuxtLink>
-        <NuxtLink href="/sdk" class=""> SDK </NuxtLink>
+        <NuxtLink href="/games"> Games </NuxtLink>
+        <NuxtLink href="/solutions/white-label"> White Label Solution </NuxtLink>
+        <NuxtLink href="/about"> About </NuxtLink>
+        <NuxtLink href="/publishers"> Publishers </NuxtLink>
+        <NuxtLink href="/developers"> Developers </NuxtLink>
+        <NuxtLink href="/sdk"> SDK </NuxtLink>
         <NuxtLink href="https://gamedistribution.com/contact"> Contact Us </NuxtLink>
         <NuxtLink href="https://faq.gamedistribution.com"> FAQ </NuxtLink>
         <NuxtLink href="https://developer.gamedistribution.com/register/publisher/" target="_blank"> Join us </NuxtLink>
@@ -19,37 +19,39 @@
         <NuxtLink href="https://developer.gamedistribution.com/" target="_blank"> Developer Login </NuxtLink>
       </div>
       <div class="mask" v-show="isShowMenuMobile"></div>
-      <NuxtLink
-        href="/"
-        aria-current="page"
-        class="logo nuxt-link-exact-active nuxt-link-active"
-        title="GameDistribution"
-      >
+      <NuxtLink href="/" aria-current="page" class="logo nuxt-link-exact-active nuxt-link-active"
+        title="GameDistribution">
         <img src="/images/logos/logo-mark-white.svg" alt="logo" class="logo-mark" />
         <img src="/images/logos/logo-white.svg" alt="logo" class="logo-full" />
       </NuxtLink>
       <div class="desktop-navigation">
-        <NuxtLink to="/games" class="gd-button active"> Games </NuxtLink>
-        <NuxtLink to="/solutions/white-label" class="gd-button"> Products for Publishers </NuxtLink>
-        <NuxtLink to="/about" class="gd-button"> About </NuxtLink>
-        <NuxtLink to="/publishers" class="gd-button"> Publishers </NuxtLink>
-        <NuxtLink to="/developers" class="gd-button gd-button--has-dropdown">
+        <NuxtLink to="/games" class="xg-button"> Games </NuxtLink>
+        <NuxtLink to="/solutions/white-label" class="xg-button"> Products for Publishers </NuxtLink>
+        <NuxtLink to="/about" class="xg-button"> About </NuxtLink>
+        <NuxtLink to="/publishers" class="xg-button"> Publishers </NuxtLink>
+        <NuxtLink to="/developers" class="xg-button xg-button--has-dropdown">
           Developers
-          <ul class="gd-button_dropdown">
-            <li><NuxtLink to="/sdk" class=""> SDK </NuxtLink></li>
+          <ul class="xg-button_dropdown">
+            <li>
+              <NuxtLink to="/sdk"> SDK </NuxtLink>
+            </li>
           </ul>
         </NuxtLink>
-        <a target="_blank" class="gd-button gd-button--has-dropdown">
+        <a target="_blank" class="xg-button xg-button--has-dropdown">
           Support
-          <ul class="gd-button_dropdown">
-            <li><NuxtLink to="/contact" class=""> Contact Us </NuxtLink></li>
-            <li><NuxtLink to="https://faq.gamedistribution.com"> FAQ </NuxtLink></li>
+          <ul class="xg-button_dropdown">
+            <li>
+              <NuxtLink to="/contact"> Contact Us </NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="https://faq.gamedistribution.com"> FAQ </NuxtLink>
+            </li>
           </ul>
         </a>
-        <NuxtLink to="https://developer.gamedistribution.com/register/publisher/" class="gd-button"> Join us </NuxtLink>
-        <a to="https://developer.gamedistribution.com/" target="_blank" class="gd-button gd-button--has-dropdown">
+        <NuxtLink to="https://developer.gamedistribution.com/register/publisher/" class="xg-button"> Join us </NuxtLink>
+        <a to="https://developer.gamedistribution.com/" target="_blank" class="xg-button xg-button--has-dropdown">
           Login
-          <ul class="gd-button_dropdown">
+          <ul class="xg-button_dropdown">
             <li>
               <NuxtLink to="https://developer.gamedistribution.com/" target="_blank">Developer login</NuxtLink>
             </li>
@@ -58,7 +60,9 @@
             </li>
           </ul>
         </a>
-        <NuxtLink to="/rss-builder" class="gd-button rss-feed-link"> RSS </NuxtLink>
+        <NuxtLink to="/rss-builder" class="xg-button"> RSS
+          <IconRss class="rss-feed-link"/>
+        </NuxtLink>
       </div>
     </div>
   </nav>
@@ -67,6 +71,7 @@
 <script setup>
 import IconMenuBurger from "@/assets/icon/MenuBurger.vue";
 import IconTime from "@/assets/icon/Time.vue";
+import IconRss from "@/assets/icon/Rss.vue";
 
 const isShowMenuMobile = ref(false);
 
@@ -128,6 +133,7 @@ nav {
       height: auto;
       max-width: 216px;
     }
+
     .logo-mark {
       display: block;
       margin-top: 4px;
@@ -182,9 +188,9 @@ nav {
   fill: #b7f9ff;
 }
 
-.about nav a,
-.error nav a,
-.home nav a {
+.about nav .desktop-navigation a,
+.error nav .desktop-navigation a,
+.home nav .desktop-navigation a {
   color: #fff;
 }
 
@@ -196,6 +202,7 @@ nav {
       .logo-mark {
         display: none;
       }
+
       .logo-full {
         display: block;
       }
@@ -260,7 +267,7 @@ nav {
       }
 
       a.active,
-      a:active:not(.gd-button--has-dropdown) {
+      a:active:not(.xg-button--has-dropdown) {
         background: #44a5ab;
         border-bottom-color: #175d7a;
       }
@@ -270,6 +277,11 @@ nav {
         background: #ffa64f;
         border-bottom-color: #e7262f;
       }
+
+      .rss-feed-link {
+          fill: #fff;
+          margin-bottom: -1px;
+      }
     }
 
     .mobile-navigation {
@@ -277,6 +289,7 @@ nav {
     }
   }
 }
+
 @media (min-width: 1366px) {
   nav {
     font-size: 22px;

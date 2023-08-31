@@ -1,65 +1,45 @@
 <template>
-  <footer data-v-f7201d20="">
-    <div data-v-f7201d20="" class="wrapper">
-      <article data-v-f7201d20="">
-        <div data-v-f7201d20="" class="footer-left">
-          <img data-v-f7201d20="" src="/images/logos/logo.svg" alt="GameDistribution logo" />
-          <p data-v-f7201d20="">
+  <footer>
+    <div class="wrapper">
+      <article>
+        <div class="footer-left">
+          <img src="/images/logos/logo.svg" alt="GameDistribution logo" />
+          <p>
             GameDistribution offers a free service for developers and publishers. We help game developers monetize and
             distribute their games. We offer publishers a wide range of high quality cross platform games.
           </p>
-          <p data-v-f7201d20="">
-            <a
-              data-v-f7201d20=""
-              href="https://www.google.nl/maps/place/OrangeGames/@52.2789942,4.7433615,17z/data=!3m1!4b1!4m5!3m4!1s0x47c60c686089387b:0x58146d40b5c1a299!8m2!3d52.2789942!4d4.7455502"
-              target="_blank"
-              title="Location of our office"
-              >Boeing Avenue 30, 1119 PE Schiphol-Rijk, The Netherlands</a
-            >
+          <p>
+            <a href="https://www.google.nl/maps/place/OrangeGames/@52.2789942,4.7433615,17z/data=!3m1!4b1!4m5!3m4!1s0x47c60c686089387b:0x58146d40b5c1a299!8m2!3d52.2789942!4d4.7455502"
+              target="_blank" title="Location of our office">Boeing Avenue 30, 1119 PE Schiphol-Rijk, The Netherlands</a>
           </p>
         </div>
-        <div data-v-f7201d20="" class="footer-right">
-          <div data-v-f7201d20="" class="info">
-            <small data-v-f7201d20="">Information</small>
-            <a data-v-f7201d20="" href="/about" class="" target="_self" title="Games">About Us</a>
-            <a data-v-f7201d20="" href="/games" class="" target="_self" title="Games">Games</a>
-            <a data-v-f7201d20="" href="/publishers" class="" target="_self" title="Publishers">Publishers</a>
-            <a data-v-f7201d20="" href="/developers" class="" target="_self" title="Developers">Developers</a>
-            <a data-v-f7201d20="" href="/sdk" class="" target="_self" title="SDK">SDK</a>
-            <a data-v-f7201d20="" href="https://blog.gamedistribution.com" target="_blank" title="Blog">Blog</a>
+        <div class="footer-right">
+          <div class="info">
+            <small>Information</small>
+            <a href="/about" class="" target="_self" title="Games">About Us</a>
+            <a href="/games" class="" target="_self" title="Games">Games</a>
+            <a href="/publishers" class="" target="_self" title="Publishers">Publishers</a>
+            <a href="/developers" class="" target="_self" title="Developers">Developers</a>
+            <a href="/sdk" class="" target="_self" title="SDK">SDK</a>
+            <a href="https://blog.gamedistribution.com" target="_blank" title="Blog">Blog</a>
           </div>
-          <div data-v-f7201d20="" class="contact">
-            <small data-v-f7201d20="">Support</small>
-            <a data-v-f7201d20="" href="/contact" class="" target="_self" title="Contact Us">Contact Us</a>
-            <a data-v-f7201d20="" href="https://faq.gamedistribution.com" title="FAQ">FAQ</a>
+          <div class="contact">
+            <small>Support</small>
+            <a href="/contact" class="" target="_self" title="Contact Us">Contact Us</a>
+            <a href="https://faq.gamedistribution.com" title="FAQ">FAQ</a>
           </div>
         </div>
-        <div data-v-f7201d20="" class="copyright">
-          <p data-v-f7201d20="">
+        <div class="copyright">
+          <p>
             Azerion Copyright 2017 - 2023 |
-            <a
-              data-v-f7201d20=""
-              href="https://static.gamedistribution.com/policy/privacy-enduser.html"
-              target="_blank"
-              title="Privacy policy"
-              >Privacy policy</a
-            >
+            <a href="https://static.gamedistribution.com/policy/privacy-enduser.html" target="_blank"
+              title="Privacy policy">Privacy policy</a>
             -
-            <a
-              data-v-f7201d20=""
-              href="https://static.gamedistribution.com/policy/privacy-platform.html"
-              target="_blank"
-              title="Platform Privacy policy"
-              >Platform Privacy policy</a
-            >
+            <a href="https://static.gamedistribution.com/policy/privacy-platform.html" target="_blank"
+              title="Platform Privacy policy">Platform Privacy policy</a>
             -
-            <a
-              data-v-f7201d20=""
-              href="https://static.gamedistribution.com/terms/both.html"
-              target="_blank"
-              title="Terms &amp; conditions"
-              >Terms &amp; conditions</a
-            >
+            <a href="https://static.gamedistribution.com/terms/both.html" target="_blank"
+              title="Terms &amp; conditions">Terms &amp; conditions</a>
           </p>
         </div>
       </article>
@@ -84,7 +64,7 @@ footer {
     }
   }
 
-  .gd-button {
+  .xg-button {
     border-bottom: 0;
     margin-top: 1em;
     padding: 0.6em 1.2em !important;
@@ -227,8 +207,8 @@ footer {
     }
 
     p {
-        margin-bottom: 0;
-      }
+      margin-bottom: 0;
+    }
   }
 }
 

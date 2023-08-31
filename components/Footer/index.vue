@@ -348,6 +348,12 @@ footer {
         }
       }
     }
+
+    .copyright {
+          flex: 1 100%;
+          order: 3;
+          text-align: center;
+        }
   }
 }
 </style>

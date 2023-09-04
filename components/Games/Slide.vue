@@ -18,8 +18,7 @@
           <!---->
           <div class="spinner"></div>
           <div class="slides-wrapper">
-            <swiper :space-between="20" :navigation="customNavigation" :modules="modules"
-              :breakpoints="{ 600: { slidesPerView: 3 }, 900: { slidesPerView: 4, } }">
+            <swiper :slides-per-view="auto" :space-between="20" :navigation="customNavigation" :modules="modules">
               <swiper-slide>
                 <div class="game card">
                   <div class="thumbnail thumbnail--loaded">

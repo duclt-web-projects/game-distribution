@@ -8,7 +8,7 @@ export const categories = [
     count: 3552
   },
   {
-    name: "Racing &amp; Driving",
+    name: "Racing & Driving",
     count: 2185
   },
   {
@@ -282,6 +282,7 @@ export const gameTypes = [
     count: 1314
   },
 ];
+
 export const languages = [
   {
     name: "English",

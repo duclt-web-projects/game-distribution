@@ -11,7 +11,7 @@
             <GamesList />
           </div>
           <div class="column">
-            <GamesFilterMultiples />
+            <GamesFilterMultipleList />
           </div>
         </div>
       </div>

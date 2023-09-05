@@ -11,14 +11,13 @@
       </h4>
       <small>
         By
-        <a href="/games?company=VOODOO" class="" title="VOODOO">VOODOO</a></small>
+        <a href="/games?company=VOODOO" class="" title="VOODOO">VOODOO</a></small
+      >
     </div>
   </div>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .promo-list-item {
@@ -59,7 +58,7 @@
     background-color: hsla(0, 0%, 88%, 0.3);
   }
 
-  &>div {
+  & > div {
     flex: 1;
   }
 
@@ -72,7 +71,7 @@
     max-width: 94px;
     position: relative;
 
-    &>div {
+    & > div {
       overflow: hidden;
     }
   }

@@ -6,63 +6,33 @@
         <IconTime v-show="isShowMenuMobile" class="rotate" />
       </div>
       <div class="mobile-navigation slide-right" v-show="isShowMenuMobile">
-        <NuxtLink href="/games"> Games </NuxtLink>
-        <NuxtLink href="/solutions/white-label"> White Label Solution </NuxtLink>
-        <NuxtLink href="/about"> About </NuxtLink>
-        <NuxtLink href="/publishers"> Publishers </NuxtLink>
-        <NuxtLink href="/developers"> Developers </NuxtLink>
-        <NuxtLink href="/sdk"> SDK </NuxtLink>
-        <NuxtLink href="https://gamedistribution.com/contact"> Contact Us </NuxtLink>
-        <NuxtLink href="https://faq.gamedistribution.com"> FAQ </NuxtLink>
-        <NuxtLink href="https://developer.gamedistribution.com/register/publisher/" target="_blank"> Join us </NuxtLink>
-        <NuxtLink href="https://reports.gamedistribution.com/" target="_blank"> Publisher Login </NuxtLink>
-        <NuxtLink href="https://developer.gamedistribution.com/" target="_blank"> Developer Login </NuxtLink>
+        <nuxt-link v-for="header in headersMobile" :href="header.path" :key="header.id"> {{ header.name }} </nuxt-link>
       </div>
       <div class="mask" v-show="isShowMenuMobile"></div>
-      <NuxtLink href="/" aria-current="page" class="logo nuxt-link-exact-active nuxt-link-active"
+      <nuxt-link href="/" aria-current="page" class="logo nuxt-link-exact-active nuxt-link-active"
         title="GameDistribution">
         <img src="/images/logos/logo-mark-white.svg" alt="logo" class="logo-mark" />
         <img src="/images/logos/logo-white.svg" alt="logo" class="logo-full" />
-      </NuxtLink>
+      </nuxt-link>
       <div class="desktop-navigation">
-        <NuxtLink to="/games" class="xg-button"> Games </NuxtLink>
-        <NuxtLink to="/solutions/white-label" class="xg-button"> Products for Publishers </NuxtLink>
-        <NuxtLink to="/about" class="xg-button"> About </NuxtLink>
-        <NuxtLink to="/publishers" class="xg-button"> Publishers </NuxtLink>
-        <NuxtLink to="/developers" class="xg-button xg-button--has-dropdown">
-          Developers
-          <ul class="xg-button_dropdown">
-            <li>
-              <NuxtLink to="/sdk"> SDK </NuxtLink>
-            </li>
-          </ul>
-        </NuxtLink>
-        <a target="_blank" class="xg-button xg-button--has-dropdown">
-          Support
-          <ul class="xg-button_dropdown">
-            <li>
-              <NuxtLink to="/contact"> Contact Us </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="https://faq.gamedistribution.com"> FAQ </NuxtLink>
-            </li>
-          </ul>
-        </a>
-        <NuxtLink to="https://developer.gamedistribution.com/register/publisher/" class="xg-button"> Join us </NuxtLink>
-        <a to="https://developer.gamedistribution.com/" target="_blank" class="xg-button xg-button--has-dropdown">
-          Login
-          <ul class="xg-button_dropdown">
-            <li>
-              <NuxtLink to="https://developer.gamedistribution.com/" target="_blank">Developer login</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="https://reports.gamedistribution.com/" target="_blank">Publisher login</NuxtLink>
-            </li>
-          </ul>
-        </a>
-        <NuxtLink to="/rss-builder" class="xg-button"> RSS
-          <IconRss class="rss-feed-link"/>
-        </NuxtLink>
+        <template v-for="header in headers">
+          <div v-if="header.children.length > 0" class=" xg-button--has-dropdown"
+            :key="header.id">
+            <nuxt-link :to="header.path" class="xg-button">
+              {{ header.name }}
+            </nuxt-link>
+            <ul class="xg-button_dropdown">
+              <li v-for="subHeader in header.children" :key="subHeader.id + 'sub'">
+                <nuxt-link :to="subHeader.path"> {{ subHeader.name }} </nuxt-link>
+              </li>
+            </ul>
+          </div>
+          <div v-else :key="header.id + 'no-child'">
+            <nuxt-link :to="header.path" class="xg-button" >
+              {{ header.name }}
+            </nuxt-link>
+          </div>
+        </template>
       </div>
     </div>
   </nav>
@@ -72,6 +42,7 @@
 import IconMenuBurger from "@/assets/icon/MenuBurger.vue";
 import IconTime from "@/assets/icon/Time.vue";
 import IconRss from "@/assets/icon/Rss.vue";
+import { headers, headersMobile } from "@/config/header"
 
 const isShowMenuMobile = ref(false);
 
@@ -279,8 +250,8 @@ nav {
       }
 
       .rss-feed-link {
-          fill: #fff;
-          margin-bottom: -1px;
+        fill: #fff;
+        margin-bottom: -1px;
       }
     }
 

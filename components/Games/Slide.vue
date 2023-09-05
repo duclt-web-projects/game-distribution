@@ -17,141 +17,139 @@
           </div>
           <!---->
           <div class="spinner"></div>
-          <div class="slides-wrapper">
-            <swiper :slides-per-view="auto" :space-between="20" :navigation="customNavigation" :modules="modules">
-              <swiper-slide>
-                <div class="game card">
-                  <div class="thumbnail thumbnail--loaded">
-                    <div class="spinner"></div>
-                    <img src="/images/icon-html5.svg" class="type" />
-                    <img src="/images/badge-exclusive.png" class="exclusive type" />
-                    <span class="image is-4by3"><img
-                        src="https://img.gamedistribution.com/85f432074ab14e71b740c740d840f19f-512x384.jpeg"
-                        alt="Candy Mahjong" /></span>
-                  </div>
-                  <div class="content">
-                    <a href="/games/candy-mahjong-2" class="title" title="Candy Mahjong">Candy
-                      Mahjong</a>
-                    <span class="company">
-                      By
-                      <a href="/games?company=Agame" class="" title="Agame">Agame</a></span>
-                    <span class="description">...</span>
-                  </div>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="game card">
-                  <div class="thumbnail thumbnail--loaded">
-                    <div class="spinner"></div>
-                    <img src="/images/icon-html5.svg" class="type" />
-                    <!---->
-                    <img src="/images/badge-exclusive.png" class="exclusive type" />
-                    <span class="image is-4by3"><img
-                        src="https://img.gamedistribution.com/d9c6a64964b8484c94e68e3990617cf7-512x384.jpeg"
-                        alt="Fat Race 3D" /></span>
-                  </div>
-                  <div class="content">
-                    <a href="/games/fat-race-3d" class="title" title="Fat Race 3D">Fat Race 3D</a>
-                    <span class="company">
-                      By
-                      <a href="/games?company=YAD.Com" class="" title="YAD.Com">YAD.Com</a></span>
-                    <span class="description">...</span>
-                  </div>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="game card">
-                  <div class="thumbnail thumbnail--loaded">
-                    <div class="spinner"></div>
-                    <img src="/images/icon-html5.svg" class="type" />
-                    <!---->
-                    <img src="/images/badge-exclusive.png" class="exclusive type" />
-                    <span class="image is-4by3"><img
-                        src="https://img.gamedistribution.com/53bb9433a5324091a4b29544ea0f93dd-512x384.jpg"
-                        alt="Dynamons 5" /></span>
-                  </div>
-                  <div class="content">
-                    <a href="/games/dynamons-5" class="title" title="Dynamons 5">Dynamons 5</a>
-                    <span class="company">
-                      By
-                      <a href="/games?company=Azerion%20Casual%20Games" class="" title="Azerion Casual Games">Azerion
-                        Casual Games</a></span>
-                    <span class="description">...</span>
-                  </div>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="game card">
-                  <div class="thumbnail thumbnail--loaded">
-                    <div class="spinner"></div>
-                    <img src="/images/icon-html5.svg" class="type" />
-                    <!---->
-                    <img src="/images/badge-exclusive.png" class="exclusive type" />
-                    <span class="image is-4by3"><img
-                        src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
-                        alt="Ball Surfer 3D" /></span>
-                  </div>
-                  <div class="content">
-                    <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
-                      3D</a>
-                    <span class="company">
-                      By
-                      <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
-                        Games</a></span>
-                    <span class="description">...</span>
-                  </div>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="game card">
-                  <div class="thumbnail thumbnail--loaded">
-                    <div class="spinner"></div>
-                    <img src="/images/icon-html5.svg" class="type" />
-                    <!---->
-                    <img src="/images/badge-exclusive.png" class="exclusive type" />
-                    <span class="image is-4by3"><img
-                        src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
-                        alt="Ball Surfer 3D" /></span>
-                  </div>
-                  <div class="content">
-                    <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
-                      3D</a>
-                    <span class="company">
-                      By
-                      <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
-                        Games</a></span>
-                    <span class="description">...</span>
-                  </div>
-                </div>
-              </swiper-slide>
-              <swiper-slide>
-                <div class="game card">
-                  <div class="thumbnail thumbnail--loaded">
-                    <div class="spinner"></div>
-                    <img src="/images/icon-html5.svg" class="type" />
-                    <!---->
-                    <img src="/images/badge-exclusive.png" class="exclusive type" />
-                    <span class="image is-4by3"><img
-                        src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
-                        alt="Ball Surfer 3D" /></span>
-                  </div>
-                  <div class="content">
-                    <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
-                      3D</a>
-                    <span class="company">
-                      By
-                      <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
-                        Games</a></span>
-                    <span class="description">...</span>
-                  </div>
-                </div>
-              </swiper-slide>
-            </swiper>
-            <div class="slides-control slides-control-prev">
-              <IconAngleLeft />
+          <div class="game card">
+            <div class="thumbnail thumbnail--loaded">
+              <div class="spinner"></div>
+              <img src="/images/icon-html5.svg" class="type" />
+              <img src="/images/badge-exclusive.png" class="exclusive type" />
+              <span class="image is-4by3"><img
+                  src="https://img.gamedistribution.com/85f432074ab14e71b740c740d840f19f-512x384.jpeg"
+                  alt="Candy Mahjong" /></span>
             </div>
-            <div class="slides-control slides-control-next">
-              <IconAngleRight />
+            <div class="content">
+              <a href="/games/candy-mahjong-2" class="title" title="Candy Mahjong">Candy
+                Mahjong</a>
+              <span class="company">
+                By
+                <a href="/games?company=Agame" class="" title="Agame">Agame</a></span>
+              <span class="description">...</span>
+            </div>
+          </div>
+          <div class="game card">
+            <div class="thumbnail thumbnail--loaded">
+              <div class="spinner"></div>
+              <img src="/images/icon-html5.svg" class="type" />
+              <!---->
+              <img src="/images/badge-exclusive.png" class="exclusive type" />
+              <span class="image is-4by3"><img
+                  src="https://img.gamedistribution.com/d9c6a64964b8484c94e68e3990617cf7-512x384.jpeg"
+                  alt="Fat Race 3D" /></span>
+            </div>
+            <div class="content">
+              <a href="/games/fat-race-3d" class="title" title="Fat Race 3D">Fat Race 3D</a>
+              <span class="company">
+                By
+                <a href="/games?company=YAD.Com" class="" title="YAD.Com">YAD.Com</a></span>
+              <span class="description">...</span>
+            </div>
+          </div>
+          <div class="game card">
+            <div class="thumbnail thumbnail--loaded">
+              <div class="spinner"></div>
+              <img src="/images/icon-html5.svg" class="type" />
+              <!---->
+              <img src="/images/badge-exclusive.png" class="exclusive type" />
+              <span class="image is-4by3"><img
+                  src="https://img.gamedistribution.com/53bb9433a5324091a4b29544ea0f93dd-512x384.jpg"
+                  alt="Dynamons 5" /></span>
+            </div>
+            <div class="content">
+              <a href="/games/dynamons-5" class="title" title="Dynamons 5">Dynamons 5</a>
+              <span class="company">
+                By
+                <a href="/games?company=Azerion%20Casual%20Games" class="" title="Azerion Casual Games">Azerion
+                  Casual Games</a></span>
+              <span class="description">...</span>
+            </div>
+          </div>
+          <div class="game card">
+            <div class="thumbnail thumbnail--loaded">
+              <div class="spinner"></div>
+              <img src="/images/icon-html5.svg" class="type" />
+              <!---->
+              <img src="/images/badge-exclusive.png" class="exclusive type" />
+              <span class="image is-4by3"><img
+                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
+                  alt="Ball Surfer 3D" /></span>
+            </div>
+            <div class="content">
+              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
+                3D</a>
+              <span class="company">
+                By
+                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
+                  Games</a></span>
+              <span class="description">...</span>
+            </div>
+          </div>
+          <div class="game card">
+            <div class="thumbnail thumbnail--loaded">
+              <div class="spinner"></div>
+              <img src="/images/icon-html5.svg" class="type" />
+              <!---->
+              <img src="/images/badge-exclusive.png" class="exclusive type" />
+              <span class="image is-4by3"><img
+                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
+                  alt="Ball Surfer 3D" /></span>
+            </div>
+            <div class="content">
+              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
+                3D</a>
+              <span class="company">
+                By
+                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
+                  Games</a></span>
+              <span class="description">...</span>
+            </div>
+          </div>
+          <div class="game card">
+            <div class="thumbnail thumbnail--loaded">
+              <div class="spinner"></div>
+              <img src="/images/icon-html5.svg" class="type" />
+              <!---->
+              <img src="/images/badge-exclusive.png" class="exclusive type" />
+              <span class="image is-4by3"><img
+                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
+                  alt="Ball Surfer 3D" /></span>
+            </div>
+            <div class="content">
+              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
+                3D</a>
+              <span class="company">
+                By
+                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
+                  Games</a></span>
+              <span class="description">...</span>
+            </div>
+          </div>
+          <div class="game card">
+            <div class="thumbnail thumbnail--loaded">
+              <div class="spinner"></div>
+              <img src="/images/icon-html5.svg" class="type" />
+              <!---->
+              <img src="/images/badge-exclusive.png" class="exclusive type" />
+              <span class="image is-4by3"><img
+                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
+                  alt="Ball Surfer 3D" /></span>
+            </div>
+            <div class="content">
+              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
+                3D</a>
+              <span class="company">
+                By
+                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
+                  Games</a></span>
+              <span class="description">...</span>
             </div>
           </div>
         </div>
@@ -161,20 +159,6 @@
 </template>
 
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-
-import IconAngleLeft from "@/assets/icon/AngleLeft.vue"
-import IconAngleRight from "@/assets/icon/AngleRight.vue"
-
-const modules = [Navigation];
-
-const customNavigation = {
-  prevEl: '.slides-control-prev', // CSS selector for the previous button
-  nextEl: '.slides-control-next'  // CSS selector for the next button
-};
 </script>
 
 <style lang="scss" scoped>
@@ -199,16 +183,6 @@ const customNavigation = {
       }
     }
   }
-
-  @media (min-width: 640px) {
-    .collection-header {
-      >div {
-        &:first-of-type {
-          display: none;
-        }
-      }
-    }
-  }
 }
 
 .slides-container {
@@ -221,64 +195,6 @@ const customNavigation = {
 
   .spinner {
     display: none;
-  }
-
-  .slides-wrapper {
-    position: relative;
-    width: 50%;
-    margin: 0 1rem 0 0;
-  }
-
-  .slides-control {
-    position: absolute;
-    top: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: #fff;
-    z-index: 10;
-    box-shadow: 0px 8px 20px rgba(182, 182, 182, 0.42);
-    cursor: pointer;
-    transition: 0.4s;
-
-    svg {
-      fill: #512e85
-    }
-
-    &:hover {
-      background-color: #512e85;
-
-      svg {
-        fill: #fff
-      }
-    }
-  }
-
-  .slides-control-next {
-    left: 100%;
-    transform: translate(-50%, 0);
-  }
-
-  .slides-control-prev {
-    right: 100%;
-    transform: translate(50%, 0);
-  }
-
-  .swiper-button-disabled {
-    svg {
-      fill: #ccc;
-    }
-
-    &:hover {
-      background-color: #fff;
-
-      svg {
-        fill: #ccc;
-      }
-    }
   }
 
   >div {
@@ -297,6 +213,11 @@ const customNavigation = {
     .game.card:first-child {
       margin-left: 0;
     }
+  }
+
+  .game {
+    flex: 1;
+    margin-top: 0;
   }
 }
 
@@ -385,8 +306,15 @@ const customNavigation = {
   }
 }
 
-
 @media (min-width: 640px) {
+  .collection-header {
+    >div {
+      &:first-of-type {
+        display: none;
+      }
+    }
+  }
+
   .slides-container {
     background-position: 0.9375rem 0;
 
@@ -398,6 +326,18 @@ const customNavigation = {
         width: auto;
       }
     }
+
+    .game {
+      margin-top: 0.6818rem;
+
+      &:nth-child(4),
+      &:nth-child(5),
+      &:nth-child(6),
+      &:nth-child(7),
+      &:nth-child(8) {
+        display: none;
+      }
+    }
   }
 
   .company-logo {
@@ -406,6 +346,46 @@ const customNavigation = {
 
   .company-logo.no-company {
     display: block;
+  }
+}
+
+@media (min-width: 1000px) {
+  .slides-container {
+    .game:nth-child(4) {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .slides-container {
+    .game:nth-child(5) {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 1500px) {
+  .slides-container {
+    .game:nth-child(6) {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 1700px) {
+  .slides-container {
+    .game:nth-child(7) {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 1900px) {
+  .slides-container {
+    .game:nth-child(8) {
+      display: block;
+    }
   }
 }
 </style>

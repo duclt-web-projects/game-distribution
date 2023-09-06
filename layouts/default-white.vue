@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="planet"></div>
     <Header>
-      <img src="/images/logos/logo.png" alt="logo" class="logo-full" />
+      <img src="/images/logos/logo-xgame.png" alt="logo" class="logo-full" />
     </Header>
     <slot />
     <Footer />

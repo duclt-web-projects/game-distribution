@@ -9,15 +9,18 @@
         <nuxt-link v-for="header in headersMobile" :href="header.path" :key="header.id"> {{ header.name }} </nuxt-link>
       </div>
       <div class="mask" v-show="isShowMenuMobile"></div>
-      <nuxt-link href="/" aria-current="page" class="logo nuxt-link-exact-active nuxt-link-active"
-        title="GameDistribution">
-        <img src="/images/logos/logo-mark-white.svg" alt="logo" class="logo-mark" />
-        <img src="/images/logos/logo-white.svg" alt="logo" class="logo-full" />
+      <nuxt-link
+        href="/"
+        aria-current="page"
+        class="logo nuxt-link-exact-active nuxt-link-active"
+        title="GameDistribution"
+      >
+        <!-- <img src="/images/logos/logo-xgame.png" alt="logo" class="logo-full" /> -->
+        <slot />
       </nuxt-link>
       <div class="desktop-navigation">
         <template v-for="header in headers">
-          <div v-if="header.children.length > 0" class=" xg-button--has-dropdown"
-            :key="header.id">
+          <div v-if="header.children.length" class="xg-button--has-dropdown" :key="header.id">
             <nuxt-link :to="header.path" class="xg-button">
               {{ header.name }}
             </nuxt-link>
@@ -28,7 +31,7 @@
             </ul>
           </div>
           <div v-else :key="header.id + 'no-child'">
-            <nuxt-link :to="header.path" class="xg-button" >
+            <nuxt-link :to="header.path" class="xg-button">
               {{ header.name }}
             </nuxt-link>
           </div>
@@ -42,7 +45,7 @@
 import IconMenuBurger from "@/assets/icon/MenuBurger.vue";
 import IconTime from "@/assets/icon/Time.vue";
 import IconRss from "@/assets/icon/Rss.vue";
-import { headers, headersMobile } from "@/config/header"
+import { headers, headersMobile } from "@/config/header";
 
 const isShowMenuMobile = ref(false);
 
@@ -99,15 +102,9 @@ nav {
     height: 46px;
     margin: auto;
 
-    img {
-      display: none;
+    :deep(img) {
       height: auto;
-      max-width: 216px;
-    }
-
-    .logo-mark {
-      display: block;
-      margin-top: 4px;
+      max-width: 150px;
     }
   }
 
@@ -170,11 +167,7 @@ nav {
     font-size: 18px;
 
     .logo {
-      .logo-mark {
-        display: none;
-      }
-
-      .logo-full {
+      &-full {
         display: block;
       }
     }

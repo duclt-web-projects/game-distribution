@@ -14,10 +14,29 @@
   </div>
 </template>
 
-<script setup>
-onMounted(() => {
-  document.body.className = "";
-  document.body.classList.add("home");
+<script setup lang="ts">
+definePageMeta({
+  layout: "default-white",
+});
+
+useHead({
+  title: "Games for Websites and Messengers - XGame Studio",
+  meta: [
+    {
+      name: "description",
+      content:
+        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+    },
+    { name: "ogTitle", content: "Games for Websites and Messengers - XGame Studio" },
+    {
+      name: "ogDescription",
+      content:
+        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+    },
+  ],
+  bodyAttrs: {
+    class: "home",
+  },
 });
 </script>
 

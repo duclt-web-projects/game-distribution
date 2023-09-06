@@ -2,22 +2,26 @@
   <div class="promo-list-item">
     <div class="promo-image">
       <div class="image is-4by3">
-        <img src="https://img.gamedistribution.com/1d9e7e2883e144d293c0894e230b5441-512x384.jpg" alt="Mob Control" />
+        <img :src="item.src" :alt="item.name" />
       </div>
     </div>
     <div class="promo-info">
       <h4>
-        <a href="/games/mob-control" class="" title="Mob Control">Mob Control</a>
+        <a href="/games/mob-control" class="" :title="item.name">{{ item.name }}</a>
       </h4>
       <small>
         By
-        <a href="/games?company=VOODOO" class="" title="VOODOO">VOODOO</a></small
+        <a href="/games?company=VOODOO" class="" :title="item.company">{{ item.name }}</a></small
       >
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  item: Object,
+});
+</script>
 
 <style lang="scss" scoped>
 .promo-list-item {

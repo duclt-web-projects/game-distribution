@@ -8,8 +8,10 @@
         </div>
       </div>
     </div>
-    <div class="slides-container loading"
-      style="background-image: url('https://img.gamedistribution.com/collections/banner/exclusive.jpg')">
+    <div
+      class="slides-container loading"
+      style="background-image: url('https://img.gamedistribution.com/collections/banner/exclusive.jpg')"
+    >
       <div>
         <div>
           <div class="company-logo no-company" style="border-color: rgb(81, 48, 133)">
@@ -17,141 +19,7 @@
           </div>
           <!---->
           <div class="spinner"></div>
-          <div class="game card">
-            <div class="thumbnail thumbnail--loaded">
-              <div class="spinner"></div>
-              <img src="/images/icon-html5.svg" class="type" />
-              <img src="/images/badge-exclusive.png" class="exclusive type" />
-              <span class="image is-4by3"><img
-                  src="https://img.gamedistribution.com/85f432074ab14e71b740c740d840f19f-512x384.jpeg"
-                  alt="Candy Mahjong" /></span>
-            </div>
-            <div class="content">
-              <a href="/games/candy-mahjong-2" class="title" title="Candy Mahjong">Candy
-                Mahjong</a>
-              <span class="company">
-                By
-                <a href="/games?company=Agame" class="" title="Agame">Agame</a></span>
-              <span class="description">...</span>
-            </div>
-          </div>
-          <div class="game card">
-            <div class="thumbnail thumbnail--loaded">
-              <div class="spinner"></div>
-              <img src="/images/icon-html5.svg" class="type" />
-              <!---->
-              <img src="/images/badge-exclusive.png" class="exclusive type" />
-              <span class="image is-4by3"><img
-                  src="https://img.gamedistribution.com/d9c6a64964b8484c94e68e3990617cf7-512x384.jpeg"
-                  alt="Fat Race 3D" /></span>
-            </div>
-            <div class="content">
-              <a href="/games/fat-race-3d" class="title" title="Fat Race 3D">Fat Race 3D</a>
-              <span class="company">
-                By
-                <a href="/games?company=YAD.Com" class="" title="YAD.Com">YAD.Com</a></span>
-              <span class="description">...</span>
-            </div>
-          </div>
-          <div class="game card">
-            <div class="thumbnail thumbnail--loaded">
-              <div class="spinner"></div>
-              <img src="/images/icon-html5.svg" class="type" />
-              <!---->
-              <img src="/images/badge-exclusive.png" class="exclusive type" />
-              <span class="image is-4by3"><img
-                  src="https://img.gamedistribution.com/53bb9433a5324091a4b29544ea0f93dd-512x384.jpg"
-                  alt="Dynamons 5" /></span>
-            </div>
-            <div class="content">
-              <a href="/games/dynamons-5" class="title" title="Dynamons 5">Dynamons 5</a>
-              <span class="company">
-                By
-                <a href="/games?company=Azerion%20Casual%20Games" class="" title="Azerion Casual Games">Azerion
-                  Casual Games</a></span>
-              <span class="description">...</span>
-            </div>
-          </div>
-          <div class="game card">
-            <div class="thumbnail thumbnail--loaded">
-              <div class="spinner"></div>
-              <img src="/images/icon-html5.svg" class="type" />
-              <!---->
-              <img src="/images/badge-exclusive.png" class="exclusive type" />
-              <span class="image is-4by3"><img
-                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
-                  alt="Ball Surfer 3D" /></span>
-            </div>
-            <div class="content">
-              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
-                3D</a>
-              <span class="company">
-                By
-                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
-                  Games</a></span>
-              <span class="description">...</span>
-            </div>
-          </div>
-          <div class="game card">
-            <div class="thumbnail thumbnail--loaded">
-              <div class="spinner"></div>
-              <img src="/images/icon-html5.svg" class="type" />
-              <!---->
-              <img src="/images/badge-exclusive.png" class="exclusive type" />
-              <span class="image is-4by3"><img
-                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
-                  alt="Ball Surfer 3D" /></span>
-            </div>
-            <div class="content">
-              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
-                3D</a>
-              <span class="company">
-                By
-                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
-                  Games</a></span>
-              <span class="description">...</span>
-            </div>
-          </div>
-          <div class="game card">
-            <div class="thumbnail thumbnail--loaded">
-              <div class="spinner"></div>
-              <img src="/images/icon-html5.svg" class="type" />
-              <!---->
-              <img src="/images/badge-exclusive.png" class="exclusive type" />
-              <span class="image is-4by3"><img
-                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
-                  alt="Ball Surfer 3D" /></span>
-            </div>
-            <div class="content">
-              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
-                3D</a>
-              <span class="company">
-                By
-                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
-                  Games</a></span>
-              <span class="description">...</span>
-            </div>
-          </div>
-          <div class="game card">
-            <div class="thumbnail thumbnail--loaded">
-              <div class="spinner"></div>
-              <img src="/images/icon-html5.svg" class="type" />
-              <!---->
-              <img src="/images/badge-exclusive.png" class="exclusive type" />
-              <span class="image is-4by3"><img
-                  src="https://img.gamedistribution.com/82985d8e4bcb46db93afe2e06312b1fd-512x384.jpeg"
-                  alt="Ball Surfer 3D" /></span>
-            </div>
-            <div class="content">
-              <a href="/games/ball-surfer-3d" class="title" title="Ball Surfer 3D">Ball Surfer
-                3D</a>
-              <span class="company">
-                By
-                <a href="/games?company=Faramel%20Games" class="" title="Faramel Games">Faramel
-                  Games</a></span>
-              <span class="description">...</span>
-            </div>
-          </div>
+          <Game v-for="item in gamesSlide" :key="item.id" :item="item" />
         </div>
       </div>
     </div>
@@ -159,13 +27,15 @@
 </template>
 
 <script setup>
+import { games } from "@/data/games";
+const gamesSlide = games.slice(0, 6);
 </script>
 
 <style lang="scss" scoped>
 .collection-header {
   display: flex;
 
-  >div {
+  > div {
     flex: 1;
     margin: 1.364rem;
     width: 100%;
@@ -178,7 +48,7 @@
       align-items: center;
       display: flex;
 
-      >div {
+      > div {
         margin-left: auto;
       }
     }
@@ -197,14 +67,14 @@
     display: none;
   }
 
-  >div {
+  > div {
     overflow-x: auto;
     overflow-y: hidden;
     position: relative;
     width: 100%;
     padding-right: 10px;
 
-    >div {
+    > div {
       display: flex;
       min-height: 15.7rem;
       padding: 0.9375rem;
@@ -308,7 +178,7 @@
 
 @media (min-width: 640px) {
   .collection-header {
-    >div {
+    > div {
       &:first-of-type {
         display: none;
       }
@@ -318,8 +188,8 @@
   .slides-container {
     background-position: 0.9375rem 0;
 
-    >div {
-      >div {
+    > div {
+      > div {
         flex-direction: row;
         justify-content: flex-end;
         padding: 0.6818rem;

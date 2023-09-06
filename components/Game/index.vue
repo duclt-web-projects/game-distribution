@@ -3,28 +3,140 @@
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
-      <span class="image is-4by3"><img
-          src="https://img.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b-512x384.jpeg"
-          alt="Words of Wonders" /></span>
+      <!---->
+      <!---->
+      <span class="image is-4by3"><img :src="item.src" :alt="item.name" /></span>
     </div>
     <div class="content">
-      <a href="/games/words-of-wonders" class="title" title="Words of Wonders">Words of
-        Wonders</a>
+      <a href="/games/words-of-wonders" class="title" :title="item.name">{{ item.name }}</a>
       <span class="company">
         By
-        <a href="/games?company=Famobi%20GmbH" class="" title="Famobi GmbH">Famobi
-          GmbH</a></span>
+        <a href="/games?company=Famobi%20GmbH" class="" :title="item.company">{{ item.company }}</a></span
+      >
       <span class="description">...</span>
     </div>
   </div>
 </template>
 
 <script setup>
-
+const props = defineProps({
+  item: Object,
+});
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/game.scss";
+.game {
+  border-radius: 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  will-change: transform;
+
+  span {
+    display: block;
+  }
+
+  .content {
+    flex: 1;
+  }
+
+  .title {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: #512e85;
+    display: -webkit-box;
+    font-family: "Squada One", cursive;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 1em;
+    overflow: hidden;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    text-shadow: none;
+    text-transform: uppercase;
+  }
+
+  .company,
+  .description {
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+  }
+
+  .company {
+    color: #512e85;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .description {
+    color: #5c5b63;
+    display: none;
+  }
+
+  .thumbnail {
+    flex: 1;
+    position: relative;
+
+    .spinner {
+      z-index: 0;
+    }
+
+    img.type {
+      z-index: 20;
+    }
+
+    .image {
+      background-color: #fff;
+      opacity: 0;
+      z-index: 10;
+
+      img {
+        border-radius: 1px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .thumbnail.thumbnail--loaded {
+    .loader {
+      display: none;
+    }
+
+    .image {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  &:hover {
+    background-color: #512e85;
+
+    .company,
+    .company > a,
+    .description,
+    .title {
+      color: #fff;
+    }
+  }
+
+  &:active {
+    .title {
+      color: #ff8c1c;
+    }
+
+    .company,
+    .company > a,
+    .description {
+      color: #fff;
+    }
+  }
+}
 
 .game.card {
   background-color: #fff;
@@ -47,7 +159,7 @@
   .company {
     margin-top: auto;
 
-    &>a {
+    & > a {
       color: #ff3a56;
 
       &:hover {
@@ -109,7 +221,7 @@
   }
 
   .company {
-    &>a {
+    & > a {
       color: #44a5ab;
 
       &:hover {

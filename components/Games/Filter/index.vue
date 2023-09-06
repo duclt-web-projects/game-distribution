@@ -64,7 +64,7 @@ import IconGrid from "@/assets/icon/Grid.vue"
     margin-right: 1%;
   }
 
-  form::v-deep input {
+  form:deep(input) {
     background-color: #fff;
   }
 

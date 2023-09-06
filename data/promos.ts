@@ -37,13 +37,14 @@ export const promosList = [
   },
 ];
 
+export const hotItem = {
+  id: 1,
+  name: "The Smurfs Cooking",
+  src: "https://img.gamedistribution.com/featured/ec7df258c06147e6a5b2325ee02cf5b3.jpg",
+  company: "IMPS",
+};
+
 export const promosFeature = [
-  {
-    id: 1,
-    name: "The Smurfs Cooking",
-    src: "https://img.gamedistribution.com/featured/ec7df258c06147e6a5b2325ee02cf5b3.jpg",
-    company: "IMPS",
-  },
   {
     id: 2,
     name: "The Mergest Kingdom",

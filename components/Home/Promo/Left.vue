@@ -4,10 +4,10 @@
       <div class="promo-featured is-orange">
         <div class="promo-info">
           <h3>
-            <a href="/games/the-smurfs-cooking" class="" :title="hotItem.name">{{ hotItem.name }}</a>
+            <NuxtLink to="/games/the-smurfs-cooking" class="" :title="hotItem.name">{{ hotItem.name }}</NuxtLink>
           </h3>
           <small>
-            By <a href="/games?company=IMPS" class="" title="IMPS">{{ hotItem.company }}</a>
+            By <NuxtLink to="/games?company=IMPS" class="" title="IMPS">{{ hotItem.company }}</NuxtLink>
           </small>
           <svg
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -57,8 +57,8 @@
               <img :src="item.src" :alt="item.company" />
             </div>
             <div class="pills" style="">
-              <a href="/games?tag=build" class="pill transparent" title="build">build</a
-              ><a href="/games?tag=builder" class="pill transparent" title="builder">builder</a>
+              <a href="/games?tag=build" class="pill transparent" title="build">build</a>
+              <a href="/games?tag=builder" class="pill transparent" title="builder">builder</a>
             </div>
           </div>
         </div>
@@ -68,9 +68,7 @@
 </template>
 
 <script setup>
-import { promosFeature } from "@/data/promos";
-
-const hotItem = promosFeature.shift();
+import { hotItem, promosFeature } from "@/data/promos";
 </script>
 
 <style lang="scss" scoped>

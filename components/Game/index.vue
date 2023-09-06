@@ -3,8 +3,6 @@
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
-      <!---->
-      <!---->
       <span class="image is-4by3"><img
           src="https://img.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b-512x384.jpeg"
           alt="Words of Wonders" /></span>

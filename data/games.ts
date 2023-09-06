@@ -50,7 +50,7 @@ export const games = [
   {
     id: 9,
     name: "Candy Riddles: Free Match 3 Puzzle",
-    src: "https://img.gamedistribution.com/639df47033804f18bf39e113ef29f4fa-512x384.jpe",
+    src: "https://img.gamedistribution.com/141b31354dda481abd7a8445e436e58e-512x384.jpg",
     company: "Clever Apps Pte. Ltd."
   },
   {

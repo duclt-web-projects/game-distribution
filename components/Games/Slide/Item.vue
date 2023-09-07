@@ -17,7 +17,6 @@
           <div class="company-logo no-company" style="border-color: rgb(81, 48, 133)">
             <img src="https://img.gamedistribution.com/collections/logo/exclusive-logo.png" />
           </div>
-          <!---->
           <div class="spinner"></div>
           <Game v-for="item in gamesSlide" :key="item.id" :item="item" />
         </div>

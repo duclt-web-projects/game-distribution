@@ -3,8 +3,6 @@
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
-      <!---->
-      <!---->
       <span class="image is-4by3"><img :src="API_UPLOAD_ENDPOINT + '/' + pareUrlFile(item.avatar)" :alt="item.name" /></span>
     </div>
     <div class="content">

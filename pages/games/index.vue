@@ -2,9 +2,7 @@
   <section>
     <div class="wrapper">
       <div class="content">
-        <!---->
         <GamesSlideList />
-        <!---->
         <div class="columns">
           <div class="column">
             <GamesFilter />

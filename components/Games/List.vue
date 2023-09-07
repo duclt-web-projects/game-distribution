@@ -1,13 +1,18 @@
 <template>
   <Pagination />
   <div class="games-container list-view-grid">
-    <Game v-for="item in games" :key="item.id" :item="item" />
+    <Game v-for="item in gamesData" :key="item.id" :item="item" />
   </div>
   <Pagination />
 </template>
 
 <script setup>
 import { games } from "@/data/games";
+import { API_ENDPOINT } from '@/config/constants';
+const { data, pending } = useFetch(`${API_ENDPOINT}/games`);
+
+const gamesData = ref(data.value?.data)
+console.log(gamesData);
 </script>
 
 <style lang="scss" scoped>

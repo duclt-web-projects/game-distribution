@@ -103,6 +103,29 @@
 <script setup>
 import IconSearch from "@/assets/icon/Search.vue";
 import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
+
+const { slug } = useRoute().params;
+console.log(slug);
+
+useHead({
+  title: `Publish ${slug} on your website - XGame Studio`,
+  meta: [
+    {
+      name: "description",
+      content:
+        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+    },
+    { name: "ogTitle", content: "Games Catalog - XGame Studio" },
+    {
+      name: "ogDescription",
+      content:
+        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+    },
+  ],
+  bodyAttrs: {
+    class: "games",
+  },
+});
 </script>
 
 <style lang="scss" scoped>

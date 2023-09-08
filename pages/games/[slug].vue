@@ -105,7 +105,6 @@ import IconSearch from "@/assets/icon/Search.vue";
 import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
 
 const { slug } = useRoute().params;
-console.log(slug);
 
 useHead({
   title: `Publish ${slug} on your website - XGame Studio`,

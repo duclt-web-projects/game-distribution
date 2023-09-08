@@ -20,6 +20,10 @@ body.home {
   background: url("/images/planets/planet-green.png") 0 -150px no-repeat;
 }
 
+body.games .planet {
+  background: none;
+}
+
 body.error .planet,
 body.home .planet {
   background: url("/images/planets/planet-green.png") 0 -150px no-repeat;

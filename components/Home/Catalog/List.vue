@@ -1,3 +1,10 @@
+<script setup>
+import { catalog } from "@/data/catalog";
+import { API_ENDPOINT } from "@/config/constants";
+
+const { data: games } = await useFetch(`${API_ENDPOINT}/games`);
+</script>
+
 <template>
   <div class="catalog-games-container">
     <HomeCatalogListItem v-for="item in catalog" :key="item.id" :title="item" :games="games" />
@@ -8,11 +15,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { games } from "@/data/games";
-import { catalog } from "@/data/catalog";
-</script>
 
 <style lang="scss" scoped>
 .catalog-games-container {

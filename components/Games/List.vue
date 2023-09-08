@@ -1,19 +1,19 @@
-<template>
-  <Pagination />
-  <div class="games-container list-view-grid">
-    <Game v-for="item in gamesData" :key="item.id" :item="item" />
-  </div>
-  <Pagination />
-</template>
-
 <script setup>
-import { games } from "@/data/games";
-import { API_ENDPOINT } from '@/config/constants';
-const { data, pending } = useFetch(`${API_ENDPOINT}/games`);
+import { API_ENDPOINT } from "@/config/constants";
 
-const gamesData = ref(data.value?.data)
-console.log(gamesData);
+const prop = defineProps({
+  searchText: String,
+});
+const { data: games } = await useFetch(() => `${API_ENDPOINT}/games/list?name=${prop.searchText}`);
 </script>
+
+<template>
+  <Pagination :pagination="games"/>
+  <div class="games-container list-view-grid">
+    <Game v-for="item in games.data" :key="item.id" :item="item" />
+  </div>
+  <!-- <Pagination /> -->
+</template>
 
 <style lang="scss" scoped>
 .games-container {

@@ -1,22 +1,3 @@
-<template>
-  <section>
-    <div class="wrapper">
-      <div class="content">
-        <GamesSlideList />
-        <div class="columns">
-          <div class="column">
-            <GamesFilter />
-            <GamesList />
-          </div>
-          <div class="column">
-            <GamesFilterMultipleList />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
 <script setup lang="ts">
 useHead({
   title: "Games Catalog - XGame Studio",
@@ -37,7 +18,32 @@ useHead({
     class: "games",
   },
 });
+
+const searchText = ref("");
+
+const handleSearch = (val) => {
+  searchText.value = val;
+};
 </script>
+
+<template>
+  <section>
+    <div class="wrapper">
+      <div class="content">
+        <!-- <GamesSlideList /> -->
+        <div class="columns">
+          <div class="column">
+            <GamesFilter @handleSearch="handleSearch" />
+            <GamesList :searchText="searchText" />
+          </div>
+          <div class="column">
+            <GamesFilterMultipleList />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
 
 <style lang="scss" scoped>
 .wrapper {

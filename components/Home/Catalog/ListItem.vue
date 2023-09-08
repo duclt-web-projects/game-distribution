@@ -1,3 +1,10 @@
+<script setup>
+const props = defineProps({
+  title: String,
+  games: Array,
+});
+</script>
+
 <template>
   <div class="games-container-wrapper">
     <h3>{{ title }}</h3>
@@ -6,13 +13,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-const props = defineProps({
-  title: String,
-  games: Array,
-});
-</script>
 
 <style lang="scss" scoped>
 h3 {

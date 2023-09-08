@@ -12,14 +12,21 @@
       <button title="Show Grid" class="xg-button flat list-view-grid">
         <IconGrid />
       </button>
-      <GamesInputText />
+      <GamesInputText v-model="searchQuery" :debounce-delay="500" />
     </div>
   </div>
 </template>
 
 <script setup>
-import IconList from "@/assets/icon/List.vue"
-import IconGrid from "@/assets/icon/Grid.vue"
+import IconList from "@/assets/icon/List.vue";
+import IconGrid from "@/assets/icon/Grid.vue";
+
+const searchQuery = ref("");
+const emit = defineEmits(['handleSearch'])
+
+watch(searchQuery, () => {
+  emit('handleSearch', searchQuery.value)
+});
 </script>
 
 <style lang="scss" scoped>

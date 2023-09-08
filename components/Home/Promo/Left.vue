@@ -1,13 +1,20 @@
+<script setup>
+import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/config/constants";
+
+const { data: promo } = await useFetch(`${API_ENDPOINT}/games/promo-feature`);
+const { hotGame, featureGame } = promo.value;
+</script>
+
 <template>
   <div class="promo-left">
     <div class="promo-tile-item">
       <div class="promo-featured is-orange">
         <div class="promo-info">
           <h3>
-            <NuxtLink to="/games/the-smurfs-cooking" class="" :title="hotItem.name">{{ hotItem.name }}</NuxtLink>
+            <NuxtLink to="/games/the-smurfs-cooking" class="" :title="hotGame.name">{{ hotGame.name }}</NuxtLink>
           </h3>
           <small>
-            By <NuxtLink to="/games?company=IMPS" class="" title="IMPS">{{ hotItem.company }}</NuxtLink>
+            By <NuxtLink to="/games?company=IMPS" class="" title="IMPS">{{ hotGame.file_game }}</NuxtLink>
           </small>
           <svg
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -30,7 +37,7 @@
         </div>
         <div class="promo-image">
           <div class="image is-2by1">
-            <img :src="hotItem.src" :alt="hotItem.name" />
+            <img :src="BACKEND_ENDPOINT + hotGame.avatar" :alt="hotGame.name" />
           </div>
           <div class="pills" style="">
             <a href="/games?tag=casual" class="pill transparent" title="casual">casual</a>
@@ -39,7 +46,7 @@
       </div>
     </div>
     <div class="promo-columns">
-      <div class="promo-tile-item" v-for="item in promosFeature" :key="item.id">
+      <div class="promo-tile-item" v-for="item in featureGame" :key="item.id">
         <div class="promo-normal is-orange">
           <div class="promo-info">
             <h4>
@@ -47,14 +54,14 @@
             </h4>
             <small>
               By
-              <a href="/games?company=Clever%20Apps%20Pte.%20Ltd." class="" :title="item.company">
-                {{ item.company }}
+              <a href="/games?company=Clever%20Apps%20Pte.%20Ltd." class="" :title="item.file_name">
+                {{ item.file_name }}
               </a>
             </small>
           </div>
           <div class="promo-image">
             <div class="image is-4by3">
-              <img :src="item.src" :alt="item.company" />
+              <img :src="BACKEND_ENDPOINT + item.avatar" :alt="item.name" />
             </div>
             <div class="pills" style="">
               <a href="/games?tag=build" class="pill transparent" title="build">build</a>
@@ -66,10 +73,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { hotItem, promosFeature } from "@/data/promos";
-</script>
 
 <style lang="scss" scoped>
 .promo-left {

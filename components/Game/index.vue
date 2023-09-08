@@ -1,28 +1,28 @@
+<script setup>
+import { BACKEND_ENDPOINT } from "@/config/constants";
+
+const props = defineProps({
+  item: Object,
+});
+</script>
+
 <template>
   <div class="game card">
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
-      <span class="image is-4by3"><img :src="API_UPLOAD_ENDPOINT + '/' + pareUrlFile(item.avatar)" :alt="item.name" /></span>
+      <span class="image is-4by3"><img :src="BACKEND_ENDPOINT + item.avatar" :alt="item.name" /></span>
     </div>
     <div class="content">
       <a href="/games/words-of-wonders" class="title" :title="item.name">{{ item.name }}</a>
       <span class="company">
         By
-        <a href="/games?company=Famobi%20GmbH" class="" :title="item.company">{{ item.company }}</a></span
+        <a href="/games?company=Famobi%20GmbH" class="" :title="item.file_game">{{ item.file_game }}</a></span
       >
       <span class="description">...</span>
     </div>
   </div>
 </template>
-
-<script setup>
-import { API_UPLOAD_ENDPOINT } from "@/config/constants";
-import { pareUrlFile } from "@/utils/images";
-const props = defineProps({
-  item: Object,
-});
-</script>
 
 <style lang="scss" scoped>
 .game {

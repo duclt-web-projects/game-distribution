@@ -21,7 +21,7 @@
       <div class="desktop-navigation">
         <template v-for="header in headers">
           <div v-if="header.children.length" class="xg-button--has-dropdown" :key="header.id">
-            <nuxt-link :to="header.path" class="xg-button">
+            <nuxt-link :to="header.path" class="xg-button" :class="route.path === header.path ? 'active' : '123'">
               {{ header.name }}
             </nuxt-link>
             <ul class="xg-button_dropdown">
@@ -31,7 +31,7 @@
             </ul>
           </div>
           <div v-else :key="header.id + 'no-child'">
-            <nuxt-link :to="header.path" class="xg-button">
+            <nuxt-link :to="header.path" class="xg-button" :class="route.path === header.path ? 'active' : '123'">
               {{ header.name }}
             </nuxt-link>
           </div>
@@ -48,6 +48,7 @@ import IconRss from "@/assets/icon/Rss.vue";
 import { headers, headersMobile } from "@/config/header";
 
 const isShowMenuMobile = ref(false);
+const route = useRoute();
 
 const onOpenMenuMobile = () => {
   isShowMenuMobile.value = !isShowMenuMobile.value;
@@ -104,7 +105,7 @@ nav {
 
     :deep(img) {
       height: auto;
-      max-width: 150px;
+      max-width: 120px;
     }
   }
 
@@ -181,9 +182,7 @@ nav {
     }
 
     .menu-icon {
-      svg {
-        display: none;
-      }
+      display: none;
     }
 
     .logo {

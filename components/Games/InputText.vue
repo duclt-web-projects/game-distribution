@@ -1,15 +1,35 @@
 <template>
-  <form class="form">
+  <form class="form" @submit.prevent="">
     <div class="input-group">
       <IconSearch />
-      <input type="search" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false"
-        placeholder="Search games..." class="search-input-field" />
+      <input
+        type="search"
+        autocorrect="off"
+        autocapitalize="off"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Search games..."
+        class="search-input-field"
+        :value="searchQuery"
+        @input="debouncedSearch"
+      />
     </div>
   </form>
 </template>
 
-<script setup>
-import IconSearch from "@/assets/icon/Search.vue"
+<script setup lang="ts">
+import IconSearch from "@/assets/icon/Search.vue";
+import { useDebounce } from "@/composables/useDebounce";
+
+const { modelValue, debounceDelay = 300 } = defineProps(["modelValue", "debounceDelay"]);
+const emit = defineEmits(["update:modelValue"]);
+
+const searchQuery = ref(modelValue);
+
+const debouncedSearch = useDebounce((event) => {
+  searchQuery.value = event.target.value;
+  emit("update:modelValue", searchQuery.value);
+}, debounceDelay);
 </script>
 
 <style lang="scss" scoped>

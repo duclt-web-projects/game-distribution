@@ -1,8 +1,16 @@
+<script setup>
+import { BACKEND_ENDPOINT } from "@/config/constants";
+
+const props = defineProps({
+  item: Object,
+});
+</script>
+
 <template>
   <div class="promo-list-item">
     <div class="promo-image">
       <div class="image is-4by3">
-        <img :src="item.src" :alt="item.name" />
+        <img :src="BACKEND_ENDPOINT + item.avatar" :alt="item.name" />
       </div>
     </div>
     <div class="promo-info">
@@ -11,17 +19,11 @@
       </h4>
       <small>
         By
-        <a href="/games?company=VOODOO" class="" :title="item.company">{{ item.name }}</a></small
+        <a href="/games?company=VOODOO" class="" :title="item.file_name">{{ item.name }}</a></small
       >
     </div>
   </div>
 </template>
-
-<script setup>
-const props = defineProps({
-  item: Object,
-});
-</script>
 
 <style lang="scss" scoped>
 .promo-list-item {

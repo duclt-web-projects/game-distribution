@@ -1,18 +1,24 @@
 <script setup>
 import { API_ENDPOINT } from "@/config/constants";
 
-const prop = defineProps({
-  searchText: String,
-});
+const searchText = ref("");
 const currentPage = ref(1);
-const { data: games } = await useFetch(() => `${API_ENDPOINT}/games/list?name=${prop.searchText}&page=${currentPage.value}`);
+
+const { data: games } = await useFetch(
+  () => `${API_ENDPOINT}/games/list?name=${searchText.value}&page=${currentPage.value}`
+);
+
+const handleSearch = (val) => {
+  searchText.value = val;
+};
 
 const onChangePage = (val) => {
-  currentPage.value = val
-}
+  currentPage.value = val;
+};
 </script>
 
 <template>
+  <GamesFilter @handleSearch="handleSearch" />
   <Pagination :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
   <div class="games-container list-view-grid">
     <Game v-for="item in games.data" :key="item.id" :item="item" />

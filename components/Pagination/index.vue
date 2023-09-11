@@ -1,37 +1,34 @@
-<script setup>
-const prop = defineProps({
+<script setup type="ts">
+const props = defineProps({
   currentPage: Number,
-  totalPage: Number
+  totalPage: Number,
 });
 
-const {currentPage, totalPage} = prop
-
-console.log(prop);
-
-const emit = defineEmits(["changePage"])
+const { currentPage, totalPage } = toRefs(props);
+const emit = defineEmits(["changePage"]);
 
 const pages = computed(() => {
   const range = [];
-  for (let i = 1; i <= totalPage; i++) {
+  for (let i = 1; i <= totalPage.value; i++) {
     range.push({
       name: i,
-      isDisabled: i === currentPage,
+      isDisabled: i === currentPage.value,
     });
   }
   return range;
 });
 
 const isFirstPage = computed(() => {
-  return currentPage === 1;
+  return currentPage.value === 1;
 });
 
 const isLastPage = computed(() => {
-  return currentPage === totalPage;
+  return currentPage.value === totalPage.value;
 });
 
 const isPageActive = (page) => {
-  return currentPage === page
-}
+  return currentPage.value === page;
+};
 </script>
 
 <template>
@@ -39,15 +36,16 @@ const isPageActive = (page) => {
     <nav class="">
       <ul class="VuePagination__pagination pagination VuePagination__pagination" style="">
         <li
-          class="VuePagination__pagination-item page-item VuePagination__pagination-item VuePagination__pagination-item-prev-page page-item VuePagination__pagination-item-prev-chunk"
+          class="page-item VuePagination__pagination-item VuePagination__pagination-item-prev-page VuePagination__pagination-item-prev-chunk"
           :class="isFirstPage ? 'disabled' : ''"
           @click="emit('changePage', 1)"
         >
           <a disabled="disabled" class="page-link">&lt;&lt;</a>
         </li>
         <li
-          class="VuePagination__pagination-item page-item VuePagination__pagination-item VuePagination__pagination-item-prev-page page-item VuePagination__pagination-item-prev-page"
+          class="page-item VuePagination__pagination-item VuePagination__pagination-item-prev-page"
           :class="isFirstPage ? 'disabled' : ''"
+          @click="emit('changePage', currentPage - 1)"
         >
           <a class="page-link">&lt;</a>
         </li>
@@ -55,20 +53,22 @@ const isPageActive = (page) => {
           v-for="page in pages"
           :key="page.name"
           class="VuePagination__pagination-item page-item"
-          :class="{active: isPageActive(page.name)}"
+          :class="{ active: isPageActive(page.name) }"
           @click="emit('changePage', page.name)"
         >
           <a role="button" class="page-link">{{ page.name }}</a>
         </li>
         <li
-          class="VuePagination__pagination-item page-item VuePagination__pagination-item VuePagination__pagination-item-next-page page-item VuePagination__pagination-item-next-page"
+          class="VuePagination__pagination-item page-item VuePagination__pagination-item-next-page"
           :class="isLastPage ? 'disabled' : ''"
+          @click="emit('changePage', currentPage + 1)"
         >
           <a class="page-link">&gt;</a>
         </li>
         <li
-          class="VuePagination__pagination-item page-item VuePagination__pagination-item VuePagination__pagination-item-next-page page-item VuePagination__pagination-item-next-chunk"
+          class="VuePagination__pagination-item page-item VuePagination__pagination-item-next-page VuePagination__pagination-item-next-chunk"
           :class="isLastPage ? 'disabled' : ''"
+          @click="emit('changePage', totalPage)"
         >
           <a class="page-link">&gt;&gt;</a>
         </li>

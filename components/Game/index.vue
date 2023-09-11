@@ -14,7 +14,7 @@ const props = defineProps({
       <span class="image is-4by3"><img :src="BACKEND_ENDPOINT + item.avatar" :alt="item.name" /></span>
     </div>
     <div class="content">
-      <a href="/games/words-of-wonders" class="title" :title="item.name">{{ item.name }}</a>
+      <NuxtLink :to="`/games/${item.file_game}-${item.id}`" class="title" :title="item.name">{{ item.name }}</NuxtLink>
       <span class="company">
         By
         <a href="/games?company=Famobi%20GmbH" class="" :title="item.file_game">{{ item.file_game }}</a></span

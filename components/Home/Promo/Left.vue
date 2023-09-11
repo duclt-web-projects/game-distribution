@@ -1,8 +1,19 @@
 <script setup>
-import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/config/constants";
+import { API_ENDPOINT, BACKEND_ENDPOINT, API_GAME_ENDPOINT } from "@/config/constants";
 
 const { data: promo } = await useFetch(`${API_ENDPOINT}/games/promo-feature`);
-const { hotGame, featureGame } = promo.value;
+
+const hotGame = ref({
+  name: "",
+  file_game: "",
+  avatar: "",
+});
+const featureGame = ref([]);
+
+if (promo.value) {
+  hotGame.value = promo.value.hotGame;
+  featureGame.value = promo.value.featureGame;
+}
 </script>
 
 <template>
@@ -11,10 +22,12 @@ const { hotGame, featureGame } = promo.value;
       <div class="promo-featured is-orange">
         <div class="promo-info">
           <h3>
-            <NuxtLink to="/games/the-smurfs-cooking" class="" :title="hotGame.name">{{ hotGame.name }}</NuxtLink>
+            <NuxtLink :to="`${API_GAME_ENDPOINT}/${hotGame.file_game}-${hotGame.id}`" :title="hotGame.name">{{
+              hotGame.name
+            }}</NuxtLink>
           </h3>
           <small>
-            By <NuxtLink to="/games?company=IMPS" class="" title="IMPS">{{ hotGame.file_game }}</NuxtLink>
+            By <NuxtLink to="/games?company=IMPS" title="IMPS">{{ hotGame.file_game }}</NuxtLink>
           </small>
           <svg
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -40,7 +53,7 @@ const { hotGame, featureGame } = promo.value;
             <img :src="BACKEND_ENDPOINT + hotGame.avatar" :alt="hotGame.name" />
           </div>
           <div class="pills" style="">
-            <a href="/games?tag=casual" class="pill transparent" title="casual">casual</a>
+            <NuxtLink href="/games" class="pill transparent" title="casual">casual</NuxtLink>
           </div>
         </div>
       </div>
@@ -50,13 +63,15 @@ const { hotGame, featureGame } = promo.value;
         <div class="promo-normal is-orange">
           <div class="promo-info">
             <h4>
-              <a href="/games/the-mergest-kingdom" class="" :title="item.name">{{ item.name }}</a>
+              <NuxtLink :to="`${API_GAME_ENDPOINT}/${item.file_game}-${item.id}`" :title="item.name">{{
+                item.name
+              }}</NuxtLink>
             </h4>
             <small>
               By
-              <a href="/games?company=Clever%20Apps%20Pte.%20Ltd." class="" :title="item.file_name">
+              <NuxtLink href="/games" :title="item.file_name">
                 {{ item.file_name }}
-              </a>
+              </NuxtLink>
             </small>
           </div>
           <div class="promo-image">

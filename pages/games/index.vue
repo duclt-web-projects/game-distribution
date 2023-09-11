@@ -18,12 +18,6 @@ useHead({
     class: "games",
   },
 });
-
-const searchText = ref("");
-
-const handleSearch = (val) => {
-  searchText.value = val;
-};
 </script>
 
 <template>
@@ -33,8 +27,7 @@ const handleSearch = (val) => {
         <!-- <GamesSlideList /> -->
         <div class="columns">
           <div class="column">
-            <GamesFilter @handleSearch="handleSearch" />
-            <GamesList :searchText="searchText" />
+            <GamesList />
           </div>
           <div class="column">
             <GamesFilterMultipleList />

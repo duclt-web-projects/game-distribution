@@ -1,3 +1,33 @@
+<script setup>
+import IconSearch from "@/assets/icon/Search.vue";
+import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
+import { API_GAME_ENDPOINT, API_ENDPOINT } from "@/config/constants";
+
+const { slug } = useRoute().params;
+
+useHead({
+  title: `Publish ${slug} on your website - XGame Studio`,
+  meta: [
+    {
+      name: "description",
+      content:
+        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+    },
+    { name: "ogTitle", content: "Games Catalog - XGame Studio" },
+    {
+      name: "ogDescription",
+      content:
+        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+    },
+  ],
+  bodyAttrs: {
+    class: "games",
+  },
+});
+
+const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${slug}`);
+</script>
+
 <template>
   <section>
     <div class="wrapper">
@@ -5,7 +35,7 @@
         <div class="columns">
           <div class="column" style="flex: 1 1 0%"></div>
           <div class="column" style="flex: 3 1 0%">
-            <div class="game-title"><h1>JEWELS KYODAI MAHJONG</h1></div>
+            <div class="game-title"><h1>{{ game.name }}</h1></div>
           </div>
           <div class="column" style="flex: 3 1 0%">
             <div class="tools-container">
@@ -34,7 +64,16 @@
             </div>
           </div>
         </div>
-        <div class="game-container" style="max-height: 1000px"></div>
+        <div class="game-container" style="max-height: 1000px">
+          <iframe
+            class="iframe-close"
+            name="iframe"
+            id="iframe"
+            :src="`${API_GAME_ENDPOINT}/${game.file_game}/index.html`"
+            :width="game.width"
+            :height="game.height"
+          ></iframe>
+        </div>
         <div class="columns">
           <div class="column">
             <div class="description-area">
@@ -100,33 +139,6 @@
   </section>
 </template>
 
-<script setup>
-import IconSearch from "@/assets/icon/Search.vue";
-import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
-
-const { slug } = useRoute().params;
-
-useHead({
-  title: `Publish ${slug} on your website - XGame Studio`,
-  meta: [
-    {
-      name: "description",
-      content:
-        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
-    },
-    { name: "ogTitle", content: "Games Catalog - XGame Studio" },
-    {
-      name: "ogDescription",
-      content:
-        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
-    },
-  ],
-  bodyAttrs: {
-    class: "games",
-  },
-});
-</script>
-
 <style lang="scss" scoped>
 .wrapper {
   width: auto;
@@ -188,6 +200,15 @@ useHead({
     position: absolute;
     right: 0;
     top: 0;
+  }
+
+  iframe {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100%;
+    max-width: 100%;
   }
 }
 

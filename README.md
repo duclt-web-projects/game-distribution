@@ -1,63 +1,19 @@
-# Nuxt 3 Minimal Starter
+# Project
+This is a FE web game project
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# Requirements
+This project requires
+- Nodejs (>= v.16)
+- npm or yarn
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# npm
+# Installation
+1. Clone project https://github.com/duclt-web-projects/game-distribution
+2. Install packages
+```
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+3. Copy `.env` from `.env.example` and setup Environment Parameters
+4. Run project
+```
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

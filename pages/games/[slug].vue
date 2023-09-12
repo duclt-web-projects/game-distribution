@@ -1,7 +1,7 @@
 <script setup>
 import IconSearch from "@/assets/icon/Search.vue";
 import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
-import { API_GAME_ENDPOINT, API_ENDPOINT } from "@/config/constants";
+import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/config/constants";
 
 const { slug } = useRoute().params;
 
@@ -35,7 +35,9 @@ const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${slug}`);
         <div class="columns">
           <div class="column" style="flex: 1 1 0%"></div>
           <div class="column" style="flex: 3 1 0%">
-            <div class="game-title"><h1>{{ game.name }}</h1></div>
+            <div class="game-title">
+              <h1>{{ game.name }}</h1>
+            </div>
           </div>
           <div class="column" style="flex: 3 1 0%">
             <div class="tools-container">
@@ -69,7 +71,7 @@ const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${slug}`);
             class="iframe-close"
             name="iframe"
             id="iframe"
-            :src="`${API_GAME_ENDPOINT}/${game.file_game}/index.html`"
+            :src="`${BACKEND_ENDPOINT}/${game.source_link}`"
             :width="game.width"
             :height="game.height"
           ></iframe>

@@ -4,23 +4,22 @@ import { BACKEND_ENDPOINT } from "@/config/constants";
 const props = defineProps({
   item: Object,
 });
+const { navigateTo } = useNavigation();
+
 </script>
 
 <template>
-  <div class="promo-list-item">
+  <div class="promo-list-item" @click="navigateTo(item.slug)">
     <div class="promo-image">
       <div class="image is-4by3">
-        <img :src="BACKEND_ENDPOINT + item.avatar" :alt="item.name" />
+        <img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" />
       </div>
     </div>
     <div class="promo-info">
       <h4>
-        <a href="/games/mob-control" class="" :title="item.name">{{ item.name }}</a>
+        <NuxtLink :to="`/games/${item.slug}`" class="" :title="item.name">{{ item.name }}</NuxtLink>
       </h4>
-      <small>
-        By
-        <a href="/games?company=VOODOO" class="" :title="item.file_name">{{ item.name }}</a></small
-      >
+      <small> By XGame</small>
     </div>
   </div>
 </template>
@@ -86,6 +85,11 @@ const props = defineProps({
     line-height: 100%;
     padding-left: 20px;
     transition: 0.1s ease-in-out;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     h4 {
       -webkit-line-clamp: 2;

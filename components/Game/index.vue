@@ -4,21 +4,20 @@ import { BACKEND_ENDPOINT } from "@/config/constants";
 const props = defineProps({
   item: Object,
 });
+
+const { navigateTo } = useNavigation();
 </script>
 
 <template>
-  <div class="game card">
+  <div class="game card" @click="navigateTo(item.slug)">
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
-      <span class="image is-4by3"><img :src="BACKEND_ENDPOINT + item.avatar" :alt="item.name" /></span>
+      <span class="image is-4by3"><img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" /></span>
     </div>
     <div class="content">
-      <NuxtLink :to="`/games/${item.file_game}-${item.id}`" class="title" :title="item.name">{{ item.name }}</NuxtLink>
-      <span class="company">
-        By
-        <a href="/games?company=Famobi%20GmbH" class="" :title="item.file_game">{{ item.file_game }}</a></span
-      >
+      <NuxtLink :to="`/games/${item.slug}`" class="title" :title="item.name">{{ item.name }}</NuxtLink>
+      <span class="company"> By XGame</span>
       <span class="description">...</span>
     </div>
   </div>

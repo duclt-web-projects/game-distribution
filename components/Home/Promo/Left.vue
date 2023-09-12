@@ -1,34 +1,21 @@
 <script setup>
 import { API_ENDPOINT, BACKEND_ENDPOINT, API_GAME_ENDPOINT } from "@/config/constants";
 
-const { data: promo } = await useFetch(`${API_ENDPOINT}/games/promo-feature`);
-
-const hotGame = ref({
-  name: "",
-  file_game: "",
-  avatar: "",
-});
-const featureGame = ref([]);
-
-if (promo.value) {
-  hotGame.value = promo.value.hotGame;
-  featureGame.value = promo.value.featureGame;
-}
+const { data: promo } = useLazyFetch(`${API_ENDPOINT}/games/promo-feature`);
+const { navigateTo } = useNavigation();
 </script>
 
 <template>
   <div class="promo-left">
     <div class="promo-tile-item">
-      <div class="promo-featured is-orange">
+      <div class="promo-featured is-orange" @click="navigateTo(promo.hotGame.slug)">
         <div class="promo-info">
           <h3>
-            <NuxtLink :to="`${API_GAME_ENDPOINT}/${hotGame.file_game}-${hotGame.id}`" :title="hotGame.name">{{
-              hotGame.name
-            }}</NuxtLink>
+            <NuxtLink :to="`/games/${promo.hotGame.slug}`" :title="promo.hotGame.name">
+              {{ promo.hotGame.name }}
+            </NuxtLink>
           </h3>
-          <small>
-            By <NuxtLink to="/games?company=IMPS" title="IMPS">{{ hotGame.file_game }}</NuxtLink>
-          </small>
+          <small> By XGame </small>
           <svg
             xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1"
@@ -49,9 +36,9 @@ if (promo.value) {
           </svg>
         </div>
         <div class="promo-image">
-          <div class="image is-2by1">
-            <img :src="BACKEND_ENDPOINT + hotGame.avatar" :alt="hotGame.name" />
-          </div>
+          <NuxtLink :to="`/games/${promo.hotGame.slug}`" class="image is-2by1">
+            <img :src="BACKEND_ENDPOINT + promo.hotGame.thumbnail" :alt="promo.hotGame.name" />
+          </NuxtLink>
           <div class="pills" style="">
             <NuxtLink href="/games" class="pill transparent" title="casual">casual</NuxtLink>
           </div>
@@ -59,30 +46,42 @@ if (promo.value) {
       </div>
     </div>
     <div class="promo-columns">
-      <div class="promo-tile-item" v-for="item in featureGame" :key="item.id">
-        <div class="promo-normal is-orange">
-          <div class="promo-info">
-            <h4>
-              <NuxtLink :to="`${API_GAME_ENDPOINT}/${item.file_game}-${item.id}`" :title="item.name">{{
-                item.name
-              }}</NuxtLink>
-            </h4>
-            <small>
-              By
-              <NuxtLink href="/games" :title="item.file_name">
-                {{ item.file_name }}
+      <div class="promo-tile-item" v-for="item in promo.featureGame" :key="item.id">
+        <div class="promo-normal is-orange" @click="navigateTo(item.slug)">
+          <template v-if="item.id % 2">
+            <div class="promo-info">
+              <h4>
+                <NuxtLink :to="`/games/${item.slug}`" :title="item.name">{{ item.name }}</NuxtLink>
+              </h4>
+              <small> By XGame </small>
+            </div>
+            <div class="promo-image">
+              <NuxtLink :to="`/games/${item.slug}`" class="image is-4by3">
+                <img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" />
               </NuxtLink>
-            </small>
-          </div>
-          <div class="promo-image">
-            <div class="image is-4by3">
-              <img :src="BACKEND_ENDPOINT + item.avatar" :alt="item.name" />
+              <div class="pills" style="">
+                <NuxtLink to="/games" class="pill transparent" title="build">build</NuxtLink>
+                <NuxtLink to="/games" class="pill transparent" title="builder">builder</NuxtLink>
+              </div>
             </div>
-            <div class="pills" style="">
-              <a href="/games?tag=build" class="pill transparent" title="build">build</a>
-              <a href="/games?tag=builder" class="pill transparent" title="builder">builder</a>
+          </template>
+          <template v-else>
+            <div class="promo-image">
+              <NuxtLink :to="`/games/${item.slug}`" class="image is-4by3">
+                <img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" />
+              </NuxtLink>
+              <div class="pills" style="">
+                <NuxtLink to="/games" class="pill transparent" title="build">build</NuxtLink>
+                <NuxtLink to="/games" class="pill transparent" title="builder">builder</NuxtLink>
+              </div>
             </div>
-          </div>
+            <div class="promo-info">
+              <h4>
+                <NuxtLink :to="`/games/${item.slug}`" :title="item.name">{{ item.name }}</NuxtLink>
+              </h4>
+              <small> By XGame </small>
+            </div>
+          </template>
         </div>
       </div>
     </div>

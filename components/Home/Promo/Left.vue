@@ -2,7 +2,6 @@
 import { API_ENDPOINT, BACKEND_ENDPOINT, API_GAME_ENDPOINT } from "@/config/constants";
 
 const { data: promo } = useLazyFetch(`${API_ENDPOINT}/games/promo-feature`);
-console.log(promo);
 const { navigateTo } = useNavigation();
 </script>
 

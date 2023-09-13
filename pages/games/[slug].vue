@@ -31,7 +31,8 @@ const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${slug}`);
 <template>
   <section>
     <div class="wrapper">
-      <div class="content">
+      <div v-if="!game">Loading ...</div>
+      <div v-else class="content">
         <div class="columns">
           <div class="column" style="flex: 1 1 0%"></div>
           <div class="column" style="flex: 3 1 0%">

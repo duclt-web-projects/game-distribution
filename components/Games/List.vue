@@ -19,10 +19,13 @@ const onChangePage = (val) => {
 
 <template>
   <GamesFilter @handleSearch="handleSearch" />
-  <Pagination :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
-  <div class="games-container list-view-grid">
-    <Game v-for="item in games.data" :key="item.id" :item="item" />
-  </div>
+  <div v-if="!games">Loading</div>
+  <template v-else>
+    <Pagination :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
+    <div class="games-container list-view-grid">
+      <Game v-for="item in games.data" :key="item.id" :item="item" />
+    </div>
+  </template>
   <!-- <Pagination /> -->
 </template>
 

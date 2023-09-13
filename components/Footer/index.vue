@@ -16,16 +16,16 @@
         <div class="footer-right">
           <div class="info">
             <small>Information</small>
-            <a href="/about" class="" target="_self" title="Games">About Us</a>
+            <a href="/games" class="" target="_self" title="Games">About Us</a>
             <a href="/games" class="" target="_self" title="Games">Games</a>
-            <a href="/publishers" class="" target="_self" title="Publishers">Publishers</a>
-            <a href="/developers" class="" target="_self" title="Developers">Developers</a>
-            <a href="/sdk" class="" target="_self" title="SDK">SDK</a>
+            <a href="/games" class="" target="_self" title="Publishers">Publishers</a>
+            <a href="/games" class="" target="_self" title="Developers">Developers</a>
+            <a href="/games" class="" target="_self" title="SDK">SDK</a>
             <a href="https://blog.gamedistribution.com" target="_blank" title="Blog">Blog</a>
           </div>
           <div class="contact">
             <small>Support</small>
-            <a href="/contact" class="" target="_self" title="Contact Us">Contact Us</a>
+            <a href="/games" class="" target="_self" title="Contact Us">Contact Us</a>
             <a href="https://faq.gamedistribution.com" title="FAQ">FAQ</a>
           </div>
         </div>

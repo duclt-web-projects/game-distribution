@@ -2,11 +2,13 @@
 import { API_ENDPOINT, BACKEND_ENDPOINT, API_GAME_ENDPOINT } from "@/config/constants";
 
 const { data: promo } = useLazyFetch(`${API_ENDPOINT}/games/promo-feature`);
+console.log(promo);
 const { navigateTo } = useNavigation();
 </script>
 
 <template>
-  <div class="promo-left">
+  <div v-if="!promo">Loading ...</div>
+  <div v-else class="promo-left">
     <div class="promo-tile-item">
       <div class="promo-featured is-orange" @click="navigateTo(promo.hotGame.slug)">
         <div class="promo-info">

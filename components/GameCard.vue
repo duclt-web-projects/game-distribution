@@ -9,18 +9,18 @@ const { navigateTo } = useNavigation();
 </script>
 
 <template>
-  <div class="game card" @click="navigateTo(item.slug)">
+  <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="game card">
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
       <span class="image is-4by3"><img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" /></span>
     </div>
     <div class="content">
-      <NuxtLink :to="`/games/${item.slug}`" class="title" :title="item.name">{{ item.name }}</NuxtLink>
+      <span class="title">{{ item.name }}</span>
       <span class="company"> By XGame</span>
       <span class="description">...</span>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

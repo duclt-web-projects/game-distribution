@@ -1,8 +1,8 @@
 <script setup>
-import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/config/constants";
+import { API_ENDPOINT } from "@/config/constants";
 
 const { data: promo } = useLazyFetch(`${API_ENDPOINT}/games/promo-feature`);
-const { navigateTo } = useNavigation();
+
 </script>
 
 <template>

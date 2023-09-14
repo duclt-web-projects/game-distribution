@@ -2,28 +2,30 @@
   <article class="banner">
     <header>
       <small>
-        <NuxtLink href="/games" class="">XGame Studio</NuxtLink>
+        <NuxtLink href="/games">XGame Studio</NuxtLink>
       </small>
       <h1>
-        <NuxtLink href="/games" class=""> Connecting Games &amp; Players</NuxtLink>
+        <NuxtLink href="/games"> Connecting Games &amp; Players</NuxtLink>
       </h1>
       <article class="christmas">
-        <NuxtLink href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano" class="" target="_self"><img
-            src="https://img.gamedistribution.com/promotions/ubisoft-promotions-logo.png" class="special-event-img"
-            style="width: 231px" /></NuxtLink>
+        <NuxtLink href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano" target="_self"
+          ><img
+            src="https://img.gamedistribution.com/promotions/ubisoft-promotions-logo.png"
+            class="special-event-img"
+            style="width: 231px"
+        /></NuxtLink>
       </article>
     </header>
     <p>
-      <NuxtLink href="/games" class="" target="_self">XGame is the biggest broker of high quality,
-        cross-platform games. We connect the best game
-        developers to the biggest publishers.</NuxtLink>
+      <NuxtLink href="/games" target="_self"
+        >XGame is the biggest broker of high quality, cross-platform games. We connect the best game developers to the
+        biggest publishers.</NuxtLink
+      >
     </p>
   </article>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 header {

@@ -12,13 +12,15 @@ const props = defineProps({
     default: false,
   },
 });
+
+const { navigateTo } = useNavigation();
 </script>
 
 <template>
   <div class="promo-tile-item">
     <div
       :class="[isFeatured ? 'promo-featured' : 'promo-normal', isPurple ? 'is-purple' : 'is-orange']"
-      @click="navigateTo(item.slug)"
+      @click.self="navigateTo(item.slug)"
     >
       <div class="promo-info">
         <h3>

@@ -14,7 +14,7 @@
 
   <div class="meta">
     <span class="label company">Company</span>
-    <span><a href="/games" class=""></a></span>
+    <span><a href="/games"></a></span>
   </div>
 
   <div class="thumbnails-container" style="display: none">

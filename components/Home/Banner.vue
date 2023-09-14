@@ -2,7 +2,7 @@
   <article class="banner">
     <header>
       <small>
-        <NuxtLink href="/games" class="">GameDistribution</NuxtLink>
+        <NuxtLink href="/games" class="">XGame Studio</NuxtLink>
       </small>
       <h1>
         <NuxtLink href="/games" class=""> Connecting Games &amp; Players</NuxtLink>
@@ -14,7 +14,7 @@
       </article>
     </header>
     <p>
-      <NuxtLink href="/games" class="" target="_self">GameDistribution is the biggest broker of high quality,
+      <NuxtLink href="/games" class="" target="_self">XGame is the biggest broker of high quality,
         cross-platform games. We connect the best game
         developers to the biggest publishers.</NuxtLink>
     </p>

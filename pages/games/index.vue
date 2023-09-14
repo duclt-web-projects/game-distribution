@@ -5,13 +5,13 @@ useHead({
     {
       name: "description",
       content:
-        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
     },
     { name: "ogTitle", content: "Games Catalog - XGame Studio" },
     {
       name: "ogDescription",
       content:
-        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
     },
   ],
   bodyAttrs: {

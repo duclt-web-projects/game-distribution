@@ -3,14 +3,14 @@
     <div class="wrapper">
       <article>
         <div class="footer-left">
-          <img src="/images/logos/logo.svg" alt="GameDistribution logo" />
+          <img src="/images/logos/logo-xgame.png" alt="XGame logo" />
           <p>
-            GameDistribution offers a free service for developers and publishers. We help game developers monetize and
+            XGame offers a free service for developers and publishers. We help game developers monetize and
             distribute their games. We offer publishers a wide range of high quality cross platform games.
           </p>
           <p>
             <a href="https://www.google.nl/maps/place/OrangeGames/@52.2789942,4.7433615,17z/data=!3m1!4b1!4m5!3m4!1s0x47c60c686089387b:0x58146d40b5c1a299!8m2!3d52.2789942!4d4.7455502"
-              target="_blank" title="Location of our office">Boeing Avenue 30, 1119 PE Schiphol-Rijk, The Netherlands</a>
+              target="_blank" title="Location of our office">The Nine, 9 Pham Van Dong, Mai Dich, Cau Giay, Ha Noi </a>
           </p>
         </div>
         <div class="footer-right">
@@ -21,17 +21,17 @@
             <a href="/games" class="" target="_self" title="Publishers">Publishers</a>
             <a href="/games" class="" target="_self" title="Developers">Developers</a>
             <a href="/games" class="" target="_self" title="SDK">SDK</a>
-            <a href="https://blog.gamedistribution.com" target="_blank" title="Blog">Blog</a>
+            <a href="/games" target="_blank" title="Blog">Blog</a>
           </div>
           <div class="contact">
             <small>Support</small>
             <a href="/games" class="" target="_self" title="Contact Us">Contact Us</a>
-            <a href="https://faq.gamedistribution.com" title="FAQ">FAQ</a>
+            <a href="/games" title="FAQ">FAQ</a>
           </div>
         </div>
         <div class="copyright">
           <p>
-            Azerion Copyright 2017 - 2023 |
+            XGame Copyright 2023 |
             <a href="https://static.gamedistribution.com/policy/privacy-enduser.html" target="_blank"
               title="Privacy policy">Privacy policy</a>
             -

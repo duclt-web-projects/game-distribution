@@ -6,7 +6,7 @@
         <h2>Games Catalog</h2>
       </header>
       <p>
-        GameDistribution is the biggest broker of high quality, cross-platform games. We connect the best game
+        XGame is the biggest broker of high quality, cross-platform games. We connect the best game
         developers to the biggest publishers.
       </p>
     </article>

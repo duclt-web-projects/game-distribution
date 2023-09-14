@@ -11,13 +11,13 @@ useHead({
     {
       name: "description",
       content:
-        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
     },
     { name: "ogTitle", content: "Games Catalog - XGame Studio" },
     {
       name: "ogDescription",
       content:
-        "Games Catalog of GameDistribution. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
     },
   ],
   bodyAttrs: {
@@ -89,9 +89,6 @@ const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${slug}`);
                 Ads should be requested from the game's page url to avoid loss of ads performance. To make this happen
                 please adjust your game frame request url as follows: gd_sdk_referrer_url should be added to the request
                 url . To do that please modify your request url as:
-                <i style="font-weight: bold"
-                  >https://html5.gamedistribution.com/GAME_ID/?gd_sdk_referrer_url=YOUR_EXACT_GAME_PAGE_URL</i
-                >
               </p>
               <p style="font-weight: bold">
                 CORRECT USAGE

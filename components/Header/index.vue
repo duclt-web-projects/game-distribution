@@ -13,7 +13,7 @@
         href="/"
         aria-current="page"
         class="logo nuxt-link-exact-active nuxt-link-active"
-        title="GameDistribution"
+        title="XGame"
       >
         <!-- <img src="/images/logos/logo-xgame.png" alt="logo" class="logo-full" /> -->
         <slot />

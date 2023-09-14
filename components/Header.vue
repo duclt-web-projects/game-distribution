@@ -15,8 +15,9 @@
         class="logo nuxt-link-exact-active nuxt-link-active"
         title="XGame"
       >
-        <!-- <img src="/images/logos/logo-xgame.png" alt="logo" class="logo-full" /> -->
-        <slot />
+        <img src="/images/logos/logo-xgame.png" alt="logo" class="logo-icon-white" />
+        <img src="/images/logos/logo.png" alt="logo" class="logo-icon" />
+        <!-- <slot /> -->
       </nuxt-link>
       <div class="desktop-navigation">
         <template v-for="header in headers">
@@ -161,6 +162,14 @@ nav {
 .error nav .desktop-navigation a,
 .home nav .desktop-navigation a {
   color: #fff;
+}
+
+.home .logo-icon {
+  display: none;
+}
+
+.games .logo-icon-white {
+  display: none;
 }
 
 @media (min-width: 640px) {

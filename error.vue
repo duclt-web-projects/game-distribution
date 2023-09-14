@@ -14,8 +14,8 @@
 </template>
 
 <script setup>
-import Header from "@/components/Header/index.vue";
-import Footer from "@/components/Footer/index.vue";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 
 useHead({
   title: "XGame Studio",

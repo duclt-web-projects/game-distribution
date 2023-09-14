@@ -18,7 +18,7 @@
             <img src="https://img.gamedistribution.com/collections/logo/exclusive-logo.png" />
           </div>
           <div class="spinner"></div>
-          <Game v-for="item in gamesSlide" :key="item.id" :item="item" />
+          <GameCard v-for="item in gamesSlide" :key="item.id" :item="item" />
         </div>
       </div>
     </div>

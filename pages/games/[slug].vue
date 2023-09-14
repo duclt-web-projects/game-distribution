@@ -131,7 +131,7 @@ const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${slug}`);
             </div>
           </div>
           <div class="column">
-            <GamesDetailMeta />
+            <GameDescription />
           </div>
         </div>
       </div>

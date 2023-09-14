@@ -1,11 +1,22 @@
+<script setup>
+import { API_ENDPOINT } from "@/config/constants";
+import { tags } from "@/data/promos";
+
+const { data: promoList } = await useFetch(`${API_ENDPOINT}/games/promo-list`);
+</script>
+
 <template>
   <div class="promo-right">
-    <HomePromoList />
-    <HomePromoTags />
+    <HomePromoListItem v-for="item in promoList" :key="item.id" :item="item" />
+
+    <div class="promo-tags">
+      <div><small>Top Tags</small></div>
+      <NuxtLink v-for="(tag, index) in tags" :key="index" :to="'/games?tag=' + tag" class="pill" :title="tag">
+        {{ tag }}
+      </NuxtLink>
+    </div>
   </div>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped>
 .promo-right {

@@ -24,13 +24,13 @@ useHead({
   <section>
     <div class="wrapper">
       <div class="content">
-        <!-- <GamesSlideList /> -->
+        <!-- <GamesSlidesContainer /> -->
         <div class="columns">
           <div class="column">
-            <GamesList />
+            <GamesContainer />
           </div>
           <div class="column">
-            <GamesFilterMultipleList />
+            <GamesFilterMultiSearch />
           </div>
         </div>
       </div>

@@ -76,3 +76,9 @@
     transform: translateY(-2000px);
   }
 }
+
+@keyframes shine {
+  to {
+    background-position: right -40px top 0;
+  }
+}

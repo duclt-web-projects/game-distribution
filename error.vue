@@ -4,9 +4,9 @@
     <Header>
       <img src="/images/logos/logo.png" alt="logo" class="logo-full" />
     </Header>
-    <div data-v-3595f7fb="">
-      <section data-v-3595f7fb="">
-        <img data-v-3595f7fb="" src="/images/404.png" alt="404" width="744" height="660" />
+    <div>
+      <section>
+        <img src="/images/404.png" alt="404" width="744" height="660" />
       </section>
     </div>
     <Footer />

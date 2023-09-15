@@ -2,6 +2,7 @@
 import IconSearch from "@/assets/icon/Search.vue";
 import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
 import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/config/constants";
+import MainLayout from "~/layouts/MainLayout.vue";
 
 const { slug } = useRoute().params;
 
@@ -29,114 +30,116 @@ const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${slug}`);
 </script>
 
 <template>
-  <section>
-    <div class="wrapper">
-      <div v-if="!game">Loading ...</div>
-      <div v-else class="content">
-        <div class="columns">
-          <div class="column" style="flex: 1 1 0%"></div>
-          <div class="column" style="flex: 3 1 0%">
-            <div class="game-title">
-              <h1>{{ game.name }}</h1>
+  <MainLayout>
+    <section>
+      <div class="wrapper">
+        <div v-if="!game">Loading ...</div>
+        <div v-else class="content">
+          <div class="columns">
+            <div class="column" style="flex: 1 1 0%"></div>
+            <div class="column" style="flex: 3 1 0%">
+              <div class="game-title">
+                <h1>{{ game.name }}</h1>
+              </div>
             </div>
-          </div>
-          <div class="column" style="flex: 3 1 0%">
-            <div class="tools-container">
-              <div class="ais-index">
-                <form class="search-box__form">
-                  <div class="input-group">
-                    <IconSearch />
-                    <input
-                      type="search"
-                      autocorrect="off"
-                      autocapitalize="off"
-                      autocomplete="off"
-                      spellcheck="false"
-                      placeholder="Search games..."
-                      class="search-input-field"
-                    />
+            <div class="column" style="flex: 3 1 0%">
+              <div class="tools-container">
+                <div class="ais-index">
+                  <form class="search-box__form">
+                    <div class="input-group">
+                      <IconSearch />
+                      <input
+                        type="search"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="off"
+                        spellcheck="false"
+                        placeholder="Search games..."
+                        class="search-input-field"
+                      />
+                    </div>
+                  </form>
+                  <div
+                    id="container"
+                    style="background-color: rgb(255, 255, 255); overflow: auto; max-height: 500px; display: none"
+                  >
+                    <div class="games-container list-view-table"></div>
                   </div>
-                </form>
-                <div
-                  id="container"
-                  style="background-color: rgb(255, 255, 255); overflow: auto; max-height: 500px; display: none"
-                >
-                  <div class="games-container list-view-table"></div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="game-container" style="max-height: 1000px">
-          <iframe
-            class="iframe-close"
-            name="iframe"
-            id="iframe"
-            :src="`${BACKEND_ENDPOINT}/${game.source_link}`"
-            :width="game.width"
-            :height="game.height"
-          ></iframe>
-        </div>
-        <div class="columns">
-          <div class="column">
-            <div class="description-area">
-              <p>
-                <i class="fa fa-exclamation-triangle" style="font-weight: bold">
-                  IMPORTANT NOTIFICATION WHILE EMBEDDING GAMES</i
-                >
-              </p>
-              <p>
-                Ads should be requested from the game's page url to avoid loss of ads performance. To make this happen
-                please adjust your game frame request url as follows: gd_sdk_referrer_url should be added to the request
-                url . To do that please modify your request url as:
-              </p>
-              <p style="font-weight: bold">
-                CORRECT USAGE
-                <i class="fa fa-check"></i>
-              </p>
-              <p>
-                If your page url is
-                <i style="font-weight: bold">https://www.example.com/games</i>
-                then your request url should be as follows:
-                <i style="font-weight: bold">?gd_sdk_referrer_url=https://www.example.com/games/{game-path}</i>
-              </p>
-              <p>You can check example url below to see how we are using in this page.</p>
-              <p style="font-weight: bold">
-                WRONG USAGE
-                <i class="fa fa-ban"></i>
-              </p>
-              <p><i style="font-weight: bold"> </i></p>
-            </div>
-            <div class="input-container input-location">
-              <label class="label company">Example URL</label>
-              <input type="text" readonly="readonly" />
-              <a href="" target="_blank" class="xg-button">
-                Open
-                <i class="fa fa-external-link"></i
-              ></a>
-            </div>
-            <div class="input-container input-embed">
-              <label class="label">Embed</label>
-              <input type="text" id="clipboard-content" readonly="readonly" />
-              <span class="xg-button">
-                Copy
-                <i class="fa fa-copy"></i
-              ></span>
-            </div>
-            <div class="input-container input-location">
-              <a href="" target="_blank" class="xg-button" style="width: 100%">
-                Open Game In New Tab
-                <IconArrowUpRightFromSquare />
-              </a>
-            </div>
+          <div class="game-container" style="max-height: 1000px">
+            <iframe
+              class="iframe-close"
+              name="iframe"
+              id="iframe"
+              :src="`${BACKEND_ENDPOINT}/${game.source_link}`"
+              :width="game.width"
+              :height="game.height"
+            ></iframe>
           </div>
-          <div class="column">
-            <GameDescription />
+          <div class="columns">
+            <div class="column">
+              <div class="description-area">
+                <p>
+                  <i class="fa fa-exclamation-triangle" style="font-weight: bold">
+                    IMPORTANT NOTIFICATION WHILE EMBEDDING GAMES</i
+                  >
+                </p>
+                <p>
+                  Ads should be requested from the game's page url to avoid loss of ads performance. To make this happen
+                  please adjust your game frame request url as follows: gd_sdk_referrer_url should be added to the
+                  request url . To do that please modify your request url as:
+                </p>
+                <p style="font-weight: bold">
+                  CORRECT USAGE
+                  <i class="fa fa-check"></i>
+                </p>
+                <p>
+                  If your page url is
+                  <i style="font-weight: bold">https://www.example.com/games</i>
+                  then your request url should be as follows:
+                  <i style="font-weight: bold">?gd_sdk_referrer_url=https://www.example.com/games/{game-path}</i>
+                </p>
+                <p>You can check example url below to see how we are using in this page.</p>
+                <p style="font-weight: bold">
+                  WRONG USAGE
+                  <i class="fa fa-ban"></i>
+                </p>
+                <p><i style="font-weight: bold"> </i></p>
+              </div>
+              <div class="input-container input-location">
+                <label class="label company">Example URL</label>
+                <input type="text" readonly="readonly" />
+                <a href="" target="_blank" class="xg-button">
+                  Open
+                  <i class="fa fa-external-link"></i
+                ></a>
+              </div>
+              <div class="input-container input-embed">
+                <label class="label">Embed</label>
+                <input type="text" id="clipboard-content" readonly="readonly" />
+                <span class="xg-button">
+                  Copy
+                  <i class="fa fa-copy"></i
+                ></span>
+              </div>
+              <div class="input-container input-location">
+                <a href="" target="_blank" class="xg-button" style="width: 100%">
+                  Open Game In New Tab
+                  <IconArrowUpRightFromSquare />
+                </a>
+              </div>
+            </div>
+            <div class="column">
+              <GameDescription />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </MainLayout>
 </template>
 
 <style lang="scss" scoped>

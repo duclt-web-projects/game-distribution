@@ -61,19 +61,8 @@ const headers = [
   {
     id: 8,
     name: "Login",
-    path: "",
-    children: [
-      {
-        id: 13,
-        name: "Developer login",
-        path: "/games/1",
-      },
-      {
-        id: 14,
-        name: "Publisher login",
-        path: "/games/1",
-      },
-    ],
+    path: "/login",
+    children: [],
   },
   {
     id: 9,

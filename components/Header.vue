@@ -15,7 +15,7 @@
         class="logo nuxt-link-exact-active nuxt-link-active"
         title="XGame"
       >
-        <img src="/images/logos/logo-xgame.png" alt="logo" class="logo-icon-white" />
+        <img src="/images/logos/logo-white.png" alt="logo" class="logo-icon-white" />
         <img src="/images/logos/logo.png" alt="logo" class="logo-icon" />
         <!-- <slot /> -->
       </nuxt-link>

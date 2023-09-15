@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import MainLayout from '~/layouts/MainLayout.vue';
+
 useHead({
   title: "Games Catalog - XGame Studio",
   meta: [
@@ -21,21 +23,23 @@ useHead({
 </script>
 
 <template>
-  <section>
-    <div class="wrapper">
-      <div class="content">
-        <!-- <GamesSlidesContainer /> -->
-        <div class="columns">
-          <div class="column">
-            <GamesContainer />
-          </div>
-          <div class="column">
-            <GamesFilterMultiSearch />
+  <MainLayout>
+    <section>
+      <div class="wrapper">
+        <div class="content">
+          <!-- <GamesSlidesContainer /> -->
+          <div class="columns">
+            <div class="column">
+              <GamesContainer />
+            </div>
+            <div class="column">
+              <GamesFilterMultiSearch />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </MainLayout>
 </template>
 
 <style lang="scss" scoped>

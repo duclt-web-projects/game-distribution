@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import MainLayout from "~/layouts/MainLayout.vue";
+
 useHead({
   title: "Games for Websites and Messengers - XGame Studio",
   meta: [
@@ -21,20 +23,22 @@ useHead({
 </script>
 
 <template>
-  <section class="intro-container">
-    <div class="wrapper">
-      <HomeBanner />
-      <div class="promo-container">
-        <HomePromoLeft />
-        <HomePromoRight />
+  <MainLayout>
+    <section class="intro-container">
+      <div class="wrapper">
+        <HomeBanner />
+        <div class="promo-container">
+          <HomePromoLeft />
+          <HomePromoRight />
+        </div>
+        <HomeCTA />
       </div>
-      <HomeCTA />
-    </div>
-  </section>
-  <section class="catalog-info-container">
-    <HomeCatalogTitle />
-    <HomeCatalogContainer />
-  </section>
+    </section>
+    <section class="catalog-info-container">
+      <HomeCatalogTitle />
+      <HomeCatalogContainer />
+    </section>
+  </MainLayout>
 </template>
 
 <style lang="scss" scoped>

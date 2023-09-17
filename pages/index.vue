@@ -24,17 +24,8 @@ useHead({
 
 <template>
   <MainLayout>
-    <section class="intro-container">
-      <div class="wrapper">
-        <HomeBanner />
-        <HomePromoContainer/>
-        <HomeCTA />
-      </div>
-    </section>
-    <section class="catalog-info-container">
-      <HomeCatalogTitle />
-      <HomeCatalogContainer />
-    </section>
+    <HomeIntro />
+    <HomeCatalog />
   </MainLayout>
 </template>
 

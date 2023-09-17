@@ -51,6 +51,10 @@ h3 {
     display: block;
     max-width: inherit;
   }
+
+  :deep(.loading) {
+    margin: 32px auto;
+  }
 }
 
 @media (min-width: 640px) {

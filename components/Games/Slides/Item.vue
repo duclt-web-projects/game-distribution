@@ -9,7 +9,7 @@
       </div>
     </div>
     <div
-      class="slides-container loading"
+      class="slides-container"
       style="background-image: url('https://img.gamedistribution.com/collections/banner/exclusive.jpg')"
     >
       <div>
@@ -17,8 +17,10 @@
           <div class="company-logo no-company" style="border-color: rgb(81, 48, 133)">
             <img src="https://img.gamedistribution.com/collections/logo/exclusive-logo.png" />
           </div>
-          <div class="spinner"></div>
-          <GameCard v-for="item in gamesSlide" :key="item.id" :item="item" />
+          <template v-if="!gamesSlide">
+            <GameCard v-for="item in gamesSlide" :key="item.id" :item="item" />
+          </template>
+          <Loading v-else />
         </div>
       </div>
     </div>
@@ -81,6 +83,13 @@ const gamesSlide = games.slice(0, 6);
 
     .game.card:first-child {
       margin-left: 0;
+    }
+
+    :deep(.loading) {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 

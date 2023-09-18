@@ -27,7 +27,7 @@ useHead({
     <section>
       <div class="wrapper">
         <div class="content">
-          <!-- <GamesSlidesContainer /> -->
+          <GamesSlidesContainer />
           <div class="columns">
             <div class="column">
               <GamesContainer />

@@ -95,5 +95,9 @@ const props = defineProps({
       padding: 32px 0;
     }
   }
+
+  :deep(.loading) {
+    border-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.25) rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.5);
+  }
 }
 </style>

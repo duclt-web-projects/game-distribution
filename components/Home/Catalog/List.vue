@@ -9,7 +9,10 @@ const props = defineProps({
   <div class="games-container-wrapper">
     <h3>{{ title }}</h3>
     <div class="games-container">
-      <GameCard v-for="item in games" :key="item.id" :item="item" />
+      <template v-if="games">
+        <GameCard v-for="item in games" :key="item.id" :item="item" />
+      </template>
+      <Loading v-else />
     </div>
   </div>
 </template>

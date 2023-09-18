@@ -4,21 +4,23 @@
 
 <style lang="scss" scoped>
 .loading {
-  width: 50px;
-  padding: 8px;
-  aspect-ratio: 1;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: #ccc;
-  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
-  -webkit-mask: var(--_m);
-  mask: var(--_m);
-  -webkit-mask-composite: source-out;
-  mask-composite: subtract;
-  animation: s3 1s infinite linear;
+  display: inline-block;
+  position: relative;
+  border: 10px solid;
+  border-color: rgba(179, 179, 179, 0.15) rgba(179, 179, 179, 0.25) rgba(179, 179, 179, 0.35) rgba(179, 179, 179, 0.5);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
 }
-@keyframes s3 {
-  to {
-    transform: rotate(1turn);
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>

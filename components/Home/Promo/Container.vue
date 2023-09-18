@@ -9,25 +9,33 @@ const { data: promoList } = await useFetch(`${API_ENDPOINT}/games/promo-list`);
 <template>
   <div class="promo-container">
     <div class="promo-left">
-      <!-- <HomePromoTileItem :item="promo.hotGame" /> -->
-      <SkeletonPromoTileItem />
+      <HomePromoTileItem v-if="promo && promo.hotGame" :item="promo.hotGame" />
+      <SkeletonPromoTileItem v-else />
 
       <div class="promo-columns">
-        <SkeletonPromoTileItem :isFeatured="false" />
-        <SkeletonPromoTileItem :isFeatured="false" :isPurple="true"/>
-        <SkeletonPromoTileItem :isFeatured="false" />
-        <!-- <HomePromoTileItem
-          v-for="item in promo.featureGame"
-          :key="item.id"
-          :item="item"
-          :isFeatured="false"
-          :isPurple="item.id % 2 === 1"
-        /> -->
+        <template v-if="promo && promo.featureGame">
+          <HomePromoTileItem
+            v-for="item in promo.featureGame"
+            :key="item.id"
+            :item="item"
+            :isFeatured="false"
+            :isPurple="item.id % 2 === 1"
+          />
+        </template>
+        <template v-else>
+          <SkeletonPromoTileItem :isFeatured="false" />
+          <SkeletonPromoTileItem :isFeatured="false" :isPurple="true" />
+          <SkeletonPromoTileItem :isFeatured="false" />
+        </template>
       </div>
     </div>
     <div class="promo-right">
-      <SkeletonPromoListItem />
-      <HomePromoListItem v-for="item in promoList" :key="item.id" :item="item" />
+      <template v-if="promoList">
+        <HomePromoListItem v-for="item in promoList" :key="item.id" :item="item" />
+      </template>
+      <template v-else>
+        <SkeletonPromoListItem />
+      </template>
 
       <div class="promo-tags">
         <div><small>Top Tags</small></div>

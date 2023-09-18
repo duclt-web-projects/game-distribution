@@ -19,7 +19,9 @@ const onChangePage = (val) => {
 
 <template>
   <GamesFilterSearch @handleSearch="handleSearch" />
-  <div v-if="!games">Loading</div>
+  <div v-if="!games" class="loading-wrapper">
+    <Loading />
+  </div>
   <template v-else>
     <Pagination :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
     <div class="games-container list-view-grid">
@@ -30,6 +32,12 @@ const onChangePage = (val) => {
 </template>
 
 <style lang="scss" scoped>
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+}
+
 .games-container {
   display: flex;
   padding-top: 18px;

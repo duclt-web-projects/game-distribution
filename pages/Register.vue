@@ -1,5 +1,5 @@
 <script setup>
-import AuthLayout from "~/layouts/AuthLayout.vue";
+import AuthLayout from "@/layouts/AuthLayout.vue";
 
 useHead({
   title: "Register - XGame Studio",

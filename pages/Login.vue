@@ -1,10 +1,6 @@
 <script setup>
 import AuthLayout from "@/layouts/AuthLayout.vue";
 
-const email = ref(null);
-const password = ref(null);
-const errors = ref(null);
-
 useHead({
   title: "Login - XGame Studio",
   meta: [
@@ -22,8 +18,36 @@ useHead({
   ],
 });
 
+const { $userStore } = useNuxtApp();
+
+const email = ref(null);
+const password = ref(null);
+const errors = ref({
+  email: "",
+  password: "",
+});
+
 const login = async () => {
-  console.log(email.value, password.value);
+  errors.value.email = "";
+  errors.value.password = "";
+
+  if (!email.value) {
+    errors.value.email = "Email is required.";
+  } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+    errors.value.email = "Invalid Email.";
+  }
+
+  if (!password.value) {
+    errors.value.password = "Password is required.";
+  }
+
+  if (errors.value.email || errors.value.email) return;
+
+  try {
+    await $userStore.login(email.value, password.value);
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
 
@@ -35,18 +59,8 @@ const login = async () => {
       <div id="stars3"></div>
     </template>
     <form @submit.prevent="login">
-      <InputTextAuth
-        placeholder="Email"
-        v-model:input="email"
-        inputType="email"
-        :error="errors && errors.email ? errors.email[0] : ''"
-      />
-      <InputTextAuth
-        placeholder="Password"
-        v-model:input="password"
-        inputType="text"
-        :error="errors && errors.password ? errors.password[0] : ''"
-      />
+      <InputTextAuth placeholder="Email" v-model:input="email" inputType="email" :error="errors.email" />
+      <InputTextAuth placeholder="Password" v-model:input="password" inputType="text" :error="errors.password" />
       <div class="form__checkbox">
         <label class="checkbox">
           <span class="checkbox-label"> Remember me </span>

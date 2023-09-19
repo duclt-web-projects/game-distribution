@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import UserLayout from "@/layouts/UserLayout.vue";
 
+definePageMeta({
+  middleware: "auth",
+});
+
 interface User {
   name: string;
   email: string;

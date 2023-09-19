@@ -15,7 +15,7 @@ const isLogin = route.path.toLowerCase() === "/login";
   <div id="stars3"></div>
   <div class="form-container">
     <div class="form-wrapper">
-      <div class="form-logo">
+      <div class="form-logo flex justify-center">
         <NuxtLink class="logo" to="/"><img src="/images/logos/logo-white.png" /></NuxtLink>
       </div>
       <div class="form">
@@ -27,12 +27,15 @@ const isLogin = route.path.toLowerCase() === "/login";
             </div>
           </div>
         </div>
-        <div class="form__content" :style="isLogin ? 'border-radius: 0px 24px 24px;' : 'border-radius: 24px 0px 24px 24px;'">
+        <div
+          class="form__content"
+          :style="isLogin ? 'border-radius: 0px 24px 24px;' : 'border-radius: 24px 0px 24px 24px;'"
+        >
           <div class="form__title">{{ isLogin ? "Login" : "Register" }}</div>
           <slot />
         </div>
       </div>
-      <div class="form-footer">
+      <div class="form-footer flex justify-center">
         <img src="/images/logos/logo-white.png" />
       </div>
     </div>

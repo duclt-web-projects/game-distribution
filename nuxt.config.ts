@@ -2,4 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   css: ["@/assets/scss/app.scss"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
 });

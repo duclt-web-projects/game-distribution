@@ -270,33 +270,25 @@ ul li {
   color: #999;
   list-style: none;
 }
-form input[type="email"],
-form input[type="number"],
-form input[type="password"],
-form input[type="search"],
-form input[type="text"],
-form input[type="url"],
-form select,
-form textarea {
-  background-color: #dedede;
-  border: 0;
-  box-sizing: border-box;
-  color: #512e85;
-  font-size: 0.8em;
-  height: 40px;
-  outline: 0;
+
+.xg-input {
   padding: 0 15px;
   width: 100%;
 }
-form textarea {
-  height: inherit;
-  line-height: 150%;
-  padding: 9px 15px;
+
+input,
+select,
+textarea {
+  outline: none;
+  border: 1px solid #dedede;
+  box-sizing: border-box;
 }
-form select {
-  border-radius: 0;
-  color: #999;
+
+input,
+select {
+  height: 40px;
 }
+
 ::-webkit-input-placeholder {
   color: #999;
 }

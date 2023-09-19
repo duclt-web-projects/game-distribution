@@ -42,6 +42,7 @@ import IconAngleDown from "@/assets/icon/AngleDown.vue"
     display: flex;
     font-size: 16px;
     padding: 0 11px;
+    height: 40px;
 
     svg {
       fill: #999;

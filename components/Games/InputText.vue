@@ -9,7 +9,7 @@
         autocomplete="off"
         spellcheck="false"
         placeholder="Search games..."
-        class="search-input-field"
+        class="search-input-field xg-input"
         :value="searchQuery"
         @input="debouncedSearch"
       />

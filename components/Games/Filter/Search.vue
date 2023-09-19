@@ -126,7 +126,8 @@ watch(searchQuery, () => {
 @media (min-width: 1120px) {
   .tools-container {
     .span {
-      display: block;
+      display: flex;
+      align-items: center;
     }
   }
 }

@@ -33,6 +33,7 @@ const props = defineProps({
     padding: 0 1rem 0 0.2rem;
     transition: all 0.2s linear;
     width: 100%;
+    white-space: nowrap;
 
     &:first-letter {
       text-transform: capitalize;

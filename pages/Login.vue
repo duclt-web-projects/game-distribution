@@ -1,5 +1,6 @@
 <script setup>
 import AuthLayout from "@/layouts/AuthLayout.vue";
+import { useUserStore } from "../stores/user";
 
 useHead({
   title: "Login - XGame Studio",
@@ -22,7 +23,7 @@ definePageMeta({
   middleware: "auth",
 });
 
-const { $userStore } = useNuxtApp();
+const userStore = useUserStore();
 
 const email = ref(null);
 const password = ref(null);
@@ -50,7 +51,7 @@ const login = async () => {
   isLoading.value = true;
 
   try {
-    await $userStore.login(email.value, password.value);
+    await userStore.login(email.value, password.value);
     isLoading.value = false;
     await navigateTo("/user");
   } catch (error) {

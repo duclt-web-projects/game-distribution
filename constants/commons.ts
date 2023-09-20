@@ -6,3 +6,7 @@ export const ROUTE_NAMES = {
   LOGOUT: "/logout",
   USER: "/user",
 };
+
+export const PROTECTED_ROUTES = [
+  ROUTE_NAMES.USER
+]

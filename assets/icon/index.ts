@@ -13,6 +13,7 @@ import { default as IconPromoFeature } from "./PromoFeature.vue";
 import { default as IconRss } from "./Rss.vue";
 import { default as IconSearch } from "./Search.vue";
 import { default as IconTime } from "./Time.vue";
+import { default as IconUserCircle } from "./UserCircle.vue";
 
 export {
   IconAngleDown,
@@ -30,4 +31,5 @@ export {
   IconRss,
   IconSearch,
   IconTime,
+  IconUserCircle,
 };

@@ -1,7 +1,7 @@
+import { DEFAULT_USER } from "@/constants/user";
 import axios from "@/plugins/axios";
+import { IUser } from "@/types/auth";
 import { defineStore } from "pinia";
-import { DEFAULT_USER } from "~/constants/user";
-import { IUser } from "~/types/auth";
 
 // @ts-ignore
 const $axios = axios().provide.axios;
@@ -47,16 +47,14 @@ export const useUserStore = defineStore("user", {
     },
 
     async logout() {
-      await $axios.post("/logout");
+      await $axios.get("/auth/logout");
       this.resetUser();
     },
 
     resetUser() {
-      this.id = "";
-      this.name = "";
-      this.email = "";
-      this.bio = "";
-      this.image = "";
+      this.id = DEFAULT_USER.id;
+      this.name = DEFAULT_USER.name;
+      this.email = DEFAULT_USER.email;
     },
   },
   persist: {

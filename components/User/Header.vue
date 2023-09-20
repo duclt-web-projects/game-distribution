@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import { IconBell, IconMenuBar, IconSearch, IconUserCircle } from "@/assets/icon";
 import { useSidebar } from "@/composables/useSidebar";
+import { useUserStore } from "@/stores/user";
 import { ref } from "vue";
-import { IconBell, IconMenuBar, IconSearch } from "~/assets/icon";
+import { ROUTE_NAMES } from "../../constants/commons";
+
+const userStore = useUserStore();
 
 const dropdownOpen = ref(false);
 const { isOpen } = useSidebar();
+
+const logout = async () => {
+  await userStore.logout();
+  navigateTo(ROUTE_NAMES.LOGIN);
+};
 </script>
 
 <template>
@@ -36,16 +45,13 @@ const { isOpen } = useSidebar();
         <IconBell />
       </button>
 
-      <div class="relative">
+      <div class="relative flex">
+        <span class="items-center pr-5 text-gray-700 hidden md:flex" v-if="userStore.name">{{ "Hi, " + userStore.name }}</span>
         <button
           class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"
         >
-          <img
-            class="object-cover w-full h-full"
-            src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
-            alt="Your avatar"
-          />
+          <IconUserCircle class="object-cover w-full h-full" />
         </button>
 
         <div v-show="dropdownOpen" class="fixed inset-0 z-10 w-full h-full" @click="dropdownOpen = false" />
@@ -58,12 +64,18 @@ const { isOpen } = useSidebar();
           leave-from-class="scale-100 opacity-100"
           leave-to-class="scale-95 opacity-0"
         >
-          <div v-show="dropdownOpen" class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Products</a>
-            <router-link to="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
+          <div
+            v-show="dropdownOpen"
+            class="absolute top-8 right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl border"
+          >
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white">Profile</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white">Products</a>
+            <button
+              class="w-full block px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-600 hover:text-white"
+              @click="logout()"
+            >
               Log out
-            </router-link>
+            </button>
           </div>
         </transition>
       </div>
@@ -76,7 +88,8 @@ header:after {
   content: none;
 }
 
-.btn-bell, .btn-menu {
+.btn-bell,
+.btn-menu {
   width: 24px;
   height: 24px;
 }

@@ -22,6 +22,7 @@ const { $userStore } = useNuxtApp();
 
 const email = ref(null);
 const password = ref(null);
+const isLoading = ref(false);
 const errors = ref({
   email: "",
   password: "",
@@ -42,9 +43,12 @@ const login = async () => {
   }
 
   if (errors.value.email || errors.value.email) return;
+  isLoading.value = true;
 
   try {
     await $userStore.login(email.value, password.value);
+    isLoading.value = false;
+    await navigateTo("/user");
   } catch (error) {
     console.log(error);
   }
@@ -60,20 +64,11 @@ const login = async () => {
     </template>
     <form @submit.prevent="login">
       <InputTextAuth placeholder="Email" v-model:input="email" inputType="email" :error="errors.email" />
-      <InputTextAuth placeholder="Password" v-model:input="password" inputType="text" :error="errors.password" />
-      <div class="form__checkbox">
-        <label class="checkbox">
-          <span class="checkbox-label"> Remember me </span>
-          <input type="checkbox" />
-          <span class="checkmark"></span>
-        </label>
-      </div>
-      <p class="forget-password">
-        <NuxtLink href="/">Forgot Password?</NuxtLink>
-      </p>
+      <InputTextAuth placeholder="Password" v-model:input="password" inputType="password" :error="errors.password" />
       <input type="hidden" name="credentialId" value="" />
       <div class="form__button">
         <button type="submit" name="login">
+          <Spinner v-show="isLoading" />
           <span>Login</span>
         </button>
       </div>

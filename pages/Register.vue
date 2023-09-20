@@ -1,5 +1,6 @@
 <script setup>
 import AuthLayout from "@/layouts/AuthLayout.vue";
+import { useUserStore } from "@/store/user";
 
 useHead({
   title: "Register - XGame Studio",
@@ -21,87 +22,63 @@ useHead({
   },
 });
 
-const firstName = ref(null);
-const lastName = ref(null);
+const userStore = useUserStore();
+const {$toast} = useNuxtApp();
+
+const name = ref(null);
 const email = ref(null);
 const password = ref(null);
-const errors = ref(null);
+const errors = ref({
+  name: "",
+  email: "",
+  password: "",
+});
+const isLoading = ref(false);
 
 const register = async () => {
-  console.log(email.value, password.value);
+  errors.value.name = "";
+  errors.value.email = "";
+  errors.value.password = "";
+
+  if (!name.value) {
+    errors.value.name = "Name is required.";
+  }
+
+  if (!email.value) {
+    errors.value.email = "Email is required.";
+  } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+    errors.value.email = "Invalid Email.";
+  }
+
+  if (!password.value) {
+    errors.value.password = "Password is required.";
+  }
+
+  if (errors.value.email || errors.value.email) return;
+  isLoading.value = true;
+
+  try {
+    await userStore.register(name.value, email.value, password.value);
+    isLoading.value = false;
+    await navigateTo("/user");
+  } catch (error) {
+    $toast.info(error.response.data.message);
+    isLoading.value = false;
+    console.log(error);
+  }
 };
 </script>
 
 <template>
   <AuthLayout>
     <form @submit.prevent="register">
-      <InputTextAuth
-        placeholder="First Name"
-        v-model:input="firstName"
-        inputType="text"
-        :error="errors && errors.firstName ? errors.firstName[0] : ''"
-      />
-      <InputTextAuth
-        placeholder="Last Name"
-        v-model:input="lastName"
-        inputType="text"
-        :error="errors && errors.lastName ? errors.lastName[0] : ''"
-      />
-      <InputTextAuth
-        placeholder="Email"
-        v-model:input="email"
-        inputType="email"
-        :error="errors && errors.email ? errors.email[0] : ''"
-      />
-      <InputTextAuth
-        placeholder="Password"
-        v-model:input="password"
-        inputType="text"
-        :error="errors && errors.password ? errors.password[0] : ''"
-      />
-      <div class="form__checkbox">
-        <label class="checkbox">
-          <span class="checkbox-label"> Remember me </span>
-          <input type="checkbox" />
-          <span class="checkmark"></span>
-        </label>
-      </div>
-      <div class="form__dropdown">
-        <InputTextAuth
-          placeholder="Password"
-          v-model:input="password"
-          inputType="text"
-          :error="errors && errors.password ? errors.password[0] : ''"
-        />
-        <div class="dropdown-menu" style="/* display: none; */">
-          <div class="dropdown-content">
-            <!---->
-            <a class="dropdown-item"><span>Boli<b>vi</b>a</span></a
-            ><a class="dropdown-item"><span>Bosnia and Herzego<b>vi</b>na</span></a
-            ><a class="dropdown-item"><span>Falkland Islands (Mal<b>vi</b>nas)</span></a
-            ><a class="dropdown-item"><span>Lat<b>vi</b>a</span></a
-            ><a class="dropdown-item"><span>Saint Kitts and Ne<b>vi</b>s</span></a
-            ><a class="dropdown-item"
-              ><span>Saint <b>Vi</b>ncent and the Grenadines</span></a
-            ><a class="dropdown-item"><span>Taiwan, Pro<b>vi</b>nce of China</span></a
-            ><a class="dropdown-item"
-              ><span><b>Vi</b>etnam</span></a
-            ><a class="dropdown-item"
-              ><span><b>Vi</b>rgin Islands, British</span></a
-            ><a class="dropdown-item"
-              ><span><b>Vi</b>rgin Islands, U.S.</span></a
-            >
-            <!---->
-          </div>
-        </div>
-      </div>
-      <p class="forget-password">
-        <NuxtLink href="/">Forgot Password?</NuxtLink>
-      </p>
-      <input type="hidden" name="credentialId" value="" />
+      <InputTextAuth placeholder="Name" v-model:input="name" inputType="text" :error="errors.name" />
+      <InputTextAuth placeholder="Email" v-model:input="email" inputType="email" :error="errors.email" />
+      <InputTextAuth placeholder="Password" v-model:input="password" inputType="password" :error="errors.password" />
       <div class="form__button">
         <button type="submit" name="login">
-          <span>Login</span>
+          <Spinner v-show="isLoading" />
+          <span>Register</span>
         </button>
       </div>
     </form>

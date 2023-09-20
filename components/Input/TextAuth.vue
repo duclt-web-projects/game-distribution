@@ -19,9 +19,8 @@ const inputComputed = computed({
 <template>
   <div class="form__input">
     <input
-      type="text"
       :id="`input-${placeholder}`"
-      :placeholder="placeholder"
+      :placeholder="placeholder + ' *'"
       :type="inputType"
       v-model="inputComputed"
       autocomplete="off"
@@ -50,7 +49,7 @@ const inputComputed = computed({
   .error {
     display: inline-block;
     margin-top: 8px;
-    color: #ad131a;
+    color: #ca2f37;
     font-size: 12px;
   }
 }

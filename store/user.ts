@@ -1,44 +1,52 @@
-import { defineStore } from "pinia";
 import axios from "@/plugins/axios";
+import { defineStore } from "pinia";
 
 // @ts-ignore
 const $axios = axios().provide.axios;
 
 export const useUserStore = defineStore("user", {
-  state: () => ({
-    id: "",
-    name: "",
-    bio: "",
-    image: "",
-  }),
+  state: () => {
+    return {
+      id: "",
+      name: "",
+      email: "",
+    };
+  },
   actions: {
-    async getTokens() {
-      await $axios.get("/sanctum/csrf-cookie");
-    },
-
     async login(email, password) {
-      await $axios.post("/auth/login", {
+      const response = await $axios.post("/auth/login", {
         email: email,
         password: password,
       });
+
+      this.id = response.data.user.id;
+      this.name = response.data.user.name;
+      this.email = response.data.user.email;
+
+      localStorage.setItem("access_token", response.data.access_token);
     },
 
-    async register(name, email, password, confirmPassword) {
-      await $axios.post("/register", {
+    async register(name, email, password) {
+      const response = await $axios.post("/auth/register", {
         name: name,
         email: email,
         password: password,
-        password_confirmation: confirmPassword,
       });
+
+      this.id = response.data.user.id;
+      this.name = response.data.user.name;
+      this.email = response.data.user.email;
+
+      localStorage.setItem("access_token", response.data.access_token);
     },
 
     async getUser() {
       let res = await $axios.get("/api/logged-in-user");
 
-      this.$state.id = res.data[0].id;
-      this.$state.name = res.data[0].name;
-      this.$state.bio = res.data[0].bio;
-      this.$state.image = res.data[0].image;
+      this.id = res.data[0].id;
+      this.name = res.data[0].name;
+      this.bio = res.data[0].bio;
+      this.image = res.data[0].image;
     },
 
     async logout() {
@@ -47,12 +55,14 @@ export const useUserStore = defineStore("user", {
     },
 
     resetUser() {
-      this.$state.id = "";
-      this.$state.name = "";
-      this.$state.email = "";
-      this.$state.bio = "";
-      this.$state.image = "";
+      this.id = "";
+      this.name = "";
+      this.email = "";
+      this.bio = "";
+      this.image = "";
     },
   },
-  persist: true,
+  persist: {
+    storage: persistedState.localStorage,
+  },
 });

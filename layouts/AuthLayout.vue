@@ -416,6 +416,9 @@ const isLogin = route.path.toLowerCase() === "/login";
       padding: 8px 22px;
       color: white;
       height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
       transform: skewX(0deg);
       font-weight: bold;
@@ -427,6 +430,7 @@ const isLogin = route.path.toLowerCase() === "/login";
         rgba(64, 165, 176, 1) 100%
       );
       text-transform: uppercase;
+      border-radius: 4px;
 
       &:hover {
         background-color: rgb(44, 115, 123);
@@ -437,6 +441,12 @@ const isLogin = route.path.toLowerCase() === "/login";
           rgba(44, 139, 149, 1) 100%
         );
       }
+    }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
     }
   }
 }

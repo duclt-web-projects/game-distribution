@@ -22,7 +22,8 @@
     "@vueform/vueform": "^1.3.3",
     "axios": "^1.5.0",
     "pinia": "^2.1.6",
-    "swiper": "^10.2.0"
+    "swiper": "^10.2.0",
+    "vue3-toastify": "^0.1.12"
   },
   "overrides": {
     "vue": "latest"

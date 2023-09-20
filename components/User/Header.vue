@@ -72,7 +72,7 @@ const logout = async () => {
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-600 hover:text-white">Products</a>
             <button
               class="w-full block px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-600 hover:text-white"
-              @click="logout()"
+              @click="logout"
             >
               Log out
             </button>

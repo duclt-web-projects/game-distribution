@@ -1,10 +1,10 @@
+import { useAxios } from "@/composables/useAxios";
 import { DEFAULT_USER } from "@/constants/user";
-import axios from "@/plugins/axios";
 import { IUser } from "@/types/auth";
 import { defineStore } from "pinia";
 
 // @ts-ignore
-const $axios = axios().provide.axios;
+const $axios = useAxios();
 
 export const useUserStore = defineStore("user", {
   state: () => {
@@ -47,8 +47,12 @@ export const useUserStore = defineStore("user", {
     },
 
     async logout() {
-      await $axios.get("/auth/logout");
-      this.resetUser();
+      console.log(1);
+
+      const response = await $axios.get("/auth/logout");
+      if (response) {
+        this.resetUser();
+      }
     },
 
     resetUser() {

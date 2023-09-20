@@ -1,5 +1,5 @@
 <script setup>
-import { API_ENDPOINT } from "@/config/constants";
+import { API_ENDPOINT } from "@/constants";
 
 const searchText = ref("");
 const currentPage = ref(1);

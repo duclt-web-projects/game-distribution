@@ -1,5 +1,5 @@
 <script setup>
-import { API_ENDPOINT } from "@/config/constants";
+import { API_ENDPOINT } from "@/constants";
 import { tags } from "@/data/promos";
 
 const { data: promo } = await useLazyFetch(`${API_ENDPOINT}/games/promo-feature`);

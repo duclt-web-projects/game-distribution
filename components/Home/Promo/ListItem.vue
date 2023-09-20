@@ -1,5 +1,5 @@
 <script setup>
-import { BACKEND_ENDPOINT } from "@/config/constants";
+import { BACKEND_ENDPOINT } from "@/constants";
 
 const props = defineProps({
   item: Object,

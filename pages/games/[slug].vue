@@ -1,7 +1,7 @@
 <script setup>
 import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
 import IconSearch from "@/assets/icon/Search.vue";
-import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/config/constants";
+import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/constants";
 import MainLayout from "@/layouts/MainLayout.vue";
 
 const { slug } = useRoute().params;

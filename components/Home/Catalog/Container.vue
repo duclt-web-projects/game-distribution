@@ -1,6 +1,6 @@
 <script setup>
+import { API_ENDPOINT } from "@/constants";
 import { catalog } from "@/data/catalog";
-import { API_ENDPOINT } from "@/config/constants";
 
 const { data: games } = await useFetch(`${API_ENDPOINT}/games`);
 </script>

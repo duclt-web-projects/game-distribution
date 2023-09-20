@@ -22,8 +22,12 @@ useHead({
   },
 });
 
+definePageMeta({
+  middleware: "auth",
+});
+
 const userStore = useUserStore();
-const {$toast} = useNuxtApp();
+const { $toast } = useNuxtApp();
 
 const name = ref(null);
 const email = ref(null);

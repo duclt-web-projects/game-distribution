@@ -1,15 +1,18 @@
 import axios from "@/plugins/axios";
 import { defineStore } from "pinia";
+import { DEFAULT_USER } from "~/constants/user";
+import { IUser } from "~/types/auth";
 
 // @ts-ignore
 const $axios = axios().provide.axios;
 
 export const useUserStore = defineStore("user", {
   state: () => {
+    const initialState: IUser = getDataFromLocalStorage("user", DEFAULT_USER);
     return {
-      id: "",
-      name: "",
-      email: "",
+      id: initialState.id,
+      name: initialState.name,
+      email: initialState.email,
     };
   },
   actions: {
@@ -27,17 +30,11 @@ export const useUserStore = defineStore("user", {
     },
 
     async register(name, email, password) {
-      const response = await $axios.post("/auth/register", {
+      await $axios.post("/register", {
         name: name,
         email: email,
         password: password,
       });
-
-      this.id = response.data.user.id;
-      this.name = response.data.user.name;
-      this.email = response.data.user.email;
-
-      localStorage.setItem("access_token", response.data.access_token);
     },
 
     async getUser() {

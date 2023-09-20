@@ -1,4 +1,4 @@
-import { API_ENDPOINT } from "@/config/constants";
+import { API_ENDPOINT } from "@/constants";
 import axios from "axios";
 
 export default defineNuxtPlugin((nuxtApp) => {

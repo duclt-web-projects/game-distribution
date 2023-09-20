@@ -1,6 +1,6 @@
 <script setup>
-import { BACKEND_ENDPOINT } from "@/config/constants";
 import IconPromoFeature from "@/assets/icon/PromoFeature.vue";
+import { BACKEND_ENDPOINT } from "@/constants";
 
 const props = defineProps({
   item: Object,

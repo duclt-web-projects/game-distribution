@@ -18,6 +18,10 @@ useHead({
   ],
 });
 
+definePageMeta({
+  middleware: "auth",
+});
+
 const { $userStore } = useNuxtApp();
 
 const email = ref(null);

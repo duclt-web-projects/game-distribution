@@ -13,7 +13,7 @@ defineProps({
     <Transition name="modal-outer">
       <div
         v-show="modalActive"
-        class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8 z-50"
+        class="absolute w-full bg-black bg-opacity-70 h-screen top-0 left-0 flex justify-center px-8 z-50"
         @click.self="$emit('close-modal')"
       >
         <Transition name="modal-inner">

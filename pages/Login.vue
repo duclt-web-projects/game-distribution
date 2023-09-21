@@ -34,6 +34,20 @@ const errors = ref({
 });
 
 const login = async () => {
+  if (!validate()) return;
+
+  isLoading.value = true;
+
+  try {
+    await userStore.login(email.value, password.value);
+    isLoading.value = false;
+    await navigateTo("/user");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const validate = () => {
   errors.value.email = "";
   errors.value.password = "";
 
@@ -47,16 +61,9 @@ const login = async () => {
     errors.value.password = "Password is required.";
   }
 
-  if (errors.value.email || errors.value.email) return;
-  isLoading.value = true;
+  if (errors.value.email || errors.value.email) return false;
 
-  try {
-    await userStore.login(email.value, password.value);
-    isLoading.value = false;
-    await navigateTo("/user");
-  } catch (error) {
-    console.log(error);
-  }
+  return true;
 };
 </script>
 

@@ -10,6 +10,7 @@ import { default as IconGrid } from "./Grid.vue";
 import { default as IconList } from "./List.vue";
 import { default as IconMenuBar } from "./MenuBar.vue";
 import { default as IconMenuBurger } from "./MenuBurger.vue";
+import { default as IconPlush } from "./Plush.vue";
 import { default as IconPromoFeature } from "./PromoFeature.vue";
 import { default as IconRss } from "./Rss.vue";
 import { default as IconSearch } from "./Search.vue";
@@ -30,6 +31,7 @@ export {
   IconList,
   IconMenuBar,
   IconMenuBurger,
+  IconPlush,
   IconPromoFeature,
   IconRss,
   IconSearch,

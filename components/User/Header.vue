@@ -51,7 +51,7 @@ const logout = async () => {
           class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"
         >
-          <IconUserCircle class="object-cover w-full h-full" />
+          <IconUserCircle class="object-cover w-full h-full fill-gray-700" />
         </button>
 
         <div v-show="dropdownOpen" class="fixed inset-0 z-10 w-full h-full" @click="dropdownOpen = false" />

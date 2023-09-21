@@ -1,5 +1,5 @@
 <script setup>
-import { IconEdit, IconTrash } from "@/assets/icon";
+import { IconEdit, IconPlush, IconTrash } from "@/assets/icon";
 import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
 import { useUserStore } from "@/stores/user";
@@ -26,9 +26,17 @@ definePageMeta({
 });
 
 const userStore = useUserStore();
-const { data: games } = await useFetch(() => `${API_ENDPOINT}/games/user/${userStore.id}`);
 
+const currentPage = ref(1);
 const modalActive = ref(null);
+
+const { data: games } = await useFetch(() => `${API_ENDPOINT}/games/user/${userStore.id}?page=${currentPage.value}`);
+
+
+const onChangePage = (val) => {
+  currentPage.value = val;
+};
+
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
@@ -36,6 +44,14 @@ const toggleModal = () => {
 
 <template>
   <UserLayout>
+    <div class="flex justify-end">
+      <NuxtLink
+        to="/user/add"
+        class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+      >
+        <IconPlush class="mr-1 fill-gray-50" /> Add game
+      </NuxtLink>
+    </div>
     <div class="flex flex-col mt-8">
       <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
@@ -75,7 +91,7 @@ const toggleModal = () => {
               <template v-else>
                 <tr v-for="(game, index) in games.data" :key="index">
                   <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ game.id }}
+                    {{ index + 1 }}
                   </td>
 
                   <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
@@ -104,6 +120,14 @@ const toggleModal = () => {
               </template>
             </tbody>
           </table>
+          <div class="flex justify-end p-4 bg-white">
+            <PaginationUser
+              v-if="games"
+              :currentPage="currentPage"
+              :totalPage="games.last_page"
+              @changePage="onChangePage"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -133,4 +157,7 @@ const toggleModal = () => {
   </UserLayout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.pagination {
+}
+</style>

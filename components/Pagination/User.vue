@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { IconAngleLeft, IconAngleRight } from '~/assets/icon';
+import { IconAngleLeft, IconAngleRight } from '@/assets/icon';
 
 const props = defineProps({
   currentPage: Number,

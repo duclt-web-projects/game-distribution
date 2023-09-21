@@ -2,6 +2,13 @@
 import { IconPlush } from "@/assets/icon";
 import { useAxios } from "@/composables/useAxios";
 
+const props = defineProps({
+  game: {
+    type: Object,
+    default: null,
+  },
+});
+
 const $axios = useAxios();
 
 const name = ref("");
@@ -20,6 +27,15 @@ const errors = ref({
   height: "",
 });
 
+onMounted(() => {
+  if (props.game) {
+    name.value = props.game.name;
+    gameWidth.value = props.game.width;
+    gameHeight.value = props.game.height;
+    description.value = props.game.description;
+  }
+});
+
 const onUploadThumbnail = (event) => {
   thumbnail.value = event.target.files[0];
 };
@@ -34,19 +50,23 @@ const handleAddNewGame = async () => {
 
   let data = new FormData();
 
-  data.append("thumbnail", thumbnail.value);
-  data.append("gameFile", gameFile.value);
+  if (!props.game) {
+    data.append("thumbnail", thumbnail.value);
+    data.append("gameFile", gameFile.value);
+  }
   data.append("name", name.value);
   data.append("description", description.value);
   data.append("width", gameWidth.value + "");
   data.append("height", gameHeight.value + "");
 
-  const response = await $axios.post("/games/store", data);
+  const response = props.game
+    ? await $axios.post(`/games/edit/${props.game.id}`, data)
+    : await $axios.post("/games/store", data);
 
   isCreating.value = false;
 
   if (response) {
-    navigateTo("/user");
+    // navigateTo("/user");
   }
 };
 
@@ -72,12 +92,14 @@ const validate = () => {
     errors.value.height = "Height is required.";
   }
 
-  if (!thumbnail.value) {
-    errors.value.thumbnail = "Thumbnail is required.";
-  }
+  if (!props.game) {
+    if (!thumbnail.value) {
+      errors.value.thumbnail = "Thumbnail is required.";
+    }
 
-  if (!gameFile.value) {
-    errors.value.gameFile = "Game file is required.";
+    if (!gameFile.value) {
+      errors.value.gameFile = "Game file is required.";
+    }
   }
 
   if (errors.value.name || errors.value.width || errors.value.height || errors.value.thumbnail || errors.value.gameFile)

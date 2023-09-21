@@ -47,8 +47,6 @@ export const useUserStore = defineStore("user", {
     },
 
     async logout() {
-      console.log(1);
-
       const response = await $axios.get("/auth/logout");
       if (response) {
         this.resetUser();

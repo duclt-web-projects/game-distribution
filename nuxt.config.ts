@@ -8,6 +8,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt",],
+  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
   plugins: ["@/plugins/axios.ts"],
 });

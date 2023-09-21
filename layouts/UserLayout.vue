@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import Header from "@/components/User/Header.vue";
 import Sidebar from "@/components/User/Sidebar.vue";
+
+onMounted(() => {
+  document.body.className = "";
+});
 </script>
 
 <template>

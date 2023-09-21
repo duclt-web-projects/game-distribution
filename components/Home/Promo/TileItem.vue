@@ -13,8 +13,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-const { navigateTo } = useNavigation();
 </script>
 
 <template>

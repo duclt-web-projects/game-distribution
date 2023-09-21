@@ -5,7 +5,6 @@ const props = defineProps({
   item: Object,
 });
 
-const { navigateTo } = useNavigation();
 </script>
 
 <template>

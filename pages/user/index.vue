@@ -1,5 +1,8 @@
-<script setup lang="ts">
+<script setup>
+import { IconEdit, IconTrash } from "@/assets/icon";
+import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
+import { useUserStore } from "@/stores/user";
 
 useHead({
   title: "User - XGame Studio",
@@ -22,25 +25,13 @@ definePageMeta({
   middleware: "auth",
 });
 
-interface User {
-  name: string;
-  email: string;
-  title: string;
-  title2: string;
-  status: string;
-  role: string;
-}
+const userStore = useUserStore();
+const { data: games } = await useFetch(() => `${API_ENDPOINT}/games/user/${userStore.id}`);
 
-const testUser: User = {
-  name: "John Doe",
-  email: "john@example.com",
-  title: "Software Engineer",
-  title2: "Web dev",
-  status: "Active",
-  role: "Owner",
+const modalActive = ref(null);
+const toggleModal = () => {
+  modalActive.value = !modalActive.value;
 };
-
-const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
 </script>
 
 <template>
@@ -64,62 +55,81 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
                 <th
                   class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
                 >
-                  Status
+                  Thumbnail
+                </th>
+                <th
+                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                >
+                  Published at
                 </th>
                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50" />
               </tr>
             </thead>
 
             <tbody class="bg-white">
-              <tr v-for="(u, index) in users" :key="index">
-                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10">
-                      <img
-                        class="w-10 h-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
-
-                    <div class="ml-4">
-                      <div class="text-sm font-medium leading-5 text-gray-900">
-                        {{ u.name }}
-                      </div>
-                      <div class="text-sm leading-5 text-gray-500">
-                        {{ u.email }}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-
-                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <div class="text-sm leading-5 text-gray-900">
-                    {{ u.title }}
-                  </div>
-                  <div class="text-sm leading-5 text-gray-500">
-                    {{ u.title2 }}
-                  </div>
-                </td>
-
-                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <span
-                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"
-                    >{{ u.status }}</span
-                  >
-                </td>
-
-                <td
-                  class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap"
-                >
-                  <a href="#" class="text-gray-600 hover:text-gray-900">Edit</a>
+              <tr v-if="!games" class="loading-wrapper">
+                <td colSpan="5" class="text-center p-4">
+                  <Loading />
                 </td>
               </tr>
+              <template v-else>
+                <tr v-for="(game, index) in games.data" :key="index">
+                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                    {{ game.id }}
+                  </td>
+
+                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                    {{ game.name }}
+                  </td>
+
+                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                    <img class="w-10 h-10" :src="`${BACKEND_ENDPOINT}${game.thumbnail}`" alt="" />
+                  </td>
+
+                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                    {{ new Date(game.published_at).toLocaleDateString() }}
+                  </td>
+
+                  <td
+                    class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap"
+                  >
+                    <div class="flex items-center">
+                      <NuxtLink to="/user/add" class="w-4 h-4 mr-2">
+                        <IconEdit class="w-full h-full fill-yellow-500" />
+                      </NuxtLink>
+                      <IconTrash class="w-4 h-4 fill-red-500 cursor-pointer" @click="toggleModal" />
+                    </div>
+                  </td>
+                </tr>
+              </template>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+    <Modal :modalActive="modalActive" @close-modal="toggleModal">
+      <div class="text-black">
+        <h1 class="text-2xl mb-1">About:</h1>
+        <p class="mb-4">
+          The Local Weather allows you to track the current and future weather of cities of your choosing.
+        </p>
+        <h2 class="text-2xl">How it works:</h2>
+        <ol class="list-decimal list-inside mb-4">
+          <li>Search for your city by entering the name into the search bar.</li>
+          <li>Select a city within the results, this will take you to the current weather for your selection.</li>
+          <li>
+            Track the city by clicking on the "+" icon in the top right. This will save the city to view at a later time
+            on the home page.
+          </li>
+        </ol>
+
+        <h2 class="text-2xl">Removing a city</h2>
+        <p>
+          If you no longer wish to track a city, simply select the city within the home page. At the bottom of the page,
+          there will be am option to delete the city.
+        </p>
+      </div>
+    </Modal>
   </UserLayout>
 </template>
 

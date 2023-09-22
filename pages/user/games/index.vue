@@ -1,6 +1,6 @@
 <script setup>
 import { IconEdit, IconPlush, IconTrash } from "@/assets/icon";
-import { API_ENDPOINT, BACKEND_ENDPOINT } from "@/constants";
+import { API_ENDPOINT, BACKEND_ENDPOINT, ROUTE_NAMES } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
 import { useUserStore } from "@/stores/user";
 
@@ -22,16 +22,17 @@ useHead({
 });
 
 definePageMeta({
-  middleware: "auth",
+  middleware: ["auth"],
 });
 
 const userStore = useUserStore();
 
+
 const currentPage = ref(1);
 const modalActive = ref(null);
+const removeId = ref(0);
 
 const { data: games } = await useFetch(() => `${API_ENDPOINT}/games/user/${userStore.id}?page=${currentPage.value}`);
-
 
 const onChangePage = (val) => {
   currentPage.value = val;
@@ -46,7 +47,7 @@ const toggleModal = () => {
   <UserLayout>
     <div class="flex justify-end">
       <NuxtLink
-        to="/user/add"
+        :to="ROUTE_NAMES.USER_GAME_CREATE"
         class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
       >
         <IconPlush class="mr-1 fill-gray-50" /> Add game
@@ -110,7 +111,7 @@ const toggleModal = () => {
                     class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap"
                   >
                     <div class="flex items-center">
-                      <NuxtLink to="/user/add" class="w-4 h-4 mr-2">
+                      <NuxtLink :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`" class="w-4 h-4 mr-2">
                         <IconEdit class="w-full h-full fill-yellow-500" />
                       </NuxtLink>
                       <IconTrash class="w-4 h-4 fill-red-500 cursor-pointer" @click="toggleModal" />
@@ -120,44 +121,18 @@ const toggleModal = () => {
               </template>
             </tbody>
           </table>
-          <div class="flex justify-end p-4 bg-white">
-            <PaginationUser
-              v-if="games"
-              :currentPage="currentPage"
-              :totalPage="games.last_page"
-              @changePage="onChangePage"
-            />
+          <div v-if="games" class="flex justify-end p-4 bg-white">
+            <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
           </div>
         </div>
       </div>
     </div>
     <Modal :modalActive="modalActive" @close-modal="toggleModal">
       <div class="text-black">
-        <h1 class="text-2xl mb-1">About:</h1>
-        <p class="mb-4">
-          The Local Weather allows you to track the current and future weather of cities of your choosing.
-        </p>
-        <h2 class="text-2xl">How it works:</h2>
-        <ol class="list-decimal list-inside mb-4">
-          <li>Search for your city by entering the name into the search bar.</li>
-          <li>Select a city within the results, this will take you to the current weather for your selection.</li>
-          <li>
-            Track the city by clicking on the "+" icon in the top right. This will save the city to view at a later time
-            on the home page.
-          </li>
-        </ol>
-
-        <h2 class="text-2xl">Removing a city</h2>
-        <p>
-          If you no longer wish to track a city, simply select the city within the home page. At the bottom of the page,
-          there will be am option to delete the city.
-        </p>
+        <h1 class="text-2xl mb-1">Delete Confirmation</h1>
       </div>
     </Modal>
   </UserLayout>
 </template>
 
-<style scoped>
-.pagination {
-}
-</style>
+<style scoped></style>

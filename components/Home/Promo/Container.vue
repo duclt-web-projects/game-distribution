@@ -63,6 +63,10 @@ const { data: promoList } = await useFetch(`${API_ENDPOINT}/games/promo-list`);
   .promo-columns {
     display: flex;
     flex-direction: column;
+
+    :deep(.promo-tile-item) {
+      width: calc(100% / 3);
+    }
   }
 }
 @media (min-width: 640px) {
@@ -84,6 +88,16 @@ const { data: promoList } = await useFetch(`${API_ENDPOINT}/games/promo-list`);
     .promo-right {
       padding-right: 0;
       width: calc(100% / 3);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .promo-container {
+    .promo-columns {
+      :deep(.promo-tile-item) {
+        width: 100%;
+      }
     }
   }
 }

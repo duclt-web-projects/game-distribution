@@ -1,6 +1,7 @@
 <script setup>
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import { useUserStore } from "@/stores/user";
+import { ROUTE_NAMES } from "@/constants/commons";
 
 useHead({
   title: "Register - XGame Studio",
@@ -64,7 +65,7 @@ const register = async () => {
   try {
     await userStore.register(name.value, email.value, password.value);
     isLoading.value = false;
-    await navigateTo("/user");
+    await navigateTo(ROUTE_NAMES.USER_GAME);
   } catch (error) {
     $toast.info(error.response.data.message);
     isLoading.value = false;

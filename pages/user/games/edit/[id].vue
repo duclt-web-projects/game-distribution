@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UserLayout from "@/layouts/UserLayout.vue";
-import { API_ENDPOINT } from "~/constants";
+import { API_ENDPOINT } from "@/constants";
 
 useHead({
   title: "Edit Game - XGame Studio",

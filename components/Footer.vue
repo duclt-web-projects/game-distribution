@@ -3,7 +3,7 @@
     <div class="wrapper">
       <article>
         <div class="footer-left">
-          <img src="/images/logos/logo-white.png" alt="XGame logo" />
+          <img src="/images/logos/logo-white.png" alt="XGame logo" class="m-auto mb-5"/>
           <p>
             XGame offers a free service for developers and publishers. We help game developers monetize and distribute
             their games. We offer publishers a wide range of high quality cross platform games.

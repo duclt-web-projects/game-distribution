@@ -46,10 +46,6 @@ h3 {
   flex-flow: wrap;
   margin: -0.9375rem -0.9375rem 0 0;
 
-  .game {
-    flex: 1;
-  }
-
   .game.card {
     display: block;
     max-width: inherit;

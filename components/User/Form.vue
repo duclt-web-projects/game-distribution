@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { IconPlush } from "@/assets/icon";
 import { useAxios } from "@/composables/useAxios";
+import { ROUTE_NAMES } from '../../constants/commons';
 
 const props = defineProps({
   game: {
@@ -66,7 +67,7 @@ const handleAddNewGame = async () => {
   isCreating.value = false;
 
   if (response) {
-    // navigateTo("/user");
+    navigateTo(ROUTE_NAMES.USER_GAME);
   }
 };
 

@@ -22,22 +22,6 @@ const logout = async () => {
       <button class="btn-menu text-gray-500 focus:outline-none lg:hidden mr-5" @click="isOpen = true">
         <IconMenuBar />
       </button>
-
-      <div class="flex items-center">
-        <input
-          type="text"
-          name="price"
-          id="price"
-          class="block w-full rounded-md border-0 py-2 pl-5 pr-5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-500 leading-6 outline-none"
-          placeholder="Search"
-        />
-        <button
-          type="submit"
-          class="btn-search p-2.5 ml-2 text-sm font-medium text-white bg-gray-600 rounded-lg border border-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300"
-        >
-          <IconSearch />
-        </button>
-      </div>
     </div>
 
     <div class="flex items-center">
@@ -46,7 +30,9 @@ const logout = async () => {
       </button>
 
       <div class="relative flex">
-        <span class="items-center pr-5 text-gray-700 hidden md:flex" v-if="userStore.name">{{ "Hi, " + userStore.name }}</span>
+        <ClientOnly>
+          <span class="items-center pr-5 text-gray-700 hidden md:flex">{{ userStore.name }}</span>
+        </ClientOnly>
         <button
           class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"

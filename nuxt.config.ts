@@ -1,3 +1,5 @@
+import { API_ENDPOINT } from "./constants/app";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
@@ -16,6 +18,11 @@ export default defineNuxtConfig({
         target: "http://127.0.0.1:8000/api",
         changeOrigin: true,
       },
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiBase: API_ENDPOINT,
     },
   },
 });

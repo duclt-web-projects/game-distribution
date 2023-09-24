@@ -31,8 +31,10 @@ const userStore = useUserStore();
 const currentPage = ref(1);
 const modalActive = ref(null);
 const removeId = ref(0);
+const runtimeConfig = useRuntimeConfig()
 
-const { data: games } = await useFetch(() => `${API_ENDPOINT}/games/user/${userStore.id}?page=${currentPage.value}`);
+
+const { data: games } = await useFetch(() => `${runtimeConfig.public.apiBase}/games/user/${userStore.id}?page=${currentPage.value}`);
 
 const onChangePage = (val) => {
   currentPage.value = val;

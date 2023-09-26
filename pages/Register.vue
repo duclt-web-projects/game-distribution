@@ -149,4 +149,3 @@ const validate = (): boolean => {
   }
 }
 </style>
-~/constants/routes

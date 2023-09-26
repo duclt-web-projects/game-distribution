@@ -2,8 +2,8 @@ import { useHttp } from "@/composables/useHttp";
 import { RESPONSE_STATUS } from "@/constants";
 import { IAuthResponse, ILogin, IRegister, IUser } from "@/types/auth";
 import { IResponseReturn } from "@/types/response";
-import { defineStore } from "pinia";
 import { handleResponse } from "@/utils/functions";
+import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore(
   "auth",
@@ -21,6 +21,8 @@ export const useAuthStore = defineStore(
         };
       }
       user.value = null;
+      localStorage.removeItem("access_token");
+
       return {
         status: RESPONSE_STATUS.SUCCESS,
         message: "Logout successfully!!!",
@@ -29,6 +31,9 @@ export const useAuthStore = defineStore(
 
     async function fetchUser() {
       const { data, error } = await useHttp("/auth/profile");
+
+      console.log(data, error);
+      
       user.value = data.value as IUser;
     }
 
@@ -40,6 +45,7 @@ export const useAuthStore = defineStore(
 
       if (data.value) {
         user.value = data.value.user;
+        localStorage.setItem("access_token", data.value.access_token);
       }
 
       return handleResponse(data, error, "Login successfully!!!", "Login failed!!!");
@@ -53,6 +59,7 @@ export const useAuthStore = defineStore(
 
       if (data.value) {
         user.value = data.value.user;
+        localStorage.setItem("access_token", data.value.access_token);
       }
 
       return handleResponse(data, error, "Register successfully!!!", "Register failed!!!");

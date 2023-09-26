@@ -22,7 +22,9 @@ useHead({
   ],
 });
 
-definePageMeta({});
+definePageMeta({
+  middleware: ["auth"],
+});
 
 const { BACKEND_URL } = useUrlConfig();
 const authStore = useAuthStore();

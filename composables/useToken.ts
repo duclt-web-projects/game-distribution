@@ -1,3 +1,8 @@
 export const useToken = () => {
-  return useState("token", () => null);
+  let token = "";
+  if (process.client) {
+    token = localStorage.getItem("access_token") ?? "";
+  }
+
+  return token;
 };

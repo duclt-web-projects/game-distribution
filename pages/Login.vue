@@ -21,9 +21,6 @@ useHead({
   ],
 });
 
-definePageMeta({
-  middleware: "auth",
-});
 
 const authStore = useAuthStore();
 const { $toast } = useNuxtApp();

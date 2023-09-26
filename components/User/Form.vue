@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IconPlush } from "@/assets/icon";
-import { ROUTE_NAMES } from "@/constants";
 import { useHttp } from "@/composables/useHttp";
+import { ROUTE_NAMES } from '@/constants/routes';
 
 const props = defineProps({
   game: {
@@ -9,6 +9,8 @@ const props = defineProps({
     default: null,
   },
 });
+
+const { $toast } = useNuxtApp();
 
 const name = ref("");
 const description = ref("");
@@ -47,25 +49,35 @@ const handleAddNewGame = async () => {
   if (!validate()) return;
   isCreating.value = true;
 
-  let data = new FormData();
+  let formData = new FormData();
 
   if (!props.game) {
-    data.append("thumbnail", thumbnail.value);
-    data.append("gameFile", gameFile.value);
+    formData.append("thumbnail", thumbnail.value);
+    formData.append("gameFile", gameFile.value);
   }
-  data.append("name", name.value);
-  data.append("description", description.value);
-  data.append("width", gameWidth.value + "");
-  data.append("height", gameHeight.value + "");
+  formData.append("name", name.value);
+  formData.append("description", description.value);
+  formData.append("width", gameWidth.value + "");
+  formData.append("height", gameHeight.value + "");
 
-  const response = props.game
-    ? await useHttp(`/games/edit/${props.game.id}`, { body: data })
-    : await useHttp("/games/store", { body: data });
+  const { data, error } = props.game
+    ? await useHttp(`/games/edit/${props.game.id}`, { method: "POST", body: formData })
+    : await useHttp("/games/store", { method: "POST", body: formData });
+  console.log(data, error);
+  data.value, error.value;
 
   isCreating.value = false;
 
-  if (response) {
-    navigateTo(ROUTE_NAMES.USER_GAME);
+  if (error.value) {
+    $toast.error(error.value.message);
+  }
+
+  if (data.value) {
+    $toast.success("Add successfully!!!");
+
+    setTimeout(() => {
+      navigateTo(ROUTE_NAMES.USER_GAME);
+    }, 500);
   }
 };
 
@@ -248,4 +260,3 @@ textarea {
   border-width: 2px;
 }
 </style>
-~/constants/routes

@@ -1,10 +1,11 @@
 <script setup>
-import { BACKEND_ENDPOINT } from "@/constants";
+import { useUrlConfig } from "@/composables/useUrlConfig";
 
 const props = defineProps({
   item: Object,
 });
 
+const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
@@ -12,7 +13,7 @@ const props = defineProps({
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
-      <span class="image is-4by3"><img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" /></span>
+      <span class="image is-4by3"><img :src="BACKEND_URL + item.thumbnail" :alt="item.name" /></span>
     </div>
     <div class="content">
       <span class="title">{{ item.name }}</span>

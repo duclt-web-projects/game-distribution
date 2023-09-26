@@ -1,11 +1,13 @@
 <script setup>
-import { API_ENDPOINT } from "@/constants";
+import { useUrlConfig } from "@/composables/useUrlConfig";
+
+const { API_URL } = useUrlConfig();
 
 const searchText = ref("");
 const currentPage = ref(1);
 
 const { data: games } = await useFetch(
-  () => `${API_ENDPOINT}/games/list?name=${searchText.value}&page=${currentPage.value}`
+  () => `${API_URL}/games/list?name=${searchText.value}&page=${currentPage.value}`
 );
 
 const handleSearch = (val) => {

@@ -9,6 +9,10 @@ export interface ILogin {
   password: string;
 }
 
+export interface IRegister extends ILogin {
+  name: string;
+}
+
 export interface IAuthResponse {
   access_token: string;
   message: string;

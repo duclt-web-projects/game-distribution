@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
+import { RESPONSE_STATUS, ROUTE_NAMES } from "@/constants";
 import AuthLayout from "@/layouts/AuthLayout.vue";
-import { useUserStore } from "@/stores/user";
-import { ROUTE_NAMES } from "@/constants/commons";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 useHead({
   title: "Register - XGame Studio",
@@ -27,12 +27,12 @@ definePageMeta({
   middleware: "auth",
 });
 
-const userStore = useUserStore();
+const authStore = useAuthStore();
 const { $toast } = useNuxtApp();
 
-const name = ref(null);
-const email = ref(null);
-const password = ref(null);
+const name = ref("");
+const email = ref("");
+const password = ref("");
 const errors = ref({
   name: "",
   email: "",
@@ -41,6 +41,27 @@ const errors = ref({
 const isLoading = ref(false);
 
 const register = async () => {
+  if (!validate()) return;
+
+  isLoading.value = true;
+
+  const response = await authStore.register({ name: name.value, email: email.value, password: password.value });
+  isLoading.value = false;
+
+  if (response.status === RESPONSE_STATUS.SUCCESS) {
+    $toast.success(response.message);
+
+    setTimeout(() => {
+      navigateTo(ROUTE_NAMES.USER_GAME);
+    }, 500);
+  } else {
+    $toast.error(response.message, {
+      autoClose: 2000,
+    });
+  }
+};
+
+const validate = (): boolean => {
   errors.value.name = "";
   errors.value.email = "";
   errors.value.password = "";
@@ -59,18 +80,9 @@ const register = async () => {
     errors.value.password = "Password is required.";
   }
 
-  if (errors.value.email || errors.value.email) return;
-  isLoading.value = true;
+  if (errors.value.email || errors.value.password || errors.value.name) return false;
 
-  try {
-    await userStore.register(name.value, email.value, password.value);
-    isLoading.value = false;
-    await navigateTo(ROUTE_NAMES.USER_GAME);
-  } catch (error) {
-    $toast.info(error.response.data.message);
-    isLoading.value = false;
-    console.log(error);
-  }
+  return true;
 };
 </script>
 
@@ -137,3 +149,4 @@ const register = async () => {
   }
 }
 </style>
+~/constants/routes

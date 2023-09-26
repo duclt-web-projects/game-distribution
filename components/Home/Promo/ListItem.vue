@@ -1,16 +1,17 @@
 <script setup>
-import { BACKEND_ENDPOINT } from "@/constants";
+import { useUrlConfig } from "@/composables/useUrlConfig";
 
 const props = defineProps({
   item: Object,
 });
+const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
   <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="promo-list-item">
     <div class="promo-image">
       <div class="image is-4by3">
-        <img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" />
+        <img :src="BACKEND_URL + item.thumbnail" :alt="item.name" />
       </div>
     </div>
     <div class="promo-info">

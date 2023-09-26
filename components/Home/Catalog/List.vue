@@ -48,6 +48,7 @@ h3 {
 
   .game.card {
     display: block;
+    flex: 1;
     max-width: inherit;
   }
 

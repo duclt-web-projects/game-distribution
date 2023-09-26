@@ -1,8 +1,9 @@
 <script setup>
-import { API_ENDPOINT } from "@/constants";
+import { useUrlConfig } from "@/composables/useUrlConfig";
 import { catalog } from "@/data/catalog";
 
-const { data: games } = await useFetch(`${API_ENDPOINT}/games`);
+const { API_URL } = useUrlConfig();
+const { data: games } = await useFetch(`${API_URL}/games`);
 </script>
 
 <template>

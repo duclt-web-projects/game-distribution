@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
+import { RESPONSE_STATUS } from "@/constants";
+import { ROUTE_NAMES } from "@/constants/routes";
 import AuthLayout from "@/layouts/AuthLayout.vue";
-import { useUserStore } from "@/stores/user";
-import { ROUTE_NAMES } from '@/constants/commons';
+import { useAuthStore } from "@/stores/useAuthStore";
 
 useHead({
   title: "Login - XGame Studio",
@@ -24,10 +25,11 @@ definePageMeta({
   middleware: "auth",
 });
 
-const userStore = useUserStore();
+const authStore = useAuthStore();
+const { $toast } = useNuxtApp();
 
-const email = ref(null);
-const password = ref(null);
+const email = ref('');
+const password = ref('');
 const isLoading = ref(false);
 const errors = ref({
   email: "",
@@ -39,12 +41,17 @@ const login = async () => {
 
   isLoading.value = true;
 
-  try {
-    await userStore.login(email.value, password.value);
+  const response = await authStore.login({ email: email.value, password: password.value });
+
+  if (response.status === RESPONSE_STATUS.SUCCESS) {
     isLoading.value = false;
-    await navigateTo(ROUTE_NAMES.USER_GAME);
-  } catch (error) {
-    console.log(error);
+    $toast.success(response.message);
+
+    setTimeout(() => {
+      navigateTo(ROUTE_NAMES.USER_GAME);
+    }, 500);
+  } else {
+    $toast.error(response.message);
   }
 };
 
@@ -480,3 +487,4 @@ const validate = () => {
   }
 }
 </style>
+../constants/routes

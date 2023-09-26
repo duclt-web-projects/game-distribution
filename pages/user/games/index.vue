@@ -1,8 +1,9 @@
 <script setup>
 import { IconEdit, IconPlush, IconTrash } from "@/assets/icon";
-import { API_ENDPOINT, BACKEND_ENDPOINT, ROUTE_NAMES } from "@/constants";
+import { useHttp } from "@/composables/useHttp";
+import { ROUTE_NAMES } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
-import { useUserStore } from "@/stores/user";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 useHead({
   title: "User - XGame Studio",
@@ -21,20 +22,17 @@ useHead({
   ],
 });
 
-definePageMeta({
-  middleware: ["auth"],
-});
+definePageMeta({});
 
-const userStore = useUserStore();
-
+const { BACKEND_URL } = useUrlConfig();
+const authStore = useAuthStore();
+const { user } = authStore;
 
 const currentPage = ref(1);
 const modalActive = ref(null);
-const removeId = ref(0);
-const runtimeConfig = useRuntimeConfig()
 
-
-const { data: games } = await useFetch(() => `${runtimeConfig.public.apiBase}/games/user/${userStore.id}?page=${currentPage.value}`);
+// const { data: games } = await useFetch(() => `${API_URL}/games/user/${user?.id}?page=${currentPage.value}`);
+const { data: games } = await useHttp(`/games/user/${user?.id}?page=${currentPage.value}`, {});
 
 const onChangePage = (val) => {
   currentPage.value = val;
@@ -91,6 +89,11 @@ const toggleModal = () => {
                   <Loading />
                 </td>
               </tr>
+              <tr v-else-if="games.data.length === 0" class="loading-wrapper">
+                <td colSpan="5" class="text-center p-4">
+                  <div>No data</div>
+                </td>
+              </tr>
               <template v-else>
                 <tr v-for="(game, index) in games.data" :key="index">
                   <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
@@ -102,7 +105,7 @@ const toggleModal = () => {
                   </td>
 
                   <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    <img class="w-10 h-10" :src="`${BACKEND_ENDPOINT}${game.thumbnail}`" alt="" />
+                    <img class="w-10 h-10" :src="`${BACKEND_URL}${game.thumbnail}`" alt="" />
                   </td>
 
                   <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
@@ -123,7 +126,7 @@ const toggleModal = () => {
               </template>
             </tbody>
           </table>
-          <div v-if="games" class="flex justify-end p-4 bg-white">
+          <div v-if="games && games.data.length" class="flex justify-end p-4 bg-white">
             <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
           </div>
         </div>

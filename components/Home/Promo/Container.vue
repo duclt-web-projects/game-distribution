@@ -1,9 +1,9 @@
 <script setup>
-import { API_ENDPOINT } from "@/constants";
+import { useHttp } from "@/composables/useHttp";
 import { tags } from "@/data/promos";
 
-const { data: promo } = await useLazyFetch(`${API_ENDPOINT}/games/promo-feature`);
-const { data: promoList } = await useFetch(`${API_ENDPOINT}/games/promo-list`);
+const { data: promo } = await useHttp("games/promo-feature");
+const { data: promoList } = await useHttp("games/promo-list");
 </script>
 
 <template>

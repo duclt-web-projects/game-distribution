@@ -1,17 +1,26 @@
 <script setup lang="ts">
-import { IconBell, IconMenuBar, IconSearch, IconUserCircle } from "@/assets/icon";
+import { IconBell, IconMenuBar, IconUserCircle } from "@/assets/icon";
 import { useSidebar } from "@/composables/useSidebar";
-import { useUserStore } from "@/stores/user";
+import { RESPONSE_STATUS, ROUTE_NAMES } from "@/constants";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { ref } from "vue";
-import { ROUTE_NAMES } from "../../constants/commons";
 
-const userStore = useUserStore();
+const authStore = useAuthStore();
+const { user } = authStore;
+
+const { $toast } = useNuxtApp();
 
 const dropdownOpen = ref(false);
 const { isOpen } = useSidebar();
 
 const logout = async () => {
-  await userStore.logout();
+  const response = await authStore.logout();
+
+  if (response.status === RESPONSE_STATUS.ERROR) {
+    $toast.error(response.message);
+    return;
+  }
+
   navigateTo(ROUTE_NAMES.LOGIN);
 };
 </script>
@@ -31,7 +40,7 @@ const logout = async () => {
 
       <div class="relative flex">
         <ClientOnly>
-          <span class="items-center pr-5 text-gray-700 hidden md:flex">{{ userStore.name }}</span>
+          <span class="items-center pr-5 text-gray-700 hidden md:flex">{{ user?.name }}</span>
         </ClientOnly>
         <button
           class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"

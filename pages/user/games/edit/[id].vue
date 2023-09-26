@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useUrlConfig } from "@/composables/useUrlConfig";
 import UserLayout from "@/layouts/UserLayout.vue";
-import { API_ENDPOINT } from "@/constants";
 
 useHead({
   title: "Edit Game - XGame Studio",
@@ -23,15 +23,16 @@ definePageMeta({
   // middleware: "auth",
 });
 
+const { API_URL } = useUrlConfig();
 const { id } = useRoute().params;
 
-const { data: game } = await useFetch(() => `${API_ENDPOINT}/games/${id}`);
+const { data: game } = await useFetch(() => `${API_URL}/games/${id}`);
 </script>
 
 <template>
   <UserLayout>
-    <Loading v-if="!game"/>
-    <UserForm v-else :game="game"/>
+    <Loading v-if="!game" />
+    <UserForm v-else :game="game" />
   </UserLayout>
 </template>
 

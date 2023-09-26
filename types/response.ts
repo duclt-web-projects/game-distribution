@@ -1,3 +1,5 @@
+import { RESPONSE_STATUS } from "@/constants";
+
 export interface IResponsePaginate {
   current_page: number;
   data: [];
@@ -12,4 +14,9 @@ export interface IResponsePaginate {
   prev_page_url: string | null;
   to: number;
   total: number;
+}
+
+export interface IResponseReturn {
+  status: RESPONSE_STATUS;
+  message: any;
 }

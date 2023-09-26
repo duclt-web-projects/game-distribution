@@ -1,6 +1,6 @@
 <script setup>
 import IconPromoFeature from "@/assets/icon/PromoFeature.vue";
-import { BACKEND_ENDPOINT } from "@/constants";
+import { useUrlConfig } from "@/composables/useUrlConfig";
 
 const props = defineProps({
   item: Object,
@@ -13,6 +13,7 @@ const props = defineProps({
     default: false,
   },
 });
+const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
@@ -37,7 +38,7 @@ const props = defineProps({
       </div>
       <div class="promo-image">
         <NuxtLink :to="`/games/${item.slug}`" class="image" :class="isFeatured ? 'is-2by1' : 'is-4by3'">
-          <img :src="BACKEND_ENDPOINT + item.thumbnail" :alt="item.name" />
+          <img :src="BACKEND_URL + item.thumbnail" :alt="item.name" />
         </NuxtLink>
         <div class="pills" style="">
           <NuxtLink href="/games" class="pill transparent" title="casual">casual</NuxtLink>

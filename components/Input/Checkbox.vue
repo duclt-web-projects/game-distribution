@@ -34,6 +34,7 @@ const props = defineProps({
     transition: all 0.2s linear;
     width: 100%;
     white-space: nowrap;
+    color: #999;
 
     &:first-letter {
       text-transform: capitalize;

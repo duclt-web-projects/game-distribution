@@ -1,7 +1,7 @@
 <template>
   <div class="algolia-multisearch-filter ais-refinement-list">
     <span><span class="refinement-list-header">{{ title }}</span>
-      <GamesInputText />
+      <SearchBox/>
     </span>
     <InputCheckbox v-for="item in data" :key="item.id" :item="item"/>
   </div>

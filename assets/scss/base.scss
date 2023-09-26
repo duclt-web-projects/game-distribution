@@ -284,8 +284,13 @@ textarea {
   box-sizing: border-box;
 }
 
-input,
-select {
+form input[type="email"],
+form input[type="number"],
+form input[type="password"],
+form input[type="search"],
+form input[type="text"],
+form input[type="url"],
+form select {
   height: 40px;
 }
 

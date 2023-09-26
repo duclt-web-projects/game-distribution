@@ -1,5 +1,3 @@
-import { API_ENDPOINT } from "./constants/app";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
@@ -12,17 +10,10 @@ export default defineNuxtConfig({
   },
   modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
   plugins: ["@/plugins/axios.ts"],
-  nitro: {
-    devProxy: {
-      "/api": {
-        target: "http://127.0.0.1:8000/api",
-        changeOrigin: true,
-      },
-    },
-  },
   runtimeConfig: {
     public: {
-      apiBase: API_ENDPOINT,
+      apiUrl: process.env.NUXT_PUBLIC_API_URL ?? "https://kimlestudio.xyz/api",
+      backendUrl: process.env.NUXT_PUBLIC_BACKEND_URL ?? "https://kimlestudio.xyz",
     },
   },
 });

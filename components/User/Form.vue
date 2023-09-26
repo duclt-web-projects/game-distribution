@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IconPlush } from "@/assets/icon";
-import { useAxios } from "@/composables/useAxios";
-import { ROUTE_NAMES } from '../../constants/commons';
+import { ROUTE_NAMES } from "@/constants";
+import { useHttp } from "@/composables/useHttp";
 
 const props = defineProps({
   game: {
@@ -9,8 +9,6 @@ const props = defineProps({
     default: null,
   },
 });
-
-const $axios = useAxios();
 
 const name = ref("");
 const description = ref("");
@@ -61,8 +59,8 @@ const handleAddNewGame = async () => {
   data.append("height", gameHeight.value + "");
 
   const response = props.game
-    ? await $axios.post(`/games/edit/${props.game.id}`, data)
-    : await $axios.post("/games/store", data);
+    ? await useHttp(`/games/edit/${props.game.id}`, { body: data })
+    : await useHttp("/games/store", { body: data });
 
   isCreating.value = false;
 
@@ -250,3 +248,4 @@ textarea {
   border-width: 2px;
 }
 </style>
+~/constants/routes

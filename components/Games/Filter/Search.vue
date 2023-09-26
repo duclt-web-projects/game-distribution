@@ -12,7 +12,7 @@
       <button title="Show Grid" class="xg-button flat list-view-grid">
         <IconGrid />
       </button>
-      <GamesInputText v-model="searchQuery" :debounce-delay="500" />
+      <SearchBox v-model="searchQuery" :debounce-delay="500" />
     </div>
   </div>
 </template>

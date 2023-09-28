@@ -14,8 +14,7 @@ export interface IRegister extends ILogin {
 }
 
 export interface IAuthResponse {
+  user: IUser;
   access_token: string;
   message: string;
-  type_token: string;
-  user: IUser;
 }

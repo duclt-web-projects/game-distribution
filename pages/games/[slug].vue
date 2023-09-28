@@ -2,6 +2,11 @@
 import { useUrlConfig } from "@/composables/useUrlConfig";
 import MainLayout from "@/layouts/MainLayout.vue";
 
+const { slug } = useRoute().params;
+const { API_URL, BACKEND_URL } = useUrlConfig();
+
+const { data: game } = await useFetch(() => `${API_URL}/games/${slug}`);
+
 useHead({
   title: `Publish ${slug} on your website - XGame Studio`,
   meta: [
@@ -21,11 +26,6 @@ useHead({
     class: "games",
   },
 });
-
-const { slug } = useRoute().params;
-const { API_URL, BACKEND_URL } = useUrlConfig();
-
-const { data: game } = await useFetch(() => `${API_URL}/games/${slug}`);
 </script>
 
 <template>
@@ -58,7 +58,7 @@ const { data: game } = await useFetch(() => `${API_URL}/games/${slug}`);
           </div>
           <div class="columns">
             <div class="column">
-              <GameDescription />
+              <GameDescription :game="game"/>
             </div>
             <div class="column">
               <GameInfo />

@@ -9,6 +9,7 @@ export const useAuthStore = defineStore(
   "auth",
   () => {
     const user = ref<IUser | null>(null);
+    const token = useToken();
     const isLoggedIn = computed(() => !!user.value);
 
     async function logout() {
@@ -21,7 +22,6 @@ export const useAuthStore = defineStore(
         };
       }
       user.value = null;
-      localStorage.removeItem("access_token");
 
       return {
         status: RESPONSE_STATUS.SUCCESS,
@@ -32,8 +32,8 @@ export const useAuthStore = defineStore(
     async function fetchUser() {
       const { data, error } = await useHttp("/auth/profile");
 
-      console.log(data, error);
-      
+      console.log(123, data.value, error.value);
+
       user.value = data.value as IUser;
     }
 
@@ -65,11 +65,33 @@ export const useAuthStore = defineStore(
       return handleResponse(data, error, "Register successfully!!!", "Register failed!!!");
     }
 
-    return { user, login, isLoggedIn, fetchUser, logout, register };
+    async function refresh() {
+      const { data, error } = await useHttp<{ access_token: string }>("/auth/refresh");
+
+      if (data.value) {
+        localStorage.setItem("access_token", data.value.access_token);
+        return {
+          status: RESPONSE_STATUS.SUCCESS,
+          message: "Refresh token success",
+        };
+      }
+
+      user.value = null;
+      localStorage.removeItem("access_token");
+
+      return {
+        status: RESPONSE_STATUS.FAILED,
+        message: error.value?.message,
+      };
+    }
+
+    function setUser(userData: IUser | null) {
+      user.value = userData;
+    }
+
+    return { user, login, isLoggedIn, fetchUser, logout, register, refresh, setUser };
   },
   {
-    persist: {
-      storage: persistedState.localStorage,
-    },
+    persist: true,
   }
 );

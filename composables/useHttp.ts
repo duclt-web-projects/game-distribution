@@ -1,17 +1,16 @@
 import { UseFetchOptions, useFetch } from "#app";
 import { RESPONSE_STATUS_CODE } from "@/constants";
-import { useToken } from "./useToken";
+import { getTokenFromLocalStorage } from "@/utils/functions";
 
 // wrap useFetch with configuration needed to talk to our API
 export function useHttp<DataT>(path, options: UseFetchOptions<DataT> = {}) {
   const config = useRuntimeConfig();
 
-  // const auth = useAuth();
   // modify options as needed
-  // options.baseURL = "https://api.shoperis.net/`;
   options.baseURL = config.public.apiUrl;
+
   // Add authentication token to request headers
-  const token = useToken();
+  const token = getTokenFromLocalStorage();
 
   if (token) {
     options.headers = {

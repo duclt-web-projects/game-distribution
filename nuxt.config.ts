@@ -16,4 +16,7 @@ export default defineNuxtConfig({
       backendUrl: process.env.NUXT_PUBLIC_BACKEND_URL ?? "https://kimlestudio.xyz",
     },
   },
+  routeRules: {
+    "/user/**": { ssr: false },
+  },
 });

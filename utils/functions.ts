@@ -20,3 +20,11 @@ export function handleResponse(data, error, messageSuccess = "Successful!!!", me
     message: messageFailed,
   };
 }
+
+export function getTokenFromLocalStorage() {
+  if (process.client) {
+    return localStorage.getItem("access_token") ?? "";
+  }
+
+  return "";
+}

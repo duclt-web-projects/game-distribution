@@ -22,9 +22,9 @@ useHead({
   ],
 });
 
-definePageMeta({
-  middleware: ["auth"],
-});
+// definePageMeta({
+//   middleware: ["token"],
+// });
 
 const { BACKEND_URL } = useUrlConfig();
 const authStore = useAuthStore();
@@ -34,7 +34,7 @@ const currentPage = ref(1);
 const modalActive = ref(null);
 
 // const { data: games } = await useFetch(() => `${API_URL}/games/user/${user?.id}?page=${currentPage.value}`);
-const { data: games } = await useHttp(`/games/user/${user?.id}?page=${currentPage.value}`, {});
+const { data: games } = await useHttp(`/games/user/1?page=${currentPage.value}`, {});
 
 const onChangePage = (val) => {
   currentPage.value = val;

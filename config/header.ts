@@ -8,7 +8,7 @@ const headers = [
   {
     id: 2,
     name: "Products for Publishers",
-    path: "/games/1",
+    path: "/user/games",
     children: [],
   },
   {

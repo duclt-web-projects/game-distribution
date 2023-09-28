@@ -1,6 +1,5 @@
 import { UseFetchOptions, useFetch } from "#app";
 import { RESPONSE_STATUS_CODE } from "@/constants";
-import { getTokenFromLocalStorage } from "@/utils/functions";
 
 // wrap useFetch with configuration needed to talk to our API
 export function useHttp<DataT>(path, options: UseFetchOptions<DataT> = {}) {
@@ -10,12 +9,12 @@ export function useHttp<DataT>(path, options: UseFetchOptions<DataT> = {}) {
   options.baseURL = config.public.apiUrl;
 
   // Add authentication token to request headers
-  const token = getTokenFromLocalStorage();
+  const token = useCookie("access_token");
 
-  if (token) {
+  if (token.value) {
     options.headers = {
       ...options.headers,
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.value}`,
     };
   }
 

@@ -8,15 +8,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
-  plugins: ["@/plugins/axios.ts"],
+  modules: ["@pinia/nuxt"],
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL ?? "https://kimlestudio.xyz/api",
       backendUrl: process.env.NUXT_PUBLIC_BACKEND_URL ?? "https://kimlestudio.xyz",
     },
   },
-  routeRules: {
-    "/user/**": { ssr: false },
-  },
+  spaLoadingTemplate: true,
 });

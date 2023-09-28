@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import Header from "@/components/User/Header.vue";
 import Sidebar from "@/components/User/Sidebar.vue";
+import { useAuthStore } from "../stores/useAuthStore";
+
+// const authStore = useAuthStore();
+
+// onBeforeMount(async () => {
+//   await authStore.getProfile();
+// });
 
 onMounted(() => {
   document.body.className = "";
@@ -8,7 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex min-h-screen	bg-gray-200 font-roboto">
+  <div class="flex min-h-screen bg-gray-200 font-roboto">
     <Sidebar />
 
     <div class="flex-1 flex flex-col overflow-hidden">

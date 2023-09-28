@@ -3,6 +3,7 @@ import { RESPONSE_STATUS } from "@/constants";
 import { ROUTE_NAMES } from "@/constants/routes";
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { storeToRefs } from "pinia";
 
 useHead({
   title: "Login - XGame Studio",
@@ -21,12 +22,15 @@ useHead({
   ],
 });
 
-
 const authStore = useAuthStore();
+const { isLoggedIn } = storeToRefs(authStore);
+
+// if (!isLoggedIn.value) await navigateTo(ROUTE_NAMES.LOGIN);
+
 const { $toast } = useNuxtApp();
 
-const email = ref('');
-const password = ref('');
+const email = ref("");
+const password = ref("");
 const isLoading = ref(false);
 const errors = ref({
   email: "",

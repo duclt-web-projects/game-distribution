@@ -18,9 +18,9 @@ useHead({
   ],
 });
 
-// definePageMeta({
-//   middleware: "auth",
-// });
+definePageMeta({
+  middleware: "auth",
+});
 </script>
 
 <template>

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { IconBell, IconMenuBar, IconUserCircle } from "@/assets/icon";
 import { useSidebar } from "@/composables/useSidebar";
 import { RESPONSE_STATUS, ROUTE_NAMES } from "@/constants";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { UserCircleIcon } from "@heroicons/vue/20/solid";
+import { Bars3Icon, BellIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
 const authStore = useAuthStore();
@@ -29,13 +30,13 @@ const logout = async () => {
   <header class="flex items-center justify-between px-6 py-4 bg-white border-b-4 border-gray-700">
     <div class="flex items-center">
       <button class="btn-menu text-gray-500 focus:outline-none lg:hidden mr-5" @click="isOpen = true">
-        <IconMenuBar />
+        <Bars3Icon />
       </button>
     </div>
 
     <div class="flex items-center">
-      <button class="btn-bell flex mx-4 text-gray-600 focus:outline-none">
-        <IconBell />
+      <button class="btn-bell flex mx-4 focus:outline-none">
+        <BellIcon />
       </button>
 
       <div class="relative flex">
@@ -46,7 +47,7 @@ const logout = async () => {
           class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"
         >
-          <IconUserCircle class="object-cover w-full h-full fill-gray-700" />
+          <UserCircleIcon class="object-cover w-full h-full fill-gray-700" />
         </button>
 
         <div v-show="dropdownOpen" class="fixed inset-0 z-10 w-full h-full" @click="dropdownOpen = false" />

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IconPlush } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
-import { ROUTE_NAMES } from '@/constants/routes';
+import { ROUTE_NAMES } from "@/constants/routes";
 
 const props = defineProps({
   game: {
@@ -13,6 +13,7 @@ const props = defineProps({
 const { $toast } = useNuxtApp();
 
 const name = ref("");
+const select = ref([]);
 const description = ref("");
 const gameWidth = ref(0);
 const gameHeight = ref(0);
@@ -27,6 +28,12 @@ const errors = ref({
   width: "",
   height: "",
 });
+const dataSelect = [
+  { value: 1, label: 1 },
+  { value: 2, label: 2 },
+  { value: 3, label: 3 },
+  { value: 4, label: 4 },
+];
 
 onMounted(() => {
   if (props.game) {
@@ -43,6 +50,11 @@ const onUploadThumbnail = (event) => {
 
 const onUploadGameFile = (event) => {
   gameFile.value = event.target.files[0];
+};
+
+const handleAddNewGameLog = () => {
+  console.log(name.value);
+  console.log(select.value);
 };
 
 const handleAddNewGame = async () => {
@@ -126,9 +138,14 @@ const validate = () => {
       <h2 class="text-lg font-semibold text-gray-700 capitalize">Add new game</h2>
 
       <form @submit.prevent="handleAddNewGame">
-        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-          <InputText label="Game name" id="name" v-model:input="name" inputType="text" :error="errors.name" />
+        <FormField label="Name" required>
+          <FormInput placeholder="John Doe" type="text" :modelValue="name" />
+        </FormField>
+        <FormField label="Users" required>
+          <FormCombobox placeholder="Search user..." v-model="select" multiple :options="dataSelect" />
+        </FormField>
 
+        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
           <div class="mb-3">
             <span for="message" class="block text-sm font-medium leading-6 text-gray-900">Thumbnail</span>
             <label class="block">
@@ -221,30 +238,9 @@ h2 {
   font-family: "Roboto", sans-serif;
 }
 
-input,
-select {
-  height: 40px;
-  background-color: #fff;
-  border: 1px solid #dadada;
-}
-
 :deep(.multiselect-tags-search) {
   height: 0;
   border: none;
-}
-
-:deep(.form-input) {
-  input {
-    height: 40px;
-    background-color: #fff;
-    border: 1px solid #dadada;
-    outline: none;
-
-    &:focus {
-      border: 1px solid #d1d5db;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.188);
-    }
-  }
 }
 
 textarea {

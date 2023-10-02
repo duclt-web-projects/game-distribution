@@ -119,7 +119,6 @@ textarea {
 }
 button {
   overflow: visible;
-  border: none;
 }
 button,
 select {
@@ -282,16 +281,6 @@ textarea {
   outline: none;
   border: 1px solid #dedede;
   box-sizing: border-box;
-}
-
-form input[type="email"],
-form input[type="number"],
-form input[type="password"],
-form input[type="search"],
-form input[type="text"],
-form input[type="url"],
-form select {
-  height: 40px;
 }
 
 ::-webkit-input-placeholder {

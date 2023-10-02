@@ -6,6 +6,7 @@ import { default as IconArrowUpRightFromSquare } from "./ArrowUpRightFromSquare.
 import { default as IconCalendar } from "./Calendar.vue";
 import { default as IconEdit } from "./Edit.vue";
 import { default as IconGrid } from "./Grid.vue";
+import { default as IconHome } from "./Home.vue";
 import { default as IconList } from "./List.vue";
 import { default as IconMenuBar } from "./MenuBar.vue";
 import { default as IconMenuBurger } from "./MenuBurger.vue";
@@ -15,6 +16,8 @@ import { default as IconRss } from "./Rss.vue";
 import { default as IconSearch } from "./Search.vue";
 import { default as IconTime } from "./Time.vue";
 import { default as IconTrash } from "./Trash.vue";
+import { default as IconUploadFile } from "./UploadFile.vue";
+import { default as IconUploadZip } from "./UploadZip.vue";
 
 export {
   IconAngleDown,
@@ -25,6 +28,7 @@ export {
   IconCalendar,
   IconEdit,
   IconGrid,
+  IconHome,
   IconList,
   IconMenuBar,
   IconMenuBurger,
@@ -34,4 +38,6 @@ export {
   IconSearch,
   IconTime,
   IconTrash,
+  IconUploadFile,
+  IconUploadZip,
 };

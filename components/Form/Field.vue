@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { randomString } from "@/utils/functions";
 import { computed, provide } from "vue";
-import ErrorMessage from "./ErrorMessage.vue";
-import HelperMessage from "./HelperMessage.vue";
-import Label from "./Label.vue";
 
 const props = defineProps({
   id: {
@@ -33,7 +30,7 @@ provide(
 </script>
 
 <template>
-  <div>
+  <div class="mb-4">
     <FormLabel v-if="props.label" :for="props.id" :required="props.required">
       {{ props.label }}
     </FormLabel>
@@ -44,7 +41,7 @@ provide(
       {{ props.error }}
     </FormErrorMessage>
 
-    <FormHelperMessage class="mt-1 text-sm text-gray-500 dark:text-gray-400" v-if="props.help" :id="ariaDescribedBy">
+    <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="props.help" :id="ariaDescribedBy">
       {{ props.help }}
     </FormHelperMessage>
   </div>

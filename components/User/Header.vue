@@ -84,6 +84,10 @@ header:after {
   content: none;
 }
 
+button {
+  border: none;
+}
+
 .btn-bell,
 .btn-menu {
   width: 24px;

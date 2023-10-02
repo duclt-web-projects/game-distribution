@@ -5,7 +5,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <label class="mb-2 inline-block text-xs font-semibold" :for="props.for">
+  <label class="mb-2 inline-block text-sm font-semibold" :for="props.for">
     <slot /><span class="text-red-600" v-if="props.required"> *</span>
   </label>
 </template>

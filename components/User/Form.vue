@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconPlush } from "@/assets/icon";
+import { IconPlush, IconUploadZip } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants/routes";
 
@@ -34,6 +34,7 @@ const dataSelect = [
   { value: 3, label: 3 },
   { value: 4, label: 4 },
 ];
+const urlPreview = ref("/images/no-image.png");
 
 onMounted(() => {
   if (props.game) {
@@ -46,15 +47,11 @@ onMounted(() => {
 
 const onUploadThumbnail = (event) => {
   thumbnail.value = event.target.files[0];
+  urlPreview.value = URL.createObjectURL(event.target.files[0]);
 };
 
 const onUploadGameFile = (event) => {
   gameFile.value = event.target.files[0];
-};
-
-const handleAddNewGameLog = () => {
-  console.log(name.value);
-  console.log(select.value);
 };
 
 const handleAddNewGame = async () => {
@@ -133,94 +130,95 @@ const validate = () => {
 </script>
 
 <template>
-  <div class="mt-4">
-    <div class="p-6 bg-white rounded-md shadow-md">
-      <h2 class="text-lg font-semibold text-gray-700 capitalize">Add new game</h2>
-
-      <form @submit.prevent="handleAddNewGame">
-        <FormField label="Name" required>
+  <Breadcrumb />
+  <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">Add new game</h2>
+  <form @submit.prevent="handleAddNewGame">
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-6 gap-4">
+      <div class="md:col-span-3 p-6 bg-white rounded-md shadow-md">
+        <FormField label="Game Name" required>
           <FormInput placeholder="John Doe" type="text" :modelValue="name" />
         </FormField>
-        <FormField label="Users" required>
+
+        <FormField label="Category" required>
           <FormCombobox placeholder="Search user..." v-model="select" multiple :options="dataSelect" />
         </FormField>
 
-        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-          <div class="mb-3">
-            <span for="message" class="block text-sm font-medium leading-6 text-gray-900">Thumbnail</span>
-            <label class="block">
-              <span class="sr-only">Choose profile photo</span>
-              <input
-                type="file"
-                class="block mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:h-10 file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600"
-                @change="onUploadThumbnail($event)"
-              />
-            </label>
-            <span v-if="errors.thumbnail" class="error"> {{ errors.thumbnail }}</span>
-          </div>
-
-          <InputText label="Width" id="width" v-model:input="gameWidth" inputType="text" :error="errors.width">
-            <span
-              class="h-10 mt-2 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-300 border border-r-0 border-gray-300"
-            >
-              px
-            </span>
-          </InputText>
-
-          <InputText label="Height" id="height" v-model:input="gameHeight" inputType="text" :error="errors.height">
-            <span
-              class="h-10 mt-2 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-300 border border-r-0 border-gray-300"
-            >
-              px
-            </span>
-          </InputText>
-
-          <div>
-            <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-            <textarea
-              id="message"
-              rows="4"
-              class="block p-2.5 w-full text-sm text-gray-900 border border-gray-300"
-              placeholder="Write your thoughts here..."
-              v-model="description"
-            ></textarea>
-          </div>
-
-          <div class="">
-            <span for="message" class="block mb-2 text-sm font-medium text-gray-900">Game file</span>
-
-            <label
-              for="dropzone-file"
-              class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50"
-            >
-              <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 16"
+        <div class="grid grid-cols-1 sm:grid-cols-6 gap-5">
+          <div class="col-span-3">
+            <FormField label="Width" required>
+              <FormInput placeholder="John Doe" type="text" :modelValue="name" typeSize>
+                <span
+                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
                 >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                  />
-                </svg>
-                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span class="font-semibold">Click to upload</span> or drag and drop
-                </p>
-                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-              </div>
-              <input id="dropzone-file" type="file" class="hidden" @change="onUploadGameFile($event)" />
-            </label>
-            <span v-if="errors.gameFile" class="error"> {{ errors.gameFile }}</span>
+                  px
+                </span>
+              </FormInput>
+            </FormField>
+          </div>
+          <div class="col-span-3">
+            <FormField label="Height" required>
+              <FormInput placeholder="John Doe" type="text" :modelValue="name" typeSize>
+                <span
+                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
+                >
+                  px
+                </span>
+              </FormInput>
+            </FormField>
           </div>
         </div>
+
+        <div>
+          <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+          <textarea
+            id="message"
+            rows="4"
+            class="block p-2.5 w-full text-sm text-gray-900 border border-gray-300"
+            placeholder="Write your thoughts here..."
+            v-model="description"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="relative md:col-span-3 p-6 pb-24 bg-white rounded-md shadow-md">
+        <div class="mb-3">
+          <FormLabel for="thumbnail" :required="true"> Thumbnail </FormLabel>
+          <label class="block">
+            <span class="sr-only">Choose profile photo</span>
+            <input
+              type="file"
+              class="block mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:h-10 file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600"
+              @change="onUploadThumbnail($event)"
+            />
+          </label>
+          <div class="preview-image h-64 w-full border-1 border-gray-200 border mt-4">
+            <img class="object-contain w-full h-full" :src="urlPreview" alt="" />
+          </div>
+          <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="errors.thumbnail" id="game-error">
+            {{ errors.thumbnail }}
+          </FormHelperMessage>
+        </div>
+
+        <div class="">
+          <FormLabel for="gameFile" :required="true"> Game File </FormLabel>
+
+          <label
+            for="dropzone-file"
+            class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50"
+          >
+            <div class="flex flex-col items-center justify-center pt-4 pb-6">
+              <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
+              <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload</p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" @change="onUploadGameFile($event)" />
+          </label>
+          <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="errors.gameFile" id="game-error">
+            {{ errors.gameFile }}
+          </FormHelperMessage>
+        </div>
+
         <button
-          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 border border-emerald-700 hover:bg-emerald-700"
+          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white rounded bg-emerald-600 border border-emerald-700 hover:bg-emerald-700 absolute bottom-6 right-6"
         >
           <div class="mr-1">
             <Spinner v-if="isCreating" />
@@ -228,9 +226,9 @@ const validate = () => {
           </div>
           Add game
         </button>
-      </form>
+      </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <style scoped lang="scss">
@@ -241,13 +239,6 @@ h2 {
 :deep(.multiselect-tags-search) {
   height: 0;
   border: none;
-}
-
-textarea {
-  &:focus {
-    border: 1px solid #d1d5db;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.188);
-  }
 }
 
 :deep(.spinner) {

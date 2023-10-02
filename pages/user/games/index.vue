@@ -3,6 +3,7 @@ import { IconEdit, IconPlush, IconTrash } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 useHead({
   title: "User - XGame Studio",
@@ -26,11 +27,12 @@ definePageMeta({
 });
 
 const { BACKEND_URL } = useUrlConfig();
+const authStore = useAuthStore();
 
 const currentPage = ref(1);
 const modalActive = ref(null);
 
-const { data: games } = await useHttp(`/games/user/1?page=${currentPage.value}`, {
+const { data: games } = await useHttp(`/games/user/${authStore.user.id}?page=${currentPage.value}`, {
   server: false,
 });
 

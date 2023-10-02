@@ -14,13 +14,13 @@ const headers = [
   {
     id: 3,
     name: "About",
-    path: "/games/1",
+    path: "/puzzle",
     children: [],
   },
   {
     id: 4,
     name: "Publishers",
-    path: "/games/1",
+    path: "/puzzleasdasd",
     children: [],
   },
   {

@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import Header from "@/components/User/Header.vue";
 import Sidebar from "@/components/User/Sidebar.vue";
-import { useAuthStore } from "../stores/useAuthStore";
-
-// const authStore = useAuthStore();
-
-// onBeforeMount(async () => {
-//   await authStore.getProfile();
-// });
 
 onMounted(() => {
   document.body.className = "";

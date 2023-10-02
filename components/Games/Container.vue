@@ -1,17 +1,19 @@
 <script setup>
 import { useUrlConfig } from "@/composables/useUrlConfig";
+import { useHttp } from '@/composables/useHttp';
 
 const { API_URL } = useUrlConfig();
 
 const searchText = ref("");
 const currentPage = ref(1);
 
-const { data: games } = await useFetch(
+const { data: games } = await useHttp(
   () => `${API_URL}/games/list?name=${searchText.value}&page=${currentPage.value}`
 );
 
 const handleSearch = (val) => {
   searchText.value = val;
+  currentPage.value = 1;
 };
 
 const onChangePage = (val) => {

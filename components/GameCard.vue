@@ -3,13 +3,14 @@ import { useUrlConfig } from "@/composables/useUrlConfig";
 
 const props = defineProps({
   item: Object,
+  showGrid: Boolean,
 });
 
 const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
-  <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="game card">
+  <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="game" :class="showGrid ? 'card' : 'list'">
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />

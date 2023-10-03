@@ -6,6 +6,7 @@ const { categories } = toRefs(props);
 
 const searchText = ref("");
 const currentPage = ref(1);
+const showGrid = ref(true);
 
 const { data: games } = await useHttp(
   () => `/games/list?name=${searchText.value}&categories=${categories.value.toString()}&page=${currentPage.value}`
@@ -19,17 +20,21 @@ const handleSearch = (val) => {
 const onChangePage = (val) => {
   currentPage.value = val;
 };
+
+const handleChangeShowGrid = () => {
+  showGrid.value = !showGrid.value;
+};
 </script>
 
 <template>
-  <GamesFilterSearch @handleSearch="handleSearch" />
+  <GamesFilterSearch :showGrid="showGrid" @handleSearch="handleSearch" @changeShowGrid="handleChangeShowGrid" />
   <div v-if="!games" class="loading-wrapper">
     <Loading />
   </div>
   <template v-else>
     <Pagination :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
-    <div class="games-container list-view-grid">
-      <GameCard v-for="item in games.data" :key="item.id" :item="item" />
+    <div class="games-container" :class="showGrid ? 'list-view-grid' : 'list-view-table'">
+      <GameCard v-for="item in games.data" :key="item.id" :item="item" :showGrid="showGrid" />
     </div>
   </template>
   <!-- <Pagination /> -->

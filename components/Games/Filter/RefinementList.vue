@@ -48,23 +48,8 @@ watch(props, () => {
     margin-bottom: 0;
   }
 
-  form {
-    margin: 0.1rem 0 0.75rem;
-    position: relative;
-
-    svg {
-      fill: #512e85;
-      left: 10px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-55%);
-    }
-
-    input {
-      box-sizing: border-box;
-      font-weight: 300;
-      padding-left: 40px;
-    }
+  :deep(.search-input-field) {
+    background-color: #dedede;
   }
 
   .refinement-list-header {

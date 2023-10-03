@@ -149,17 +149,13 @@ const isPageActive = (page) => {
       border: 3px solid #512e85;
       color: #512e85;
       display: inline-block;
-      flex: 1;
-      font-size: 0.636em;
+      font-size: 0.75rem;
       font-weight: 500;
-      height: 29px;
-      line-height: 29px;
-      margin-right: 0.182em;
-      max-width: 29px;
-      min-width: 29px;
       text-align: center;
       text-decoration: none;
-      width: 29px;
+      width: 36px;
+      height: 36px;
+      line-height: 32px;
       cursor: pointer;
 
       &:hover {

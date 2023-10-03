@@ -3,14 +3,12 @@
     <img src="/images/public_color_podiums.png" class="pop-logo" />
     <span class="span">POPULAR RANKING</span>
     <div class="tools-container_filters">
-      <div class="tools-container_filters-item">
-        <InputSelect />
-      </div>
     </div>
     <div class="tools-container_actions">
       <button title="Reset Filter" class="xg-button flat reset-filter" style="display: none"></button>
-      <button title="Show Grid" class="xg-button flat list-view-grid">
-        <IconGrid />
+      <button title="Show Grid" class="xg-button flat list-view-grid" @click="emit('changeShowGrid')">
+        <IconGrid v-if="showGrid"/>
+        <IconList v-else="showGrid"/>
       </button>
       <SearchBox v-model="searchQuery" :debounce-delay="500" />
     </div>
@@ -21,8 +19,12 @@
 import IconList from "@/assets/icon/List.vue";
 import IconGrid from "@/assets/icon/Grid.vue";
 
+const props = defineProps({
+  showGrid: Boolean
+})
+const emit = defineEmits(['handleSearch', 'changeShowGrid'])
+
 const searchQuery = ref("");
-const emit = defineEmits(['handleSearch'])
 
 watch(searchQuery, () => {
   emit('handleSearch', searchQuery.value)

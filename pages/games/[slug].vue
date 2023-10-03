@@ -1,14 +1,15 @@
 <script setup>
 import { useUrlConfig } from "@/composables/useUrlConfig";
 import MainLayout from "@/layouts/MainLayout.vue";
+import { useHttp } from '@/composables/useHttp';
 
 const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
 
-const { data: game } = await useFetch(() => `${API_URL}/games/${slug}`);
+const { data: game } = await useHttp(() => `${API_URL}/game/${slug}`);
 
 useHead({
-  title: `Publish ${slug} on your website - XGame Studio`,
+  title: `Publish ${game.name} on your website - XGame Studio`,
   meta: [
     {
       name: "description",
@@ -61,7 +62,7 @@ useHead({
               <GameDescription :game="game"/>
             </div>
             <div class="column">
-              <GameInfo />
+              <GameInfo :game="game"/>
             </div>
           </div>
         </div>

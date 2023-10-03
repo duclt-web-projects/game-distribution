@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { IconPlush, IconUploadZip } from "@/assets/icon";
+import { IconEdit, IconPlush, IconUploadZip } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants/routes";
+import { ICategory } from "@/types/game";
+import { IOptions } from "../../types/common";
 
 const props = defineProps({
   game: {
@@ -12,46 +14,97 @@ const props = defineProps({
 
 const { $toast } = useNuxtApp();
 
-const name = ref("");
-const select = ref([]);
-const description = ref("");
-const gameWidth = ref(0);
-const gameHeight = ref(0);
-const thumbnail = ref("");
-const gameFile = ref("");
+const gameData = reactive({
+  name: "",
+  category: [],
+  description: "",
+  width: "",
+  height: "",
+  thumbnail: "",
+  gameFile: "",
+});
 const isCreating = ref(false);
 const errors = ref({
   name: "",
   description: "",
+  category: "",
   thumbnail: "",
   gameFile: "",
   width: "",
   height: "",
 });
-const dataSelect = [
-  { value: 1, label: 1 },
-  { value: 2, label: 2 },
-  { value: 3, label: 3 },
-  { value: 4, label: 4 },
-];
 const urlPreview = ref("/images/no-image.png");
+
+const loadCategories = async (query, setOptions) => {
+  const { data: categories } = await useHttp<ICategory[]>(`categories?name=${query}`);
+  const categoryOptions = categories.value?.map((cate) => {
+    return {
+      value: cate.id,
+      label: cate.name,
+    };
+  });
+  setOptions(categoryOptions);
+};
 
 onMounted(() => {
   if (props.game) {
-    name.value = props.game.name;
-    gameWidth.value = props.game.width;
-    gameHeight.value = props.game.height;
-    description.value = props.game.description;
+    gameData.name = props.game.name;
+    gameData.width = props.game.width;
+    gameData.height = props.game.height;
+    gameData.description = props.game.description;
   }
 });
 
 const onUploadThumbnail = (event) => {
-  thumbnail.value = event.target.files[0];
+  gameData.thumbnail = event.target.files[0];
   urlPreview.value = URL.createObjectURL(event.target.files[0]);
 };
 
 const onUploadGameFile = (event) => {
-  gameFile.value = event.target.files[0];
+  gameData.gameFile = event.target.files[0];
+};
+
+const validate = () => {
+  errors.value = {
+    name: "",
+    description: "",
+    category: "",
+    thumbnail: "",
+    gameFile: "",
+    width: "",
+    height: "",
+  };
+
+  if (!gameData.name) {
+    errors.value.name = "Name is required.";
+  }
+
+  if (!gameData.width) {
+    errors.value.width = "Width is required.";
+  }
+
+  if (!gameData.height) {
+    errors.value.height = "Height is required.";
+  }
+
+  if (!props.game) {
+    if (!gameData.thumbnail) {
+      errors.value.thumbnail = "Thumbnail is required.";
+    }
+
+    if (!gameData.gameFile) {
+      errors.value.gameFile = "Game file is required.";
+    }
+
+    if (!gameData.category.length) {
+      errors.value.category = "Category is required.";
+    }
+  }
+
+  if (errors.value.name || errors.value.width || errors.value.height || errors.value.thumbnail || errors.value.gameFile)
+    return false;
+
+  return true;
 };
 
 const handleAddNewGame = async () => {
@@ -61,18 +114,22 @@ const handleAddNewGame = async () => {
   let formData = new FormData();
 
   if (!props.game) {
-    formData.append("thumbnail", thumbnail.value);
-    formData.append("gameFile", gameFile.value);
+    formData.append("thumbnail", gameData.thumbnail);
+    formData.append("gameFile", gameData.gameFile);
+
+    const categoryIds = gameData.category.map((cate: IOptions) => cate.value);
+    formData.append("category", JSON.stringify(categoryIds));
   }
-  formData.append("name", name.value);
-  formData.append("description", description.value);
-  formData.append("width", gameWidth.value + "");
-  formData.append("height", gameHeight.value + "");
+
+  formData.append("name", gameData.name);
+  formData.append("description", gameData.description);
+  formData.append("width", gameData.width + "");
+  formData.append("height", gameData.height + "");
 
   const { data, error } = props.game
-    ? await useHttp(`/games/edit/${props.game.id}`, { method: "POST", body: formData })
-    : await useHttp("/games/store", { method: "POST", body: formData });
-  console.log(data, error);
+    ? await useHttp(`/game/edit/${props.game.id}`, { method: "POST", body: formData })
+    : await useHttp("/game/store", { method: "POST", body: formData });
+
   data.value, error.value;
 
   isCreating.value = false;
@@ -89,64 +146,31 @@ const handleAddNewGame = async () => {
     }, 500);
   }
 };
-
-const validate = () => {
-  errors.value = {
-    name: "",
-    description: "",
-    thumbnail: "",
-    gameFile: "",
-    width: "",
-    height: "",
-  };
-
-  if (!name.value) {
-    errors.value.name = "Name is required.";
-  }
-
-  if (!gameWidth.value) {
-    errors.value.width = "Width is required.";
-  }
-
-  if (!gameHeight.value) {
-    errors.value.height = "Height is required.";
-  }
-
-  if (!props.game) {
-    if (!thumbnail.value) {
-      errors.value.thumbnail = "Thumbnail is required.";
-    }
-
-    if (!gameFile.value) {
-      errors.value.gameFile = "Game file is required.";
-    }
-  }
-
-  if (errors.value.name || errors.value.width || errors.value.height || errors.value.thumbnail || errors.value.gameFile)
-    return false;
-
-  return true;
-};
 </script>
 
 <template>
   <Breadcrumb />
-  <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">Add new game</h2>
+  <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">{{ game ? "Edit game" : "Add new game" }}</h2>
   <form @submit.prevent="handleAddNewGame">
     <div class="mt-4 grid grid-cols-1 md:grid-cols-6 gap-4">
       <div class="md:col-span-3 p-6 bg-white rounded-md shadow-md">
-        <FormField label="Game Name" required>
-          <FormInput placeholder="John Doe" type="text" :modelValue="name" />
+        <FormField label="Game Name" :error="errors.name" required>
+          <FormInput placeholder="John Doe" type="text" v-model="gameData.name" />
         </FormField>
 
-        <FormField label="Category" required>
-          <FormCombobox placeholder="Search user..." v-model="select" multiple :options="dataSelect" />
+        <FormField label="Category" :error="errors.category" required disable>
+          <FormCombobox
+            placeholder="Search user..."
+            v-model="gameData.category"
+            multiple
+            :loadOptions="loadCategories"
+          />
         </FormField>
 
         <div class="grid grid-cols-1 sm:grid-cols-6 gap-5">
           <div class="col-span-3">
-            <FormField label="Width" required>
-              <FormInput placeholder="John Doe" type="text" :modelValue="name" typeSize>
+            <FormField label="Width" :error="errors.width" required>
+              <FormInput placeholder="John Doe" type="text" v-model="gameData.width" typeSize>
                 <span
                   class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
                 >
@@ -156,8 +180,8 @@ const validate = () => {
             </FormField>
           </div>
           <div class="col-span-3">
-            <FormField label="Height" required>
-              <FormInput placeholder="John Doe" type="text" :modelValue="name" typeSize>
+            <FormField label="Height" :error="errors.height" required>
+              <FormInput placeholder="John Doe" type="text" v-model="gameData.height" typeSize>
                 <span
                   class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
                 >
@@ -169,13 +193,13 @@ const validate = () => {
         </div>
 
         <div>
-          <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+          <FormLabel for="message" :required="false">Description</FormLabel>
           <textarea
             id="message"
             rows="4"
             class="block p-2.5 w-full text-sm text-gray-900 border border-gray-300"
             placeholder="Write your thoughts here..."
-            v-model="description"
+            v-model="gameData.description"
           ></textarea>
         </div>
       </div>
@@ -194,9 +218,9 @@ const validate = () => {
           <div class="preview-image h-64 w-full border-1 border-gray-200 border mt-4">
             <img class="object-contain w-full h-full" :src="urlPreview" alt="" />
           </div>
-          <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="errors.thumbnail" id="game-error">
+          <FormErrorMessage v-if="errors.thumbnail" id="game-error">
             {{ errors.thumbnail }}
-          </FormHelperMessage>
+          </FormErrorMessage>
         </div>
 
         <div class="">
@@ -218,13 +242,19 @@ const validate = () => {
         </div>
 
         <button
-          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white rounded bg-emerald-600 border border-emerald-700 hover:bg-emerald-700 absolute bottom-6 right-6"
+          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white rounded border absolute bottom-6 right-6"
+          :class="
+            game
+              ? 'bg-yellow-400 border-yellow-400 hover:bg-yellow-500'
+              : 'bg-emerald-600 border-emerald-700 hover:bg-emerald-700'
+          "
         >
           <div class="mr-1">
             <Spinner v-if="isCreating" />
+            <IconEdit v-else-if="game" class="mr-1 fill-white" />
             <IconPlush v-else class="mr-1 fill-white" />
           </div>
-          Add game
+          {{ game ? "Edit" : "Add" }}
         </button>
       </div>
     </div>

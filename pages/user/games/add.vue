@@ -2,7 +2,7 @@
 import UserLayout from "@/layouts/UserLayout.vue";
 
 useHead({
-  title: "Create New Game - XGame Studio",
+  title: "Add New Game - XGame Studio",
   meta: [
     {
       name: "description",

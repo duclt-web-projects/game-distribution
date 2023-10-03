@@ -40,3 +40,7 @@ export function randomString(length = 5) {
   }
   return result;
 }
+
+export function convertStringToDate(string) {
+  return new Date(string).toLocaleDateString();
+}

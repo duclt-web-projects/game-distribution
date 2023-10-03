@@ -2,9 +2,6 @@
   <GamesSlidesItem />
   <GamesSlidesItem />
   <GamesSlidesItem />
-  <GamesSlidesItem />
-  <GamesSlidesItem />
-  <GamesSlidesItem />
 </template>
 
 <script setup>

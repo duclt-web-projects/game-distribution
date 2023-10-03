@@ -4,6 +4,7 @@ import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { convertStringToDate } from '@/utils/functions';
 
 useHead({
   title: "User - XGame Studio",
@@ -49,7 +50,7 @@ const toggleModal = () => {
   <UserLayout>
     <div class="flex justify-end">
       <NuxtLink
-        :to="ROUTE_NAMES.USER_GAME_CREATE"
+        :to="ROUTE_NAMES.USER_GAME_ADD"
         class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
       >
         <IconPlush class="mr-1 fill-gray-50" /> Add game
@@ -111,7 +112,7 @@ const toggleModal = () => {
                   </td>
 
                   <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ new Date(game.published_at).toLocaleDateString() }}
+                    {{ convertStringToDate(game.published_at) }}
                   </td>
 
                   <td

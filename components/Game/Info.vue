@@ -1,20 +1,22 @@
+<script setup>
+import { convertStringToDate } from "@/utils/functions";
+
+const props = defineProps({
+  game: Object,
+});
+</script>
+
 <template>
   <div class="meta">
     <span class="label">Published</span>
-    <span>Invalid Date</span>
-  </div>
-  <div class="meta">
-    <span class="label">Type</span>
-    <span class="meta-type"></span>
+    <span>{{ convertStringToDate(game.published_at) }}</span>
   </div>
 
-  <div class="meta"><span class="label">HTTPS ready</span> <span>No</span></div>
-
-  <div class="meta"><span class="label">Dimensions</span> <span>x</span></div>
+  <div class="meta"><span class="label">Dimensions</span> <span>{{ game.width }} x {{ game.height }}</span></div>
 
   <div class="meta">
-    <span class="label company">Company</span>
-    <span><a href="/games"></a></span>
+    <span class="label">Description</span>
+    <span v-html="game.description"></span>
   </div>
 
   <div class="thumbnails-container" style="display: none">
@@ -43,8 +45,6 @@
     >
   </div>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped>
 .meta {

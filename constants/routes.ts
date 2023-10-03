@@ -5,6 +5,6 @@ export const ROUTE_NAMES = {
   REGISTER: "/register",
   LOGOUT: "/logout",
   USER_GAME: "/user/games",
-  USER_GAME_CREATE: "/user/games/create",
+  USER_GAME_ADD: "/user/games/add",
   USER_GAME_EDIT: "/user/games/edit",
 };

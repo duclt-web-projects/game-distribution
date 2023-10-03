@@ -1,5 +1,5 @@
 <script setup>
-import { useHttp } from "../../../composables/useHttp";
+import { useHttp } from "@/composables/useHttp";
 
 const { data: categories } = await useHttp("/categories", {
   server: false,

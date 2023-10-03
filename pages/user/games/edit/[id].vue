@@ -26,7 +26,7 @@ definePageMeta({
 const { API_URL } = useUrlConfig();
 const { id } = useRoute().params;
 
-const { data: game } = await useFetch(() => `${API_URL}/games/${id}`);
+const { data: game } = await useFetch(() => `${API_URL}/game/${id}`);
 </script>
 
 <template>

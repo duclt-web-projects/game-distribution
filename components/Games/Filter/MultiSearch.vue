@@ -1,13 +1,19 @@
-<template>
-  <GamesFilterRefinementList title="Categories" :data="categories"/>
-  <GamesFilterRefinementList title="MOBILE READY" :data="mobileReady"/>
-  <GamesFilterRefinementList title="COMPANIES" :data="companies"/>
-  <GamesFilterRefinementList title="GAME SUB TYPE" :data="gameTypes"/>
-  <GamesFilterRefinementList title="LANGUAGES" :data="languages"/>
-</template>
-
 <script setup>
-import { categories, mobileReady, companies, gameTypes, languages } from "@/data/filters";
+import { useHttp } from "../../../composables/useHttp";
+
+const { data: categories } = await useHttp("/categories", {
+  server: false,
+});
+
+const emit = defineEmits(["select-category"]);
+
+const handleSelectCategory = (val) => {
+  emit('select-category', val);
+}
 </script>
+
+<template>
+  <GamesFilterRefinementList title="Categories" :data="categories" @select-category="handleSelectCategory"/>
+</template>
 
 <style lang="scss" scoped></style>

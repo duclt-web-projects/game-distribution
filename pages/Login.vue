@@ -23,9 +23,6 @@ useHead({
 });
 
 const authStore = useAuthStore();
-const { isLoggedIn } = storeToRefs(authStore);
-
-// if (!isLoggedIn.value) await navigateTo(ROUTE_NAMES.LOGIN);
 
 const { $toast } = useNuxtApp();
 

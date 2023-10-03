@@ -1,14 +1,14 @@
 <script setup>
-import { useUrlConfig } from "@/composables/useUrlConfig";
-import { useHttp } from '@/composables/useHttp';
+import { useHttp } from "@/composables/useHttp";
 
-const { API_URL } = useUrlConfig();
+const props = defineProps(["categories"]);
+const { categories } = toRefs(props);
 
 const searchText = ref("");
 const currentPage = ref(1);
 
 const { data: games } = await useHttp(
-  () => `${API_URL}/games/list?name=${searchText.value}&page=${currentPage.value}`
+  () => `/games/list?name=${searchText.value}&categories=${categories.value.toString()}&page=${currentPage.value}`
 );
 
 const handleSearch = (val) => {

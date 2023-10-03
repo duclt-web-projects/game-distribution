@@ -20,6 +20,16 @@ useHead({
     class: "games",
   },
 });
+
+const selectedCategories = ref<number[]>([]);
+
+const handleSelectCategory = (val: number) => {
+  if(!selectedCategories.value.includes(val)) {
+    selectedCategories.value.push(val);
+  } else {
+    selectedCategories.value = selectedCategories.value.filter((e) => e !== val);
+  }
+};
 </script>
 
 <template>
@@ -30,10 +40,10 @@ useHead({
           <GamesSlidesContainer />
           <div class="columns">
             <div class="column">
-              <GamesContainer />
+              <GamesContainer :categories="selectedCategories"/>
             </div>
             <div class="column">
-              <GamesFilterMultiSearch />
+              <GamesFilterMultiSearch @select-category="handleSelectCategory" />
             </div>
           </div>
         </div>

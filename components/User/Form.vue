@@ -44,78 +44,22 @@ onMounted(() => {
   }
 });
 
-const onUploadThumbnail = (event) => {
-  gameData.thumbnail = event.target.files[0];
-  urlPreview.value = URL.createObjectURL(event.target.files[0]);
-};
-
-const onUploadGameFile = (event) => {
-  gameData.gameFile = event.target.files[0];
-};
-
-const validate = () => {
-  errors.value = {
-    name: "",
-    description: "",
-    category: "",
-    thumbnail: "",
-    gameFile: "",
-    width: "",
-    height: "",
-  };
-
-  if (!gameData.name) {
-    errors.value.name = "Name is required.";
-  }
-
-  if (!gameData.width) {
-    errors.value.width = "Width is required.";
-  }
-
-  if (!gameData.height) {
-    errors.value.height = "Height is required.";
-  }
-
-  if (!props.game) {
-    if (!gameData.thumbnail) {
-      errors.value.thumbnail = "Thumbnail is required.";
-    }
-
-    if (!gameData.gameFile) {
-      errors.value.gameFile = "Game file is required.";
-    }
-
-    if (!gameData.category.length) {
-      errors.value.category = "Category is required.";
-    }
-  }
-
-  if (errors.value.name || errors.value.width || errors.value.height || errors.value.thumbnail || errors.value.gameFile)
-    return false;
-
-  return true;
-};
-
 const handleAddNewGame = async () => {
-  console.log(formRef.value.data);
-  return;
-  if (!validate()) return;
-  isCreating.value = true;
-
   let formData = new FormData();
+  const dataForm = formRef.value.data;
 
   if (!props.game) {
-    formData.append("thumbnail", gameData.thumbnail);
-    formData.append("gameFile", gameData.gameFile);
+    formData.append("thumbnail", dataForm.thumbnail);
+    formData.append("gameFile", dataForm.gameFile);
 
-    const categoryIds = gameData.category.map((cate) => cate.value);
+    const categoryIds = dataForm.category.map((cate) => cate.value);
     formData.append("category", JSON.stringify(categoryIds));
   }
 
-  formData.append("name", gameData.name);
-  formData.append("description", gameData.description);
-  formData.append("width", gameData.width + "");
-  formData.append("height", gameData.height + "");
+  formData.append("name", dataForm.name);
+  formData.append("description", dataForm.description);
+  formData.append("width", dataForm.width + "");
+  formData.append("height", dataForm.height + "");
 
   const { data, error } = props.game
     ? await useHttp(`/game/edit/${props.game.id}`, { method: "POST", body: formData })
@@ -144,59 +88,74 @@ const handleAddNewGame = async () => {
   <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">{{ game ? "Edit game" : "Add new game" }}</h2>
 
   <ClientOnly>
-    <Vueform ref="formRef">
-      <div class="md:col-span-6 p-6 bg-white rounded-md shadow-md">
+    <Vueform ref="formRef" :display-errors="false" :endpoint="false">
+      <div class="md:col-span-6 col-span-12 p-6 bg-white rounded-md shadow-md">
         <TextElement name="name" id="name" class="mb-5" rules="required">
           <template #label="scope">
             <FormLabel :required="true">Game name</FormLabel>
           </template>
         </TextElement>
 
-        <TagsElement name="tags" :items="categories" class="mb-5">
+        <TagsElement
+          name="category"
+          :items="categories"
+          class="mb-5"
+          rules="required"
+          :messages="{
+            required: 'Categories is required',
+          }"
+        >
           <template #label="scope">
             <FormLabel :required="true">Category</FormLabel>
           </template>
         </TagsElement>
 
         <div class="grid grid-cols-12 gap-4 mb-5">
-          <TextElement name="width" class="md:col-span-6">
+          <TextElement name="width" class="md:col-span-6" rules="required">
             <template #label="scope">
               <FormLabel :required="true">Width</FormLabel>
             </template>
           </TextElement>
-          <TextElement name="height" class="md:col-span-6">
+          <TextElement name="height" class="md:col-span-6" rules="required">
             <template #label="scope">
               <FormLabel :required="true">Height</FormLabel>
             </template>
           </TextElement>
         </div>
 
-        <TEditorElement name="t-editor">
+        <TEditorElement name="description">
           <template #label="scope">
             <FormLabel :required="false">Description</FormLabel>
           </template>
         </TEditorElement>
       </div>
-      <div class="relative md:col-span-6 p-6 bg-white rounded-md shadow-md">
-        <FileElement name="file" view="gallery" :auto="false" :submit="false" class="thumbnail mb-5">
-          <template #label="scope">
-            <FormLabel :required="true">Thumbnail</FormLabel>
-          </template>
-        </FileElement>
+      <div class="flex flex-col md:col-span-6 col-span-12 p-6 bg-white rounded-md shadow-md">
         <div>
-          <FileElement name="file" :auto="false" class="thumbnail flex justify-center" :submit="false" :drop="true">
+          <FileElement
+            :url="false"
+            name="thumbnail"
+            view="gallery"
+            :auto="false"
+            class="thumbnail mb-5"
+            rules="required"
+          >
+            <template #label="scope">
+              <FormLabel :required="true">Thumbnail</FormLabel>
+            </template>
+          </FileElement>
+          <FileElement name="gameFile" :auto="false" class="thumbnail mb-5" :url="false" :drop="true" rules="required">
             <template #label="scope">
               <FormLabel :required="true">Game File</FormLabel>
             </template>
           </FileElement>
         </div>
-        <ButtonElement name="button" @click="handleAddNewGame">
+        <ButtonElement name="button" @click="handleAddNewGame" class="mt-auto flex justify-end" submits>
           <div class="flex items-center btn-search text-sm font-medium text-white">
             <Spinner v-if="isCreating" />
             <IconEdit v-else-if="game" class="mr-1 fill-white" />
             <IconPlush v-else class="mr-1 fill-white" />
+            {{ game ? "Edit" : "Add" }}
           </div>
-          {{ game ? "Edit" : "Add" }}
         </ButtonElement>
       </div>
     </Vueform>
@@ -229,5 +188,12 @@ h2 {
 
 :deep(.form-w-gallery) {
   width: 240px;
+}
+
+.thumbnail {
+  :deep(> div > div > div:nth-child(2)) {
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

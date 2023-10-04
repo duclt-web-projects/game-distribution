@@ -142,6 +142,10 @@ useHead({
     right: 0;
     top: 0;
   }
+
+  iframe {
+    max-width: 100%;
+  }
 }
 
 @media (min-width: 640px) {

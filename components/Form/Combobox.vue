@@ -172,7 +172,7 @@ function clearSelection() {
         <div
           v-for="(option, idx) in props.modelValue"
           :key="idx"
-          class="inline-flex items-center overflow-hidden rounded bg-gray-200 p-1.5 text-xs leading-none text-black"
+          class="inline-flex items-center overflow-hidden rounded bg-gray-300 p-1.5 text-xs leading-none text-black"
         >
           <span>{{ option.label }}</span>
           <button

@@ -1,9 +1,7 @@
-<script setup lang="ts">
-import { IconEdit, IconPlush, IconUploadZip } from "@/assets/icon";
+<script setup>
 import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants/routes";
-import { ICategory } from "@/types/game";
-import { IOptions } from "../../types/common";
+import { IconEdit, IconPlush } from "~/assets/icon";
 
 const props = defineProps({
   game: {
@@ -14,15 +12,7 @@ const props = defineProps({
 
 const { $toast } = useNuxtApp();
 
-const gameData = reactive({
-  name: "",
-  category: [],
-  description: "",
-  width: "",
-  height: "",
-  thumbnail: "",
-  gameFile: "",
-});
+const formRef = ref(null);
 const isCreating = ref(false);
 const errors = ref({
   name: "",
@@ -35,16 +25,15 @@ const errors = ref({
 });
 const urlPreview = ref("/images/no-image.png");
 
-const loadCategories = async (query, setOptions) => {
-  const { data: categories } = await useHttp<ICategory[]>(`categories?name=${query}`);
-  const categoryOptions = categories.value?.map((cate) => {
-    return {
-      value: cate.id,
+const { data: categories } = await useHttp(`categories`, {
+  server: false,
+  transform(categories) {
+    return categories.map((cate) => ({
       label: cate.name,
-    };
-  });
-  setOptions(categoryOptions);
-};
+      value: cate.id,
+    }));
+  },
+});
 
 onMounted(() => {
   if (props.game) {
@@ -108,6 +97,8 @@ const validate = () => {
 };
 
 const handleAddNewGame = async () => {
+  console.log(formRef.value.data);
+  return;
   if (!validate()) return;
   isCreating.value = true;
 
@@ -117,7 +108,7 @@ const handleAddNewGame = async () => {
     formData.append("thumbnail", gameData.thumbnail);
     formData.append("gameFile", gameData.gameFile);
 
-    const categoryIds = gameData.category.map((cate: IOptions) => cate.value);
+    const categoryIds = gameData.category.map((cate) => cate.value);
     formData.append("category", JSON.stringify(categoryIds));
   }
 
@@ -151,114 +142,65 @@ const handleAddNewGame = async () => {
 <template>
   <Breadcrumb />
   <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">{{ game ? "Edit game" : "Add new game" }}</h2>
-  <form @submit.prevent="handleAddNewGame">
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-6 gap-4">
-      <div class="md:col-span-3 p-6 bg-white rounded-md shadow-md">
-        <FormField label="Game Name" :error="errors.name" required>
-          <FormInput placeholder="John Doe" type="text" v-model="gameData.name" />
-        </FormField>
 
-        <FormField label="Category" :error="errors.category" required disable>
-          <FormCombobox
-            placeholder="Search user..."
-            v-model="gameData.category"
-            multiple
-            :loadOptions="loadCategories"
-          />
-        </FormField>
+  <ClientOnly>
+    <Vueform ref="formRef">
+      <div class="md:col-span-6 p-6 bg-white rounded-md shadow-md">
+        <TextElement name="name" id="name" class="mb-5" rules="required">
+          <template #label="scope">
+            <FormLabel :required="true">Game name</FormLabel>
+          </template>
+        </TextElement>
 
-        <div class="grid grid-cols-1 sm:grid-cols-6 gap-5">
-          <div class="col-span-3">
-            <FormField label="Width" :error="errors.width" required>
-              <FormInput placeholder="John Doe" type="text" v-model="gameData.width" typeSize>
-                <span
-                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
-                >
-                  px
-                </span>
-              </FormInput>
-            </FormField>
-          </div>
-          <div class="col-span-3">
-            <FormField label="Height" :error="errors.height" required>
-              <FormInput placeholder="John Doe" type="text" v-model="gameData.height" typeSize>
-                <span
-                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
-                >
-                  px
-                </span>
-              </FormInput>
-            </FormField>
-          </div>
+        <TagsElement name="tags" :items="categories" class="mb-5">
+          <template #label="scope">
+            <FormLabel :required="true">Category</FormLabel>
+          </template>
+        </TagsElement>
+
+        <div class="grid grid-cols-12 gap-4 mb-5">
+          <TextElement name="width" class="md:col-span-6">
+            <template #label="scope">
+              <FormLabel :required="true">Width</FormLabel>
+            </template>
+          </TextElement>
+          <TextElement name="height" class="md:col-span-6">
+            <template #label="scope">
+              <FormLabel :required="true">Height</FormLabel>
+            </template>
+          </TextElement>
         </div>
 
-        <div>
-          <FormLabel for="message" :required="false">Description</FormLabel>
-          <textarea
-            id="message"
-            rows="4"
-            class="block p-2.5 w-full text-sm text-gray-900 border border-gray-300"
-            placeholder="Write your thoughts here..."
-            v-model="gameData.description"
-          ></textarea>
-        </div>
+        <TEditorElement name="t-editor">
+          <template #label="scope">
+            <FormLabel :required="false">Description</FormLabel>
+          </template>
+        </TEditorElement>
       </div>
-
-      <div class="relative md:col-span-3 p-6 pb-24 bg-white rounded-md shadow-md">
-        <div class="mb-3">
-          <FormLabel for="thumbnail" :required="true"> Thumbnail </FormLabel>
-          <label class="block">
-            <span class="sr-only">Choose profile photo</span>
-            <input
-              type="file"
-              class="block mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:h-10 file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600"
-              @change="onUploadThumbnail($event)"
-            />
-          </label>
-          <div class="preview-image h-64 w-full border-1 border-gray-200 border mt-4">
-            <img class="object-contain w-full h-full" :src="urlPreview" alt="" />
-          </div>
-          <FormErrorMessage v-if="errors.thumbnail" id="game-error">
-            {{ errors.thumbnail }}
-          </FormErrorMessage>
+      <div class="relative md:col-span-6 p-6 bg-white rounded-md shadow-md">
+        <FileElement name="file" view="gallery" :auto="false" :submit="false" class="thumbnail mb-5">
+          <template #label="scope">
+            <FormLabel :required="true">Thumbnail</FormLabel>
+          </template>
+        </FileElement>
+        <div>
+          <FileElement name="file" :auto="false" class="thumbnail flex justify-center" :submit="false" :drop="true">
+            <template #label="scope">
+              <FormLabel :required="true">Game File</FormLabel>
+            </template>
+          </FileElement>
         </div>
-
-        <div class="">
-          <FormLabel for="gameFile" :required="true"> Game File </FormLabel>
-
-          <label
-            for="dropzone-file"
-            class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50"
-          >
-            <div class="flex flex-col items-center justify-center pt-4 pb-6">
-              <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
-              <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload</p>
-            </div>
-            <input id="dropzone-file" type="file" class="hidden" @change="onUploadGameFile($event)" />
-          </label>
-          <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="errors.gameFile" id="game-error">
-            {{ errors.gameFile }}
-          </FormHelperMessage>
-        </div>
-
-        <button
-          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white rounded border absolute bottom-6 right-6"
-          :class="
-            game
-              ? 'bg-yellow-400 border-yellow-400 hover:bg-yellow-500'
-              : 'bg-emerald-600 border-emerald-700 hover:bg-emerald-700'
-          "
-        >
-          <div class="mr-1">
+        <ButtonElement name="button" @click="handleAddNewGame">
+          <div class="flex items-center btn-search text-sm font-medium text-white">
             <Spinner v-if="isCreating" />
             <IconEdit v-else-if="game" class="mr-1 fill-white" />
             <IconPlush v-else class="mr-1 fill-white" />
           </div>
           {{ game ? "Edit" : "Add" }}
-        </button>
+        </ButtonElement>
       </div>
-    </div>
-  </form>
+    </Vueform>
+  </ClientOnly>
 </template>
 
 <style scoped lang="scss">
@@ -275,5 +217,17 @@ h2 {
   width: 20px;
   height: 20px;
   border-width: 2px;
+}
+
+:deep(.form-h-gallery) {
+  height: 240px;
+}
+
+:deep(.form-color-on-primary) {
+  display: none;
+}
+
+:deep(.form-w-gallery) {
+  width: 240px;
 }
 </style>

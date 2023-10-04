@@ -4,7 +4,7 @@ import { useUrlConfig } from "@/composables/useUrlConfig";
 const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
 
-const { data: game } = await useFetch(() => `${API_URL}/games/${slug}`);
+const { data: game } = await useFetch(() => `${API_URL}/game/${slug}`);
 
 const changeSize = () => {
   try {
@@ -53,12 +53,13 @@ useHead({
     class="iframe-close"
     name="iframe"
     id="iframe"
-    :src="`${BACKEND_URL}/${game.source_link}`"
+    :src="`//localhost:8000/${game.source_link}`"
     scrolling="no"
     allowfullscreen
     frameborder="0"
     seamless="seamless"
   ></iframe>
+  <button @click="changeSize">Reset</button>
 </template>
 
 <style lang="scss" scoped>

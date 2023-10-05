@@ -158,10 +158,6 @@ const handleAddNewGame = async () => {
           <FormInput placeholder="John Doe" type="text" v-model="gameData.name" />
         </FormField>
 
-        <FormField label="Game Name" :error="errors.name" required>
-          <FormInput placeholder="John Doe" type="text" v-model="gameData.name" />
-        </FormField>
-
         <FormField label="Category" :error="errors.category" required disable>
           <FormCombobox
             placeholder="Search category..."
@@ -181,6 +177,7 @@ const handleAddNewGame = async () => {
               </span>
             </FormInput>
           </FormField>
+
           <FormField label="Height" :error="errors.height" required>
             <FormInput placeholder="John Doe" type="text" v-model="gameData.height" typeSize>
               <span
@@ -191,6 +188,7 @@ const handleAddNewGame = async () => {
             </FormInput>
           </FormField>
         </div>
+
         <FormField class="col-span-2">
           <FormLabel for="message" :required="false">Description</FormLabel>
           <FormTextArea placeholder="John Doe" type="text" v-model="gameData.description" />
@@ -198,8 +196,7 @@ const handleAddNewGame = async () => {
       </div>
 
       <div class="relative md:col-span-3 p-6 pb-24 bg-white rounded-md shadow-md">
-        <div class="mb-3">
-          <FormLabel for="thumbnail" :required="true"> Thumbnail </FormLabel>
+        <FormField class="mb-3" label="Thumbnail" required :error="errors.thumbnail">
           <label class="block">
             <span class="sr-only">Choose profile photo</span>
             <input
@@ -211,10 +208,7 @@ const handleAddNewGame = async () => {
           <div class="preview-image h-64 w-full border-1 border-gray-200 border mt-4">
             <img class="object-contain w-full h-full" :src="urlPreview" alt="" />
           </div>
-          <FormErrorMessage v-if="errors.thumbnail" id="game-error">
-            {{ errors.thumbnail }}
-          </FormErrorMessage>
-        </div>
+        </FormField>
 
         <div class="mb-3">
           <FormLabel for="gameFile" :required="true"> Game File </FormLabel>

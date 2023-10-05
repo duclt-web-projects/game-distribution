@@ -20,8 +20,6 @@
     "@headlessui/vue": "^1.7.16",
     "@heroicons/vue": "^2.0.18",
     "@pinia/nuxt": "^0.4.11",
-    "@vueform/nuxt": "^1.0.0",
-    "axios": "^1.5.0",
     "pinia": "^2.1.6",
     "swiper": "^10.2.0",
     "vue3-toastify": "^0.1.12"

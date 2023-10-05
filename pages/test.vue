@@ -11,35 +11,26 @@ const { data: categories } = await useHttp("/categories", {
   },
 });
 
-const formRef = ref(null);
 const name = ref("");
 const tags = ref([]);
 const file = ref("");
 // console.log(categories);
 const handleClick = () => {
-  formRef.value.validate();
-  console.log(formRef.value.data, formRef.value.hasErrors, formRef.value);
+  console.log(tags.value);
+  console.log(name.value);
 };
 </script>
 
 <template>
-  <div>
-    <ClientOnly>
-      <Vueform ref="formRef" :endpoint="false" validate-on="change|step">
-        <TextElement name="hello_world" label="Hello" placeholder="World" rules="required" default="123"/>
-        <TagsElement :native="false" name="tags" :items="categories" rules="required"/>
-        <FileElement :url="false" name="thumbnail" view="gallery" :auto="false" class="thumbnail mb-5">
-        </FileElement>
-        <ButtonElement name="button" @click="handleClick"> Submit </ButtonElement>
-      </Vueform>
-    </ClientOnly>
+  <div class="m-5">
+    <FormCheckbox placeholder="John Doe" id="tags" value="a1" label="a1" type="text" v-model="tags" />
+    <FormCheckbox placeholder="John Doe" id="tags" value="a2" label="a2" type="text" v-model="tags" />
+    <FormCheckbox placeholder="John Doe" id="tags" value="a3" label="a3" type="text" v-model="tags" />
   </div>
+  <FormField label="Width" required>
+    <FormInput placeholder="John Doe" type="text" v-model="name"> </FormInput>
+  </FormField>
+  <button @click="handleClick" class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium rounded border">
+    Click
+  </button>
 </template>
-
-<style lang="scss">
-.file-upload {
-  & > div > div > div > div:last-child {
-    display: none;
-  }
-}
-</style>

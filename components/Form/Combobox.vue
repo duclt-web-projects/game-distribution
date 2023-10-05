@@ -163,7 +163,7 @@ function clearSelection() {
     <ComboboxButton
       :class="{
         'border-gray-200 bg-white': open && !field.invalid,
-        'border-red-500': !open && field.invalid,
+        'border-red-300': !open && field.invalid,
         'border-gray-200': !open && !field.invalid,
       }"
       class="min-h-[40px] relative flex w-full flex-wrap items-center gap-1 overflow-hidden rounded border-2 bg-white py-1 pr-14 text-sm focus-within:border-gray-200 focus-within:!bg-white hover:bg-gray-100 hover:border-gray-300 focus:ring-0 px-4"

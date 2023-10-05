@@ -27,14 +27,14 @@ const handleChange = (event) => {
     }
     emit("update:modelValue", newValue);
   } else {
-    emit("update:modelValue", isChecked ? props.value : '');
+    emit("update:modelValue", isChecked ? props.value : "");
   }
 };
 </script>
 
 <template>
-  <label class="relative flex cursor-pointer items-center rounded-full" data-ripple-dark="true">
-    <div class="relative flex mr-2">
+  <div class="inline-flex items-center">
+    <label class="relative flex cursor-pointer items-center rounded-full p-3" :for="props.id" data-ripple-dark="true">
       <input
         type="checkbox"
         class="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded border border-blue-gray-200 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-500 checked:bg-gray-500 checked:before:bg-gray-500 hover:before:opacity-10"
@@ -61,7 +61,9 @@ const handleChange = (event) => {
           ></path>
         </svg>
       </span>
-    </div>
-    {{ props.label }}
-  </label>
+    </label>
+    <label class="mt-px cursor-pointer select-none font-light text-gray-700" :for="props.id">
+      {{ props.label }}
+    </label>
+  </div>
 </template>

@@ -1,10 +1,10 @@
 import { useUserStore } from "@/stores/useUserStore";
 
 export default defineNuxtPlugin(async () => {
-  const authStore = useUserStore();
+  const userStore = useUserStore();
 
-  if(!authStore.isLoggedIn) {
-    await authStore.getProfile();
+  if(!userStore.isLoggedIn) {
+    await userStore.getProfile();
   }
 
 });

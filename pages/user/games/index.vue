@@ -24,7 +24,7 @@ useHead({
 });
 
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ["auth-user"],
 });
 
 const { BACKEND_URL } = useUrlConfig();

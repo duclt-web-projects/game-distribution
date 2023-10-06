@@ -20,7 +20,7 @@ useHead({
 });
 
 definePageMeta({
-  middleware: "auth",
+  middleware: "auth-user",
 });
 
 const { API_URL } = useUrlConfig();

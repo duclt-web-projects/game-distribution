@@ -23,10 +23,6 @@ useHead({
   },
 });
 
-// definePageMeta({
-//   middleware: "auth",
-// });
-
 const userStore = useUserStore();
 const { $toast } = useNuxtApp();
 

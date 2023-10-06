@@ -169,7 +169,7 @@ const handleAddNewGame = async () => {
 
         <div class="flex flex-col sm:flex-row gap-4">
           <FormField label="Width" :error="errors.width" required>
-            <FormInput placeholder="John Doe" type="text" v-model="gameData.width" typeSize>
+            <FormInput placeholder="John Doe" type="text" v-model="gameData.width" class-name="rounded-l">
               <span
                 class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
               >
@@ -179,7 +179,7 @@ const handleAddNewGame = async () => {
           </FormField>
 
           <FormField label="Height" :error="errors.height" required>
-            <FormInput placeholder="John Doe" type="text" v-model="gameData.height" typeSize>
+            <FormInput placeholder="John Doe" type="text" v-model="gameData.height" class-name="rounded-l">
               <span
                 class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
               >

@@ -3,7 +3,10 @@ import { useUrlConfig } from "@/composables/useUrlConfig";
 
 const props = defineProps({
   item: Object,
-  showGrid: Boolean,
+  showGrid: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const { BACKEND_URL } = useUrlConfig();

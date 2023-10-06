@@ -3,7 +3,7 @@ import { IconEdit, IconPlush, IconTrash } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
-import { useAuthStore } from "@/stores/useAuthStore";
+import { useUserStore } from "@/stores/useUserStore";
 import { convertStringToDate } from '@/utils/functions';
 
 useHead({
@@ -28,12 +28,12 @@ definePageMeta({
 });
 
 const { BACKEND_URL } = useUrlConfig();
-const authStore = useAuthStore();
+const userStore = useUserStore();
 
 const currentPage = ref(1);
 const modalActive = ref(null);
 
-const { data: games } = await useHttp(`/games/user/${authStore.user.id}?page=${currentPage.value}`, {
+const { data: games } = await useHttp(`/games/user/${userStore.user.id}?page=${currentPage.value}`, {
   server: false,
 });
 

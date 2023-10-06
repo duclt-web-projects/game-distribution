@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RESPONSE_STATUS, ROUTE_NAMES } from "@/constants";
 import AuthLayout from "@/layouts/AuthLayout.vue";
-import { useAuthStore } from "@/stores/useAuthStore";
+import { useUserStore } from "@/stores/useUserStore";
 
 useHead({
   title: "Register - XGame Studio",
@@ -27,7 +27,7 @@ useHead({
 //   middleware: "auth",
 // });
 
-const authStore = useAuthStore();
+const userStore = useUserStore();
 const { $toast } = useNuxtApp();
 
 const name = ref("");
@@ -45,7 +45,7 @@ const register = async () => {
 
   isLoading.value = true;
 
-  const response = await authStore.register({ name: name.value, email: email.value, password: password.value });
+  const response = await userStore.register({ name: name.value, email: email.value, password: password.value });
   isLoading.value = false;
 
   if (response.status === RESPONSE_STATUS.SUCCESS) {

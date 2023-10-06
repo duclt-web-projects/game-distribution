@@ -5,7 +5,7 @@ import { IResponseReturn } from "@/types/response";
 import { handleResponse } from "@/utils/functions";
 import { defineStore } from "pinia";
 
-export const useAuthStore = defineStore("auth", () => {
+export const useUserStore = defineStore("user", () => {
   const user = ref<IUser | null>(null);
   const token = useCookie("access_token");
   const isLoggedIn = computed(() => !!user.value);

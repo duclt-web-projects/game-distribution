@@ -236,12 +236,14 @@ const handleAddNewGame = async () => {
               : 'bg-emerald-600 border-emerald-700 hover:bg-emerald-700'
           "
         >
-          <div class="mr-1">
+          <div class="mr-1 flex items-center w-10 h-5 justify-center">
             <Spinner v-if="isCreating" />
-            <IconEdit v-else-if="game" class="mr-1 fill-white" />
-            <IconPlush v-else class="mr-1 fill-white" />
+            <template v-else>
+              <IconEdit v-if="game" class="mr-1 fill-white" />
+              <IconPlush v-else class="mr-1 fill-white" />
+              {{ game ? "Edit" : "Add" }}
+            </template>
           </div>
-          {{ game ? "Edit" : "Add" }}
         </button>
       </div>
     </div>
@@ -259,8 +261,8 @@ h2 {
 }
 
 :deep(.spinner) {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-width: 2px;
 }
 </style>

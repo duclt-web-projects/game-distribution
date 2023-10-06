@@ -2,7 +2,7 @@
 import { RESPONSE_STATUS } from "@/constants";
 import { ROUTE_NAMES } from "@/constants/routes";
 import AuthLayout from "@/layouts/AuthLayout.vue";
-import { useAuthStore } from "@/stores/useAuthStore";
+import { useUserStore } from "@/stores/useUserStore";
 import { storeToRefs } from "pinia";
 
 useHead({
@@ -22,7 +22,7 @@ useHead({
   ],
 });
 
-const authStore = useAuthStore();
+const userStore = useUserStore();
 
 const { $toast } = useNuxtApp();
 
@@ -39,7 +39,7 @@ const login = async () => {
 
   isLoading.value = true;
 
-  const response = await authStore.login({ email: email.value, password: password.value });
+  const response = await userStore.login({ email: email.value, password: password.value });
 
   if (response.status === RESPONSE_STATUS.SUCCESS) {
     isLoading.value = false;

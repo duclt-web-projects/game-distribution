@@ -1,8 +1,8 @@
 import { ROUTE_NAMES } from "@/constants";
-import { useAuthStore } from "@/stores/useAuthStore";
+import { useUserStore } from "@/stores/useUserStore";
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  // const auth = useAuthStore();
+  // const auth = useUserStore();
   // const redirectRoute = [ROUTE_NAMES.LOGIN, ROUTE_NAMES.LOGOUT];
 
   // if (!auth.isLoggedIn) {

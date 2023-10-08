@@ -1,17 +1,17 @@
 import { useHttp } from "@/composables/useHttp";
 import { RESPONSE_STATUS } from "@/constants";
-import { IAuthResponse, ILogin, IRegister, IUser } from "@/types/auth";
+import { IAuthAdminResponse, ILogin, IRegister, IUser } from "@/types/auth";
 import { IResponseReturn } from "@/types/response";
 import { handleResponse } from "@/utils/functions";
 import { defineStore } from "pinia";
 
 export const useAdminStore = defineStore("admin", () => {
   const user = ref<IUser | null>(null);
-  const token = useCookie("access_token");
+  const token = useCookie("admin_access_token");
   const isLoggedIn = computed(() => !!user.value);
 
   async function logout() {
-    const { error } = await useHttp("admin/auth/logout");
+    const { error } = await useHttp("admin/auth/logout", { tokenKey: "admin_access_token" });
 
     if (error.value) {
       return {
@@ -29,19 +29,19 @@ export const useAdminStore = defineStore("admin", () => {
   }
 
   async function getProfile() {
-    const { data } = await useHttp("admin/auth/profile");
+    const { data } = await useHttp("admin/auth/profile", { tokenKey: "admin_access_token" });
 
     user.value = data.value as IUser;
   }
 
   async function login(loginInfo: ILogin): Promise<IResponseReturn> {
-    const { data, error } = await useHttp<IAuthResponse>("admin/auth/login", {
+    const { data, error } = await useHttp<IAuthAdminResponse>("admin/auth/login", {
       method: "POST",
       body: loginInfo,
     });
 
     if (data.value) {
-      user.value = data.value.user;
+      user.value = data.value.admin;
       token.value = data.value.access_token;
     }
 
@@ -49,13 +49,13 @@ export const useAdminStore = defineStore("admin", () => {
   }
 
   async function register(registerInfo: IRegister): Promise<IResponseReturn> {
-    const { data, error } = await useHttp<IAuthResponse>("admin/auth/register", {
+    const { data, error } = await useHttp<IAuthAdminResponse>("admin/auth/register", {
       method: "POST",
       body: registerInfo,
     });
 
     if (data.value) {
-      user.value = data.value.user;
+      user.value = data.value.admin;
       token.value = data.value.access_token;
     }
 
@@ -63,10 +63,12 @@ export const useAdminStore = defineStore("admin", () => {
   }
 
   async function refresh() {
-    const { data, error } = await useHttp<{ access_token: string }>("admin/auth/refresh");
+    const { data, error } = await useHttp<{ access_token: string }>("admin/auth/refresh", {
+      tokenKey: "admin_access_token",
+    });
 
     if (data.value) {
-      localStorage.setItem("access_token", data.value.access_token);
+      localStorage.setItem("admin_access_token", data.value.access_token);
       return {
         status: RESPONSE_STATUS.SUCCESS,
         message: "Refresh token success",
@@ -74,7 +76,7 @@ export const useAdminStore = defineStore("admin", () => {
     }
 
     user.value = null;
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("admin_access_token");
 
     return {
       status: RESPONSE_STATUS.FAILED,

@@ -1,9 +1,9 @@
 import { useAdminStore } from "@/stores/useAdminStore";
 
 export default defineNuxtPlugin(async () => {
-  const userStore = useAdminStore();
+  const adminStore = useAdminStore();
 
-  if (!userStore.isLoggedIn) {
-    await userStore.getProfile();
+  if (!adminStore.isLoggedIn) {
+    await adminStore.getProfile();
   }
 });

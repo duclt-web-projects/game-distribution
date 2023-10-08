@@ -1,15 +1,19 @@
 import { UseFetchOptions, useFetch } from "#app";
 import { RESPONSE_STATUS_CODE } from "@/constants";
 
+interface IOptionsFetch<DataT> extends UseFetchOptions<DataT> {
+  tokenKey?: string;
+}
+
 // wrap useFetch with configuration needed to talk to our API
-export function useHttp<DataT>(path, options: UseFetchOptions<DataT> = {}) {
+export function useHttp<DataT>(path, options: IOptionsFetch<DataT> = {}) {
   const config = useRuntimeConfig();
 
   // modify options as needed
   options.baseURL = config.public.apiUrl;
 
   // Add authentication token to request headers
-  const token = useCookie("access_token");
+  const token = useCookie(options?.tokenKey ?? "access_token");
 
   if (token.value) {
     options.headers = {

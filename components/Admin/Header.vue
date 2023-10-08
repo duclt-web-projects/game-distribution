@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useSidebar } from "@/composables/useSidebar";
 import { RESPONSE_STATUS, ROUTE_NAMES } from "@/constants";
-import { useUserStore } from "@/stores/useUserStore";
+import { useAdminStore } from "@/stores/useAdminStore";
 import { UserCircleIcon } from "@heroicons/vue/20/solid";
 import { Bars3Icon, BellIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
-const userStore = useUserStore();
-const { user } = userStore;
+const adminStore = useAdminStore();
+const { user } = adminStore;
 
 const { $toast } = useNuxtApp();
 
@@ -15,14 +15,14 @@ const dropdownOpen = ref(false);
 const { isOpen } = useSidebar();
 
 const logout = async () => {
-  const response = await userStore.logout();
+  const response = await adminStore.logout();
 
   if (response.status === RESPONSE_STATUS.ERROR) {
     $toast.error(response.message);
     return;
   }
 
-  navigateTo(ROUTE_NAMES.LOGIN);
+  navigateTo(ROUTE_NAMES.ADMIN_LOGIN);
 };
 </script>
 

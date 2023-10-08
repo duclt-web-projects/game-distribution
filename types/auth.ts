@@ -18,3 +18,10 @@ export interface IAuthResponse {
   access_token: string;
   message: string;
 }
+
+
+export interface IAuthAdminResponse {
+  admin: IUser;
+  access_token: string;
+  message: string;
+}

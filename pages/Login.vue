@@ -3,7 +3,6 @@ import { RESPONSE_STATUS } from "@/constants";
 import { ROUTE_NAMES } from "@/constants/routes";
 import AuthLayout from "@/layouts/AuthLayout.vue";
 import { useUserStore } from "@/stores/useUserStore";
-import { storeToRefs } from "pinia";
 
 useHead({
   title: "Login - XGame Studio",

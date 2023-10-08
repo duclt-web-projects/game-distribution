@@ -33,7 +33,7 @@ const userStore = useUserStore();
 const currentPage = ref(1);
 const modalActive = ref(null);
 
-const { data: games } = await useHttp(`/games/user/${userStore.user.id}?page=${currentPage.value}`, {
+const { data: games } = await useHttp(() => `/games/user/${userStore.user.id}?page=${currentPage.value}`, {
   server: false,
 });
 

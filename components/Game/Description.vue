@@ -10,32 +10,7 @@ const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
-  <div class="description-area">
-    <p>
-      <i class="fa fa-exclamation-triangle" style="font-weight: bold"> IMPORTANT NOTIFICATION WHILE EMBEDDING GAMES</i>
-    </p>
-    <p>
-      Ads should be requested from the game's page url to avoid loss of ads performance. To make this happen please
-      adjust your game frame request url as follows: gd_sdk_referrer_url should be added to the request url . To do that
-      please modify your request url as:
-    </p>
-    <p style="font-weight: bold">
-      CORRECT USAGE
-      <i class="fa fa-check"></i>
-    </p>
-    <p>
-      If your page url is
-      <i style="font-weight: bold">https://www.example.com/games</i>
-      then your request url should be as follows:
-      <i style="font-weight: bold">?gd_sdk_referrer_url=https://www.example.com/games/{game-path}</i>
-    </p>
-    <p>You can check example url below to see how we are using in this page.</p>
-    <p style="font-weight: bold">
-      WRONG USAGE
-      <i class="fa fa-ban"></i>
-    </p>
-    <p><i style="font-weight: bold"> </i></p>
-  </div>
+  <div class="description-area" v-html="game.description"></div>
   <div class="input-container input-location">
     <label class="label company">Example URL</label>
     <input type="text" readonly="readonly" />

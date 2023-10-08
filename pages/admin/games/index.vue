@@ -1,7 +1,5 @@
 <script setup>
-import { IconPlush } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
-import { ROUTE_NAMES } from "@/constants";
 import AdminLayout from "@/layouts/AdminLayout.vue";
 import { convertStringToDate } from "@/utils/functions";
 
@@ -138,9 +136,7 @@ const changeStatus = async (id, currentStatus, status) => {
                     {{ convertStringToDate(game.published_at) }}
                   </td>
 
-                  <td
-                    class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap"
-                  >
+                  <td class="px-6 py-4 text-sm font-medium leading-5 border-b border-gray-200 whitespace-nowrap">
                     <span
                       v-if="game.status === 0"
                       class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
@@ -149,15 +145,15 @@ const changeStatus = async (id, currentStatus, status) => {
                     </span>
                     <span
                       v-if="game.status === 1"
-                      class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
-                    >
-                      Rejected
-                    </span>
-                    <span
-                      v-if="game.status === 2"
                       class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
                     >
                       Accepted
+                    </span>
+                    <span
+                      v-if="game.status === 2"
+                      class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
+                    >
+                      Rejected
                     </span>
                   </td>
 
@@ -180,13 +176,13 @@ const changeStatus = async (id, currentStatus, status) => {
                       >
                         <li
                           class="bg-white hover:bg-gray-100 py-2 px-4 block whitespace-no-wrap text-xs cursor-pointer"
-                          @click="() => changeStatus(game.id, game.status, 2)"
+                          @click="() => changeStatus(game.id, game.status, 1)"
                         >
                           Accept
                         </li>
                         <li
                           class="bg-white hover:bg-gray-100 py-2 px-4 block whitespace-no-wrap text-xs cursor-pointer"
-                          @click="() => changeStatus(game.id, game.status, 1)"
+                          @click="() => changeStatus(game.id, game.status, 2)"
                         >
                           Reject
                         </li>

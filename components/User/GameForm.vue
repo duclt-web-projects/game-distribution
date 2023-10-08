@@ -3,7 +3,7 @@ import { IconEdit, IconPlush, IconUploadZip } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants/routes";
 import { ICategory } from "@/types/game";
-import { IOptions } from "../../types/common";
+import { IOptions } from "@/types/common";
 
 const props = defineProps({
   game: {

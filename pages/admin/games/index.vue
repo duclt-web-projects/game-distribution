@@ -6,7 +6,7 @@ import AdminLayout from "@/layouts/AdminLayout.vue";
 import { convertStringToDate } from "@/utils/functions";
 
 useHead({
-  title: "Admin - XGame Studio",
+  title: "Games - Admin - XGame Studio",
   meta: [
     {
       name: "description",

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useSidebar } from "@/composables/useSidebar";
-import { ref } from "vue";
 import { ROUTE_NAMES } from "@/constants";
+import { ref } from "vue";
 
 const { isOpen } = useSidebar();
 const activeClass = ref("bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100");
 const inactiveClass = ref("border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100");
+
+const route = useRoute();
+
 </script>
 
 <template>
@@ -31,8 +34,8 @@ const inactiveClass = ref("border-gray-900 text-gray-500 hover:bg-gray-600 hover
       <nav class="mt-10">
         <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[true ? activeClass : inactiveClass]"
-          :to="ROUTE_NAMES.USER_GAME"
+          :class="[route.path === ROUTE_NAMES.ADMIN_GAME ? activeClass : inactiveClass]"
+          :to="ROUTE_NAMES.ADMIN_GAME"
         >
           <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -43,6 +46,21 @@ const inactiveClass = ref("border-gray-900 text-gray-500 hover:bg-gray-600 hover
           </svg>
 
           <span class="mx-4">Games</span>
+        </router-link>
+        <router-link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[route.path === ROUTE_NAMES.ADMIN_CATEGORY ? activeClass : inactiveClass]"
+          :to="ROUTE_NAMES.ADMIN_CATEGORY"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M2 10C2 5.58172 5.58172 2 10 2V10H18C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10Z"
+              fill="currentColor"
+            />
+            <path d="M12 2.25195C14.8113 2.97552 17.0245 5.18877 17.748 8.00004H12V2.25195Z" fill="currentColor" />
+          </svg>
+
+          <span class="mx-4">Category</span>
         </router-link>
       </nav>
     </div>

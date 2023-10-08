@@ -5,8 +5,7 @@ const props = defineProps({
   required: Boolean,
   invalid: Boolean,
   ariaDescribedBy: String,
-  typeSize: Boolean,
-  value: String,
+  value: Boolean,
   label: String,
 });
 
@@ -26,7 +25,7 @@ const handleChange = ($event) => {
         type="checkbox"
         :id="field.id"
         :aria-describedby="field.ariaDescribedBy"
-        :value="props.value"
+        :checked="props.value"
         @change="handleChange"
         class="peer absolute h-4 w-8 cursor-pointer appearance-none rounded-full bg-gray-100 transition-colors duration-300 checked:bg-emerald-500 peer-checked:border-emerald-500 peer-checked:before:bg-emerald-500"
       />

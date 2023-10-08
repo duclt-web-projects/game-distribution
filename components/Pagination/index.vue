@@ -29,6 +29,12 @@ const isLastPage = computed(() => {
 const isPageActive = (page) => {
   return currentPage.value === page;
 };
+
+const handleChangePage = (page) => {
+  if(page > 0 && page <= totalPage.value) {
+    emit('changePage', page)
+  }
+}
 </script>
 
 <template>
@@ -38,37 +44,37 @@ const isPageActive = (page) => {
         <li
           class="page-item VuePagination__pagination-item VuePagination__pagination-item-prev-page VuePagination__pagination-item-prev-chunk"
           :class="isFirstPage ? 'disabled' : ''"
-          @click="emit('changePage', 1)"
+          @click="handleChangePage(1)"
         >
           <a disabled="disabled" class="page-link">&lt;&lt;</a>
         </li>
         <li
           class="page-item VuePagination__pagination-item VuePagination__pagination-item-prev-page"
           :class="isFirstPage ? 'disabled' : ''"
-          @click="emit('changePage', currentPage - 1)"
+          @click="handleChangePage(currentPage - 1)"
         >
-          <a class="page-link">&lt;</a>
+          <a disabled="disabled" class="page-link">&lt;</a>
         </li>
         <li
           v-for="page in pages"
           :key="page.name"
           class="VuePagination__pagination-item page-item"
           :class="{ active: isPageActive(page.name) }"
-          @click="emit('changePage', page.name)"
+          @click="handleChangePage(page.name)"
         >
           <a role="button" class="page-link">{{ page.name }}</a>
         </li>
         <li
           class="VuePagination__pagination-item page-item VuePagination__pagination-item-next-page"
           :class="isLastPage ? 'disabled' : ''"
-          @click="emit('changePage', currentPage + 1)"
+          @click="handleChangePage(currentPage + 1)"
         >
-          <a class="page-link">&gt;</a>
+          <a disabled="disabled" class="page-link">&gt;</a>
         </li>
         <li
           class="VuePagination__pagination-item page-item VuePagination__pagination-item-next-page VuePagination__pagination-item-next-chunk"
           :class="isLastPage ? 'disabled' : ''"
-          @click="emit('changePage', totalPage)"
+          @click="handleChangePage(totalPage)"
         >
           <a class="page-link">&gt;&gt;</a>
         </li>

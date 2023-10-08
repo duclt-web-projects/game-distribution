@@ -31,10 +31,9 @@ const { BACKEND_URL } = useUrlConfig();
 const { $toast } = useNuxtApp();
 
 const currentPage = ref(1);
-const modalActive = ref(null);
 const isRefetch = ref(false);
 
-const { data: games } = await useHttp(`/admin/games/list?page=${currentPage.value}`, {
+const { data: games } = await useHttp(() => `/admin/games/list?page=${currentPage.value}`, {
   server: false,
   watch: [isRefetch],
   tokenKey: "admin_access_token",
@@ -42,10 +41,6 @@ const { data: games } = await useHttp(`/admin/games/list?page=${currentPage.valu
 
 const onChangePage = (val) => {
   currentPage.value = val;
-};
-
-const toggleModal = () => {
-  modalActive.value = !modalActive.value;
 };
 
 const changeStatus = async (id, currentStatus, status) => {
@@ -216,11 +211,6 @@ const changeStatus = async (id, currentStatus, status) => {
         </div>
       </div>
     </div>
-    <Modal :modalActive="modalActive" @close-modal="toggleModal">
-      <div class="text-black">
-        <h1 class="text-2xl mb-1">Delete Confirmation</h1>
-      </div>
-    </Modal>
   </AdminLayout>
 </template>
 

@@ -31,22 +31,27 @@ const isLastPage = computed(() => {
 const isPageActive = (page) => {
   return currentPage.value === page;
 };
+
+const handleChangePage = (page) => {
+  if(page > 0 && page <= totalPage.value) {
+    emit('changePage', page)
+  }
+}
 </script>
 
 <template>
   <nav aria-label="Page navigation example">
     <ul class="flex items-center -space-x-px h-8 text-sm">
-      <li>
-        <a
-          class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300"
-          :class="isFirstPage ? 'disabled' : 'hover:bg-gray-100 hover:text-gray-700 '"
-          @click="emit('changePage', 1)"
-        >
-          <span class="sr-only">Previous</span>
+      <li
+        class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 border border-gray-300"
+        :class="isFirstPage ? 'bg-gray-300 disabled' : 'bg-white hover:bg-gray-100 hover:text-gray-700 '"
+        @click="handleChangePage(currentPage - 1)"
+      >
+        <a disabled="disabled">
           <IconAngleLeft class="fill-gray-500" />
         </a>
       </li>
-      <li v-for="page in pages" :key="page.name" @click="emit('changePage', page.name)">
+      <li v-for="page in pages" :key="page.name" @click="handleChangePage(page.name)">
         <a
           role="button"
           class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300"
@@ -61,8 +66,9 @@ const isPageActive = (page) => {
       <li>
         <a
           role="button"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300"
-          :class="isLastPage ? 'disabled' : 'hover:bg-gray-100 hover:text-gray-700 '"
+          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 border border-gray-300"
+          :class="isLastPage ? 'bg-gray-300 disabled' : 'bg-white hover:bg-gray-100 hover:text-gray-700 '"
+          @click="handleChangePage(currentPage + 1)"
         >
           <span class="sr-only">Next</span>
           <IconAngleRight class="fill-gray-500" />

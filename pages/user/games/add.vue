@@ -25,7 +25,7 @@ definePageMeta({
 
 <template>
   <UserLayout>
-    <UserForm />
+    <UserGameForm />
   </UserLayout>
 </template>
 

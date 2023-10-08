@@ -17,9 +17,9 @@ defineProps({
         @click.self="$emit('close-modal')"
       >
         <Transition name="modal-inner">
-          <div v-if="modalActive" class="p-4 bg-white self-start mt-32 max-w-screen-md">
+          <div v-if="modalActive" class="p-4 bg-white self-start mt-32 max-w-screen-md min-w-[400px] relative">
             <slot />
-            <button class="text-white mt-8 bg-weather-primary py-2 px-6" @click="$emit('close-modal')">Close</button>
+            <button class="bg-weather-primary py-2 px-6 absolute top-0 right-1" @click="$emit('close-modal')">x</button>
           </div>
         </Transition>
       </div>

@@ -32,7 +32,7 @@ const { data: game } = await useFetch(() => `${API_URL}/game/${id}`);
 <template>
   <UserLayout>
     <Loading v-if="!game" />
-    <UserForm v-else :game="game" />
+    <UserGameForm v-else :game="game" />
   </UserLayout>
 </template>
 

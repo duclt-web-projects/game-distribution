@@ -6,10 +6,6 @@ summary {
 section {
   position: relative;
 
-  &:first-of-type {
-    padding-top: 4.167em;
-  }
-
   article {
     padding: 2.2222em 0.278em 0.556em;
     text-align: center;
@@ -26,10 +22,6 @@ section {
 
 @media (min-width: 640px) {
   section {
-    &:first-of-type {
-      padding-top: 3.409em;
-    }
-
     article {
       p {
         padding: 0;
@@ -45,10 +37,6 @@ section {
 
 @media (min-width: 1366px) {
   section {
-    &:first-of-type {
-      padding-top: 4.167em;
-    }
-
     article {
       padding: 2.727em 1.136em 3.409em;
     }

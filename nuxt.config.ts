@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@element-plus/nuxt", "@ant-design-vue/nuxt"],
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL ?? "https://kimlestudio.xyz/api",
@@ -16,4 +16,7 @@ export default defineNuxtConfig({
     },
   },
   spaLoadingTemplate: true,
+  routeRules: {
+    "/admin/**": { ssr: false },
+  },
 });

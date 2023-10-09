@@ -9,8 +9,11 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@ant-design-vue/nuxt": "^1.1.1",
+    "@element-plus/nuxt": "^1.0.6",
     "@nuxt/devtools": "latest",
     "autoprefixer": "^10.4.15",
+    "element-plus": "^2.3.14",
     "nuxt": "^3.7.0",
     "postcss": "^8.4.30",
     "sass": "^1.66.1",

@@ -20,9 +20,9 @@ useHead({
   ],
 });
 
-definePageMeta({
-  middleware: ["auth-admin"],
-});
+// definePageMeta({
+//   middleware: ["auth-admin"],
+// });
 
 const { $toast } = useNuxtApp();
 

@@ -1,21 +1,27 @@
 <script setup lang="ts">
+import { adminMenus } from "@/config/admin-menu";
+
 onMounted(() => {
   document.body.className = "";
 });
 </script>
 
 <template>
-  <div class="flex min-h-screen bg-gray-200 font-roboto">
-    <AdminSidebar />
-
-    <div class="flex-1 flex flex-col overflow-hidden">
-      <AdminHeader />
-
-      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-        <div class="container mx-auto px-6 py-8">
-          <slot />
-        </div>
-      </main>
-    </div>
-  </div>
+  <a-layout>
+    <dashboard-sidebar :menu-data="adminMenus" />
+    <a-layout class="body">
+      <dashboard-header />
+      <a-layout-content class="m-5">
+        <slot />
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
 </template>
+
+<style scoped lang="scss">
+.body {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+</style>

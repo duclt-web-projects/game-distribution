@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { useHttp } from "@/composables/useHttp";
 import AdminLayout from "@/layouts/AdminLayout.vue";
-import { convertStringToDate } from "@/utils/functions";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import { EllipsisHorizontalIcon } from "@heroicons/vue/24/outline";
 
 useHead({
   title: "Games - Admin - XGame Studio",
@@ -20,9 +21,9 @@ useHead({
   ],
 });
 
-definePageMeta({
-  middleware: ["auth-admin"],
-});
+// definePageMeta({
+//   middleware: ["auth-admin"],
+// });
 
 const { BACKEND_URL } = useUrlConfig();
 
@@ -59,151 +60,227 @@ const changeStatus = async (id, currentStatus, status) => {
     }
   }
 };
+
+interface TableCell {
+  id: number;
+  checked: boolean;
+  name: string;
+  title: string;
+  email: string;
+  role: string;
+  status: number;
+}
+
+const tableData = ref<TableCell[]>([]);
+watchEffect(async () => {
+  tableData.value = [
+    {
+      id: 1,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 1,
+    },
+    {
+      id: 2,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 0,
+    },
+    {
+      id: 3,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 1,
+    },
+    {
+      id: 4,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 0,
+    },
+    {
+      id: 5,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 1,
+    },
+    {
+      id: 6,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 1,
+    },
+    {
+      id: 7,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 1,
+    },
+    {
+      id: 8,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 0,
+    },
+    {
+      id: 9,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 0,
+    },
+    {
+      id: 10,
+      checked: false,
+      name: "Leon",
+      title: "Full Stack",
+      email: "leon@example.com",
+      role: "member",
+      status: 0,
+    },
+  ];
+});
+
+const toggleAllSelect = (e: MouseEvent) => {
+  console.log((e.target as HTMLInputElement).checked);
+  tableData.value = tableData.value.map((v, i) => {
+    return { ...v, checked: (e.target as HTMLInputElement).checked };
+  });
+};
 </script>
 
 <template>
   <AdminLayout>
-    <div class="flex flex-col mt-8">
-      <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-          <table class="min-w-full">
-            <thead>
-              <tr>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Id
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Name
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Thumbnail
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Published at
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Status
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Created by
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Actions
-                </th>
-              </tr>
-            </thead>
-
-            <tbody class="bg-white">
-              <tr v-if="!games || !games.data" class="loading-wrapper">
-                <td colSpan="7" class="text-center p-4">
-                  <Loading />
+    <div class="bg-white rounded mt-4 shadow overflow-hidden">
+      <div class="flex justify-between items-center p-4">
+        <h1 class="font-bold">Games by User</h1>
+      </div>
+      <div class="overflow-x-auto px-4 pb-5">
+        <table class="w-full">
+          <thead class="bg-slate-200 border border-gray-200">
+            <tr class="text-slate-900 text-sm text-left">
+              <th class="px-4 py-4 text-left text-sm font-medium text-slate-900">
+                <input type="checkbox" class="border-gray-400" @click="toggleAllSelect" />
+              </th>
+              <th class="px-4 py-4 font-medium">Name</th>
+              <th class="px-4 py-4 font-medium">Thumbnail</th>
+              <th class="px-4 py-4 font-medium">Size</th>
+              <th class="px-4 py-4 font-medium">Status</th>
+              <th class="px-4 py-4 font-medium">Published at</th>
+              <th class="px-4 py-4 font-medium">Created at</th>
+              <th class="px-4 py-4 font-medium"></th>
+            </tr>
+          </thead>
+          <tbody class="border">
+            <tr v-if="!games || !games.data" class="loading-wrapper">
+              <td colSpan="7" class="text-center p-4">
+                <Loading />
+              </td>
+            </tr>
+            <tr v-else-if="games.data.length === 0" class="loading-wrapper">
+              <td colSpan="7" class="text-center p-4">
+                <div>No data</div>
+              </td>
+            </tr>
+            <template v-else>
+              <tr class="odd:bg-white even:bg-slate-50 text-sm text-slate-900" v-for="(game, i) in games.data">
+                <td class="px-4 py-4 whitespace-nowrap">
+                  <input type="checkbox" class="rounded border-gray-400" data-id="v.id" />
                 </td>
-              </tr>
-              <tr v-else-if="games.data.length === 0" class="loading-wrapper">
-                <td colSpan="7" class="text-center p-4">
-                  <div>No data</div>
+                <td class="px-4 py-4 whitespace-nowrap">{{ game.name }}</td>
+                <td class="px-4 py-4 whitespace-nowrap">{{ game.title }}</td>
+                <td class="px-4 py-4 whitespace-nowrap">{{ game.width }} x {{ game.height }}</td>
+                <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
+                  <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full" v-if="game.status === 1">
+                    Active
+                  </span>
+                  <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> InActive </span>
                 </td>
-              </tr>
-              <template v-else>
-                <tr v-for="(game, index) in games.data" :key="index">
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ index + 1 }}
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ game.name }}
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    <img class="w-10 h-10" :src="`${BACKEND_URL}${game.thumbnail}`" alt="" />
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ convertStringToDate(game.published_at) }}
-                  </td>
-
-                  <td class="px-6 py-4 text-sm font-medium leading-5 border-b border-gray-200 whitespace-nowrap">
-                    <span
-                      v-if="game.status === 0"
-                      class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
-                    >
-                      Pending
-                    </span>
-                    <span
-                      v-if="game.status === 1"
-                      class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
-                    >
-                      Accepted
-                    </span>
-                    <span
-                      v-if="game.status === 2"
-                      class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
-                    >
-                      Rejected
-                    </span>
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ game.author.name }}
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    <div class="dropdown inline-block relative">
-                      <button
-                        class="border border-gray-300 text-gray-700 text-sm py-1 px-2 rounded inline-flex items-center"
+                <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.published_at) }}</td>
+                <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.created_at) }}</td>
+                <td class="h-[44px] flex items-center gap-1">
+                  <Menu as="div" class="relative inline-block text-left">
+                    <div>
+                      <MenuButton
+                        class="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-bold"
                       >
-                        <span class="mr-1">Actions</span>
-                        <svg class="fill-current h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                      </button>
-                      <ul
-                        class="dropdown-menu border border-gray-300 rounded absolute hidden text-gray-700 pt-1 z-10 left-0 min-w-10"
-                      >
-                        <li
-                          class="bg-white hover:bg-gray-100 py-2 px-4 block whitespace-no-wrap text-xs cursor-pointer"
-                          @click="() => changeStatus(game.id, game.status, 1)"
-                        >
-                          Accept
-                        </li>
-                        <li
-                          class="bg-white hover:bg-gray-100 py-2 px-4 block whitespace-no-wrap text-xs cursor-pointer"
-                          @click="() => changeStatus(game.id, game.status, 2)"
-                        >
-                          Reject
-                        </li>
-                      </ul>
+                        <EllipsisHorizontalIcon
+                          class="h-5 w-5 "
+                          aria-hidden="true"
+                        />
+                      </MenuButton>
                     </div>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-          <div v-if="games && games.data && games.data.length" class="flex justify-end p-4 bg-white">
-            <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
-          </div>
-        </div>
+
+                    <transition
+                      enter-active-class="transition duration-100 ease-out"
+                      enter-from-class="transform scale-95 opacity-0"
+                      enter-to-class="transform scale-100 opacity-100"
+                      leave-active-class="transition duration-75 ease-in"
+                      leave-from-class="transform scale-100 opacity-100"
+                      leave-to-class="transform scale-95 opacity-0"
+                    >
+                      <MenuItems
+                        class="absolute bg-white right-0 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+                      >
+                        <div class="px-1 py-1">
+                          <MenuItem v-slot="{ active }">
+                            <button
+                              :class="[
+                                active ? 'bg-gray-500 text-white' : 'text-gray-900',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                              ]"
+                            >
+                              Edit
+                            </button>
+                          </MenuItem>
+                          <MenuItem v-slot="{ active }">
+                            <button
+                              :class="[
+                                active ? 'bg-gray-500 text-white' : 'text-gray-900',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                              ]"
+                            >
+                              Duplicate
+                            </button>
+                          </MenuItem>
+                        </div>
+                      </MenuItems>
+                    </transition>
+                  </Menu>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
       </div>
     </div>
   </AdminLayout>
 </template>
 
-<style scoped>
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-</style>
+<style scoped></style>

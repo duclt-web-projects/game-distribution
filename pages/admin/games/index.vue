@@ -32,60 +32,11 @@ const { $toast } = useNuxtApp();
 const currentPage = ref(1);
 const isRefetch = ref(false);
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Thumbnail",
-    dataIndex: "thumbnail",
-    key: "thumbnail",
-  },
-  {
-    title: "Size",
-    dataIndex: "size",
-    key: "size",
-  },
-  {
-    title: "Author",
-    dataIndex: "author",
-    key: "author",
-  },
-  {
-    title: "Publish At",
-    dataIndex: "published_at",
-    key: "publish_at",
-  },
-  {
-    title: "Created At",
-    dataIndex: "created_at",
-    key: "created_at",
-  },
-  {
-    title: "Actions",
-    dataIndex: "actions",
-    key: "actions",
-  },
-];
-
 const { data: games } = await useHttp(() => `/admin/games/list?page=${currentPage.value}`, {
   server: false,
   watch: [isRefetch],
   tokenKey: "admin_access_token",
 });
-
-const pagination = computed(() => ({
-  total: games.total,
-  current: games.current_page,
-  pageSize: 10,
-}));
-
-const handleTableChange = (pagination, filters, sorter) => {
-  console.log(pagination);
-  isRefetch.value = !isRefetch.value;
-};
 
 const onChangePage = (val) => {
   currentPage.value = val;
@@ -93,8 +44,6 @@ const onChangePage = (val) => {
 
 const changeStatus = async (id, currentStatus, status) => {
   if (currentStatus !== status) {
-    isRefetch.value = !isRefetch.value;
-
     const { data, error } = await useHttp(`admin/game/change-status/${id}`, {
       method: "POST",
       body: { status },
@@ -106,6 +55,7 @@ const changeStatus = async (id, currentStatus, status) => {
     }
     if (data.value) {
       $toast.success("Change status successfully!!!");
+      isRefetch.value = !isRefetch.value;
     }
   }
 };
@@ -121,100 +71,6 @@ interface TableCell {
 }
 
 const tableData = ref<TableCell[]>([]);
-watchEffect(async () => {
-  tableData.value = [
-    {
-      id: 1,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 1,
-    },
-    {
-      id: 2,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 0,
-    },
-    {
-      id: 3,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 1,
-    },
-    {
-      id: 4,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 0,
-    },
-    {
-      id: 5,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 1,
-    },
-    {
-      id: 6,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 1,
-    },
-    {
-      id: 7,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 1,
-    },
-    {
-      id: 8,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 0,
-    },
-    {
-      id: 9,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 0,
-    },
-    {
-      id: 10,
-      checked: false,
-      name: "Leon",
-      title: "Full Stack",
-      email: "leon@example.com",
-      role: "member",
-      status: 0,
-    },
-  ];
-});
 
 const toggleAllSelect = (e: MouseEvent) => {
   console.log((e.target as HTMLInputElement).checked);
@@ -267,22 +123,17 @@ const toggleAllSelect = (e: MouseEvent) => {
                 <td class="px-4 py-4 whitespace-nowrap">{{ game.width }} x {{ game.height }}</td>
                 <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
                   <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full" v-if="game.status === 1">
-                    Active
+                    Accepted
                   </span>
-                  <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> InActive </span>
+                  <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> Rejected </span>
                 </td>
                 <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.published_at) }}</td>
                 <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.created_at) }}</td>
                 <td class="h-[44px] flex items-center gap-1">
                   <Menu as="div" class="relative inline-block text-left">
                     <div>
-                      <MenuButton
-                        class="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-bold"
-                      >
-                        <EllipsisHorizontalIcon
-                          class="h-5 w-5 "
-                          aria-hidden="true"
-                        />
+                      <MenuButton class="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-bold">
+                        <EllipsisHorizontalIcon class="h-5 w-5" aria-hidden="true" />
                       </MenuButton>
                     </div>
 
@@ -304,8 +155,9 @@ const toggleAllSelect = (e: MouseEvent) => {
                                 active ? 'bg-gray-500 text-white' : 'text-gray-900',
                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                               ]"
+                              @click="changeStatus(game.id, game.status, 1)"
                             >
-                              Edit
+                              Approve
                             </button>
                           </MenuItem>
                           <MenuItem v-slot="{ active }">
@@ -314,8 +166,9 @@ const toggleAllSelect = (e: MouseEvent) => {
                                 active ? 'bg-gray-500 text-white' : 'text-gray-900',
                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                               ]"
+                              @click="changeStatus(game.id, game.status, 2)"
                             >
-                              Duplicate
+                              Reject
                             </button>
                           </MenuItem>
                         </div>
@@ -327,6 +180,10 @@ const toggleAllSelect = (e: MouseEvent) => {
             </template>
           </tbody>
         </table>
+
+        <div v-if="games && games.data.length" class="flex justify-end p-4 bg-white">
+          <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
+        </div>
       </div>
     </div>
   </AdminLayout>

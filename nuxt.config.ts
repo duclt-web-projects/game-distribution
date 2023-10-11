@@ -16,7 +16,4 @@ export default defineNuxtConfig({
     },
   },
   spaLoadingTemplate: true,
-  routeRules: {
-    "/admin/**": { ssr: false },
-  },
 });

@@ -25,7 +25,7 @@ const menus = [
   {
     name: "User",
     icon: UserIcon,
-    path: "/admin/categories",
+    path: "/admin",
   },
 ];
 

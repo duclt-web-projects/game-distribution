@@ -2,6 +2,7 @@
 import { IconEdit, IconPlush } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
 import AdminLayout from "@/layouts/AdminLayout.vue";
+import { PlusSmallIcon } from "@heroicons/vue/24/outline";
 
 useHead({
   title: "Category - Admin - XGame Studio",
@@ -57,9 +58,9 @@ const editCategory = async (id) => {
 
 const addCategory = () => {
   currentCategory.value = null;
-  categoryData.value = '';
-  modalActive.value = true
-}
+  categoryData.value = "";
+  modalActive.value = true;
+};
 
 const onChangePage = (val) => {
   currentPage.value = val;
@@ -83,6 +84,7 @@ const handleChangeStatus = async (id) => {
 
 const handleAddCategory = async () => {
   categoryError.value = "";
+  console.log(123);
 
   if (categoryData.value === "") {
     categoryError.value = "Category is required.";
@@ -109,113 +111,77 @@ const handleAddCategory = async () => {
   if (data.value) {
     $toast.success("Change category successfully!!!");
     isRefetch.value = !isRefetch.value;
+    currentCategory.value = null;
   }
 };
 </script>
 
 <template>
   <AdminLayout>
-    <div class="flex justify-end">
-      <button
-        class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
-        @click="addCategory"
-      >
-        <IconPlush class="mr-1 fill-gray-50" /> Add Category
-      </button>
-    </div>
-    <div class="flex flex-col mt-8">
-      <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-          <table class="min-w-full">
-            <thead>
-              <tr>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Id
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Name
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Status
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Created at
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Actions
-                </th>
-              </tr>
-            </thead>
-
-            <tbody class="bg-white">
-              <tr v-if="!categories || !categories.data" class="loading-wrapper">
-                <td colSpan="5" class="text-center p-4">
-                  <Loading />
+    <div class="bg-white rounded mt-4 shadow overflow-hidden">
+      <div class="flex justify-between items-center p-4">
+        <h1 class="font-bold">Category List</h1>
+        <button
+          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+          @click="addCategory"
+        >
+          <PlusSmallIcon class="w-4 h-4 stroke-white" /> Add
+        </button>
+      </div>
+      <div class="overflow-x-auto px-4 pb-5">
+        <table class="w-full">
+          <thead class="bg-slate-200 border border-gray-200">
+            <tr class="text-slate-900 text-sm text-left">
+              <th class="px-4 py-4 text-left text-sm font-medium text-slate-900">
+                <input type="checkbox" class="border-gray-400" @click="toggleAllSelect" />
+              </th>
+              <th class="px-4 py-4 font-medium">Name</th>
+              <th class="px-4 py-4 font-medium">Status</th>
+              <th class="px-4 py-4 font-medium">Created at</th>
+              <th class="px-4 py-4 font-medium"></th>
+            </tr>
+          </thead>
+          <tbody class="border">
+            <tr v-if="!categories || !categories.data" class="loading-wrapper">
+              <td colSpan="7" class="text-center p-4">
+                <Loading />
+              </td>
+            </tr>
+            <tr v-else-if="categories.data.length === 0" class="loading-wrapper">
+              <td colSpan="7" class="text-center p-4">
+                <div>No data</div>
+              </td>
+            </tr>
+            <template v-else>
+              <tr class="odd:bg-white even:bg-slate-50 text-sm text-slate-900" v-for="(category, i) in categories.data">
+                <td class="px-4 py-4 whitespace-nowrap">
+                  <input type="checkbox" class="rounded border-gray-400" data-id="v.id" />
+                </td>
+                <td class="px-4 py-4 whitespace-nowrap">{{ category.name }}</td>
+                <td class="px-4 py-4 whitespace-nowrap">
+                  <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full" v-if="category.status === 1">
+                    Active
+                  </span>
+                  <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> Inactive </span>
+                </td>
+                <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(category.created_at) }}</td>
+                <td class="h-[44px] flex items-center gap-1">
+                  <div class="flex items-center">
+                    <FormSwitch
+                      :id="category.slug"
+                      :value="category.status === 1"
+                      v-on:update:modelValue="handleChangeStatus(category.id)"
+                    />
+                    <IconEdit class="w-5 h-5 ml-4 fill-yellow-500 cursor-pointer" @click="editCategory(category.id)" />
+                  </div>
                 </td>
               </tr>
-              <tr v-else-if="categories.data.length === 0" class="loading-wrapper">
-                <td colSpan="5" class="text-center p-4">
-                  <div>No data</div>
-                </td>
-              </tr>
-              <template v-else>
-                <tr v-for="(category, index) in categories.data" :key="index">
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ index + 1 }}
-                  </td>
+            </template>
+          </tbody>
+        </table>
 
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ category.name }}
-                  </td>
-                  <td class="px-6 py-4 text-sm font-medium leading-5 border-b border-gray-200 whitespace-nowrap">
-                    <span
-                      v-if="category.status === 0"
-                      class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
-                    >
-                      Inactive
-                    </span>
-                    <span
-                      v-if="category.status === 1"
-                      class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"
-                    >
-                      Active
-                    </span>
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ convertStringToDate(category.created_at) }}
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <FormSwitch
-                        :id="category.slug"
-                        :value="category.status === 1"
-                        v-on:update:modelValue="handleChangeStatus(category.id)"
-                      />
-                      <IconEdit
-                        class="w-5 h-5 ml-4 fill-yellow-500 cursor-pointer"
-                        @click="editCategory(category.id)"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-          <div v-if="categories && categories.data && categories.data.length" class="flex justify-end p-4 bg-white">
-            <PaginationUser :currentPage="currentPage" :totalPage="categories.last_page" @changePage="onChangePage" />
-          </div>
+        <div v-if="categories && categories.data.length" class="flex justify-end p-4 bg-white">
+          <PaginationUser :currentPage="currentPage" :totalPage="categories.last_page" @changePage="onChangePage" />
         </div>
       </div>
     </div>

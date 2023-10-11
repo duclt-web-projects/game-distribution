@@ -1,58 +1,84 @@
 <script setup lang="ts">
-import { DownOutlined } from '@ant-design/icons-vue';
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { useSidebar } from "@/composables/useSidebar";
+import {
+  ArchiveBoxIcon,
+  ArrowTopRightOnSquareIcon,
+  Bars3Icon,
+  DocumentDuplicateIcon,
+  MagnifyingGlassIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/vue/24/outline";
 
-const { isOpen } = useSidebar();
+const { isCollapse } = useSidebar();
 </script>
 
 <template>
-  <a-layout-header style="background: #fff; padding: 0" class="header">
-    <div class="flex justify-between">
-      <div class="header__left px-5">
-        <menu-unfold-outlined v-if="isOpen" class="trigger" @click="() => (isOpen = !isOpen)" />
-        <menu-fold-outlined v-else class="trigger" @click="() => (isOpen = !isOpen)" />
+  <header class="sticky top-0 h-16 flex justify-between items-center p-4 shadow bg-white">
+    <Bars3Icon class="h-6 w-6 stroke-gray-600 lg:cursor-pointer" @click="isCollapse = !isCollapse" />
+    <form class="group relative ml-2 mr-auto">
+      <MagnifyingGlassIcon
+        class="w-5 h-5 absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500"
+      />
+      <input
+        class="focus:outline-none appearance-none text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 border-1 w-36 md:w-96"
+        type="text"
+        aria-label="Search"
+        placeholder="Search"
+      />
+    </form>
+    <Menu as="div" class="relative mr-3">
+      <div class="flex items-center">
+        <MenuButton>
+          <img
+            class="w-8 h-8 rounded-full"
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
+            alt="avatar"
+          />
+        </MenuButton>
       </div>
-      <div class="header__right">
-        <div class="header__user mr-5">
-          <a-dropdown>
-            <a class="ant-dropdown-link flex items-center" @click.prevent>
-              <a-avatar :size="32">
-                <template #icon><UserOutlined /></template>
-              </a-avatar>
-              <span class="ml-2">Admin</span>
-              <DownOutlined style="font-size: 8px;" class="ml-2"/>
-            </a>
-            <template #overlay>
-              <a-menu>
-                <a-menu-item>
-                  <a href="javascript:;">User Profile</a>
-                </a-menu-item>
-                <a-divider style="margin: 0;" />
-                <a-menu-item>
-                  <a href="javascript:;">Logout</a>
-                </a-menu-item>
-              </a-menu>
-            </template>
-          </a-dropdown>
-        </div>
-      </div>
-    </div>
-  </a-layout-header>
+      <transition
+        enter-active-class="transition duration-100 ease-out"
+        enter-from-class="transform scale-95 opacity-0"
+        enter-to-class="transform scale-100 opacity-100"
+        leave-active-class="transition duration-75 ease-out"
+        leave-from-class="transform scale-100 opacity-100"
+        leave-to-class="transform scale-95 opacity-0"
+      >
+        <MenuItems
+          class="absolute right-0 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        >
+          <div class="px-1 py-1">
+            <MenuItem v-slot="{ active }">
+              <button
+                :class="[
+                  active ? 'bg-gray-500 text-white' : 'text-gray-900',
+                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                ]"
+              >
+                <PencilSquareIcon :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']" aria-hidden="true" />
+                Profile
+              </button>
+            </MenuItem>
+          </div>
+          <div class="px-1 py-1">
+            <MenuItem v-slot="{ active }">
+              <button
+                :class="[
+                  active ? 'bg-gray-500 text-white' : 'text-gray-900',
+                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                ]"
+              >
+                <TrashIcon :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']" aria-hidden="true" />
+                Logout
+              </button>
+            </MenuItem>
+          </div>
+        </MenuItems>
+      </transition>
+    </Menu>
+  </header>
 </template>
 
-<style lang="scss" scoped>
-.header {
-  position: sticky;
-  top: 0;
-
-  .trigger {
-    font-size: 18px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-
-  .trigger:hover {
-    background-color: #f5f5f5;
-  }
-}
-</style>
+<style scoped></style>

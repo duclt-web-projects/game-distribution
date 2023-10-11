@@ -1,100 +1,75 @@
 <script setup lang="ts">
 import { useSidebar } from "@/composables/useSidebar";
-import { ref } from "vue";
+import {
+  ArchiveBoxIcon,
+  ArrowTopRightOnSquareIcon,
+  Bars3Icon,
+  DocumentDuplicateIcon,
+  MagnifyingGlassIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/vue/24/outline";
 
-const props = defineProps({
-  menuData: Object,
-});
 const route = useRoute();
-
-const selectedKeys = ref<string[]>([route.path]);
-const openKeys = computed(() => {
-  const menu = props.menuData?.find((e) => {
-    if (e.child.length) {
-      return e.child.find((subMenu) => {
-        return subMenu.path === route.path;
-      });
-    }
-  });
-  return menu ? [menu.id] : [];
+const { isCollapse } = useSidebar();
+const props = defineProps({
+  navList: {
+    type: Array,
+    default: [],
+  },
 });
-const { isOpen } = useSidebar();
+
+const asideRef = ref<HTMLElement | null>(null);
+const asideMaskRef = ref<HTMLDivElement | null>(null);
+
+watch(isCollapse, () => {
+  toggleAside();
+});
+
+const toggleAside = () => {
+  const asideClassList = asideRef.value?.classList;
+  const asideMaskClassList = asideMaskRef.value?.classList;
+
+  asideClassList?.toggle("-translate-x-full");
+  asideClassList?.toggle("lg:w-[80px]");
+
+  if (asideMaskClassList?.contains("invisible")) {
+    asideMaskClassList?.remove("invisible", "opacity-0");
+    asideMaskClassList?.add("visible", "opacity-50");
+  } else {
+    asideMaskClassList?.add("invisible", "opacity-0");
+    asideMaskClassList?.remove("visible", "opacity-50");
+  }
+};
+
+watch(route, () => {
+  const asideClassList = asideRef.value?.classList;
+  const asideMaskClassList = asideMaskRef.value?.classList;
+  if (asideMaskClassList?.contains("visible")) {
+    asideMaskClassList?.add("invisible", "opacity-0");
+    asideMaskClassList?.remove("visible", "opacity-50");
+    asideClassList?.toggle("-translate-x-full");
+  }
+});
 </script>
 
 <template>
-  <a-layout-sider class="sidebar" :trigger="null" v-model:collapsed="isOpen" collapsible width="240px">
-    <div class="logo">
-      <img src="/images/logos/logo-white.png" alt="">
+  <aside
+    class="z-20 fixed top-0 left-0 bg-gray-800 w-[250px] h-screen overflow-y-auto pb-4 -translate-x-full transition-all duration-500 ease-in-out lg:static lg:translate-x-0 lg:shrink-0 lg:shadow-2xl lg:shadow-gray6-600"
+    ref="asideRef"
+  >
+    <div class="sticky top-0 bg-gray-800 h-16 flex justify-center items-center shadow-md">
+      <RouterLink to="/" class="text-white text-2xl font-medium h-full p-4">
+        <img class="h-full object-contain" src="/images/logos/logo-white.png" alt="" />
+      </RouterLink>
     </div>
-    <a-menu
-      v-model:selectedKeys="selectedKeys"
-      v-model:openKeys="openKeys"
-      theme="dark"
-      mode="inline"
-      class="sidebar-menu"
-    >
-      <template v-for="menu in props.menuData">
-        <a-sub-menu v-if="menu.child.length" :key="menu.id">
-          <template #title>
-            <span class="flex items-center">
-              <CustomIcon :icon="menu.icon" />
-              <span>{{ menu.name }}</span>
-            </span>
-          </template>
-          <a-menu-item v-for="subMenu in menu.child" :key="subMenu.path">
-            <NuxtLink :to="subMenu.path">{{ subMenu.name }}</NuxtLink>
-          </a-menu-item>
-        </a-sub-menu>
-        <a-menu-item v-else :key="'sub-' + menu.id">
-          <NuxtLink :to="menu.path">{{ menu.name }}</NuxtLink>
-        </a-menu-item>
-      </template>
-    </a-menu>
-  </a-layout-sider>
+    <NavList :isCollapse="isCollapse" :navList="navList" />
+  </aside>
+  <div
+    class="bg-black h-screen w-screen fixed top-0 left-0 z-10 opacity-0 invisible transition-all duration-500 lg:hidden"
+    ref="asideMaskRef"
+    @click="toggleAside"
+  ></div>
 </template>
 
-<style lang="scss" scoped>
-.sidebar {
-  height: 100vh;
-  overflow-y: hidden;
-
-  .logo {
-    position: sticky;
-    top: 0;
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    padding: 16px 0;
-
-    img {
-      height: 100%;
-      width: auto;
-    }
-  }
-
-  &-menu {
-    height: calc(100% - 64px);
-    overflow-y: auto;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-      background: #999;
-    }
-
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-      background: #777;
-    }
-  }
-
-  :deep(svg) {
-    margin-right: 8px;
-    width: 16px;
-    height: 16px;
-  }
-}
-</style>
+<style scoped></style>

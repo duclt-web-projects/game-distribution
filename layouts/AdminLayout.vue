@@ -1,5 +1,33 @@
 <script setup lang="ts">
-import { adminMenus } from "@/config/admin-menu";
+import { HomeIcon, PuzzlePieceIcon, TagIcon, UserIcon } from "@heroicons/vue/24/outline";
+
+const menus = [
+  {
+    path: "/admin",
+    name: "Home",
+    icon: HomeIcon,
+  },
+  {
+    name: "Games",
+    icon: PuzzlePieceIcon,
+    child: [
+      {
+        name: "Games By User",
+        path: "/admin/games",
+      },
+    ],
+  },
+  {
+    name: "Category",
+    icon: TagIcon,
+    path: "/admin/categories",
+  },
+  {
+    name: "User",
+    icon: UserIcon,
+    path: "/admin/categories",
+  },
+];
 
 onMounted(() => {
   document.body.className = "";
@@ -7,15 +35,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <a-layout>
-    <dashboard-sidebar :menu-data="adminMenus" />
-    <a-layout class="body">
+  <div class="flex">
+    <dashboard-sidebar :navList="menus" />
+    <div class="w-full h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
       <dashboard-header />
-      <a-layout-content class="m-5">
+      <main class="p-4">
         <slot />
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+      </main>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

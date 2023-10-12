@@ -300,7 +300,6 @@ textarea {
   cursor: pointer;
   display: inline-block;
   font-family: "Roboto", sans-serif;
-  font-size: 0.909em;
   font-weight: 500;
   letter-spacing: 1px;
   outline: none;
@@ -354,7 +353,7 @@ textarea {
     pointer-events: none;
     position: absolute;
     right: 0;
-    top: calc(100% - 0.4rem);
+    top: calc(100% - 6px);
 
     li {
       margin: 0;
@@ -404,10 +403,6 @@ textarea {
 }
 
 @media (min-width: 640px) {
-  .xg-button {
-    font-size: 0.909em;
-  }
-
   .xg-button.flat.active,
   .xg-button.flat:hover {
     background-color: #ff8c1c;

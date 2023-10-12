@@ -51,7 +51,7 @@ useHead({
               class="iframe-close"
               name="iframe"
               id="iframe"
-              :src="`${BACKEND_URL}/${game.source_link}`"
+              :src="`/games-fullscreen/${game.slug}`"
               :width="game.width"
               :height="game.height"
               scrolling="no"
@@ -145,6 +145,7 @@ useHead({
 
   iframe {
     max-width: 100%;
+    object-fit: contain; 
   }
 }
 

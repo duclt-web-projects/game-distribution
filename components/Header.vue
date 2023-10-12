@@ -22,7 +22,7 @@
       <div class="desktop-navigation">
         <template v-for="header in headers">
           <div v-if="header.children.length" class="xg-button--has-dropdown" :key="header.id">
-            <nuxt-link :to="header.path" class="xg-button" :class="route.path === header.path ? 'active' : '123'">
+            <nuxt-link :to="header.path" class="xg-button" :class="route.path === header.path ? 'active' : ''">
               {{ header.name }}
             </nuxt-link>
             <ul class="xg-button_dropdown">
@@ -206,8 +206,8 @@ nav {
         border-bottom-color: transparent;
         color: #512e85;
         font-family: "Squada One", cursive;
-        font-size: 0.864em;
-        padding: 0.273em 0.818em;
+        font-size: 1.2rem;
+        padding: 5px 16px;
         text-transform: capitalize;
 
         &:hover {

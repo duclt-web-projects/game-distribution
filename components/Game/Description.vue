@@ -12,7 +12,7 @@ const { BACKEND_URL } = useUrlConfig();
 <template>
   <div class="description-area" v-html="game.description"></div>
   <div class="input-container input-location">
-    <a :href="`${BACKEND_URL}/${props.game?.source_link}`" target="_blank" class="xg-button" style="width: 100%">
+    <a :href="`/games-fullscreen/${props.game?.slug}`" target="_blank" class="xg-button" style="width: 100%">
       Open Game In New Tab
       <IconArrowUpRightFromSquare />
     </a>

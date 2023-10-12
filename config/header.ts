@@ -8,54 +8,54 @@ const headers = [
   {
     id: 2,
     name: "Products for Publishers",
-    path: "/user/games",
+    path: "",
     children: [],
   },
   {
     id: 3,
     name: "About",
-    path: "/puzzle",
+    path: "",
     children: [],
   },
   {
     id: 4,
     name: "Publishers",
-    path: "/puzzleasdasd",
+    path: "",
     children: [],
   },
   {
     id: 5,
     name: "Developers",
-    path: "/games/1",
+    path: "",
     children: [
       {
         id: 10,
         name: "SDK",
-        path: "/games/1",
+        path: "",
       },
     ],
   },
   {
     id: 6,
     name: "Supports",
-    path: "/games/1",
+    path: "",
     children: [
       {
         id: 11,
         name: "Contact us",
-        path: "/games/1",
+        path: "",
       },
       {
         id: 12,
         name: "FAQ",
-        path: "/games/1",
+        path: "",
       },
     ],
   },
   {
     id: 7,
     name: "Join Us",
-    path: "/games/1",
+    path: "",
     children: [],
   },
   {
@@ -67,7 +67,7 @@ const headers = [
   {
     id: 9,
     name: "RSS",
-    path: "/games/1",
+    path: "",
     children: [],
   },
 ];

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { IconEdit, IconPlush, IconUploadZip } from "@/assets/icon";
+import { IconUploadZip } from "@/assets/icon";
 import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants/routes";
-import { ICategory } from "@/types/game";
 import { IOptions } from "@/types/common";
+import { ICategory } from "@/types/game";
 
 const props = defineProps({
   game: {
@@ -152,98 +152,97 @@ const handleAddNewGame = async () => {
   <Breadcrumb />
   <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">{{ game ? "Edit game" : "Add new game" }}</h2>
   <form @submit.prevent="handleAddNewGame">
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-6 gap-4">
-      <div class="md:col-span-3 flex flex-col p-6 bg-white rounded-md shadow-md">
-        <FormField label="Game Name" :error="errors.name" required>
-          <FormInput placeholder="John Doe" type="text" v-model="gameData.name" />
-        </FormField>
+    <div class="shadow rounded overflow-hidden">
+      <div class="bg-white px-4 py-5 sm:p-6">
+        <div class="grid grid-cols-6 gap-1 md:gap-5">
+          <div class="col-span-6 sm:col-span-3">
+            <FormField label="Game Name" :error="errors.name" required>
+              <FormInput placeholder="John Doe" type="text" v-model="gameData.name" />
+            </FormField>
+          </div>
 
-        <FormField label="Category" :error="errors.category" required disable>
-          <FormCombobox
-            placeholder="Search category..."
-            v-model="gameData.category"
-            multiple
-            :loadOptions="loadCategories"
-          />
-        </FormField>
+          <div class="col-span-6 sm:col-span-3">
+            <FormField label="Category" :error="errors.category" required disable>
+              <FormCombobox
+                placeholder="Search category..."
+                v-model="gameData.category"
+                multiple
+                :loadOptions="loadCategories"
+              />
+            </FormField>
+          </div>
 
-        <div class="flex flex-col sm:flex-row gap-4">
-          <FormField label="Width" :error="errors.width" required>
-            <FormInput placeholder="John Doe" type="text" v-model="gameData.width" class-name="rounded-l">
-              <span
-                class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
-              >
-                px
-              </span>
-            </FormInput>
-          </FormField>
+          <div class="col-span-6 sm:col-span-3">
+            <FormField label="Width" :error="errors.width" required>
+              <FormInput placeholder="John Doe" type="text" v-model="gameData.width" class-name="rounded-l">
+                <span
+                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
+                >
+                  px
+                </span>
+              </FormInput>
+            </FormField>
+          </div>
 
-          <FormField label="Height" :error="errors.height" required>
-            <FormInput placeholder="John Doe" type="text" v-model="gameData.height" class-name="rounded-l">
-              <span
-                class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
-              >
-                px
-              </span>
-            </FormInput>
-          </FormField>
+          <div class="col-span-6 sm:col-span-3">
+            <FormField label="Height" :error="errors.height" required>
+              <FormInput placeholder="John Doe" type="text" v-model="gameData.height" class-name="rounded-l">
+                <span
+                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
+                >
+                  px
+                </span>
+              </FormInput>
+            </FormField>
+          </div>
+
+          <div class="col-span-6">
+            <FormField class="col-span-2">
+              <FormLabel for="message" :required="false">Description</FormLabel>
+              <FormTextArea placeholder="John Doe" type="text" v-model="gameData.description" />
+            </FormField>
+          </div>
+
+          <div class="col-span-6">
+            <FormField class="mb-3" label="Thumbnail" required :error="errors.thumbnail">
+              <label class="block">
+                <span class="sr-only">Choose profile photo</span>
+                <input
+                  type="file"
+                  class="block mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:h-10 file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600"
+                  @change="onUploadThumbnail($event)"
+                />
+              </label>
+              <div class="preview-image h-64 w-full border-1 border-gray-200 border mt-4">
+                <img class="object-contain w-full h-full" :src="urlPreview" alt="" />
+              </div>
+            </FormField>
+          </div>
+          <div class="col-span-6">
+            <FormLabel for="gameFile" :required="true"> Game File </FormLabel>
+
+            <label
+              for="dropzone-file"
+              class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50"
+            >
+              <div class="flex flex-col items-center justify-center pt-4 pb-6">
+                <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
+                <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload</p>
+              </div>
+              <input id="dropzone-file" type="file" class="hidden" @change="onUploadGameFile($event)" />
+            </label>
+            <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="errors.gameFile" id="game-error">
+              {{ errors.gameFile }}
+            </FormHelperMessage>
+          </div>
         </div>
-
-        <FormField class="col-span-2">
-          <FormLabel for="message" :required="false">Description</FormLabel>
-          <FormTextArea placeholder="John Doe" type="text" v-model="gameData.description" />
-        </FormField>
       </div>
-
-      <div class="relative md:col-span-3 p-6 pb-24 bg-white rounded-md shadow-md">
-        <FormField class="mb-3" label="Thumbnail" required :error="errors.thumbnail">
-          <label class="block">
-            <span class="sr-only">Choose profile photo</span>
-            <input
-              type="file"
-              class="block mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:h-10 file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600"
-              @change="onUploadThumbnail($event)"
-            />
-          </label>
-          <div class="preview-image h-64 w-full border-1 border-gray-200 border mt-4">
-            <img class="object-contain w-full h-full" :src="urlPreview" alt="" />
-          </div>
-        </FormField>
-
-        <div class="mb-3">
-          <FormLabel for="gameFile" :required="true"> Game File </FormLabel>
-
-          <label
-            for="dropzone-file"
-            class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50"
-          >
-            <div class="flex flex-col items-center justify-center pt-4 pb-6">
-              <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
-              <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload</p>
-            </div>
-            <input id="dropzone-file" type="file" class="hidden" @change="onUploadGameFile($event)" />
-          </label>
-          <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="errors.gameFile" id="game-error">
-            {{ errors.gameFile }}
-          </FormHelperMessage>
-        </div>
-
+      <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
         <button
-          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white rounded border absolute bottom-6 right-6"
-          :class="
-            game
-              ? 'bg-yellow-400 border-yellow-400 hover:bg-yellow-500'
-              : 'bg-emerald-600 border-emerald-700 hover:bg-emerald-700'
-          "
+          type="submit"
+          class="inline-flex justify-center rounded-md border border-transparent bg-emerald-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
         >
-          <div class="mr-1 flex items-center w-10 h-5 justify-center">
-            <Spinner v-if="isCreating" />
-            <template v-else>
-              <IconEdit v-if="game" class="mr-1 fill-white" />
-              <IconPlush v-else class="mr-1 fill-white" />
-              {{ game ? "Edit" : "Add" }}
-            </template>
-          </div>
+          Save
         </button>
       </div>
     </div>

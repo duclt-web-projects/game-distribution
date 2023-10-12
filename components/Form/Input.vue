@@ -31,7 +31,7 @@ const field = inject("field", props);
       :value="props.modelValue"
       @input="($event) => emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       :class="[
-        'h-10 text-sm placeholder-gray-400 hover:bg-gray-100 border-2 w-full focus:border-gray-400 focus:ring-0 focus:bg-white px-4',
+        'h-10 text-sm placeholder-gray-400 hover:bg-gray-100 border-1 w-full focus:border-blue-400 focus:border-1 focus:ring-0 focus:bg-white px-4',
         className,
         field.invalid ? 'border-red-300' : 'border-gray-200',
       ]"

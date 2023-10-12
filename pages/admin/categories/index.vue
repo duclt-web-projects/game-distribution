@@ -129,10 +129,10 @@ const handleAddCategory = async () => {
         </button>
       </div>
       <div class="overflow-x-auto px-4 pb-5">
-        <table class="w-full">
+        <table class="w-full overflow-x-auto">
           <thead class="bg-slate-200 border border-gray-200">
             <tr class="text-slate-900 text-sm text-left">
-              <th class="px-4 py-4 text-left text-sm font-medium text-slate-900">
+              <th class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900">
                 <input type="checkbox" class="border-gray-400" @click="toggleAllSelect" />
               </th>
               <th class="px-4 py-4 font-medium">Name</th>
@@ -159,7 +159,7 @@ const handleAddCategory = async () => {
                 </td>
                 <td class="px-4 py-4 whitespace-nowrap">{{ category.name }}</td>
                 <td class="px-4 py-4 whitespace-nowrap">
-                  <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full" v-if="category.status === 1">
+                  <span class="bg-emerald-100 text-green-700 px-2 py-0.5 rounded-full" v-if="category.status === 1">
                     Active
                   </span>
                   <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> Inactive </span>

@@ -46,10 +46,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
-.body {
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-</style>
+<style scoped lang="scss"></style>

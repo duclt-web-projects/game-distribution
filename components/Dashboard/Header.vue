@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { useSidebar } from "@/composables/useSidebar";
-import {
-  ArchiveBoxIcon,
-  ArrowTopRightOnSquareIcon,
-  Bars3Icon,
-  DocumentDuplicateIcon,
-  MagnifyingGlassIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from "@heroicons/vue/24/outline";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import { Bars3Icon, MagnifyingGlassIcon, PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
 
 const { isCollapse } = useSidebar();
 </script>
 
 <template>
-  <header class="sticky top-0 h-16 flex justify-between items-center p-4 shadow bg-white">
+  <header class="sticky top-0 h-16 flex justify-between items-center p-4 shadow bg-white z-10">
     <Bars3Icon class="h-6 w-6 stroke-gray-600 lg:cursor-pointer" @click="isCollapse = !isCollapse" />
     <form class="group relative ml-2 mr-auto">
       <MagnifyingGlassIcon

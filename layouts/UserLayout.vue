@@ -1,6 +1,27 @@
 <script setup lang="ts">
-import Header from "@/components/User/Header.vue";
-import Sidebar from "@/components/User/Sidebar.vue";
+import { HomeIcon, PuzzlePieceIcon } from "@heroicons/vue/24/outline";
+
+const menus = [
+  {
+    path: "/user",
+    name: "Home",
+    icon: HomeIcon,
+  },
+  {
+    name: "Games",
+    icon: PuzzlePieceIcon,
+    child: [
+      {
+        name: "List",
+        path: "/user/games",
+      },
+      {
+        name: "Add new game",
+        path: "/user/games/add",
+      },
+    ],
+  },
+];
 
 onMounted(() => {
   document.body.className = "";
@@ -8,17 +29,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex min-h-screen bg-gray-200 font-roboto">
-    <Sidebar />
-
-    <div class="flex-1 flex flex-col overflow-hidden">
-      <Header />
-
-      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-        <div class="container mx-auto px-6 py-8">
-          <slot />
-        </div>
+  <div class="flex">
+    <dashboard-sidebar :navList="menus" />
+    <div class="w-full h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
+      <dashboard-header />
+      <main class="p-4">
+        <slot />
       </main>
     </div>
   </div>
 </template>
+
+<style scoped lang="scss"></style>

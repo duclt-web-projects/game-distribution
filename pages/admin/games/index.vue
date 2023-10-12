@@ -87,7 +87,7 @@ const toggleAllSelect = (e: MouseEvent) => {
         <h1 class="font-bold">Games by User</h1>
       </div>
       <div class="overflow-x-auto px-4 pb-5">
-        <table class="w-full">
+        <table class="w-full overflow-x-auto">
           <thead class="bg-slate-200 border border-gray-200">
             <tr class="text-slate-900 text-sm text-left">
               <th class="px-4 py-4 text-left text-sm font-medium text-slate-900">
@@ -118,7 +118,7 @@ const toggleAllSelect = (e: MouseEvent) => {
                 <td class="px-4 py-4 whitespace-nowrap">
                   <input type="checkbox" class="rounded border-gray-400" data-id="v.id" />
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap">{{ game.name }}</td>
+                <td class="px-4 py-4x">{{ game.name }}</td>
                 <td class="px-4 py-4 whitespace-nowrap">{{ game.title }}</td>
                 <td class="px-4 py-4 whitespace-nowrap">{{ game.width }} x {{ game.height }}</td>
                 <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">

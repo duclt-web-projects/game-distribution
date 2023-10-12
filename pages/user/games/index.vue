@@ -4,7 +4,7 @@ import { useHttp } from "@/composables/useHttp";
 import { ROUTE_NAMES } from "@/constants";
 import UserLayout from "@/layouts/UserLayout.vue";
 import { useUserStore } from "@/stores/useUserStore";
-import { convertStringToDate } from '@/utils/functions';
+import { convertStringToDate } from "@/utils/functions";
 
 useHead({
   title: "User - XGame Studio",
@@ -33,7 +33,7 @@ const userStore = useUserStore();
 const currentPage = ref(1);
 const modalActive = ref(null);
 
-const { data: games } = await useHttp(() => `/games/user/${userStore.user.id}?page=${currentPage.value}`, {
+const { data: games } = await useHttp(() => `/games/user/1?page=${currentPage.value}`, {
   server: false,
 });
 
@@ -48,90 +48,74 @@ const toggleModal = () => {
 
 <template>
   <UserLayout>
-    <div class="flex justify-end">
-      <NuxtLink
-        :to="ROUTE_NAMES.USER_GAME_ADD"
-        class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
-      >
-        <IconPlush class="mr-1 fill-gray-50" /> Add game
-      </NuxtLink>
-    </div>
-    <div class="flex flex-col mt-8">
-      <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-          <table class="min-w-full">
-            <thead>
-              <tr>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Id
+    <div class="bg-white rounded mt-4 shadow overflow-hidden">
+      <div class="flex justify-between items-center p-4">
+        <h1 class="font-bold">List of Games</h1>
+        <NuxtLink
+          :to="ROUTE_NAMES.USER_GAME_ADD"
+          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+        >
+          <IconPlush class="mr-1 fill-gray-50" /> Add game
+        </NuxtLink>
+      </div>
+      <div class="px-4">
+        <div class="pb-5 overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-slate-200 border border-gray-200">
+              <tr class="text-slate-900 text-sm text-left">
+                <th class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900">
+                  <input type="checkbox" class="border-gray-400" @click="toggleAllSelect" />
                 </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Name
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Thumbnail
-                </th>
-                <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                >
-                  Published at
-                </th>
-                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50" />
+                <th class="px-4 py-4 font-medium">Name</th>
+                <th class="px-4 py-4 font-medium">Thumbnail</th>
+                <th class="px-4 py-4 font-medium">Size</th>
+                <th class="px-4 py-4 font-medium">Status</th>
+                <th class="px-4 py-4 font-medium whitespace-nowrap">Published at</th>
+                <th class="px-4 py-4 font-medium whitespace-nowrap">Created at</th>
+                <th class="w-[60px] px-4 py-4 font-medium"></th>
               </tr>
             </thead>
-
-            <tbody class="bg-white">
-              <tr v-if="!games" class="loading-wrapper">
-                <td colSpan="5" class="text-center p-4">
+            <tbody class="border">
+              <tr v-if="!games || !games.data" class="loading-wrapper">
+                <td colSpan="7" class="text-center p-4">
                   <Loading />
                 </td>
               </tr>
               <tr v-else-if="games.data.length === 0" class="loading-wrapper">
-                <td colSpan="5" class="text-center p-4">
+                <td colSpan="7" class="text-center p-4">
                   <div>No data</div>
                 </td>
               </tr>
               <template v-else>
-                <tr v-for="(game, index) in games.data" :key="index">
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ index + 1 }}
+                <tr class="odd:bg-white even:bg-slate-50 text-sm text-slate-900" v-for="(game, i) in games.data">
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    <input type="checkbox" class="rounded border-gray-400" data-id="v.id" />
                   </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ game.name }}
+                  <td class="px-4 py-4">{{ game.name }}</td>
+                  <td class="px-4 py-4 whitespace-nowrap">{{ game.title }}</td>
+                  <td class="px-4 py-4 whitespace-nowrap">{{ game.width }} x {{ game.height }}</td>
+                  <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
+                    <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full" v-if="game.status === 1">
+                      Accepted
+                    </span>
+                    <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> Rejected </span>
                   </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    <img class="w-10 h-10" :src="`${BACKEND_URL}${game.thumbnail}`" alt="" />
-                  </td>
-
-                  <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                    {{ convertStringToDate(game.published_at) }}
-                  </td>
-
-                  <td
-                    class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap"
-                  >
-                    <div class="flex items-center">
-                      <NuxtLink :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`" class="w-4 h-4 mr-2">
-                        <IconEdit class="w-full h-full fill-yellow-500" />
-                      </NuxtLink>
-                      <IconTrash class="w-4 h-4 fill-red-500 cursor-pointer" @click="toggleModal" />
-                    </div>
+                  <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.published_at) }}</td>
+                  <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.created_at) }}</td>
+                  <td class="h-[52px] px-4 flex items-center gap-1">
+                    <NuxtLink :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`" class="w-4 h-4 mr-2">
+                      <IconEdit class="w-full h-full fill-yellow-500" />
+                    </NuxtLink>
+                    <IconTrash class="w-4 h-4 fill-red-500 cursor-pointer" @click="toggleModal" />
                   </td>
                 </tr>
               </template>
             </tbody>
           </table>
-          <div v-if="games && games.data.length" class="flex justify-end p-4 bg-white">
-            <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
-          </div>
+        </div>
+
+        <div v-if="games && games.data.length" class="flex justify-end p-4 bg-white">
+          <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
         </div>
       </div>
     </div>

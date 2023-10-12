@@ -31,7 +31,8 @@ useHead({
 
 <style lang="scss" scoped>
 section.intro-container {
-  padding-bottom: 1.111em;
+  padding-top: 6rem;
+  padding-bottom: 1rem;
 }
 
 section.catalog-info-container {

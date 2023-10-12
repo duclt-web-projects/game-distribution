@@ -1,6 +1,8 @@
 <script setup>
+import { useUrlConfig } from "@/composables/useUrlConfig";
 import { convertStringToDate } from "@/utils/functions";
 
+const { BACKEND_URL } = useUrlConfig();
 const props = defineProps({
   game: Object,
 });
@@ -12,22 +14,28 @@ const props = defineProps({
     <span>{{ convertStringToDate(game.published_at) }}</span>
   </div>
 
-  <div class="meta"><span class="label">Dimensions</span> <span>{{ game.width }} x {{ game.height }}</span></div>
+  <div class="meta">
+    <span class="label">Dimensions</span>
+    <span>{{ game.width }} x {{ game.height }}</span>
+  </div>
 
   <div class="meta">
-    <span class="label">Description</span>
-    <span v-html="game.description"></span>
+    <span class="label">Categories</span>
+    <span>
+      <NuxtLink v-for="(category, index) in game.categories" :key="index" :to="'/games'" class="pill" :title="category.name">
+        {{ category.name }}
+      </NuxtLink>
+    </span>
+  </div>
+
+  <div class="meta">
+    <span class="label">Thumbnail</span>
+    <span><img :src="BACKEND_URL + game.thumbnail" :alt="game.name" /></span>
   </div>
 
   <div class="thumbnails-container" style="display: none">
     <span class="label">Thumbnails &amp; Icons</span>
     <div class="thumbnails"></div>
-  </div>
-  <div class="thumbnails-download">
-    <a class="xg-button">
-      Download Images
-      <i class="fa fa-download"></i
-    ></a>
   </div>
 
   <div class="upsell">

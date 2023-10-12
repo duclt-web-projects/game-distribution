@@ -183,44 +183,37 @@ th {
   padding: 0;
 }
 
-// h1,
-// h2,
-// h3,
-// h4,
-// header small {
-//   border-bottom: 1px solid transparent;
-//   border-top: 1px solid transparent;
-//   color: #fff;
-//   display: inline-block;
-//   font-family: "Squada One", cursive;
-//   font-size: 2.556em;
-//   font-weight: 400;
-//   letter-spacing: 2px;
-//   line-height: 1em;
-//   margin: 0;
-//   padding: 13px 1px;
-//   text-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.5);
-//   text-transform: uppercase;
-// }
+.custom-heading {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  color: #fff;
+  display: inline-block;
+  font-family: "Squada One", cursive;
+  font-size: 2.556em;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1em;
+  margin: 0;
+  padding: 13px 1px;
+  text-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
 
-// h1,
-// h2,
-// h3 {
-//   border-bottom: 0;
-//   color: #4e96a0;
-//   display: block;
-//   margin-bottom: 0;
-//   padding: 0.4rem 0.2rem;
-//   text-shadow: 0 0 0 transparent;
-// }
-// h1,
-// h2,
-// h3 {
-//   border-top: 1px solid #dedede;
-// }
-// h1 {
-//   border-bottom: 1px solid #dedede;
-// }
+h1.custom-heading,
+h2.custom-heading,
+h3.custom-heading {
+  border-bottom: 0;
+  color: #4e96a0;
+  display: block;
+  margin-bottom: 0;
+  padding: 0.4rem 0.2rem;
+  text-shadow: 0 0 0 transparent;
+  border-top: 1px solid #dedede;
+}
+
+h1.custom-heading {
+  border-bottom: 1px solid #dedede;
+}
 
 header {
   position: relative;
@@ -230,7 +223,7 @@ header:after {
   content: "";
   display: table;
 }
-header small {
+header small .custom-heading {
   border-bottom: 0;
   border-top: 1px solid transparent;
   color: #fff;
@@ -238,7 +231,6 @@ header small {
   letter-spacing: 1px;
   padding: 0.591em 0.045em;
   text-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.5);
-  margin: 0.67em 0;
 }
 
 header h1,

@@ -3,8 +3,8 @@
     <div class="wrapper">
       <article>
         <header>
-          <small><span>Connecting Games &amp; Players</span></small>
-          <h2>Games Catalog</h2>
+          <small class="custom-heading">Connecting Games &amp; Players</small>
+          <h2 class="custom-heading">Games Catalog</h2>
         </header>
         <p>
           XGame is the biggest broker of high quality, cross-platform games. We connect the best game developers to the
@@ -26,21 +26,20 @@
   }
 
   header {
-    h2,
-    h3 {
+    h2.custom-heading {
+      font-size: 4rem;
       border-bottom: 1px solid #dedede;
       border-top: 1px solid #dedede;
       color: #512e85;
       text-shadow: 0 0.07em 0 #dedede;
+      margin-bottom: 2rem;
     }
 
-    small {
+    small.custom-heading {
       border: none;
       color: #ff3a56;
-
-      span {
-        text-shadow: 0 0 0 transparent;
-      }
+      text-shadow: 0 0 0 transparent;
+      font-size: 1.25rem;
     }
   }
 

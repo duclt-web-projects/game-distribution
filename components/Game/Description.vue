@@ -12,22 +12,6 @@ const { BACKEND_URL } = useUrlConfig();
 <template>
   <div class="description-area" v-html="game.description"></div>
   <div class="input-container input-location">
-    <label class="label company">Example URL</label>
-    <input type="text" readonly="readonly" />
-    <a href="" target="_blank" class="xg-button">
-      Open
-      <i class="fa fa-external-link"></i
-    ></a>
-  </div>
-  <div class="input-container input-embed">
-    <label class="label">Embed</label>
-    <input type="text" id="clipboard-content" readonly="readonly" />
-    <span class="xg-button">
-      Copy
-      <i class="fa fa-copy"></i
-    ></span>
-  </div>
-  <div class="input-container input-location">
     <a :href="`${BACKEND_URL}/${props.game?.source_link}`" target="_blank" class="xg-button" style="width: 100%">
       Open Game In New Tab
       <IconArrowUpRightFromSquare />
@@ -41,6 +25,7 @@ const { BACKEND_URL } = useUrlConfig();
   border-radius: 3px;
   color: #000;
   font-size: 15px;
+  padding: 16px;
 
   > p {
     margin: auto;

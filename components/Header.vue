@@ -103,6 +103,7 @@ nav {
   .logo {
     height: 46px;
     margin: auto;
+    margin-bottom: 20px;
 
     :deep(img) {
       height: auto;
@@ -192,10 +193,6 @@ nav {
 
     .menu-icon {
       display: none;
-    }
-
-    .logo {
-      margin: initial;
     }
 
     .desktop-navigation {

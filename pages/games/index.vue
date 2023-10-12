@@ -34,11 +34,11 @@ const handleSelectCategory = (val: number) => {
 
 <template>
   <MainLayout>
-    <section>
+    <section class="pt-20">
       <div class="wrapper">
         <div class="content">
-          <!-- <GamesSlidesContainer /> -->
-          <div class="columns">
+          <GamesSlidesContainer />
+          <div class="columns mt-5">
             <div class="column">
               <GamesContainer :categories="selectedCategories"/>
             </div>

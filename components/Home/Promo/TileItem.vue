@@ -24,12 +24,12 @@ const { BACKEND_URL } = useUrlConfig();
     >
       <div class="promo-info">
         <h3 v-if="isFeatured">
-          <NuxtLink :to="`/games/${item.slug}`" :title="item.name">
+          <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="custom-heading">
             {{ item.name }}
           </NuxtLink>
         </h3>
         <h4 v-else>
-          <NuxtLink :to="`/games/${item.slug}`" :title="item.name">
+          <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="custom-heading">
             {{ item.name }}
           </NuxtLink>
         </h4>

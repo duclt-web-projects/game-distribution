@@ -15,7 +15,7 @@ const { BACKEND_URL } = useUrlConfig();
       </div>
     </div>
     <div class="promo-info">
-      <h4>
+      <h4 class="custom-heading">
         {{ item.name }}
       </h4>
       <small> By XGame</small>

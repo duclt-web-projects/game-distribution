@@ -7,7 +7,7 @@ const props = defineProps({
 
 <template>
   <div class="games-container-wrapper">
-    <h3>{{ title }}</h3>
+    <h3 class="custom-heading">{{ title }}</h3>
     <div class="games-container">
       <template v-if="games">
         <GameCard v-for="item in games" :key="item.id" :item="item" />

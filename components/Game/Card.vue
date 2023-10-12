@@ -47,16 +47,14 @@ const { BACKEND_URL } = useUrlConfig();
 
   .title {
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
     color: #512e85;
     display: -webkit-box;
+    -webkit-box-orient: vertical;
     font-family: "Squada One", cursive;
     font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 1px;
-    line-height: 1em;
     overflow: hidden;
-    -webkit-text-decoration: none;
     text-decoration: none;
     text-overflow: ellipsis;
     text-shadow: none;

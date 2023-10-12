@@ -31,7 +31,7 @@ useHead({
 
 <template>
   <MainLayout>
-    <section>
+    <section  class="pt-20">
       <div class="wrapper">
         <div v-if="!game">Loading ...</div>
         <div v-else class="content">
@@ -39,7 +39,7 @@ useHead({
             <div class="column" style="flex: 1 1 0%"></div>
             <div class="column game-title" style="flex: 3 1 0%">
               <div class="game-title">
-                <h1>{{ game.name }}</h1>
+                <h1 class="custom-heading">{{ game.name }}</h1>
               </div>
             </div>
             <div class="column" style="flex: 3 1 0%">

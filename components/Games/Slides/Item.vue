@@ -1,3 +1,14 @@
+<script setup>
+import { useHttp } from "../../../composables/useHttp";
+
+const props = defineProps({
+  logo: String,
+  bgImage: String,
+  type: String,
+});
+const { data: games } = await useHttp(() => `/games/featured-list?type=${props.type}`);
+</script>
+
 <template>
   <div>
     <div class="collection-header">
@@ -8,17 +19,14 @@
         </div>
       </div>
     </div>
-    <div
-      class="slides-container"
-      style="background-image: url('https://img.gamedistribution.com/collections/banner/exclusive.jpg')"
-    >
+    <div class="slides-container" :style="{ 'background-image': `url(${props.bgImage})` }">
       <div>
         <div>
           <div class="company-logo no-company" style="border-color: rgb(81, 48, 133)">
-            <img src="https://img.gamedistribution.com/collections/logo/exclusive-logo.png" />
+            <img :src="props.logo" />
           </div>
-          <template v-if="!gamesSlide">
-            <GameCard v-for="item in gamesSlide" :key="item.id" :item="item" />
+          <template v-if="games">
+            <GameCard v-for="item in games" :key="item.id" :item="item" />
           </template>
           <Loading v-else />
         </div>
@@ -26,11 +34,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { games } from "@/data/games";
-const gamesSlide = games.slice(0, 6);
-</script>
 
 <style lang="scss" scoped>
 .collection-header {

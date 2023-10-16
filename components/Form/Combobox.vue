@@ -294,7 +294,6 @@ function clearSelection() {
 
 <style>
 button {
-  border: inherit;
   box-sizing: border-box;
 }
 </style>

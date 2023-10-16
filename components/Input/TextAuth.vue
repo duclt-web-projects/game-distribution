@@ -2,7 +2,7 @@
 const emit = defineEmits(['update:input']);
 
 const props = defineProps({
-  input: Object,
+  input: String,
   placeholder: String,
   inputType: {
     type: String,

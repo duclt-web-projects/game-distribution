@@ -21,6 +21,7 @@ export const useUserStore = defineStore('user', () => {
     }
 
     user.value = null;
+    token.value = null;
 
     return {
       status: RESPONSE_STATUS.SUCCESS,
@@ -78,7 +79,6 @@ export const useUserStore = defineStore('user', () => {
     );
 
     if (data.value) {
-      localStorage.setItem('access_token', data.value.access_token);
       return {
         status: RESPONSE_STATUS.SUCCESS,
         message: 'Refresh token success',
@@ -86,7 +86,6 @@ export const useUserStore = defineStore('user', () => {
     }
 
     user.value = null;
-    localStorage.removeItem('access_token');
 
     return {
       status: RESPONSE_STATUS.FAILED,

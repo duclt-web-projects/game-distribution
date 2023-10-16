@@ -22,7 +22,6 @@ useHead({
 });
 
 const userStore = useUserStore();
-
 const { $toast } = useNuxtApp();
 
 const email = ref('');

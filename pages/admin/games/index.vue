@@ -4,7 +4,7 @@ import AdminLayout from '@/layouts/AdminLayout.vue';
 import { IResponsePaginate } from '@/types/response';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
-import { IGame } from '../../../types/game';
+import { IGame } from '@/types/game';
 
 useHead({
   title: 'Games - Admin - XGame Studio',

@@ -27,14 +27,13 @@ definePageMeta({
   middleware: ['auth-user'],
 });
 
-const { BACKEND_URL } = useUrlConfig();
 const userStore = useUserStore();
 
 const currentPage = ref(1);
 const modalActive = ref(null);
 
 const { data: games } = await useHttp(
-  () => `/games/user/1?page=${currentPage.value}`,
+  () => `/games/user/${userStore.user.id}?page=${currentPage.value}`,
   {
     server: false,
   },
@@ -91,7 +90,7 @@ const toggleModal = () => {
             <tbody class="border">
               <tr v-if="!games || !games.data" class="loading-wrapper">
                 <td colSpan="7" class="text-center p-4">
-                  <Loading />
+                  <Spinner />
                 </td>
               </tr>
               <tr v-else-if="games.data.length === 0" class="loading-wrapper">
@@ -119,7 +118,13 @@ const toggleModal = () => {
                   </td>
                   <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
                     <span
-                      v-if="game.status === 1"
+                      v-if="game.status === 0"
+                      class="bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full"
+                    >
+                      Pending
+                    </span>
+                    <span
+                      v-else-if="game.status === 1"
                       class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full"
                     >
                       Accepted
@@ -175,4 +180,9 @@ const toggleModal = () => {
   </UserLayout>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+:deep(.spinner) {
+  border-color: #cbd5e1;
+  border-bottom-color: transparent;
+}
+</style>

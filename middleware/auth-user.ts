@@ -3,6 +3,7 @@ import { useUserStore } from '@/stores/useUserStore';
 
 export default defineNuxtRouteMiddleware((to, from) => {
   const auth = useUserStore();
+
   const redirectRoute = [ROUTE_NAMES.LOGIN, ROUTE_NAMES.LOGOUT];
 
   if (!auth.isLoggedIn) {

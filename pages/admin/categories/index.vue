@@ -1,7 +1,9 @@
 <script setup>
 import { useHttp } from '@/composables/useHttp';
+import { adminCategoryPageBreadcrumbs } from '@/config/breadcrumbs';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import { PlusSmallIcon } from '@heroicons/vue/24/outline';
+import { PlusIcon } from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'Category - Admin - XGame Studio',
@@ -121,14 +123,15 @@ const handleAddCategory = async () => {
 
 <template>
   <AdminLayout>
+    <Breadcrumb :breadcrumbs="adminCategoryPageBreadcrumbs" />
+    <DashboardHeading title="Category List" />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
-      <div class="flex justify-between items-center p-4">
-        <h1 class="font-bold">Category List</h1>
+      <div class="flex justify-end items-center p-4">
         <button
-          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+          class="flex items-center btn-search p-2 ml-2 text-xs font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
           @click="addCategory"
         >
-          <PlusSmallIcon class="w-4 h-4 stroke-white" /> Add
+          <PlusSmallIcon class="w-4 h-4 stroke-white" /> Add Category
         </button>
       </div>
       <div class="overflow-x-auto px-4 pb-5">
@@ -247,14 +250,14 @@ const handleAddCategory = async () => {
                 : 'bg-emerald-600 border-emerald-700 hover:bg-emerald-700'
             "
           >
-            <div class="mr-1 flex items-center w-10 h-5 justify-center">
+            <div class="mr-1 flex items-center justify-center">
               <Spinner v-if="false" />
               <template v-else>
                 <PencilSquareIcon
                   v-if="currentCategory"
-                  class="mr-1 fill-white"
+                  class="mr-1 fill-white w-5 h-5"
                 />
-                <PlusSmallIcon class="w-5 h-5 text-white mr-1" />
+                <PlusIcon class="w-4 h-4 text-white mr-1" />
                 {{ currentCategory ? 'Edit' : 'Add' }}
               </template>
             </div>
@@ -271,7 +274,9 @@ const handleAddCategory = async () => {
 }
 
 :deep(.spinner) {
-  border-color: #cbd5e1;
   border-bottom-color: transparent;
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
 }
 </style>

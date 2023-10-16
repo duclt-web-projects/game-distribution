@@ -5,6 +5,7 @@ import { IGame } from '@/types/game';
 import { IResponsePaginate } from '@/types/response';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
+import { adminGamePageBreadcrumbs } from '@/config/breadcrumbs';
 
 useHead({
   title: 'Games - Admin - XGame Studio',
@@ -86,11 +87,10 @@ const toggleAllSelect = (e: MouseEvent) => {
 
 <template>
   <AdminLayout>
+    <Breadcrumb :breadcrumbs="adminGamePageBreadcrumbs" />
+    <DashboardHeading title="Games by User" />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
-      <div class="flex justify-between items-center p-4">
-        <h1 class="font-bold">Games by User</h1>
-      </div>
-      <div class="overflow-x-auto px-4 pb-5">
+      <div class="overflow-x-auto p-4">
         <table class="w-full overflow-x-auto">
           <thead class="bg-slate-200 border border-gray-200">
             <tr class="text-slate-900 text-sm text-left">
@@ -137,6 +137,7 @@ const toggleAllSelect = (e: MouseEvent) => {
                   />
                 </td>
                 <td class="px-4 py-4x">{{ game.name }}</td>
+                <td class="px-4 py-4x"></td>
                 <td class="px-4 py-4 whitespace-nowrap">
                   {{ game.width }} x {{ game.height }}
                 </td>

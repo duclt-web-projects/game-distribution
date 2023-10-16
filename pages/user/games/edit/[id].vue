@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUrlConfig } from '@/composables/useUrlConfig';
+import { userGameEditPageBreadcrumbs } from '@/config/breadcrumbs';
 import UserLayout from '@/layouts/UserLayout.vue';
 
 useHead({
@@ -31,6 +32,8 @@ const { data: game } = await useFetch(() => `${API_URL}/game/${id}`);
 
 <template>
   <UserLayout>
+    <Breadcrumb :breadcrumbs="userGameEditPageBreadcrumbs" />
+    <DashboardHeading title="Edit game" />
     <Loading v-if="!game" />
     <UserGameForm v-else :game="game" />
   </UserLayout>

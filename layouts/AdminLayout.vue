@@ -31,11 +31,11 @@ const menus = [
     icon: TagIcon,
     path: '/admin/categories',
   },
-  {
-    name: 'User',
-    icon: UserIcon,
-    path: '/admin',
-  },
+  // {
+  //   name: 'User',
+  //   icon: UserIcon,
+  //   path: '/admin',
+  // },
 ];
 const adminStore = useAdminStore();
 

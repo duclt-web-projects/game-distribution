@@ -158,10 +158,6 @@ const handleAddNewGame = async () => {
 </script>
 
 <template>
-  <Breadcrumb />
-  <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">
-    {{ game ? 'Edit game' : 'Add new game' }}
-  </h2>
   <form @submit.prevent="handleAddNewGame">
     <div class="shadow rounded overflow-hidden">
       <div class="bg-white px-4 py-5 sm:p-6">

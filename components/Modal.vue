@@ -1,4 +1,6 @@
 <script setup>
+import { XMarkIcon } from '@heroicons/vue/24/solid';
+
 defineEmits(['close-modal']);
 defineProps({
   modalActive: {
@@ -23,10 +25,10 @@ defineProps({
           >
             <slot />
             <button
-              class="bg-weather-primary py-2 px-6 absolute top-0 right-1"
+              class="bg-weather-primary py-2 px-6 absolute top-4 right-1"
               @click="$emit('close-modal')"
             >
-              x
+              <XMarkIcon class="w-4 h-4" />
             </button>
           </div>
         </Transition>

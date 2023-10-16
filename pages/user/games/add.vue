@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { userGameAddPageBreadcrumbs } from '@/config/breadcrumbs';
 import UserLayout from '@/layouts/UserLayout.vue';
 
 useHead({
@@ -25,6 +26,8 @@ definePageMeta({
 
 <template>
   <UserLayout>
+    <Breadcrumb :breadcrumbs="userGameAddPageBreadcrumbs" />
+    <DashboardHeading title="Add new game" />
     <UserGameForm />
   </UserLayout>
 </template>

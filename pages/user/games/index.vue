@@ -1,5 +1,6 @@
 <script setup>
 import { useHttp } from '@/composables/useHttp';
+import { userGamePageBreadcrumbs } from '@/config/breadcrumbs';
 import { ROUTE_NAMES } from '@/constants';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { useUserStore } from '@/stores/useUserStore';
@@ -54,12 +55,13 @@ const toggleModal = () => {
 
 <template>
   <UserLayout>
+    <Breadcrumb :breadcrumbs="userGamePageBreadcrumbs" />
+    <DashboardHeading title="List of Games" />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
-      <div class="flex justify-between items-center p-4">
-        <h1 class="font-bold">List of Games</h1>
+      <div class="flex justify-end items-center p-4">
         <NuxtLink
           :to="ROUTE_NAMES.USER_GAME_ADD"
-          class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+          class="flex items-center btn-search p-2 ml-2 text-xs font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
         >
           <PlusSmallIcon class="w-5 h-5 text-white mr-1" /> Add game
         </NuxtLink>

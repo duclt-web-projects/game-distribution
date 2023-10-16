@@ -5,7 +5,7 @@ const route = useRoute();
 const { isCollapse } = useSidebar();
 const props = defineProps({
   navList: {
-    type: Array,
+    type: Array<Object>,
     default() {
       return [];
     },

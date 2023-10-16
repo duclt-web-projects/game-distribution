@@ -2,8 +2,8 @@
   <nav>
     <div class="wrapper">
       <div class="menu-icon" @click="onOpenMenuMobile">
-        <IconMenuBurger v-show="!isShowMenuMobile" class="rotate" />
-        <IconTime v-show="isShowMenuMobile" class="rotate" />
+        <Bars3Icon v-show="!isShowMenuMobile" class="rotate" />
+        <XMarkIcon v-show="isShowMenuMobile" class="rotate" />
       </div>
       <div v-show="isShowMenuMobile" class="mobile-navigation slide-right">
         <nuxt-link
@@ -70,9 +70,8 @@
 </template>
 
 <script setup>
-import IconMenuBurger from '@/assets/icon/MenuBurger.vue';
-import IconTime from '@/assets/icon/Time.vue';
 import { headers, headersMobile } from '@/config/header';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/solid';
 
 const isShowMenuMobile = ref(false);
 const route = useRoute();
@@ -120,7 +119,7 @@ nav {
     svg {
       width: 30px;
       height: 30px;
-      fill: #512e85;
+      stroke: #512e85;
       transform: rotate(0deg);
       transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
     }

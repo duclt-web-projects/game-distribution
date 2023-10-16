@@ -1,10 +1,14 @@
 <script setup>
-import { IconEdit, IconPlush, IconTrash } from '@/assets/icon';
 import { useHttp } from '@/composables/useHttp';
 import { ROUTE_NAMES } from '@/constants';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { useUserStore } from '@/stores/useUserStore';
 import { convertStringToDate } from '@/utils/functions';
+import {
+  PencilSquareIcon,
+  PlusSmallIcon,
+  TrashIcon,
+} from '@heroicons/vue/24/outline';
 
 useHead({
   title: 'User - XGame Studio',
@@ -57,7 +61,7 @@ const toggleModal = () => {
           :to="ROUTE_NAMES.USER_GAME_ADD"
           class="flex items-center btn-search p-2.5 ml-2 text-sm font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
         >
-          <IconPlush class="mr-1 fill-gray-50" /> Add game
+          <PlusSmallIcon class="w-5 h-5 text-white mr-1" /> Add game
         </NuxtLink>
       </div>
       <div class="px-4">
@@ -145,12 +149,12 @@ const toggleModal = () => {
                   <td class="h-[52px] px-4 flex items-center gap-1">
                     <NuxtLink
                       :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`"
-                      class="w-4 h-4 mr-2"
+                      class="mr-2"
                     >
-                      <IconEdit class="w-full h-full fill-yellow-500" />
+                      <PencilSquareIcon class="w-5 h-5 text-yellow-600" />
                     </NuxtLink>
-                    <IconTrash
-                      class="w-4 h-4 fill-red-500 cursor-pointer"
+                    <TrashIcon
+                      class="w-5 h-5 text-red-500 cursor-pointer"
                       @click="toggleModal"
                     />
                   </td>

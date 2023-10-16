@@ -1,7 +1,7 @@
 <template>
   <form class="form" @submit.prevent="">
     <div class="input-group">
-      <IconSearch />
+      <MagnifyingGlassIcon class="w-5 h-5" />
       <input
         type="search"
         autocorrect="off"
@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import IconSearch from '@/assets/icon/Search.vue';
 import { useDebounce } from '@/composables/useDebounce';
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 
 const { modelValue, debounceDelay = 300 } = defineProps({
   modelValue: String,

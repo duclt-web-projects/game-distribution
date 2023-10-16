@@ -1,5 +1,4 @@
 <script setup>
-import { IconEdit, IconPlush } from '@/assets/icon';
 import { useHttp } from '@/composables/useHttp';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import { PlusSmallIcon } from '@heroicons/vue/24/outline';
@@ -203,7 +202,7 @@ const handleAddCategory = async () => {
                       :value="category.status === 1"
                       @update:model-value="handleChangeStatus(category.id)"
                     />
-                    <IconEdit
+                    <PencilSquareIcon
                       class="w-5 h-5 ml-4 fill-yellow-500 cursor-pointer"
                       @click="editCategory(category.id)"
                     />
@@ -251,8 +250,11 @@ const handleAddCategory = async () => {
             <div class="mr-1 flex items-center w-10 h-5 justify-center">
               <Spinner v-if="false" />
               <template v-else>
-                <IconEdit v-if="currentCategory" class="mr-1 fill-white" />
-                <IconPlush v-else class="mr-1 fill-white" />
+                <PencilSquareIcon
+                  v-if="currentCategory"
+                  class="mr-1 fill-white"
+                />
+                <PlusSmallIcon class="w-5 h-5 text-white mr-1" />
                 {{ currentCategory ? 'Edit' : 'Add' }}
               </template>
             </div>

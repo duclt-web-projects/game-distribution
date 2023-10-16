@@ -15,7 +15,7 @@
         @click="emit('changeShowGrid')"
       >
         <IconGrid v-if="showGrid" />
-        <IconList v-else />
+        <ListBulletIcon v-else />
       </button>
       <SearchBox v-model="searchQuery" :debounce-delay="500" />
     </div>
@@ -24,7 +24,7 @@
 
 <script setup>
 import IconGrid from '@/assets/icon/Grid.vue';
-import IconList from '@/assets/icon/List.vue';
+import { ListBulletIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
   showGrid: Boolean,

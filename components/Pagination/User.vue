@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { IconAngleLeft, IconAngleRight } from '@/assets/icon';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
   currentPage: Number,
@@ -52,7 +52,7 @@ const handleChangePage = (page) => {
         @click="handleChangePage(currentPage - 1)"
       >
         <a disabled="disabled">
-          <IconAngleLeft class="fill-gray-500" />
+          <ChevronLeftIcon class="w-4 h-4" />
         </a>
       </li>
       <li
@@ -83,7 +83,7 @@ const handleChangePage = (page) => {
           @click="handleChangePage(currentPage + 1)"
         >
           <span class="sr-only">Next</span>
-          <IconAngleRight class="fill-gray-500" />
+          <ChevronRightIcon class="w-4 h-4" />
         </a>
       </li>
     </ul>

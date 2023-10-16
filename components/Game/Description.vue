@@ -10,7 +10,7 @@ const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
-  <div class="description-area">{{ game.description }}</div>
+  <div class="description-area" v-html="game.description"></div>
   <div class="input-container input-location">
     <a
       :href="`/games-fullscreen/${props.game?.slug}`"
@@ -19,7 +19,7 @@ const { BACKEND_URL } = useUrlConfig();
       style="width: 100%"
     >
       Open Game In New Tab
-      <IconArrowUpRightFromSquare />
+      <IconArrowUpRightFromSquare class="w-3 h-3 ml-2 mb-1" />
     </a>
   </div>
 </template>
@@ -59,6 +59,9 @@ const { BACKEND_URL } = useUrlConfig();
   .xg-button {
     text-align: center;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     svg {
       fill: #fff;

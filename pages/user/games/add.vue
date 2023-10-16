@@ -19,7 +19,7 @@ useHead({
 });
 
 definePageMeta({
-  middleware: "auth-user",
+middleware: "auth-user",
 });
 </script>
 

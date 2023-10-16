@@ -2,6 +2,7 @@
 import { RESPONSE_STATUS } from '@/constants';
 import { ROUTE_NAMES } from '@/constants/routes';
 import { useAdminStore } from '@/stores/useAdminStore';
+import { LockClosedIcon } from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'Admin Login - XGame Studio',
@@ -77,13 +78,20 @@ const validate = () => {
 </script>
 
 <template>
-  <div class="h-screen bg-gray-200 py-20 p-4 md:p-20 lg:p-32">
-    <div class="max-w-sm bg-white rounded-lg overflow-hidden shadow-lg mx-auto">
-      <div class="p-6">
-        <div class="flex justify-center mb-5">
+  <div class="grid grid-cols-1 lg:grid-cols-2 h-screen m-4 lg:m-0">
+    <div
+      class="hidden bg-cover bg-no-repeat bg-center lg:block"
+      :style="{ backgroundImage: `url(/images/landing.jpg)` }"
+    ></div>
+    <div class="flex justify-center items-center">
+      <div class="w-96 space-y-8 lg:w-96">
+        <div class="flex justify-center">
           <img src="/images/logos/logo.png" alt="logo" class="w-[200px]" />
         </div>
-        <form>
+        <h2 class="mt-6 text-center text-[28px] font-extrabold text-gray-900">
+          Sign in to your account
+        </h2>
+        <form class="mt-8 space-y-6" @submit.prevent="login">
           <FormField label="Email" :error="errors.email" required>
             <FormInput
               v-model="email"
@@ -101,20 +109,17 @@ const validate = () => {
             />
           </FormField>
 
-          <div class="flex items-center justify-between mt-5">
-            <a
-              class="inline-block align-baseline font-semibold text-xs text-sm text-blue-500 hover:text-blue-800"
-              href="#"
-            >
-              Forgot Password?
-            </a>
-          </div>
           <button
-            class="w-full h-10 bg-blue-500 flex items-center justify-center hover:bg-blue-700 text-white font-bold px-4 mt-5 rounded focus:outline-none focus:shadow-outline"
-            type="button"
-            @click="login"
+            type="submit"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
           >
-            <Spinner v-show="isLoading" />
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <LockClosedIcon
+                class="h-5 w-5 text-emerald-500 group-hover:text-emerald-400"
+                aria-hidden="true"
+              />
+            </span>
+            <Spinner v-show="isLoading" class="mr-2" />
             Log In
           </button>
         </form>
@@ -125,7 +130,8 @@ const validate = () => {
 
 <style scoped>
 :deep(.spinner) {
-  width: 20px;
-  height: 20px;
+  width: 20px !important;
+  height: 20px !important;
+  border-width: 2px !important;
 }
 </style>

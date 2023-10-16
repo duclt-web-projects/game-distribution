@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAdminStore } from '@/stores/useAdminStore';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import {
   HomeIcon,
@@ -36,10 +37,16 @@ const menus = [
     path: '/admin',
   },
 ];
+const adminStore = useAdminStore();
 
 onMounted(() => {
   document.body.className = '';
 });
+
+const logout = async () => {
+  await adminStore.logout();
+  navigateTo('/admin/login');
+};
 </script>
 
 <template>
@@ -91,6 +98,7 @@ onMounted(() => {
                       active ? 'bg-gray-500 text-white' : 'text-gray-900',
                       'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]"
+                    @click="logout"
                   >
                     <TrashIcon
                       :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']"

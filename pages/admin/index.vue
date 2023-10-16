@@ -8,6 +8,10 @@ import {
   TrashIcon,
 } from '@heroicons/vue/24/outline';
 
+definePageMeta({
+  middleware: ['auth-admin'],
+});
+
 const route = useRoute();
 const asideRef = ref<HTMLElement | null>(null);
 const asideMaskRef = ref<HTMLDivElement | null>(null);

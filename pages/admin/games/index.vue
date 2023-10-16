@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useHttp } from '@/composables/useHttp';
 import AdminLayout from '@/layouts/AdminLayout.vue';
+import { IGame } from '@/types/game';
 import { IResponsePaginate } from '@/types/response';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
-import { IGame } from '@/types/game';
 
 useHead({
   title: 'Games - Admin - XGame Studio',
@@ -23,9 +23,9 @@ useHead({
   ],
 });
 
-// definePageMeta({
-//   middleware: ["auth-admin"],
-// });
+definePageMeta({
+  middleware: ['auth-admin'],
+});
 
 const { BACKEND_URL } = useUrlConfig();
 
@@ -115,7 +115,7 @@ const toggleAllSelect = (e: MouseEvent) => {
           <tbody class="border">
             <tr v-if="!games || !games.data" class="loading-wrapper">
               <td colSpan="7" class="text-center p-4">
-                <Loading />
+                <Spinner />
               </td>
             </tr>
             <tr v-else-if="games.data.length === 0" class="loading-wrapper">
@@ -236,4 +236,9 @@ const toggleAllSelect = (e: MouseEvent) => {
   </AdminLayout>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+:deep(.spinner) {
+  border-color: #cbd5e1;
+  border-bottom-color: transparent;
+}
+</style>

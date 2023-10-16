@@ -153,7 +153,7 @@ const handleAddCategory = async () => {
           <tbody class="border">
             <tr v-if="!categories || !categories.data" class="loading-wrapper">
               <td colSpan="7" class="text-center p-4">
-                <Loading />
+                <Spinner />
               </td>
             </tr>
             <tr
@@ -268,5 +268,10 @@ const handleAddCategory = async () => {
 <style scoped>
 .dropdown:hover .dropdown-menu {
   display: block;
+}
+
+:deep(.spinner) {
+  border-color: #cbd5e1;
+  border-bottom-color: transparent;
 }
 </style>

@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import NavList from "@/components/Nav/List.vue";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { Bars3Icon, MagnifyingGlassIcon, PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
+import NavList from '@/components/Nav/List.vue';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import {
+  Bars3Icon,
+  MagnifyingGlassIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from '@heroicons/vue/24/outline';
 
 const route = useRoute();
 const asideRef = ref<HTMLElement | null>(null);
@@ -12,26 +17,26 @@ const toggleAside = () => {
   const asideClassList = asideRef.value?.classList;
   const asideMaskClassList = asideMaskRef.value?.classList;
 
-  asideClassList?.toggle("-translate-x-full");
-  asideClassList?.toggle("lg:w-[80px]");
+  asideClassList?.toggle('-translate-x-full');
+  asideClassList?.toggle('lg:w-[80px]');
   isCollapse.value = !isCollapse.value;
 
-  if (asideMaskClassList?.contains("invisible")) {
-    asideMaskClassList?.remove("invisible", "opacity-0");
-    asideMaskClassList?.add("visible", "opacity-50");
+  if (asideMaskClassList?.contains('invisible')) {
+    asideMaskClassList?.remove('invisible', 'opacity-0');
+    asideMaskClassList?.add('visible', 'opacity-50');
   } else {
-    asideMaskClassList?.add("invisible", "opacity-0");
-    asideMaskClassList?.remove("visible", "opacity-50");
+    asideMaskClassList?.add('invisible', 'opacity-0');
+    asideMaskClassList?.remove('visible', 'opacity-50');
   }
 };
 
 watch(route, () => {
   const asideClassList = asideRef.value?.classList;
   const asideMaskClassList = asideMaskRef.value?.classList;
-  if (asideMaskClassList?.contains("visible")) {
-    asideMaskClassList?.add("invisible", "opacity-0");
-    asideMaskClassList?.remove("visible", "opacity-50");
-    asideClassList?.toggle("-translate-x-full");
+  if (asideMaskClassList?.contains('visible')) {
+    asideMaskClassList?.add('invisible', 'opacity-0');
+    asideMaskClassList?.remove('visible', 'opacity-50');
+    asideClassList?.toggle('-translate-x-full');
   }
 });
 </script>
@@ -39,19 +44,28 @@ watch(route, () => {
 <template>
   <div class="flex">
     <aside
-      class="z-20 fixed top-0 left-0 bg-gray-800 w-[250px] h-screen overflow-y-auto pb-4 -translate-x-full transition-all duration-500 ease-in-out lg:static lg:translate-x-0 lg:shrink-0 lg:shadow-2xl lg:shadow-gray6-600"
       ref="asideRef"
+      class="z-20 fixed top-0 left-0 bg-gray-800 w-[250px] h-screen overflow-y-auto pb-4 -translate-x-full transition-all duration-500 ease-in-out lg:static lg:translate-x-0 lg:shrink-0 lg:shadow-2xl lg:shadow-gray6-600"
     >
-      <div class="sticky top-0 bg-gray-800 h-16 flex justify-center items-center shadow-md">
+      <div
+        class="sticky top-0 bg-gray-800 h-16 flex justify-center items-center shadow-md"
+      >
         <RouterLink to="/" class="text-white text-2xl font-medium h-full p-4">
-          <img class="h-full object-contain" src="/images/logos/logo-white.png" alt="" />
+          <img
+            class="h-full object-contain"
+            src="/images/logos/logo-white.png"
+            alt=""
+          />
         </RouterLink>
       </div>
-      <NavList :isCollapse="isCollapse" />
+      <NavList :is-collapse="isCollapse" />
     </aside>
     <div class="w-full">
       <header class="h-16 flex justify-between items-center p-4 shadow">
-        <Bars3Icon class="h-6 w-6 stroke-gray-600 lg:cursor-pointer" @click="toggleAside" />
+        <Bars3Icon
+          class="h-6 w-6 stroke-gray-600 lg:cursor-pointer"
+          @click="toggleAside"
+        />
         <form class="group relative ml-2 mr-auto">
           <MagnifyingGlassIcon
             class="w-5 h-5 absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500"
@@ -92,7 +106,10 @@ watch(route, () => {
                       'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]"
                   >
-                    <PencilSquareIcon :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']" aria-hidden="true" />
+                    <PencilSquareIcon
+                      :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']"
+                      aria-hidden="true"
+                    />
                     Profile
                   </button>
                 </MenuItem>
@@ -105,7 +122,10 @@ watch(route, () => {
                       'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                     ]"
                   >
-                    <TrashIcon :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']" aria-hidden="true" />
+                    <TrashIcon
+                      :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']"
+                      aria-hidden="true"
+                    />
                     Logout
                   </button>
                 </MenuItem>
@@ -116,8 +136,8 @@ watch(route, () => {
       </header>
     </div>
     <div
-      class="bg-black h-screen w-screen fixed top-0 left-0 z-10 opacity-0 invisible transition-all duration-500 lg:hidden"
       ref="asideMaskRef"
+      class="bg-black h-screen w-screen fixed top-0 left-0 z-10 opacity-0 invisible transition-all duration-500 lg:hidden"
       @click="toggleAside"
     ></div>
   </div>

@@ -19,7 +19,6 @@ export interface IAuthResponse {
   message: string;
 }
 
-
 export interface IAuthAdminResponse {
   admin: IUser;
   access_token: string;

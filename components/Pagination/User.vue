@@ -44,14 +44,22 @@ const handleChangePage = (page) => {
     <ul class="flex items-center -space-x-px h-8 text-sm">
       <li
         class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 border border-gray-300"
-        :class="isFirstPage ? 'bg-gray-300 disabled' : 'bg-white hover:bg-gray-100 hover:text-gray-700 '"
+        :class="
+          isFirstPage
+            ? 'bg-gray-300 disabled'
+            : 'bg-white hover:bg-gray-100 hover:text-gray-700 '
+        "
         @click="handleChangePage(currentPage - 1)"
       >
         <a disabled="disabled">
           <IconAngleLeft class="fill-gray-500" />
         </a>
       </li>
-      <li v-for="page in pages" :key="page.name" @click="handleChangePage(page.name)">
+      <li
+        v-for="page in pages"
+        :key="page.name"
+        @click="handleChangePage(page.name)"
+      >
         <a
           role="button"
           class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300"
@@ -67,7 +75,11 @@ const handleChangePage = (page) => {
         <a
           role="button"
           class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 border border-gray-300"
-          :class="isLastPage ? 'bg-gray-300 disabled' : 'bg-white hover:bg-gray-100 hover:text-gray-700 '"
+          :class="
+            isLastPage
+              ? 'bg-gray-300 disabled'
+              : 'bg-white hover:bg-gray-100 hover:text-gray-700 '
+          "
           @click="handleChangePage(currentPage + 1)"
         >
           <span class="sr-only">Next</span>

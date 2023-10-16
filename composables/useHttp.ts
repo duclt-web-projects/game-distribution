@@ -1,5 +1,5 @@
-import { UseFetchOptions, useFetch } from "#app";
-import { RESPONSE_STATUS_CODE } from "@/constants";
+import { UseFetchOptions, useFetch } from '#app';
+import { RESPONSE_STATUS_CODE } from '@/constants';
 
 interface IOptionsFetch<DataT> extends UseFetchOptions<DataT> {
   tokenKey?: string;
@@ -13,7 +13,7 @@ export function useHttp<DataT>(path, options: IOptionsFetch<DataT> = {}) {
   options.baseURL = config.public.apiUrl;
 
   // Add authentication token to request headers
-  const token = useCookie(options?.tokenKey ?? "access_token");
+  const token = useCookie(options?.tokenKey ?? 'access_token');
 
   if (token.value) {
     options.headers = {
@@ -30,12 +30,12 @@ export function useHttp<DataT>(path, options: IOptionsFetch<DataT> = {}) {
       case RESPONSE_STATUS_CODE.UNAUTHORIZED:
         throw new Error(response._data.message);
       default:
-        throw new Error("Something went wrong !!!");
+        throw new Error('Something went wrong !!!');
     }
   };
 
   return useFetch(path, {
-    method: "GET",
+    method: 'GET',
     ...options,
   });
 }

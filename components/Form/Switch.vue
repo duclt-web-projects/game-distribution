@@ -9,12 +9,12 @@ const props = defineProps({
   label: String,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
-const field = inject("field", props);
+const field = inject('field', props);
 
 const handleChange = ($event) => {
-  emit("update:modelValue", $event.target.value);
+  emit('update:modelValue', $event.target.value);
 };
 </script>
 
@@ -22,12 +22,12 @@ const handleChange = ($event) => {
   <div class="inline-flex items-center">
     <div class="relative inline-block h-4 w-8 cursor-pointer rounded-full">
       <input
-        type="checkbox"
         :id="field.id"
+        type="checkbox"
         :aria-describedby="field.ariaDescribedBy"
         :checked="props.value"
-        @change="handleChange"
         class="peer absolute h-4 w-8 cursor-pointer appearance-none rounded-full bg-gray-100 transition-colors duration-300 checked:bg-emerald-500 peer-checked:border-emerald-500 peer-checked:before:bg-emerald-500"
+        @change="handleChange"
       />
       <label
         :for="props.id"

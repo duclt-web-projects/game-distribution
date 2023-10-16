@@ -40,7 +40,10 @@ const handleChangePage = (page) => {
 <template>
   <div class="VuePagination">
     <nav>
-      <ul class="VuePagination__pagination pagination VuePagination__pagination" style="">
+      <ul
+        class="VuePagination__pagination pagination VuePagination__pagination"
+        style=""
+      >
         <li
           class="page-item VuePagination__pagination-item VuePagination__pagination-item-prev-page VuePagination__pagination-item-prev-chunk"
           :class="isFirstPage ? 'disabled' : ''"

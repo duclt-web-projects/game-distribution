@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import { RESPONSE_STATUS, ROUTE_NAMES } from "@/constants";
-import AuthLayout from "@/layouts/AuthLayout.vue";
-import { useUserStore } from "@/stores/useUserStore";
+import { RESPONSE_STATUS, ROUTE_NAMES } from '@/constants';
+import AuthLayout from '@/layouts/AuthLayout.vue';
+import { useUserStore } from '@/stores/useUserStore';
 
 useHead({
-  title: "Register - XGame Studio",
+  title: 'Register - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Register - XGame Studio" },
+    { name: 'ogTitle', content: 'Register - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
   bodyAttrs: {
-    class: "register",
+    class: 'register',
   },
 });
 
 const userStore = useUserStore();
 const { $toast } = useNuxtApp();
 
-const name = ref("");
-const email = ref("");
-const password = ref("");
+const name = ref('');
+const email = ref('');
+const password = ref('');
 const errors = ref({
-  name: "",
-  email: "",
-  password: "",
+  name: '',
+  email: '',
+  password: '',
 });
 const isLoading = ref(false);
 
@@ -41,7 +41,11 @@ const register = async () => {
 
   isLoading.value = true;
 
-  const response = await userStore.register({ name: name.value, email: email.value, password: password.value });
+  const response = await userStore.register({
+    name: name.value,
+    email: email.value,
+    password: password.value,
+  });
   isLoading.value = false;
 
   if (response.status === RESPONSE_STATUS.SUCCESS) {
@@ -58,25 +62,28 @@ const register = async () => {
 };
 
 const validate = (): boolean => {
-  errors.value.name = "";
-  errors.value.email = "";
-  errors.value.password = "";
+  errors.value.name = '';
+  errors.value.email = '';
+  errors.value.password = '';
 
   if (!name.value) {
-    errors.value.name = "Name is required.";
+    errors.value.name = 'Name is required.';
   }
 
   if (!email.value) {
-    errors.value.email = "Email is required.";
-  } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-    errors.value.email = "Invalid Email.";
+    errors.value.email = 'Email is required.';
+  } else if (
+    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)
+  ) {
+    errors.value.email = 'Invalid Email.';
   }
 
   if (!password.value) {
-    errors.value.password = "Password is required.";
+    errors.value.password = 'Password is required.';
   }
 
-  if (errors.value.email || errors.value.password || errors.value.name) return false;
+  if (errors.value.email || errors.value.password || errors.value.name)
+    return false;
 
   return true;
 };
@@ -85,9 +92,24 @@ const validate = (): boolean => {
 <template>
   <AuthLayout>
     <form @submit.prevent="register">
-      <InputTextAuth placeholder="Name" v-model:input="name" inputType="text" :error="errors.name" />
-      <InputTextAuth placeholder="Email" v-model:input="email" inputType="email" :error="errors.email" />
-      <InputTextAuth placeholder="Password" v-model:input="password" inputType="password" :error="errors.password" />
+      <InputTextAuth
+        v-model:input="name"
+        placeholder="Name"
+        input-type="text"
+        :error="errors.name"
+      />
+      <InputTextAuth
+        v-model:input="email"
+        placeholder="Email"
+        input-type="email"
+        :error="errors.email"
+      />
+      <InputTextAuth
+        v-model:input="password"
+        placeholder="Password"
+        input-type="password"
+        :error="errors.password"
+      />
       <div class="form__button">
         <button type="submit" name="login">
           <Spinner v-show="isLoading" />
@@ -118,7 +140,9 @@ const validate = (): boolean => {
     max-height: 200px;
     background-color: #fff;
     border-radius: 3px;
-    box-shadow: 0 2px 3px hsla(0, 0%, 4%, 0.1), 0 0 0 1px hsla(0, 0%, 4%, 0.1);
+    box-shadow:
+      0 2px 3px hsla(0, 0%, 4%, 0.1),
+      0 0 0 1px hsla(0, 0%, 4%, 0.1);
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
   }

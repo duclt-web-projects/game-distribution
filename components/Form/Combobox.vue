@@ -6,10 +6,14 @@ import {
   ComboboxOption,
   ComboboxOptions,
   TransitionRoot,
-} from "@headlessui/vue";
-import { ChevronDownIcon, XCircleIcon, XMarkIcon } from "@heroicons/vue/20/solid";
+} from '@headlessui/vue';
+import {
+  ChevronDownIcon,
+  XCircleIcon,
+  XMarkIcon,
+} from '@heroicons/vue/20/solid';
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
   modelValue: [Object, Array],
@@ -27,19 +31,19 @@ const props = defineProps({
   ariaDescribedBy: String,
 });
 
-const field = inject("field", props);
+const field = inject('field', props);
 const inputRef = ref();
 const options = ref(props.options);
 const isLoadingOptions = ref(false);
 const isCreatingOption = ref(false);
-const query = ref("");
+const query = ref('');
 
 const queryOption = computed(() => {
   if (!props.createOption) {
     return null;
   }
 
-  if (query.value === "") {
+  if (query.value === '') {
     return null;
   }
 
@@ -49,7 +53,9 @@ const queryOption = computed(() => {
 
   if (
     props.multiple &&
-    props.modelValue?.some((option) => option?.label.toLowerCase() === query.value?.toLowerCase())
+    props.modelValue?.some(
+      (option) => option?.label.toLowerCase() === query.value?.toLowerCase(),
+    )
   ) {
     return null;
   }
@@ -71,9 +77,9 @@ if (props.loadOptions) {
         isLoadingOptions.value = false;
       });
 
-      inputRef.value?.$el?.setAttribute("size", q.length || 1);
+      inputRef.value?.$el?.setAttribute('size', q.length || 1);
     },
-    { immediate: true }
+    { immediate: true },
   );
 }
 
@@ -87,7 +93,9 @@ const filteredOptions = computed(() => {
   }
 
   const result = [
-    ...selectedOptions.filter((option) => !options.value.some((opt) => opt?.value === option.value)),
+    ...selectedOptions.filter(
+      (option) => !options.value.some((opt) => opt?.value === option.value),
+    ),
     ...options.value,
   ];
 
@@ -96,54 +104,57 @@ const filteredOptions = computed(() => {
   }
 
   return result.filter((option) => {
-    return option?.label.toLowerCase().replace(/\s+/g, "").includes(query.value.toLowerCase().replace(/\s+/g, ""));
+    return option?.label
+      .toLowerCase()
+      .replace(/\s+/g, '')
+      .includes(query.value.toLowerCase().replace(/\s+/g, ''));
   });
 });
 
 function handleUpdateModelValue(selected) {
-  emit("update:modelValue", selected);
-  query.value = "";
+  emit('update:modelValue', selected);
+  query.value = '';
   inputRef.value?.$el?.focus();
 
   if (!props.createOption) return;
 
   if (props.multiple) {
-    let newOption = selected.length ? selected[selected.length - 1] : undefined;
+    const newOption = selected.length
+      ? selected[selected.length - 1]
+      : undefined;
 
     if (newOption?.missing) {
       isCreatingOption.value = true;
       props.createOption(newOption, (option) => {
         selected[selected.length - 1] = option;
-        emit("update:modelValue", [...selected]);
+        emit('update:modelValue', [...selected]);
         isCreatingOption.value = false;
       });
     }
-  } else {
-    if (selected?.missing) {
-      isCreatingOption.value = true;
-      props.createOption(selected, (option) => {
-        emit("update:modelValue", option);
-        isCreatingOption.value = false;
-      });
-    }
+  } else if (selected?.missing) {
+    isCreatingOption.value = true;
+    props.createOption(selected, (option) => {
+      emit('update:modelValue', option);
+      isCreatingOption.value = false;
+    });
   }
 }
 
 function remove(option) {
   emit(
-    "update:modelValue",
-    props.modelValue?.filter((opt) => opt.value !== option.value)
+    'update:modelValue',
+    props.modelValue?.filter((opt) => opt.value !== option.value),
   );
 }
 
 function handleQueryDelete() {
   if (!query.value) {
-    emit("update:modelValue", props.modelValue?.slice(0, -1));
+    emit('update:modelValue', props.modelValue?.slice(0, -1));
   }
 }
 
 function clearSelection() {
-  emit("update:modelValue", props.multiple ? [] : null);
+  emit('update:modelValue', props.multiple ? [] : null);
   inputRef.value?.$el?.focus();
 }
 </script>
@@ -187,8 +198,12 @@ function clearSelection() {
       <ComboboxInput
         :id="field.id"
         ref="inputRef"
-        :displayValue="(option) => (props.multiple ? query : option?.label)"
-        :placeholder="(props.multiple ? !props.modelValue.length : !props.modelValue) ? props.placeholder : ''"
+        :display-value="(option) => (props.multiple ? query : option?.label)"
+        :placeholder="
+          (props.multiple ? !props.modelValue.length : !props.modelValue)
+            ? props.placeholder
+            : ''
+        "
         class="min-w-0 flex-grow cursor-pointer border-none bg-transparent py-0 text-sm placeholder-gray-400 focus:ring-0"
         size="1"
         @change="query = $event.target.value"
@@ -197,7 +212,11 @@ function clearSelection() {
 
       <div class="absolute inset-y-0 right-1 flex items-center">
         <button
-          v-if="Array.isArray(props.modelValue) ? props.modelValue.length : props.modelValue"
+          v-if="
+            Array.isArray(props.modelValue)
+              ? props.modelValue.length
+              : props.modelValue
+          "
           class="inline-flex h-full w-6 items-center justify-center text-gray-500 hover:text-gray-700 focus:text-gray-700 focus:outline-none"
           @click.prevent="clearSelection"
         >
@@ -211,8 +230,8 @@ function clearSelection() {
     <TransitionRoot
       class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
       leave="transition ease-in duration-100"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
+      leave-from="opacity-100"
+      leave-to="opacity-0"
       @after-leave="query = ''"
     >
       <ComboboxOptions class="min-w-fit">
@@ -231,10 +250,16 @@ function clearSelection() {
         </li>
 
         <template v-if="!isLoadingOptions && !isCreatingOption">
-          <ComboboxOption v-if="queryOption" v-slot="{ active }" :value="queryOption" as="template">
+          <ComboboxOption
+            v-if="queryOption"
+            v-slot="{ active }"
+            :value="queryOption"
+            as="template"
+          >
             <li
               :class="{
-                'bg-gray-200 shadow-[inset_2px_0px_0px] shadow-blue-600': active,
+                'bg-gray-200 shadow-[inset_2px_0px_0px] shadow-blue-600':
+                  active,
               }"
               class="relative cursor-default select-none whitespace-pre py-2 px-3 text-sm active:bg-gray-300"
             >
@@ -251,7 +276,8 @@ function clearSelection() {
           >
             <li
               :class="{
-                'shadow-[inset_2px_0px_0px] shadow-blue-600': active || selected,
+                'shadow-[inset_2px_0px_0px] shadow-blue-600':
+                  active || selected,
                 'bg-gray-100': selected,
                 'bg-gray-200': active,
               }"

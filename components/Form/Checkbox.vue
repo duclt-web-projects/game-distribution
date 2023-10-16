@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { inject } from 'vue';
 
 const props = defineProps({
   id: String,
@@ -12,33 +12,37 @@ const props = defineProps({
   label: String,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
-const field = inject("field", props);
+const field = inject('field', props);
 
 const handleChange = (event) => {
-  let isChecked = event.target.checked;
+  const isChecked = event.target.checked;
   if (props.modelValue instanceof Array) {
-    let newValue = [...props.modelValue];
+    const newValue = [...props.modelValue];
     if (isChecked) {
       newValue.push(props.value);
     } else {
       newValue.splice(newValue.indexOf(props.value), 1);
     }
-    emit("update:modelValue", newValue);
+    emit('update:modelValue', newValue);
   } else {
-    emit("update:modelValue", isChecked ? props.value : "");
+    emit('update:modelValue', isChecked ? props.value : '');
   }
 };
 </script>
 
 <template>
   <div class="inline-flex items-center">
-    <label class="relative flex cursor-pointer items-center rounded-full p-3" :for="props.id" data-ripple-dark="true">
+    <label
+      class="relative flex cursor-pointer items-center rounded-full p-3"
+      :for="props.id"
+      data-ripple-dark="true"
+    >
       <input
+        :id="field.id"
         type="checkbox"
         class="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded border border-blue-gray-200 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-500 checked:bg-gray-500 checked:before:bg-gray-500 hover:before:opacity-10"
-        :id="field.id"
         :aria-describedby="field.ariaDescribedBy"
         :value="props.value"
         @change="handleChange"
@@ -62,7 +66,10 @@ const handleChange = (event) => {
         </svg>
       </span>
     </label>
-    <label class="mt-px cursor-pointer select-none font-light text-gray-700" :for="props.id">
+    <label
+      class="mt-px cursor-pointer select-none font-light text-gray-700"
+      :for="props.id"
+    >
       {{ props.label }}
     </label>
   </div>

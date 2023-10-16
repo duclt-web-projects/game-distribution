@@ -1,5 +1,5 @@
 <script setup>
-defineEmits(["close-modal"]);
+defineEmits(['close-modal']);
 defineProps({
   modalActive: {
     type: Boolean,
@@ -17,9 +17,17 @@ defineProps({
         @click.self="$emit('close-modal')"
       >
         <Transition name="modal-inner">
-          <div v-if="modalActive" class="p-4 bg-white self-start mt-32 max-w-screen-md min-w-[400px] relative">
+          <div
+            v-if="modalActive"
+            class="p-4 bg-white self-start mt-32 max-w-screen-md min-w-[400px] relative"
+          >
             <slot />
-            <button class="bg-weather-primary py-2 px-6 absolute top-0 right-1" @click="$emit('close-modal')">x</button>
+            <button
+              class="bg-weather-primary py-2 px-6 absolute top-0 right-1"
+              @click="$emit('close-modal')"
+            >
+              x
+            </button>
           </div>
         </Transition>
       </div>

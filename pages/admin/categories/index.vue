@@ -1,29 +1,29 @@
 <script setup>
-import { IconEdit, IconPlush } from "@/assets/icon";
-import { useHttp } from "@/composables/useHttp";
-import AdminLayout from "@/layouts/AdminLayout.vue";
-import { PlusSmallIcon } from "@heroicons/vue/24/outline";
+import { IconEdit, IconPlush } from '@/assets/icon';
+import { useHttp } from '@/composables/useHttp';
+import AdminLayout from '@/layouts/AdminLayout.vue';
+import { PlusSmallIcon } from '@heroicons/vue/24/outline';
 
 useHead({
-  title: "Category - Admin - XGame Studio",
+  title: 'Category - Admin - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Register - XGame Studio" },
+    { name: 'ogTitle', content: 'Register - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
 });
 
-// definePageMeta({
-//   middleware: ["auth-admin"],
-// });
+definePageMeta({
+  middleware: ['auth-admin'],
+});
 
 const { $toast } = useNuxtApp();
 
@@ -31,18 +31,21 @@ const currentPage = ref(1);
 const isRefetch = ref(false);
 const modalActive = ref(null);
 const currentCategory = ref(null);
-const categoryData = ref("");
-const categoryError = ref("");
+const categoryData = ref('');
+const categoryError = ref('');
 
-const { data: categories } = await useHttp(() => `/admin/categories/list?page=${currentPage.value}`, {
-  server: false,
-  watch: [isRefetch],
-  tokenKey: "admin_access_token",
-});
+const { data: categories } = await useHttp(
+  () => `/admin/categories/list?page=${currentPage.value}`,
+  {
+    server: false,
+    watch: [isRefetch],
+    tokenKey: 'admin_access_token',
+  },
+);
 
 const editCategory = async (id) => {
   const { data, error } = await useHttp(`/admin/category/${id}`, {
-    tokenKey: "admin_access_token",
+    tokenKey: 'admin_access_token',
   });
 
   if (data.value) {
@@ -52,13 +55,12 @@ const editCategory = async (id) => {
     return;
   }
 
-  $toast.error(error.value?.message ?? "Something went wrong !!!");
-  return;
+  $toast.error(error.value?.message ?? 'Something went wrong !!!');
 };
 
 const addCategory = () => {
   currentCategory.value = null;
-  categoryData.value = "";
+  categoryData.value = '';
   modalActive.value = true;
 };
 
@@ -70,46 +72,48 @@ const handleChangeStatus = async (id) => {
   isRefetch.value = !isRefetch.value;
 
   const { data, error } = await useHttp(`admin/category/change-status/${id}`, {
-    method: "POST",
-    tokenKey: "admin_access_token",
+    method: 'POST',
+    tokenKey: 'admin_access_token',
   });
 
   if (error.value) {
     $toast.error(error.value.message);
   }
   if (data.value) {
-    $toast.success("Change status successfully!!!");
+    $toast.success('Change status successfully!!!');
   }
 };
 
 const handleAddCategory = async () => {
-  categoryError.value = "";
-  console.log(123);
+  categoryError.value = '';
 
-  if (categoryData.value === "") {
-    categoryError.value = "Category is required.";
+  if (categoryData.value === '') {
+    categoryError.value = 'Category is required.';
     return;
   }
 
   modalActive.value = false;
 
   const requestData = {
-    method: "POST",
-    tokenKey: "admin_access_token",
+    method: 'POST',
+    tokenKey: 'admin_access_token',
     body: {
       name: categoryData,
     },
   };
 
   const { data, error } = currentCategory.value
-    ? await useHttp(`admin/category/edit/${currentCategory.value.id}`, requestData)
+    ? await useHttp(
+        `admin/category/edit/${currentCategory.value.id}`,
+        requestData,
+      )
     : await useHttp(`admin/category/store`, requestData);
 
   if (error.value) {
     $toast.error(error.value.message);
   }
   if (data.value) {
-    $toast.success("Change category successfully!!!");
+    $toast.success('Change category successfully!!!');
     isRefetch.value = !isRefetch.value;
     currentCategory.value = null;
   }
@@ -132,8 +136,14 @@ const handleAddCategory = async () => {
         <table class="w-full overflow-x-auto">
           <thead class="bg-slate-200 border border-gray-200">
             <tr class="text-slate-900 text-sm text-left">
-              <th class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900">
-                <input type="checkbox" class="border-gray-400" @click="toggleAllSelect" />
+              <th
+                class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900"
+              >
+                <input
+                  type="checkbox"
+                  class="border-gray-400"
+                  @click="toggleAllSelect"
+                />
               </th>
               <th class="px-4 py-4 font-medium">Name</th>
               <th class="px-4 py-4 font-medium">Status</th>
@@ -147,32 +157,56 @@ const handleAddCategory = async () => {
                 <Loading />
               </td>
             </tr>
-            <tr v-else-if="categories.data.length === 0" class="loading-wrapper">
+            <tr
+              v-else-if="categories.data.length === 0"
+              class="loading-wrapper"
+            >
               <td colSpan="7" class="text-center p-4">
                 <div>No data</div>
               </td>
             </tr>
             <template v-else>
-              <tr class="odd:bg-white even:bg-slate-50 text-sm text-slate-900" v-for="(category, i) in categories.data">
+              <tr
+                v-for="(category, index) in categories.data"
+                :key="index"
+                class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
+              >
                 <td class="px-4 py-4 whitespace-nowrap">
-                  <input type="checkbox" class="rounded border-gray-400" data-id="v.id" />
+                  <input
+                    type="checkbox"
+                    class="rounded border-gray-400"
+                    data-id="v.id"
+                  />
                 </td>
                 <td class="px-4 py-4 whitespace-nowrap">{{ category.name }}</td>
                 <td class="px-4 py-4 whitespace-nowrap">
-                  <span class="bg-emerald-100 text-green-700 px-2 py-0.5 rounded-full" v-if="category.status === 1">
+                  <span
+                    v-if="category.status === 1"
+                    class="bg-emerald-100 text-green-700 px-2 py-0.5 rounded-full"
+                  >
                     Active
                   </span>
-                  <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> Inactive </span>
+                  <span
+                    v-else
+                    class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
+                  >
+                    Inactive
+                  </span>
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(category.created_at) }}</td>
+                <td class="px-4 py-4 whitespace-nowrap">
+                  {{ convertStringToDate(category.created_at) }}
+                </td>
                 <td class="h-[44px] flex items-center gap-1">
                   <div class="flex items-center">
                     <FormSwitch
                       :id="category.slug"
                       :value="category.status === 1"
-                      v-on:update:modelValue="handleChangeStatus(category.id)"
+                      @update:model-value="handleChangeStatus(category.id)"
                     />
-                    <IconEdit class="w-5 h-5 ml-4 fill-yellow-500 cursor-pointer" @click="editCategory(category.id)" />
+                    <IconEdit
+                      class="w-5 h-5 ml-4 fill-yellow-500 cursor-pointer"
+                      @click="editCategory(category.id)"
+                    />
                   </div>
                 </td>
               </tr>
@@ -180,18 +214,31 @@ const handleAddCategory = async () => {
           </tbody>
         </table>
 
-        <div v-if="categories && categories.data.length" class="flex justify-end p-4 bg-white">
-          <PaginationUser :currentPage="currentPage" :totalPage="categories.last_page" @changePage="onChangePage" />
+        <div
+          v-if="categories && categories.data.length"
+          class="flex justify-end p-4 bg-white"
+        >
+          <PaginationUser
+            :current-page="currentPage"
+            :total-page="categories.last_page"
+            @change-page="onChangePage"
+          />
         </div>
       </div>
     </div>
-    <Modal :modalActive="modalActive" @close-modal="modalActive = false">
+    <Modal :modal-active="modalActive" @close-modal="modalActive = false">
       <div class="text-black">
-        <h3 class="text-3xl font-bold">{{ currentCategory ? "Edit category" : "Add category" }}</h3>
+        <h3 class="text-3xl font-bold">
+          {{ currentCategory ? 'Edit category' : 'Add category' }}
+        </h3>
 
         <form @submit.prevent="handleAddCategory">
           <FormField label="Category Name" :error="categoryError" required>
-            <FormInput placeholder="John Doe" type="text" v-model="categoryData" />
+            <FormInput
+              v-model="categoryData"
+              placeholder="John Doe"
+              type="text"
+            />
           </FormField>
           <button
             class="flex items-center btn-search p-2.5 text-sm font-medium text-white rounded border"
@@ -206,7 +253,7 @@ const handleAddCategory = async () => {
               <template v-else>
                 <IconEdit v-if="currentCategory" class="mr-1 fill-white" />
                 <IconPlush v-else class="mr-1 fill-white" />
-                {{ currentCategory ? "Edit" : "Add" }}
+                {{ currentCategory ? 'Edit' : 'Add' }}
               </template>
             </div>
           </button>

@@ -6,13 +6,19 @@
       <article class="banner">
         <header>
           <small>
-            <NuxtLink href="/games" class="custom-heading">XGame Studio</NuxtLink>
+            <NuxtLink href="/games" class="custom-heading"
+              >XGame Studio</NuxtLink
+            >
           </small>
           <h1>
-            <NuxtLink href="/games" class="custom-heading"> Connecting Games &amp; Players</NuxtLink>
+            <NuxtLink href="/games" class="custom-heading">
+              Connecting Games &amp; Players</NuxtLink
+            >
           </h1>
           <article class="christmas">
-            <NuxtLink href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano" target="_self"
+            <NuxtLink
+              href="/games?condition=company%3AUbisoft%20AND%20tags%3Anano"
+              target="_self"
               ><img
                 src="https://img.gamedistribution.com/promotions/ubisoft-promotions-logo.png"
                 class="special-event-img"
@@ -20,10 +26,11 @@
             /></NuxtLink>
           </article>
         </header>
-        <p class="mt-5 mb-10 ">
+        <p class="mt-5 mb-10">
           <NuxtLink href="/games" target="_self" class="text-[22px]"
-            >XGame is the biggest broker of high quality, cross-platform games. We connect the best game developers to
-            the biggest publishers.</NuxtLink
+            >XGame is the biggest broker of high quality, cross-platform games.
+            We connect the best game developers to the biggest
+            publishers.</NuxtLink
           >
         </p>
       </article>
@@ -64,7 +71,7 @@
       a {
         color: #fff;
         text-decoration: none;
-        text-shadow: 0 0.07em 0 rgba(0,0,0,.5);
+        text-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.5);
       }
     }
 

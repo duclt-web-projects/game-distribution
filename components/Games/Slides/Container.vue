@@ -1,5 +1,5 @@
 <script setup>
-import { collections } from "@/config/collections";
+import { collections } from '@/config/collections';
 </script>
 
 <template>
@@ -7,7 +7,7 @@ import { collections } from "@/config/collections";
     v-for="collection in collections"
     :key="collection.name"
     :logo="collection.logo"
-    :bgImage="collection.bgImage"
+    :bg-image="collection.bgImage"
     :type="collection.type"
   />
 </template>

@@ -1,1 +1,6 @@
-export const catalog = ["Top Picks", "EXCLUSIVE GAMES", "TOP GAMES", "BEST NEW GAMES"];
+export const catalog = [
+  'Top Picks',
+  'EXCLUSIVE GAMES',
+  'TOP GAMES',
+  'BEST NEW GAMES',
+];

@@ -1,4 +1,4 @@
-import { useAdminStore } from "@/stores/useAdminStore";
+import { useAdminStore } from '@/stores/useAdminStore';
 
 export default defineNuxtPlugin(async () => {
   const adminStore = useAdminStore();

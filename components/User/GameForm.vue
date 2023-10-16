@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { IconUploadZip } from "@/assets/icon";
-import { useHttp } from "@/composables/useHttp";
-import { ROUTE_NAMES } from "@/constants/routes";
-import { IOptions } from "@/types/common";
-import { ICategory } from "@/types/game";
+import { IconUploadZip } from '@/assets/icon';
+import { useHttp } from '@/composables/useHttp';
+import { ROUTE_NAMES } from '@/constants/routes';
+import { IOptions } from '@/types/common';
+import { ICategory } from '@/types/game';
 
 const props = defineProps({
   game: {
@@ -15,28 +15,30 @@ const props = defineProps({
 const { $toast } = useNuxtApp();
 
 const gameData = reactive({
-  name: "",
+  name: '',
   category: [],
-  description: "",
-  width: "",
-  height: "",
-  thumbnail: "",
-  gameFile: "",
+  description: '',
+  width: '',
+  height: '',
+  thumbnail: '',
+  gameFile: '',
 });
 const isCreating = ref(false);
 const errors = ref({
-  name: "",
-  description: "",
-  category: "",
-  thumbnail: "",
-  gameFile: "",
-  width: "",
-  height: "",
+  name: '',
+  description: '',
+  category: '',
+  thumbnail: '',
+  gameFile: '',
+  width: '',
+  height: '',
 });
-const urlPreview = ref("/images/no-image.png");
+const urlPreview = ref('/images/no-image.png');
 
 const loadCategories = async (query, setOptions) => {
-  const { data: categories } = await useHttp<ICategory[]>(`categories?name=${query}`);
+  const { data: categories } = await useHttp<ICategory[]>(
+    `categories?name=${query}`,
+  );
   const categoryOptions = categories.value?.map((cate) => {
     return {
       value: cate.id,
@@ -66,42 +68,48 @@ const onUploadGameFile = (event) => {
 
 const validate = () => {
   errors.value = {
-    name: "",
-    description: "",
-    category: "",
-    thumbnail: "",
-    gameFile: "",
-    width: "",
-    height: "",
+    name: '',
+    description: '',
+    category: '',
+    thumbnail: '',
+    gameFile: '',
+    width: '',
+    height: '',
   };
 
   if (!gameData.name) {
-    errors.value.name = "Name is required.";
+    errors.value.name = 'Name is required.';
   }
 
   if (!gameData.width) {
-    errors.value.width = "Width is required.";
+    errors.value.width = 'Width is required.';
   }
 
   if (!gameData.height) {
-    errors.value.height = "Height is required.";
+    errors.value.height = 'Height is required.';
   }
 
   if (!props.game) {
     if (!gameData.thumbnail) {
-      errors.value.thumbnail = "Thumbnail is required.";
+      errors.value.thumbnail = 'Thumbnail is required.';
     }
 
     if (!gameData.gameFile) {
-      errors.value.gameFile = "Game file is required.";
+      errors.value.gameFile = 'Game file is required.';
     }
 
     if (!gameData.category.length) {
-      errors.value.category = "Category is required.";
+      errors.value.category = 'Category is required.';
     }
   }
 
-  if (errors.value.name || errors.value.width || errors.value.height || errors.value.thumbnail || errors.value.gameFile)
+  if (
+    errors.value.name ||
+    errors.value.width ||
+    errors.value.height ||
+    errors.value.thumbnail ||
+    errors.value.gameFile
+  )
     return false;
 
   return true;
@@ -111,26 +119,27 @@ const handleAddNewGame = async () => {
   if (!validate()) return;
   isCreating.value = true;
 
-  let formData = new FormData();
+  const formData = new FormData();
 
   if (!props.game) {
-    formData.append("thumbnail", gameData.thumbnail);
-    formData.append("gameFile", gameData.gameFile);
+    formData.append('thumbnail', gameData.thumbnail);
+    formData.append('gameFile', gameData.gameFile);
 
     const categoryIds = gameData.category.map((cate: IOptions) => cate.value);
-    formData.append("category", JSON.stringify(categoryIds));
+    formData.append('category', JSON.stringify(categoryIds));
   }
 
-  formData.append("name", gameData.name);
-  formData.append("description", gameData.description);
-  formData.append("width", gameData.width + "");
-  formData.append("height", gameData.height + "");
+  formData.append('name', gameData.name);
+  formData.append('description', gameData.description);
+  formData.append('width', gameData.width + '');
+  formData.append('height', gameData.height + '');
 
   const { data, error } = props.game
-    ? await useHttp(`/game/edit/${props.game.id}`, { method: "POST", body: formData })
-    : await useHttp("/game/store", { method: "POST", body: formData });
-
-  data.value, error.value;
+    ? await useHttp(`/game/edit/${props.game.id}`, {
+        method: 'POST',
+        body: formData,
+      })
+    : await useHttp('/game/store', { method: 'POST', body: formData });
 
   isCreating.value = false;
 
@@ -139,7 +148,7 @@ const handleAddNewGame = async () => {
   }
 
   if (data.value) {
-    $toast.success("Add successfully!!!");
+    $toast.success('Add successfully!!!');
 
     setTimeout(() => {
       navigateTo(ROUTE_NAMES.USER_GAME);
@@ -150,31 +159,47 @@ const handleAddNewGame = async () => {
 
 <template>
   <Breadcrumb />
-  <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">{{ game ? "Edit game" : "Add new game" }}</h2>
+  <h2 class="text-xl font-semibold text-gray-700 capitalize mb-5">
+    {{ game ? 'Edit game' : 'Add new game' }}
+  </h2>
   <form @submit.prevent="handleAddNewGame">
     <div class="shadow rounded overflow-hidden">
       <div class="bg-white px-4 py-5 sm:p-6">
         <div class="grid grid-cols-6 gap-1 md:gap-5">
           <div class="col-span-6 sm:col-span-3">
             <FormField label="Game Name" :error="errors.name" required>
-              <FormInput placeholder="John Doe" type="text" v-model="gameData.name" />
+              <FormInput
+                v-model="gameData.name"
+                placeholder="John Doe"
+                type="text"
+              />
             </FormField>
           </div>
 
           <div class="col-span-6 sm:col-span-3">
-            <FormField label="Category" :error="errors.category" required disable>
+            <FormField
+              label="Category"
+              :error="errors.category"
+              required
+              disable
+            >
               <FormCombobox
-                placeholder="Search category..."
                 v-model="gameData.category"
+                placeholder="Search category..."
                 multiple
-                :loadOptions="loadCategories"
+                :load-options="loadCategories"
               />
             </FormField>
           </div>
 
           <div class="col-span-6 sm:col-span-3">
             <FormField label="Width" :error="errors.width" required>
-              <FormInput placeholder="John Doe" type="text" v-model="gameData.width" class-name="rounded-l">
+              <FormInput
+                v-model="gameData.width"
+                placeholder="John Doe"
+                type="text"
+                class-name="rounded-l"
+              >
                 <span
                   class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
                 >
@@ -186,7 +211,12 @@ const handleAddNewGame = async () => {
 
           <div class="col-span-6 sm:col-span-3">
             <FormField label="Height" :error="errors.height" required>
-              <FormInput placeholder="John Doe" type="text" v-model="gameData.height" class-name="rounded-l">
+              <FormInput
+                v-model="gameData.height"
+                placeholder="John Doe"
+                type="text"
+                class-name="rounded-l"
+              >
                 <span
                   class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
                 >
@@ -199,12 +229,21 @@ const handleAddNewGame = async () => {
           <div class="col-span-6">
             <FormField class="col-span-2">
               <FormLabel for="message" :required="false">Description</FormLabel>
-              <FormTextArea placeholder="John Doe" type="text" v-model="gameData.description" />
+              <FormTextArea
+                v-model="gameData.description"
+                placeholder="John Doe"
+                type="text"
+              />
             </FormField>
           </div>
 
           <div class="col-span-6">
-            <FormField class="mb-3" label="Thumbnail" required :error="errors.thumbnail">
+            <FormField
+              class="mb-3"
+              label="Thumbnail"
+              required
+              :error="errors.thumbnail"
+            >
               <label class="block">
                 <span class="sr-only">Choose profile photo</span>
                 <input
@@ -213,8 +252,14 @@ const handleAddNewGame = async () => {
                   @change="onUploadThumbnail($event)"
                 />
               </label>
-              <div class="preview-image h-64 w-full border-1 border-gray-200 border mt-4">
-                <img class="object-contain w-full h-full" :src="urlPreview" alt="" />
+              <div
+                class="preview-image h-64 w-full border-1 border-gray-200 border mt-4"
+              >
+                <img
+                  class="object-contain w-full h-full"
+                  :src="urlPreview"
+                  alt=""
+                />
               </div>
             </FormField>
           </div>
@@ -227,11 +272,22 @@ const handleAddNewGame = async () => {
             >
               <div class="flex flex-col items-center justify-center pt-4 pb-6">
                 <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
-                <p class="text-sm text-gray-500 dark:text-gray-400">Click to upload</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Click to upload
+                </p>
               </div>
-              <input id="dropzone-file" type="file" class="hidden" @change="onUploadGameFile($event)" />
+              <input
+                id="dropzone-file"
+                type="file"
+                class="hidden"
+                @change="onUploadGameFile($event)"
+              />
             </label>
-            <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="errors.gameFile" id="game-error">
+            <FormHelperMessage
+              v-if="errors.gameFile"
+              id="game-error"
+              class="mt-1 text-sm text-gray-500"
+            >
               {{ errors.gameFile }}
             </FormHelperMessage>
           </div>
@@ -251,7 +307,7 @@ const handleAddNewGame = async () => {
 
 <style scoped lang="scss">
 h2 {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 :deep(.multiselect-tags-search) {

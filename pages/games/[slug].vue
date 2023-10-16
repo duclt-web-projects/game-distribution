@@ -1,7 +1,7 @@
 <script setup>
-import { useUrlConfig } from "@/composables/useUrlConfig";
-import MainLayout from "@/layouts/MainLayout.vue";
 import { useHttp } from '@/composables/useHttp';
+import { useUrlConfig } from '@/composables/useUrlConfig';
+import MainLayout from '@/layouts/MainLayout.vue';
 
 const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
@@ -12,26 +12,26 @@ useHead({
   title: `Publish ${game.name} on your website - XGame Studio`,
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
     },
-    { name: "ogTitle", content: "Games Catalog - XGame Studio" },
+    { name: 'ogTitle', content: 'Games Catalog - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
     },
   ],
   bodyAttrs: {
-    class: "games",
+    class: 'games',
   },
 });
 </script>
 
 <template>
   <MainLayout>
-    <section  class="pt-20">
+    <section class="pt-20">
       <div class="wrapper">
         <div v-if="!game">Loading ...</div>
         <div v-else class="content">
@@ -48,9 +48,9 @@ useHead({
           </div>
           <div class="game-container" style="max-height: 1000px">
             <iframe
+              id="iframe"
               class="iframe-close"
               name="iframe"
-              id="iframe"
               :src="`/games-fullscreen/${game.slug}`"
               :width="game.width"
               :height="game.height"
@@ -59,10 +59,10 @@ useHead({
           </div>
           <div class="columns">
             <div class="column">
-              <GameDescription :game="game"/>
+              <GameDescription :game="game" />
             </div>
             <div class="column">
-              <GameInfo :game="game"/>
+              <GameInfo :game="game" />
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@ useHead({
 
   iframe {
     max-width: 100%;
-    object-fit: contain; 
+    object-fit: contain;
   }
 }
 

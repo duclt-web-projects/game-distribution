@@ -1,8 +1,8 @@
-import { RESPONSE_STATUS } from "@/constants";
+import { RESPONSE_STATUS } from '@/constants';
 
-export interface IResponsePaginate {
+export interface IResponsePaginate<T> {
   current_page: number;
-  data: [];
+  data: T[];
   first_page_url: string;
   from: number;
   last_page: number;

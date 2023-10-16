@@ -1,42 +1,47 @@
 <script setup lang="ts">
-import { HomeIcon, PuzzlePieceIcon, TagIcon, UserIcon } from "@heroicons/vue/24/outline";
+import {
+  HomeIcon,
+  PuzzlePieceIcon,
+  TagIcon,
+  UserIcon,
+} from '@heroicons/vue/24/outline';
 
 const menus = [
   {
-    path: "/admin",
-    name: "Home",
+    path: '/admin',
+    name: 'Home',
     icon: HomeIcon,
   },
   {
-    name: "Games",
+    name: 'Games',
     icon: PuzzlePieceIcon,
     child: [
       {
-        name: "Games By User",
-        path: "/admin/games",
+        name: 'Games By User',
+        path: '/admin/games',
       },
     ],
   },
   {
-    name: "Category",
+    name: 'Category',
     icon: TagIcon,
-    path: "/admin/categories",
+    path: '/admin/categories',
   },
   {
-    name: "User",
+    name: 'User',
     icon: UserIcon,
-    path: "/admin",
+    path: '/admin',
   },
 ];
 
 onMounted(() => {
-  document.body.className = "";
+  document.body.className = '';
 });
 </script>
 
 <template>
   <div class="flex">
-    <dashboard-sidebar :navList="menus" />
+    <dashboard-sidebar :nav-list="menus" />
     <div class="w-full h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
       <dashboard-header />
       <main class="p-4">

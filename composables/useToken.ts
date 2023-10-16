@@ -1,3 +1,3 @@
 export function useToken() {
-  return useState("token", () => "");
+  return useState('token', () => '');
 }

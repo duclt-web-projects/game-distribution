@@ -1,6 +1,11 @@
 <template>
   <div class="promo-tile-item">
-    <div :class="[isFeatured ? 'promo-featured' : 'promo-normal', isPurple ? 'is-purple' : 'is-orange']">
+    <div
+      :class="[
+        isFeatured ? 'promo-featured' : 'promo-normal',
+        isPurple ? 'is-purple' : 'is-orange',
+      ]"
+    >
       <div class="promo-info">
         <h3 v-if="isFeatured" class="skeleton"></h3>
         <h4 v-else class="skeleton"></h4>
@@ -15,7 +20,7 @@
 </template>
 
 <script setup>
-import IconPromoFeature from "@/assets/icon/PromoFeature.vue";
+import IconPromoFeature from '@/assets/icon/PromoFeature.vue';
 
 const props = defineProps({
   item: Object,
@@ -31,7 +36,7 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/promo-tile-item.scss";
+@import '@/assets/scss/components/promo-tile-item.scss';
 
 .promo-tile-item {
   .promo-featured {
@@ -97,7 +102,8 @@ const props = defineProps({
   }
 
   :deep(.loading) {
-    border-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.25) rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.25)
+      rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.5);
   }
 }
 </style>

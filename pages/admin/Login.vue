@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { RESPONSE_STATUS } from "@/constants";
-import { ROUTE_NAMES } from "@/constants/routes";
-import { useAdminStore } from "@/stores/useAdminStore";
+import { RESPONSE_STATUS } from '@/constants';
+import { ROUTE_NAMES } from '@/constants/routes';
+import { useAdminStore } from '@/stores/useAdminStore';
 
 useHead({
-  title: "Admin Login - XGame Studio",
+  title: 'Admin Login - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Login - XGame Studio" },
+    { name: 'ogTitle', content: 'Login - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
 });
@@ -24,12 +24,12 @@ const adminStore = useAdminStore();
 
 const { $toast } = useNuxtApp();
 
-const email = ref("");
-const password = ref("");
+const email = ref('');
+const password = ref('');
 const isLoading = ref(false);
 const errors = ref({
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 });
 
 const login = async () => {
@@ -37,7 +37,10 @@ const login = async () => {
 
   isLoading.value = true;
 
-  const response = await adminStore.login({ email: email.value, password: password.value });
+  const response = await adminStore.login({
+    email: email.value,
+    password: password.value,
+  });
 
   isLoading.value = false;
   if (response.status === RESPONSE_STATUS.SUCCESS) {
@@ -52,17 +55,19 @@ const login = async () => {
 };
 
 const validate = () => {
-  errors.value.email = "";
-  errors.value.password = "";
+  errors.value.email = '';
+  errors.value.password = '';
 
   if (!email.value) {
-    errors.value.email = "Email is required.";
-  } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-    errors.value.email = "Invalid Email.";
+    errors.value.email = 'Email is required.';
+  } else if (
+    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)
+  ) {
+    errors.value.email = 'Invalid Email.';
   }
 
   if (!password.value) {
-    errors.value.password = "Password is required.";
+    errors.value.password = 'Password is required.';
   }
 
   if (errors.value.email || errors.value.email) return false;
@@ -80,11 +85,20 @@ const validate = () => {
         </div>
         <form>
           <FormField label="Email" :error="errors.email" required>
-            <FormInput placeholder="John Doe" class-name="rounded-l" v-model="email" />
+            <FormInput
+              v-model="email"
+              placeholder="John Doe"
+              class-name="rounded-l"
+            />
           </FormField>
 
           <FormField label="Password" :error="errors.password" required>
-            <FormInput placeholder="John Doe" class-name="rounded-l" type="password" v-model="password" />
+            <FormInput
+              v-model="password"
+              placeholder="John Doe"
+              class-name="rounded-l"
+              type="password"
+            />
           </FormField>
 
           <div class="flex items-center justify-between mt-5">

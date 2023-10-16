@@ -1,5 +1,5 @@
-import { ROUTE_NAMES } from "@/constants";
-import { useUserStore } from "@/stores/useUserStore";
+import { ROUTE_NAMES } from '@/constants';
+import { useUserStore } from '@/stores/useUserStore';
 
 export default defineNuxtRouteMiddleware((to, from) => {
   const auth = useUserStore();

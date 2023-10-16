@@ -1,6 +1,6 @@
 <script setup>
-import { useUrlConfig } from "@/composables/useUrlConfig";
-import { convertStringToDate } from "@/utils/functions";
+import { useUrlConfig } from '@/composables/useUrlConfig';
+import { convertStringToDate } from '@/utils/functions';
 
 const { BACKEND_URL } = useUrlConfig();
 const props = defineProps({
@@ -22,7 +22,13 @@ const props = defineProps({
   <div class="meta">
     <span class="label">Categories</span>
     <span>
-      <NuxtLink v-for="(category, index) in game.categories" :key="index" :to="'/games'" class="pill" :title="category.name">
+      <NuxtLink
+        v-for="(category, index) in game.categories"
+        :key="index"
+        :to="'/games'"
+        class="pill"
+        :title="category.name"
+      >
         {{ category.name }}
       </NuxtLink>
     </span>
@@ -83,7 +89,7 @@ const props = defineProps({
 
   .label {
     color: #44a5ab;
-    font-family: "Squada One", cursive;
+    font-family: 'Squada One', cursive;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 22px;

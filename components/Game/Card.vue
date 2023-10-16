@@ -1,5 +1,5 @@
 <script setup>
-import { useUrlConfig } from "@/composables/useUrlConfig";
+import { useUrlConfig } from '@/composables/useUrlConfig';
 
 const props = defineProps({
   item: Object,
@@ -13,11 +13,18 @@ const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
-  <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="game" :class="showGrid ? 'card' : 'list'">
+  <NuxtLink
+    :to="`/games/${item.slug}`"
+    :title="item.name"
+    class="game"
+    :class="showGrid ? 'card' : 'list'"
+  >
     <div class="thumbnail thumbnail--loaded">
       <div class="spinner"></div>
       <img src="/images/icon-html5.svg" class="type" />
-      <span class="image is-4by3"><img :src="BACKEND_URL + item.thumbnail" :alt="item.name" /></span>
+      <span class="image is-4by3"
+        ><img :src="BACKEND_URL + item.thumbnail" :alt="item.name"
+      /></span>
     </div>
     <div class="content">
       <span class="title">{{ item.name }}</span>
@@ -50,7 +57,7 @@ const { BACKEND_URL } = useUrlConfig();
     color: #512e85;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    font-family: "Squada One", cursive;
+    font-family: 'Squada One', cursive;
     font-size: 1.2rem;
     font-weight: 500;
     letter-spacing: 1px;
@@ -144,7 +151,9 @@ const { BACKEND_URL } = useUrlConfig();
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   margin: 0.9375rem 0.9375rem 0 0;
   min-width: 170px;
-  transition: box-shadow 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25), transform 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  transition:
+    box-shadow 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25),
+    transform 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25);
 
   .content {
     display: flex;
@@ -197,7 +206,9 @@ const { BACKEND_URL } = useUrlConfig();
   }
 
   &:active {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.13);
+    box-shadow:
+      0 10px 20px rgba(0, 0, 0, 0.19),
+      0 6px 6px rgba(0, 0, 0, 0.13);
     transform: translateY(-5px);
   }
 }

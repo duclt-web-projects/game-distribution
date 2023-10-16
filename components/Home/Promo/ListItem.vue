@@ -1,5 +1,5 @@
 <script setup>
-import { useUrlConfig } from "@/composables/useUrlConfig";
+import { useUrlConfig } from '@/composables/useUrlConfig';
 
 const props = defineProps({
   item: Object,
@@ -8,7 +8,11 @@ const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
-  <NuxtLink :to="`/games/${item.slug}`" :title="item.name" class="promo-list-item">
+  <NuxtLink
+    :to="`/games/${item.slug}`"
+    :title="item.name"
+    class="promo-list-item"
+  >
     <div class="promo-image">
       <div class="image is-4by3">
         <img :src="BACKEND_URL + item.thumbnail" :alt="item.name" />
@@ -24,5 +28,5 @@ const { BACKEND_URL } = useUrlConfig();
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/promo-list-item.scss";
+@import '@/assets/scss/components/promo-list-item.scss';
 </style>

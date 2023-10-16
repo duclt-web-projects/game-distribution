@@ -29,4 +29,4 @@ export const promoTags = [
   {
     name: '1player',
   },
-]
+];

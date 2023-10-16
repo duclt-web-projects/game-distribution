@@ -14,26 +14,29 @@
 </template>
 
 <script setup>
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 
 useHead({
-  title: "XGame Studio",
+  title: 'XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Games for Websites and Messengers - XGame Studio" },
     {
-      name: "ogDescription",
+      name: 'ogTitle',
+      content: 'Games for Websites and Messengers - XGame Studio',
+    },
+    {
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
   bodyAttrs: {
-    class: "home",
+    class: 'home',
   },
 });
 </script>
@@ -46,9 +49,9 @@ section {
   padding: 0;
 
   &::before {
-    background: url("/images/shape-bg.svg") no-repeat 100% 0;
+    background: url('/images/shape-bg.svg') no-repeat 100% 0;
     background-size: cover;
-    content: "";
+    content: '';
     height: 100%;
     opacity: 0.1;
     position: absolute;

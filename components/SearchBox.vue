@@ -18,17 +18,23 @@
 </template>
 
 <script setup lang="ts">
-import IconSearch from "@/assets/icon/Search.vue";
-import { useDebounce } from "@/composables/useDebounce";
+import IconSearch from '@/assets/icon/Search.vue';
+import { useDebounce } from '@/composables/useDebounce';
 
-const { modelValue, debounceDelay = 300 } = defineProps(["modelValue", "debounceDelay"]);
-const emit = defineEmits(["update:modelValue"]);
+const { modelValue, debounceDelay } = defineProps({
+  modelValue: String,
+  debounceDelay: {
+    type: Number,
+    default: 300,
+  },
+});
+const emit = defineEmits(['update:modelValue']);
 
 const searchQuery = ref(modelValue);
 
 const debouncedSearch = useDebounce((event) => {
   searchQuery.value = event.target.value;
-  emit("update:modelValue", searchQuery.value);
+  emit('update:modelValue', searchQuery.value);
 }, debounceDelay);
 </script>
 

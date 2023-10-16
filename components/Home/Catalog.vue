@@ -7,8 +7,8 @@
           <h2 class="custom-heading">Games Catalog</h2>
         </header>
         <p>
-          XGame is the biggest broker of high quality, cross-platform games. We connect the best game developers to the
-          biggest publishers.
+          XGame is the biggest broker of high quality, cross-platform games. We
+          connect the best game developers to the biggest publishers.
         </p>
       </article>
     </div>
@@ -58,7 +58,7 @@
   .wrapper {
     &:before {
       background-size: 235px;
-      content: "";
+      content: '';
       left: -100%;
       top: -220px;
     }

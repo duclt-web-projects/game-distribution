@@ -2,13 +2,20 @@
   <div class="tools-container filter-part">
     <img src="/images/public_color_podiums.png" class="pop-logo" />
     <span class="span">POPULAR RANKING</span>
-    <div class="tools-container_filters">
-    </div>
+    <div class="tools-container_filters"></div>
     <div class="tools-container_actions">
-      <button title="Reset Filter" class="xg-button flat reset-filter" style="display: none"></button>
-      <button title="Show Grid" class="xg-button flat list-view-grid" @click="emit('changeShowGrid')">
-        <IconGrid v-if="showGrid"/>
-        <IconList v-else="showGrid"/>
+      <button
+        title="Reset Filter"
+        class="xg-button flat reset-filter"
+        style="display: none"
+      ></button>
+      <button
+        title="Show Grid"
+        class="xg-button flat list-view-grid"
+        @click="emit('changeShowGrid')"
+      >
+        <IconGrid v-if="showGrid" />
+        <IconList v-else />
       </button>
       <SearchBox v-model="searchQuery" :debounce-delay="500" />
     </div>
@@ -16,18 +23,18 @@
 </template>
 
 <script setup>
-import IconList from "@/assets/icon/List.vue";
-import IconGrid from "@/assets/icon/Grid.vue";
+import IconGrid from '@/assets/icon/Grid.vue';
+import IconList from '@/assets/icon/List.vue';
 
 const props = defineProps({
-  showGrid: Boolean
-})
-const emit = defineEmits(['handleSearch', 'changeShowGrid'])
+  showGrid: Boolean,
+});
+const emit = defineEmits(['handleSearch', 'changeShowGrid']);
 
-const searchQuery = ref("");
+const searchQuery = ref('');
 
 watch(searchQuery, () => {
-  emit('handleSearch', searchQuery.value)
+  emit('handleSearch', searchQuery.value);
 });
 </script>
 

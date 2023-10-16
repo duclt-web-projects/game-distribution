@@ -1,14 +1,24 @@
 <script setup lang="ts">
-import { useSidebar } from "@/composables/useSidebar";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { Bars3Icon, MagnifyingGlassIcon, PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
+import { useSidebar } from '@/composables/useSidebar';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import {
+  Bars3Icon,
+  MagnifyingGlassIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from '@heroicons/vue/24/outline';
 
 const { isCollapse } = useSidebar();
 </script>
 
 <template>
-  <header class="sticky top-0 h-16 flex justify-between items-center p-4 shadow bg-white z-10">
-    <Bars3Icon class="h-6 w-6 stroke-gray-600 lg:cursor-pointer" @click="isCollapse = !isCollapse" />
+  <header
+    class="sticky top-0 h-16 flex justify-between items-center p-4 shadow bg-white z-10"
+  >
+    <Bars3Icon
+      class="h-6 w-6 stroke-gray-600 lg:cursor-pointer"
+      @click="isCollapse = !isCollapse"
+    />
     <form class="group relative ml-2 mr-auto">
       <MagnifyingGlassIcon
         class="w-5 h-5 absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-gray-500"
@@ -49,7 +59,10 @@ const { isCollapse } = useSidebar();
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
               >
-                <PencilSquareIcon :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']" aria-hidden="true" />
+                <PencilSquareIcon
+                  :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']"
+                  aria-hidden="true"
+                />
                 Profile
               </button>
             </MenuItem>
@@ -62,7 +75,10 @@ const { isCollapse } = useSidebar();
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
               >
-                <TrashIcon :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']" aria-hidden="true" />
+                <TrashIcon
+                  :class="['mr-2 h-5 w-5', !active && 'stroke-gray-600']"
+                  aria-hidden="true"
+                />
                 Logout
               </button>
             </MenuItem>

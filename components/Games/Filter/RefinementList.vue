@@ -1,5 +1,5 @@
 <script setup>
-const emit = defineEmits(["select-category"]);
+const emit = defineEmits(['select-category']);
 
 const props = defineProps({
   title: String,
@@ -9,12 +9,14 @@ const props = defineProps({
 const categories = ref(props.data);
 
 const handleSelectCategory = (event) => {
-  emit("select-category", event.target.value);
+  emit('select-category', event.target.value);
 };
-const searchCategory = ref("");
+const searchCategory = ref('');
 
 watch(searchCategory, () => {
-  categories.value = props.data.filter((e) => e.name.toLowerCase().includes(searchCategory.value.toLowerCase()));
+  categories.value = props.data.filter((e) =>
+    e.name.toLowerCase().includes(searchCategory.value.toLowerCase()),
+  );
 });
 
 watch(props, () => {
@@ -31,7 +33,12 @@ watch(props, () => {
     <template v-for="item in categories" :key="item.id">
       <div class="checkbox">
         <label class="checkbox__label">
-          <input type="checkbox" class="checkbox__checkbox" :value="item.id" @change="handleSelectCategory" />
+          <input
+            type="checkbox"
+            class="checkbox__checkbox"
+            :value="item.id"
+            @change="handleSelectCategory"
+          />
           <span class="checkbox__value">{{ item.name }}</span>
         </label>
       </div>
@@ -56,7 +63,7 @@ watch(props, () => {
     border-top: 1px solid #dedede;
     color: #4e96a0;
     display: block;
-    font-family: "Squada One", cursive;
+    font-family: 'Squada One', cursive;
     font-size: 1.5rem;
     letter-spacing: 2px;
     line-height: 1em;
@@ -177,7 +184,7 @@ watch(props, () => {
     }
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     display: inline;
     margin: 0 0.5rem 0 0;
   }

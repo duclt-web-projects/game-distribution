@@ -1,9 +1,9 @@
 <script setup>
-import { useHttp } from "@/composables/useHttp";
-import { tags } from "@/data/promos/tags";
+import { useHttp } from '@/composables/useHttp';
+import { promoTags } from '@/data/tags';
 
-const { data: promo } = await useHttp("games/promo-feature");
-const { data: promoList } = await useHttp("games/promo-list");
+const { data: promo } = await useHttp('games/promo-feature');
+const { data: promoList } = await useHttp('games/promo-list');
 </script>
 
 <template>
@@ -18,20 +18,24 @@ const { data: promoList } = await useHttp("games/promo-list");
             v-for="item in promo.featureGame"
             :key="item.id"
             :item="item"
-            :isFeatured="false"
-            :isPurple="item.id % 2 === 1"
+            :is-featured="false"
+            :is-purple="item.id % 2 === 1"
           />
         </template>
         <template v-else>
-          <SkeletonPromoTileItem :isFeatured="false" />
-          <SkeletonPromoTileItem :isFeatured="false" :isPurple="true" />
-          <SkeletonPromoTileItem :isFeatured="false" />
+          <SkeletonPromoTileItem :is-featured="false" />
+          <SkeletonPromoTileItem :is-featured="false" :is-purple="true" />
+          <SkeletonPromoTileItem :is-featured="false" />
         </template>
       </div>
     </div>
     <div class="promo-right">
       <template v-if="promoList">
-        <HomePromoListItem v-for="item in promoList" :key="item.id" :item="item" />
+        <HomePromoListItem
+          v-for="item in promoList"
+          :key="item.id"
+          :item="item"
+        />
       </template>
       <template v-else>
         <SkeletonPromoListItem />
@@ -39,8 +43,14 @@ const { data: promoList } = await useHttp("games/promo-list");
 
       <div class="promo-tags">
         <div><small>Top Tags</small></div>
-        <NuxtLink v-for="(tag, index) in tags" :key="index" :to="'/games?tag=' + tag" class="pill" :title="tag">
-          {{ tag }}
+        <NuxtLink
+          v-for="(tag, index) in promoTags"
+          :key="index"
+          :to="'/games?tag=' + tag"
+          class="pill"
+          :title="tag.name"
+        >
+          {{ tag.name }}
         </NuxtLink>
       </div>
     </div>

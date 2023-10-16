@@ -1,6 +1,11 @@
-import { RESPONSE_STATUS } from "@/constants";
+import { RESPONSE_STATUS } from '@/constants';
 
-export function handleResponse(data, error, messageSuccess = "Successful!!!", messageFailed = "Failed!!!") {
+export function handleResponse(
+  data,
+  error,
+  messageSuccess = 'Successful!!!',
+  messageFailed = 'Failed!!!',
+) {
   if (error.value) {
     return {
       status: RESPONSE_STATUS.ERROR,
@@ -23,15 +28,16 @@ export function handleResponse(data, error, messageSuccess = "Successful!!!", me
 
 export function getTokenFromLocalStorage() {
   if (process.client) {
-    return localStorage.getItem("access_token") ?? "";
+    return localStorage.getItem('access_token') ?? '';
   }
 
-  return "";
+  return '';
 }
 
 export function randomString(length = 5) {
-  let result = "";
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = '';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
   let counter = 0;
   while (counter < length) {

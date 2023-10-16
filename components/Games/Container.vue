@@ -1,15 +1,20 @@
 <script setup>
-import { useHttp } from "@/composables/useHttp";
+import { useHttp } from '@/composables/useHttp';
 
-const props = defineProps(["categories"]);
+const props = defineProps({
+  categories: Array,
+});
 const { categories } = toRefs(props);
 
-const searchText = ref("");
+const searchText = ref('');
 const currentPage = ref(1);
 const showGrid = ref(true);
 
 const { data: games } = await useHttp(
-  () => `/games/list?name=${searchText.value}&categories=${categories.value.toString()}&page=${currentPage.value}`
+  () =>
+    `/games/list?name=${
+      searchText.value
+    }&categories=${categories.value.toString()}&page=${currentPage.value}`,
 );
 
 const handleSearch = (val) => {
@@ -27,14 +32,30 @@ const handleChangeShowGrid = () => {
 </script>
 
 <template>
-  <GamesFilterSearch :showGrid="showGrid" @handleSearch="handleSearch" @changeShowGrid="handleChangeShowGrid" />
+  <GamesFilterSearch
+    :show-grid="showGrid"
+    @handle-search="handleSearch"
+    @change-show-grid="handleChangeShowGrid"
+  />
   <div v-if="!games" class="loading-wrapper">
     <Loading />
   </div>
   <template v-else>
-    <Pagination :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
-    <div class="games-container" :class="showGrid ? 'list-view-grid' : 'list-view-table'">
-      <GameCard v-for="item in games.data" :key="item.id" :item="item" :showGrid="showGrid" />
+    <Pagination
+      :current-page="currentPage"
+      :total-page="games.last_page"
+      @change-page="onChangePage"
+    />
+    <div
+      class="games-container"
+      :class="showGrid ? 'list-view-grid' : 'list-view-table'"
+    >
+      <GameCard
+        v-for="item in games.data"
+        :key="item.id"
+        :item="item"
+        :show-grid="showGrid"
+      />
     </div>
   </template>
   <!-- <Pagination /> -->

@@ -1,30 +1,30 @@
 <script setup>
-import { IconEdit, IconPlush, IconTrash } from "@/assets/icon";
-import { useHttp } from "@/composables/useHttp";
-import { ROUTE_NAMES } from "@/constants";
-import UserLayout from "@/layouts/UserLayout.vue";
-import { useUserStore } from "@/stores/useUserStore";
-import { convertStringToDate } from "@/utils/functions";
+import { IconEdit, IconPlush, IconTrash } from '@/assets/icon';
+import { useHttp } from '@/composables/useHttp';
+import { ROUTE_NAMES } from '@/constants';
+import UserLayout from '@/layouts/UserLayout.vue';
+import { useUserStore } from '@/stores/useUserStore';
+import { convertStringToDate } from '@/utils/functions';
 
 useHead({
-  title: "User - XGame Studio",
+  title: 'User - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Register - XGame Studio" },
+    { name: 'ogTitle', content: 'Register - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
 });
 
 definePageMeta({
-  middleware: ["auth-user"],
+  middleware: ['auth-user'],
 });
 
 const { BACKEND_URL } = useUrlConfig();
@@ -33,9 +33,12 @@ const userStore = useUserStore();
 const currentPage = ref(1);
 const modalActive = ref(null);
 
-const { data: games } = await useHttp(() => `/games/user/1?page=${currentPage.value}`, {
-  server: false,
-});
+const { data: games } = await useHttp(
+  () => `/games/user/1?page=${currentPage.value}`,
+  {
+    server: false,
+  },
+);
 
 const onChangePage = (val) => {
   currentPage.value = val;
@@ -63,15 +66,25 @@ const toggleModal = () => {
           <table class="w-full">
             <thead class="bg-slate-200 border border-gray-200">
               <tr class="text-slate-900 text-sm text-left">
-                <th class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900">
-                  <input type="checkbox" class="border-gray-400" @click="toggleAllSelect" />
+                <th
+                  class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900"
+                >
+                  <input
+                    type="checkbox"
+                    class="border-gray-400"
+                    @click="toggleAllSelect"
+                  />
                 </th>
                 <th class="px-4 py-4 font-medium">Name</th>
                 <th class="px-4 py-4 font-medium">Thumbnail</th>
                 <th class="px-4 py-4 font-medium">Size</th>
                 <th class="px-4 py-4 font-medium">Status</th>
-                <th class="px-4 py-4 font-medium whitespace-nowrap">Published at</th>
-                <th class="px-4 py-4 font-medium whitespace-nowrap">Created at</th>
+                <th class="px-4 py-4 font-medium whitespace-nowrap">
+                  Published at
+                </th>
+                <th class="px-4 py-4 font-medium whitespace-nowrap">
+                  Created at
+                </th>
                 <th class="w-[60px] px-4 py-4 font-medium"></th>
               </tr>
             </thead>
@@ -87,26 +100,54 @@ const toggleModal = () => {
                 </td>
               </tr>
               <template v-else>
-                <tr class="odd:bg-white even:bg-slate-50 text-sm text-slate-900" v-for="(game, i) in games.data">
+                <tr
+                  v-for="(game, index) in games.data"
+                  :key="index"
+                  class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
+                >
                   <td class="px-4 py-4 whitespace-nowrap">
-                    <input type="checkbox" class="rounded border-gray-400" data-id="v.id" />
+                    <input
+                      type="checkbox"
+                      class="rounded border-gray-400"
+                      data-id="v.id"
+                    />
                   </td>
                   <td class="px-4 py-4">{{ game.name }}</td>
                   <td class="px-4 py-4 whitespace-nowrap">{{ game.title }}</td>
-                  <td class="px-4 py-4 whitespace-nowrap">{{ game.width }} x {{ game.height }}</td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    {{ game.width }} x {{ game.height }}
+                  </td>
                   <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
-                    <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full" v-if="game.status === 1">
+                    <span
+                      v-if="game.status === 1"
+                      class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full"
+                    >
                       Accepted
                     </span>
-                    <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> Rejected </span>
+                    <span
+                      v-else
+                      class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
+                    >
+                      Rejected
+                    </span>
                   </td>
-                  <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.published_at) }}</td>
-                  <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.created_at) }}</td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    {{ convertStringToDate(game.published_at) }}
+                  </td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    {{ convertStringToDate(game.created_at) }}
+                  </td>
                   <td class="h-[52px] px-4 flex items-center gap-1">
-                    <NuxtLink :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`" class="w-4 h-4 mr-2">
+                    <NuxtLink
+                      :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`"
+                      class="w-4 h-4 mr-2"
+                    >
                       <IconEdit class="w-full h-full fill-yellow-500" />
                     </NuxtLink>
-                    <IconTrash class="w-4 h-4 fill-red-500 cursor-pointer" @click="toggleModal" />
+                    <IconTrash
+                      class="w-4 h-4 fill-red-500 cursor-pointer"
+                      @click="toggleModal"
+                    />
                   </td>
                 </tr>
               </template>
@@ -114,12 +155,19 @@ const toggleModal = () => {
           </table>
         </div>
 
-        <div v-if="games && games.data.length" class="flex justify-end p-4 bg-white">
-          <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
+        <div
+          v-if="games && games.data.length"
+          class="flex justify-end p-4 bg-white"
+        >
+          <PaginationUser
+            :current-page="currentPage"
+            :total-page="games.last_page"
+            @change-page="onChangePage"
+          />
         </div>
       </div>
     </div>
-    <Modal :modalActive="modalActive" @close-modal="toggleModal">
+    <Modal :modal-active="modalActive" @close-modal="toggleModal">
       <div class="text-black">
         <h1 class="text-2xl mb-1">Delete Confirmation</h1>
       </div>

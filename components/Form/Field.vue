@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { randomString } from "@/utils/functions";
-import { computed, provide } from "vue";
+import { randomString } from '@/utils/functions';
+import { computed, provide } from 'vue';
 
 const props = defineProps({
   id: {
@@ -14,18 +14,18 @@ const props = defineProps({
 });
 
 const ariaDescribedBy = computed(() => {
-  return !!props.help ? `help-${randomString()}` : null;
+  return !!props.help ?? `help-${randomString()}`;
 });
 
 provide(
-  "field",
+  'field',
   computed(() => {
     return {
       ...props,
       invalid: !!props.error,
       ariaDescribedBy: ariaDescribedBy.value,
     };
-  })
+  }),
 );
 </script>
 
@@ -41,7 +41,11 @@ provide(
       {{ props.error }}
     </FormErrorMessage>
 
-    <FormHelperMessage class="mt-1 text-sm text-gray-500" v-if="props.help" :id="ariaDescribedBy">
+    <FormHelperMessage
+      v-if="props.help"
+      :id="ariaDescribedBy"
+      class="mt-1 text-sm text-gray-500"
+    >
       {{ props.help }}
     </FormHelperMessage>
   </div>

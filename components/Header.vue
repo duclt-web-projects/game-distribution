@@ -5,34 +5,61 @@
         <IconMenuBurger v-show="!isShowMenuMobile" class="rotate" />
         <IconTime v-show="isShowMenuMobile" class="rotate" />
       </div>
-      <div class="mobile-navigation slide-right" v-show="isShowMenuMobile">
-        <nuxt-link v-for="header in headersMobile" :href="header.path" :key="header.id"> {{ header.name }} </nuxt-link>
+      <div v-show="isShowMenuMobile" class="mobile-navigation slide-right">
+        <nuxt-link
+          v-for="header in headersMobile"
+          :key="header.id"
+          :href="header.path"
+        >
+          {{ header.name }}
+        </nuxt-link>
       </div>
-      <div class="mask" v-show="isShowMenuMobile"></div>
+      <div v-show="isShowMenuMobile" class="mask"></div>
       <nuxt-link
         href="/"
         aria-current="page"
         class="logo nuxt-link-exact-active nuxt-link-active"
         title="XGame"
       >
-        <img src="/images/logos/logo-white.png" alt="logo" class="logo-icon-white" />
+        <img
+          src="/images/logos/logo-white.png"
+          alt="logo"
+          class="logo-icon-white"
+        />
         <img src="/images/logos/logo.png" alt="logo" class="logo-icon" />
         <!-- <slot /> -->
       </nuxt-link>
       <div class="desktop-navigation">
         <template v-for="header in headers">
-          <div v-if="header.children.length" class="xg-button--has-dropdown" :key="header.id">
-            <nuxt-link :to="header.path" class="xg-button" :class="route.path === header.path ? 'active' : ''">
+          <div
+            v-if="header.children.length"
+            :key="header.id"
+            class="xg-button--has-dropdown"
+          >
+            <nuxt-link
+              :to="header.path"
+              class="xg-button"
+              :class="route.path === header.path ? 'active' : ''"
+            >
               {{ header.name }}
             </nuxt-link>
             <ul class="xg-button_dropdown">
-              <li v-for="subHeader in header.children" :key="subHeader.id + 'sub'">
-                <nuxt-link :to="subHeader.path"> {{ subHeader.name }} </nuxt-link>
+              <li
+                v-for="subHeader in header.children"
+                :key="subHeader.id + 'sub'"
+              >
+                <nuxt-link :to="subHeader.path">
+                  {{ subHeader.name }}
+                </nuxt-link>
               </li>
             </ul>
           </div>
           <div v-else :key="header.id + 'no-child'">
-            <nuxt-link :to="header.path" class="xg-button" :class="route.path === header.path ? 'active' : '123'">
+            <nuxt-link
+              :to="header.path"
+              class="xg-button"
+              :class="route.path === header.path ? 'active' : '123'"
+            >
               {{ header.name }}
             </nuxt-link>
           </div>
@@ -43,10 +70,9 @@
 </template>
 
 <script setup>
-import IconMenuBurger from "@/assets/icon/MenuBurger.vue";
-import IconTime from "@/assets/icon/Time.vue";
-import IconRss from "@/assets/icon/Rss.vue";
-import { headers, headersMobile } from "@/config/header";
+import IconMenuBurger from '@/assets/icon/MenuBurger.vue';
+import IconTime from '@/assets/icon/Time.vue';
+import { headers, headersMobile } from '@/config/header';
 
 const isShowMenuMobile = ref(false);
 const route = useRoute();
@@ -132,7 +158,7 @@ nav {
       will-change: transform;
       color: #fff;
       display: block;
-      font-family: "Squada One", cursive;
+      font-family: 'Squada One', cursive;
       font-size: 1em;
       font-weight: 500;
       height: 60px;
@@ -205,7 +231,7 @@ nav {
         background: transparent;
         border-bottom-color: transparent;
         color: #512e85;
-        font-family: "Squada One", cursive;
+        font-family: 'Squada One', cursive;
         font-size: 1.2rem;
         padding: 5px 16px;
         text-transform: capitalize;
@@ -217,7 +243,9 @@ nav {
         }
 
         &:active {
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.13);
+          box-shadow:
+            0 10px 20px rgba(0, 0, 0, 0.19),
+            0 6px 6px rgba(0, 0, 0, 0.13);
           color: #fff;
           cursor: default;
           transform: translateY(-5px);

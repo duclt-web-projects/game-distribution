@@ -1,12 +1,14 @@
 <script setup>
-import { useHttp } from "../../../composables/useHttp";
+import { useHttp } from '@/composables/useHttp';
 
 const props = defineProps({
   logo: String,
   bgImage: String,
   type: String,
 });
-const { data: games } = await useHttp(() => `/games/featured-list?type=${props.type}`);
+const { data: games } = await useHttp(
+  () => `/games/featured-list?type=${props.type}`,
+);
 </script>
 
 <template>
@@ -15,14 +17,22 @@ const { data: games } = await useHttp(() => `/games/featured-list?type=${props.t
       <div></div>
       <div>
         <div>
-          <a href="/games?collection=exclusiveGame" class="xg-button flat">More</a>
+          <a href="/games?collection=exclusiveGame" class="xg-button flat"
+            >More</a
+          >
         </div>
       </div>
     </div>
-    <div class="slides-container" :style="{ 'background-image': `url(${props.bgImage})` }">
+    <div
+      class="slides-container"
+      :style="{ 'background-image': `url(${props.bgImage})` }"
+    >
       <div>
         <div>
-          <div class="company-logo no-company" style="border-color: rgb(81, 48, 133)">
+          <div
+            class="company-logo no-company"
+            style="border-color: rgb(81, 48, 133)"
+          >
             <img :src="props.logo" />
           </div>
           <template v-if="games">
@@ -60,7 +70,7 @@ const { data: games } = await useHttp(() => `/games/featured-list?type=${props.t
 }
 
 .slides-container {
-  background-image: url("/images/featured/default.jpg");
+  background-image: url('/images/featured/default.jpg');
   background-position: -200px 0;
   background-repeat: no-repeat;
   background-size: cover;
@@ -149,7 +159,9 @@ const { data: games } = await useHttp(() => `/games/featured-list?type=${props.t
   align-items: center;
   background-color: #fff;
   border: 5px solid #6e6c6d;
-  box-shadow: inset 0 0 0 7px #ebebeb, 5px 5px 25px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:
+    inset 0 0 0 7px #ebebeb,
+    5px 5px 25px 0 rgba(0, 0, 0, 0.5);
   display: flex;
 
   img {
@@ -162,7 +174,9 @@ const { data: games } = await useHttp(() => `/games/featured-list?type=${props.t
 .company-logo.no-company {
   background-color: #fff;
   border: 5px solid #fd7f1a;
-  box-shadow: inset 0 0 0 7px #ebebeb, 5px 5px 25px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:
+    inset 0 0 0 7px #ebebeb,
+    5px 5px 25px 0 rgba(0, 0, 0, 0.5);
   display: none;
   height: 150px;
   left: 2%;
@@ -179,7 +193,9 @@ const { data: games } = await useHttp(() => `/games/featured-list?type=${props.t
 .company-logo.no-company.iap {
   background-color: #0a3957;
   border: 5px solid #0a3957;
-  box-shadow: inset 0 0 0 7px #fff, 5px 5px 25px 0 #0a3957;
+  box-shadow:
+    inset 0 0 0 7px #fff,
+    5px 5px 25px 0 #0a3957;
 
   img {
     margin-left: 0;

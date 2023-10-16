@@ -1,32 +1,34 @@
 <script setup lang="ts">
-import { useUrlConfig } from "@/composables/useUrlConfig";
-import MainLayout from "@/layouts/MainLayout.vue";
-import { ROUTE_NAMES } from "@/constants/routes";
+import { useUrlConfig } from '@/composables/useUrlConfig';
+import { ROUTE_NAMES } from '@/constants/routes';
+import MainLayout from '@/layouts/MainLayout.vue';
 
 useHead({
-  title: "Games Catalog - XGame Studio",
+  title: 'Games Catalog - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
     },
-    { name: "ogTitle", content: "Games Catalog - XGame Studio" },
+    { name: 'ogTitle', content: 'Games Catalog - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
     },
   ],
   bodyAttrs: {
-    class: "games",
+    class: 'games',
   },
 });
 
 const { API_URL } = useUrlConfig();
 const { categorySlug } = useRoute().params;
 
-const { data: category } = await useFetch(() => `${API_URL}/categories/${categorySlug}`);
+const { data: category } = await useFetch(
+  () => `${API_URL}/categories/${categorySlug}`,
+);
 
 if (!category.value) {
   navigateTo(ROUTE_NAMES.GAME);

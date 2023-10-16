@@ -1,23 +1,26 @@
 <script setup lang="ts">
-import MainLayout from "@/layouts/MainLayout.vue";
+import MainLayout from '@/layouts/MainLayout.vue';
 
 useHead({
-  title: "Games for Websites and Messengers - XGame Studio",
+  title: 'Games for Websites and Messengers - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Games for Websites and Messengers - XGame Studio" },
     {
-      name: "ogDescription",
+      name: 'ogTitle',
+      content: 'Games for Websites and Messengers - XGame Studio',
+    },
+    {
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
   bodyAttrs: {
-    class: "home",
+    class: 'home',
   },
 });
 </script>
@@ -42,7 +45,7 @@ section.catalog-info-container {
     border-bottom: 0 solid transparent;
     border-left: 98vw solid #fff;
     border-top: 1.111em solid transparent;
-    content: "";
+    content: '';
     height: 0;
     left: 0;
     position: absolute;
@@ -69,7 +72,7 @@ section.catalog-info-container {
     & > div:before {
       background: url(/images/home-main-xl.png) no-repeat 100%;
       background-size: 280px;
-      content: "";
+      content: '';
       height: 100%;
       position: absolute;
       top: -45px;
@@ -80,7 +83,7 @@ section.catalog-info-container {
     .wrapper {
       &:before {
         background-size: 235px;
-        content: "";
+        content: '';
         left: -85%;
         top: -210px;
       }

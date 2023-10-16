@@ -1,23 +1,34 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { onMounted } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
 
-const props = defineProps(["itemChild"]);
+const props = defineProps({
+  itemChild: {
+    type: Object,
+    default() {
+      return {
+        path: '',
+        name: 'Home',
+        icon: null,
+      };
+    },
+  },
+});
 const route = useRoute();
 
-const emit = defineEmits(["setMatch"]);
+const emit = defineEmits(['setMatch']);
 onMounted(() => {
-  if( route.fullPath === props.itemChild.path ) {
+  if (route.fullPath === props.itemChild.path) {
     emit('setMatch', true);
   }
-})
+});
 </script>
 
 <template>
   <RouterLink
     :to="itemChild.path"
     class="pl-11 flex items-center py-3 hover:bg-gray-700 text-gray-400 hover:text-white"
-    :activeClass="'bg-gray-700'"
+    :active-class="'bg-gray-700'"
   >
     <span>{{ itemChild.name }}</span>
   </RouterLink>

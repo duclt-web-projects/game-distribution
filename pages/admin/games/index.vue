@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { useHttp } from "@/composables/useHttp";
-import AdminLayout from "@/layouts/AdminLayout.vue";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { EllipsisHorizontalIcon } from "@heroicons/vue/24/outline";
+import { useHttp } from '@/composables/useHttp';
+import AdminLayout from '@/layouts/AdminLayout.vue';
+import { IResponsePaginate } from '@/types/response';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
+import { IGame } from '../../../types/game';
 
 useHead({
-  title: "Games - Admin - XGame Studio",
+  title: 'Games - Admin - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Register - XGame Studio" },
+    { name: 'ogTitle', content: 'Register - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
 });
@@ -32,11 +34,14 @@ const { $toast } = useNuxtApp();
 const currentPage = ref(1);
 const isRefetch = ref(false);
 
-const { data: games } = await useHttp(() => `/admin/games/list?page=${currentPage.value}`, {
-  server: false,
-  watch: [isRefetch],
-  tokenKey: "admin_access_token",
-});
+const { data: games } = await useHttp<IResponsePaginate<IGame>>(
+  () => `/admin/games/list?page=${currentPage.value}`,
+  {
+    server: false,
+    watch: [isRefetch],
+    tokenKey: 'admin_access_token',
+  },
+);
 
 const onChangePage = (val) => {
   currentPage.value = val;
@@ -45,16 +50,16 @@ const onChangePage = (val) => {
 const changeStatus = async (id, currentStatus, status) => {
   if (currentStatus !== status) {
     const { data, error } = await useHttp(`admin/game/change-status/${id}`, {
-      method: "POST",
+      method: 'POST',
       body: { status },
-      tokenKey: "admin_access_token",
+      tokenKey: 'admin_access_token',
     });
 
     if (error.value) {
       $toast.error(error.value.message);
     }
     if (data.value) {
-      $toast.success("Change status successfully!!!");
+      $toast.success('Change status successfully!!!');
       isRefetch.value = !isRefetch.value;
     }
   }
@@ -73,7 +78,6 @@ interface TableCell {
 const tableData = ref<TableCell[]>([]);
 
 const toggleAllSelect = (e: MouseEvent) => {
-  console.log((e.target as HTMLInputElement).checked);
   tableData.value = tableData.value.map((v, i) => {
     return { ...v, checked: (e.target as HTMLInputElement).checked };
   });
@@ -90,8 +94,14 @@ const toggleAllSelect = (e: MouseEvent) => {
         <table class="w-full overflow-x-auto">
           <thead class="bg-slate-200 border border-gray-200">
             <tr class="text-slate-900 text-sm text-left">
-              <th class="px-4 py-4 text-left text-sm font-medium text-slate-900">
-                <input type="checkbox" class="border-gray-400" @click="toggleAllSelect" />
+              <th
+                class="px-4 py-4 text-left text-sm font-medium text-slate-900"
+              >
+                <input
+                  type="checkbox"
+                  class="border-gray-400"
+                  @click="toggleAllSelect"
+                />
               </th>
               <th class="px-4 py-4 font-medium">Name</th>
               <th class="px-4 py-4 font-medium">Thumbnail</th>
@@ -114,26 +124,52 @@ const toggleAllSelect = (e: MouseEvent) => {
               </td>
             </tr>
             <template v-else>
-              <tr class="odd:bg-white even:bg-slate-50 text-sm text-slate-900" v-for="(game, i) in games.data">
+              <tr
+                v-for="(game, index) in games.data"
+                :key="index"
+                class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
+              >
                 <td class="px-4 py-4 whitespace-nowrap">
-                  <input type="checkbox" class="rounded border-gray-400" data-id="v.id" />
+                  <input
+                    type="checkbox"
+                    class="rounded border-gray-400"
+                    data-id="v.id"
+                  />
                 </td>
                 <td class="px-4 py-4x">{{ game.name }}</td>
-                <td class="px-4 py-4 whitespace-nowrap">{{ game.title }}</td>
-                <td class="px-4 py-4 whitespace-nowrap">{{ game.width }} x {{ game.height }}</td>
+                <td class="px-4 py-4 whitespace-nowrap">
+                  {{ game.width }} x {{ game.height }}
+                </td>
                 <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
-                  <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full" v-if="game.status === 1">
+                  <span
+                    v-if="game.status === 1"
+                    class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full"
+                  >
                     Accepted
                   </span>
-                  <span class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full" v-else> Rejected </span>
+                  <span
+                    v-else
+                    class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
+                  >
+                    Rejected
+                  </span>
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.published_at) }}</td>
-                <td class="px-4 py-4 whitespace-nowrap">{{ convertStringToDate(game.created_at) }}</td>
+                <td class="px-4 py-4 whitespace-nowrap">
+                  {{ convertStringToDate(game.published_at) }}
+                </td>
+                <td class="px-4 py-4 whitespace-nowrap">
+                  {{ convertStringToDate(game.created_at) }}
+                </td>
                 <td class="h-[44px] flex items-center gap-1">
                   <Menu as="div" class="relative inline-block text-left">
                     <div>
-                      <MenuButton class="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-bold">
-                        <EllipsisHorizontalIcon class="h-5 w-5" aria-hidden="true" />
+                      <MenuButton
+                        class="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-bold"
+                      >
+                        <EllipsisHorizontalIcon
+                          class="h-5 w-5"
+                          aria-hidden="true"
+                        />
                       </MenuButton>
                     </div>
 
@@ -152,7 +188,9 @@ const toggleAllSelect = (e: MouseEvent) => {
                           <MenuItem v-slot="{ active }">
                             <button
                               :class="[
-                                active ? 'bg-gray-500 text-white' : 'text-gray-900',
+                                active
+                                  ? 'bg-gray-500 text-white'
+                                  : 'text-gray-900',
                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                               ]"
                               @click="changeStatus(game.id, game.status, 1)"
@@ -163,7 +201,9 @@ const toggleAllSelect = (e: MouseEvent) => {
                           <MenuItem v-slot="{ active }">
                             <button
                               :class="[
-                                active ? 'bg-gray-500 text-white' : 'text-gray-900',
+                                active
+                                  ? 'bg-gray-500 text-white'
+                                  : 'text-gray-900',
                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                               ]"
                               @click="changeStatus(game.id, game.status, 2)"
@@ -181,8 +221,15 @@ const toggleAllSelect = (e: MouseEvent) => {
           </tbody>
         </table>
 
-        <div v-if="games && games.data.length" class="flex justify-end p-4 bg-white">
-          <PaginationUser :currentPage="currentPage" :totalPage="games.last_page" @changePage="onChangePage" />
+        <div
+          v-if="games && games.data.length"
+          class="flex justify-end p-4 bg-white"
+        >
+          <PaginationUser
+            :current-page="currentPage"
+            :total-page="games.last_page"
+            @change-page="onChangePage"
+          />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <script setup>
-import { useUrlConfig } from "@/composables/useUrlConfig";
-import { catalog } from "@/data/catalog";
+import { useUrlConfig } from '@/composables/useUrlConfig';
+import { catalog } from '@/data/catalog';
 
 const { API_URL } = useUrlConfig();
 const { data: games } = await useFetch(`${API_URL}/games`);
@@ -8,9 +8,16 @@ const { data: games } = await useFetch(`${API_URL}/games`);
 
 <template>
   <div class="catalog-games-container">
-    <HomeCatalogList v-for="item in catalog" :key="item.id" :title="item" :games="games" />
+    <HomeCatalogList
+      v-for="item in catalog"
+      :key="item.id"
+      :title="item"
+      :games="games"
+    />
     <div class="button-container">
-      <NuxtLink to="/games" class="xg-button" target="_self" title="">Games catalog</NuxtLink>
+      <NuxtLink to="/games" class="xg-button" target="_self" title=""
+        >Games catalog</NuxtLink
+      >
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 export enum RESPONSE_STATUS {
-  SUCCESS = "success",
-  FAILED = "failed",
-  ERROR = "error",
+  SUCCESS = 'success',
+  FAILED = 'failed',
+  ERROR = 'error',
 }
 
 export enum RESPONSE_STATUS_CODE {

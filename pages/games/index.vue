@@ -1,33 +1,35 @@
 <script setup lang="ts">
-import MainLayout from "@/layouts/MainLayout.vue";
+import MainLayout from '@/layouts/MainLayout.vue';
 
 useHead({
-  title: "Games Catalog - XGame Studio",
+  title: 'Games Catalog - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
     },
-    { name: "ogTitle", content: "Games Catalog - XGame Studio" },
+    { name: 'ogTitle', content: 'Games Catalog - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.",
+        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
     },
   ],
   bodyAttrs: {
-    class: "games",
+    class: 'games',
   },
 });
 
 const selectedCategories = ref<number[]>([]);
 
 const handleSelectCategory = (val: number) => {
-  if(!selectedCategories.value.includes(val)) {
+  if (!selectedCategories.value.includes(val)) {
     selectedCategories.value.push(val);
   } else {
-    selectedCategories.value = selectedCategories.value.filter((e) => e !== val);
+    selectedCategories.value = selectedCategories.value.filter(
+      (e) => e !== val,
+    );
   }
 };
 </script>
@@ -40,7 +42,7 @@ const handleSelectCategory = (val: number) => {
           <GamesSlidesContainer />
           <div class="columns mt-5">
             <div class="column">
-              <GamesContainer :categories="selectedCategories"/>
+              <GamesContainer :categories="selectedCategories" />
             </div>
             <div class="column">
               <GamesFilterMultiSearch @select-category="handleSelectCategory" />

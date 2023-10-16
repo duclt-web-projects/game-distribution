@@ -9,14 +9,29 @@
     </div>
     <div class="filter__select-item_dropdown">
       <div>
-        <a href="/games?most-date=last_day" class="filter__select-item_dropdown-item"
-          style="text-decoration: none">
-          Last day </a><a href="/games?most-date=last_7" class="filter__select-item_dropdown-item"
-          style="text-decoration: none">
-          Last 7 days </a><a href="/games?most-date=last_30" class="filter__select-item_dropdown-item"
-          style="text-decoration: none">
-          Last 30 days </a><a href="/games?most-date=last_6_months" class="filter__select-item_dropdown-item"
-          style="text-decoration: none">
+        <a
+          href="/games?most-date=last_day"
+          class="filter__select-item_dropdown-item"
+          style="text-decoration: none"
+        >
+          Last day </a
+        ><a
+          href="/games?most-date=last_7"
+          class="filter__select-item_dropdown-item"
+          style="text-decoration: none"
+        >
+          Last 7 days </a
+        ><a
+          href="/games?most-date=last_30"
+          class="filter__select-item_dropdown-item"
+          style="text-decoration: none"
+        >
+          Last 30 days </a
+        ><a
+          href="/games?most-date=last_6_months"
+          class="filter__select-item_dropdown-item"
+          style="text-decoration: none"
+        >
           Last 6 Months
         </a>
       </div>
@@ -25,8 +40,8 @@
 </template>
 
 <script setup>
-import IconCalendar from "@/assets/icon/Calendar.vue"
-import IconAngleDown from "@/assets/icon/AngleDown.vue"
+import IconAngleDown from '@/assets/icon/AngleDown.vue';
+import IconCalendar from '@/assets/icon/Calendar.vue';
 </script>
 
 <style lang="scss" scoped>

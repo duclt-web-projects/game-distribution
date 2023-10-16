@@ -1,9 +1,8 @@
 <script setup lang="ts">
-
 const props = defineProps({
   icon: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 </script>

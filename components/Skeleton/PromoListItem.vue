@@ -13,7 +13,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/promo-list-item.scss";
+@import '@/assets/scss/components/promo-list-item.scss';
 
 .promo-list-item {
   .promo-image {

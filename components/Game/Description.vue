@@ -1,6 +1,6 @@
 <script setup>
-import IconArrowUpRightFromSquare from "@/assets/icon/ArrowUpRightFromSquare.vue";
-import { useUrlConfig } from "@/composables/useUrlConfig";
+import IconArrowUpRightFromSquare from '@/assets/icon/ArrowUpRightFromSquare.vue';
+import { useUrlConfig } from '@/composables/useUrlConfig';
 
 const props = defineProps({
   game: Object,
@@ -10,9 +10,14 @@ const { BACKEND_URL } = useUrlConfig();
 </script>
 
 <template>
-  <div class="description-area" v-html="game.description"></div>
+  <div class="description-area">{{ game.description }}</div>
   <div class="input-container input-location">
-    <a :href="`/games-fullscreen/${props.game?.slug}`" target="_blank" class="xg-button" style="width: 100%">
+    <a
+      :href="`/games-fullscreen/${props.game?.slug}`"
+      target="_blank"
+      class="xg-button"
+      style="width: 100%"
+    >
       Open Game In New Tab
       <IconArrowUpRightFromSquare />
     </a>

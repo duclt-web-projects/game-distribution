@@ -3,10 +3,15 @@
     <div class="wrapper">
       <article>
         <div class="footer-left">
-          <img src="/images/logos/logo-white.png" alt="XGame logo" class="m-auto mb-5"/>
+          <img
+            src="/images/logos/logo-white.png"
+            alt="XGame logo"
+            class="m-auto mb-5"
+          />
           <p>
-            XGame offers a free service for developers and publishers. We help game developers monetize and distribute
-            their games. We offer publishers a wide range of high quality cross platform games.
+            XGame offers a free service for developers and publishers. We help
+            game developers monetize and distribute their games. We offer
+            publishers a wide range of high quality cross platform games.
           </p>
           <p>
             <a
@@ -50,7 +55,10 @@
               >Platform Privacy policy</a
             >
             -
-            <a href="https://static.gamedistribution.com/terms/both.html" target="_blank" title="Terms &amp; conditions"
+            <a
+              href="https://static.gamedistribution.com/terms/both.html"
+              target="_blank"
+              title="Terms &amp; conditions"
               >Terms &amp; conditions</a
             >
           </p>
@@ -168,7 +176,7 @@ footer {
 
       li:before {
         color: currentColor;
-        content: "-";
+        content: '-';
       }
     }
 

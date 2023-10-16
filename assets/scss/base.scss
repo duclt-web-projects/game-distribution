@@ -4,13 +4,13 @@ html {
   font-family: sans-serif;
 }
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 body {
   margin: 0;
   background: #fff;
   color: #333;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: 1px;
@@ -128,9 +128,9 @@ select {
   text-transform: none;
 }
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
   -webkit-appearance: button;
   cursor: pointer;
 }
@@ -146,16 +146,16 @@ input::-moz-focus-inner {
 input {
   line-height: normal;
 }
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   box-sizing: border-box;
   padding: 0;
 }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   height: auto;
 }
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: textfield;
   box-sizing: content-box;
 }
@@ -188,7 +188,7 @@ th {
   border-top: 1px solid transparent;
   color: #fff;
   display: inline-block;
-  font-family: "Squada One", cursive;
+  font-family: 'Squada One', cursive;
   font-size: 2.556em;
   font-weight: 400;
   letter-spacing: 2px;
@@ -220,7 +220,7 @@ header {
 }
 header:after {
   clear: both;
-  content: "";
+  content: '';
   display: table;
 }
 header small .custom-heading {
@@ -245,7 +245,7 @@ header small {
 }
 
 small {
-  font-family: "Squada One", cursive;
+  font-family: 'Squada One', cursive;
   font-size: 0.8em;
   letter-spacing: 1px;
   text-transform: capitalize;
@@ -299,20 +299,24 @@ textarea {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
   outline: none;
   padding: 0.7em 1.4em;
   text-decoration: none;
   text-transform: uppercase;
-  transition: box-shadow 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25), transform 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+  transition:
+    box-shadow 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25),
+    transform 0.2s cubic-bezier(0.25, 0.75, 0.5, 1.25);
   white-space: nowrap;
   width: auto;
   will-change: transform;
 
   &:active {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.13);
+    box-shadow:
+      0 10px 20px rgba(0, 0, 0, 0.19),
+      0 6px 6px rgba(0, 0, 0, 0.13);
     transform: translateY(-5px);
 
     ul {
@@ -427,7 +431,12 @@ textarea {
 
 .skeleton {
   background-color: hsla(0, 0%, 88%, 0.3);
-  background-image: linear-gradient(90deg, rgba(#ccc, 0), rgba(#ccc, 0.5), rgba(#ccc, 0));
+  background-image: linear-gradient(
+    90deg,
+    rgba(#ccc, 0),
+    rgba(#ccc, 0.5),
+    rgba(#ccc, 0)
+  );
   background-size: 40px 100%;
   background-repeat: no-repeat;
   background-position: left -40px top 0;

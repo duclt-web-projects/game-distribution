@@ -1,8 +1,20 @@
 <script setup>
-const emit = defineEmits(["update:input"]);
+const emit = defineEmits(['update:input']);
 
-const props = defineProps(["id", "input", "label", "placeholder", "inputType", "max", "autoFocus", "error"]);
-const { id, input, label, placeholder, inputType, autoFocus, error } = toRefs(props);
+const props = defineProps({
+  id: String,
+  input: Object,
+  label: String,
+  placeholder: String,
+  inputType: {
+    type: String,
+    default: 'text',
+  },
+  autoFocus: Boolean,
+  error: String,
+});
+const { id, input, label, placeholder, inputType, autoFocus, error } =
+  toRefs(props);
 
 onMounted(() => {
   if (autoFocus.value) {
@@ -12,21 +24,24 @@ onMounted(() => {
 
 const inputComputed = computed({
   get: () => input.value,
-  set: (val) => emit("update:input", val),
+  set: (val) => emit('update:input', val),
 });
 </script>
 
 <template>
   <div class="form-input">
-    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">{{ label }}</label>
+    <label
+      for="country"
+      class="block text-sm font-medium leading-6 text-gray-900"
+      >{{ label }}</label
+    >
     <div class="flex">
       <input
-        class="w-full mt-2 border-gray-200  pl-5 pr-5"
-        type="text"
         :id="`input-${id}`"
-        :placeholder="placeholder ? placeholder + ' *' : ''"
-        :type="inputType"
         v-model="inputComputed"
+        class="w-full mt-2 border-gray-200 pl-5 pr-5"
+        :type="inputType"
+        :placeholder="placeholder ? placeholder + ' *' : ''"
         autocomplete="off"
       />
       <slot />
@@ -45,7 +60,7 @@ const inputComputed = computed({
     border: 1px solid #fff;
     box-sizing: border-box;
     font-size: 1rem;
-    font-family: Roboto, "Open Sans";
+    font-family: Roboto, 'Open Sans';
   }
 }
 </style>

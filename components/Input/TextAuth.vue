@@ -1,7 +1,16 @@
 <script setup>
-const emit = defineEmits(["update:input"]);
+const emit = defineEmits(['update:input']);
 
-const props = defineProps(["input", "placeholder", "inputType", "max", "autoFocus", "error"]);
+const props = defineProps({
+  input: Object,
+  placeholder: String,
+  inputType: {
+    type: String,
+    default: 'text',
+  },
+  autoFocus: Boolean,
+  error: String,
+});
 const { input, placeholder, inputType, autoFocus, error } = toRefs(props);
 
 onMounted(() => {
@@ -12,7 +21,7 @@ onMounted(() => {
 
 const inputComputed = computed({
   get: () => input.value,
-  set: (val) => emit("update:input", val),
+  set: (val) => emit('update:input', val),
 });
 </script>
 
@@ -20,9 +29,9 @@ const inputComputed = computed({
   <div class="form__input">
     <input
       :id="`input-${placeholder}`"
+      v-model="inputComputed"
       :placeholder="placeholder + ' *'"
       :type="inputType"
-      v-model="inputComputed"
       autocomplete="off"
     />
     <span v-if="error" class="error"> {{ error }}</span>
@@ -43,7 +52,7 @@ const inputComputed = computed({
     border-radius: 8px;
     border: 1px solid #fff;
     font-size: 1rem;
-    font-family: Roboto, "Open Sans";
+    font-family: Roboto, 'Open Sans';
   }
 
   .error {

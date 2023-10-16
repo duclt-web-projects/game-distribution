@@ -19,7 +19,7 @@ body.auth {
   overflow: hidden;
   font-size: 0.875rem;
   background: radial-gradient(ellipse at bottom, #11172b 0%, #0b0f1d 100%);
-  font-family: Roboto, "Open Sans";
+  font-family: Roboto, 'Open Sans';
   font-weight: 400;
   line-height: 1.43;
   background-color: #fafafa;
@@ -30,7 +30,7 @@ body.auth {
   position: absolute;
   top: 0;
   width: 100%;
-  background: url("/images/planets/planet-green.png") 0 -150px no-repeat;
+  background: url('/images/planets/planet-green.png') 0 -150px no-repeat;
 }
 
 body.games .planet {
@@ -39,7 +39,7 @@ body.games .planet {
 
 body.error .planet,
 body.home .planet {
-  background: url("/images/planets/planet-green.png") 0 -150px no-repeat;
+  background: url('/images/planets/planet-green.png') 0 -150px no-repeat;
 }
 
 body.about {
@@ -47,7 +47,7 @@ body.about {
 }
 
 body.about .planet {
-  background: url("/images/planets/planet-green.png") -150px -150px no-repeat;
+  background: url('/images/planets/planet-green.png') -150px -150px no-repeat;
 }
 
 body.publishers {
@@ -59,24 +59,24 @@ body.developers {
 }
 
 body.developers .planet {
-  background: url("/images/planets/planet-saturn.png") -250px -150px no-repeat;
+  background: url('/images/planets/planet-saturn.png') -250px -150px no-repeat;
 }
 
 body.publishers .planet {
-  background: url("/images/planets/planet-astroids.png") -250px -150px no-repeat;
+  background: url('/images/planets/planet-astroids.png') -250px -150px no-repeat;
 }
 
 body.sdk {
   background: linear-gradient(270deg, #fc6926, #ef0e74, #fc6926);
 }
 body.sdk .planet {
-  background: url("/images/planets/planet-saturn.png") -200px 50px no-repeat;
+  background: url('/images/planets/planet-saturn.png') -200px 50px no-repeat;
 }
 body.rss {
   background: linear-gradient(270deg, #240d47, #5c3997, #240d47);
 }
 body.rss .planet {
-  background: url("/images/planets/planet-astroids.png") -250px -150px no-repeat;
+  background: url('/images/planets/planet-astroids.png') -250px -150px no-repeat;
 }
 
 .about .main-wrapper,
@@ -96,9 +96,9 @@ body.rss .planet {
 .rss .main-wrapper:before,
 .sdk .main-wrapper:before {
   animation: animationStars 24s linear infinite;
-  background: url("/images/planets/stars.svg") 0 0 repeat;
+  background: url('/images/planets/stars.svg') 0 0 repeat;
   background-size: 100%;
-  content: "";
+  content: '';
   height: 800px;
   left: -25%;
   opacity: 0;
@@ -116,9 +116,9 @@ body.rss .planet {
 .rss .main-wrapper:after,
 .sdk .main-wrapper:after {
   animation: animationStarsAfter 24s linear infinite;
-  background: url("/images/planets/stars.svg") 0 0 repeat;
+  background: url('/images/planets/stars.svg') 0 0 repeat;
   background-size: 100%;
-  content: "";
+  content: '';
   height: 800px;
   left: -25%;
   opacity: 0;
@@ -135,9 +135,9 @@ body.rss .planet {
 .publishers section:first-of-type:before,
 .rss section:first-of-type:before,
 .sdk section:first-of-type:before {
-  background: url("/images/shape-bg.svg") no-repeat 100% 0;
+  background: url('/images/shape-bg.svg') no-repeat 100% 0;
   background-size: cover;
-  content: "";
+  content: '';
   height: 100%;
   opacity: 0.1;
   position: absolute;

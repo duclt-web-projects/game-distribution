@@ -3,6 +3,7 @@ export interface IGame {
   name: string;
   slug: string;
   active: number;
+  status: number;
   width: number;
   height: number;
   source_link: string;
@@ -36,6 +37,6 @@ export interface IGameDetail extends IGame {
 }
 
 export interface IPromo {
-  hotGame: IGame,
-  featureGame: IGame[]
+  hotGame: IGame;
+  featureGame: IGame[];
 }

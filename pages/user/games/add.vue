@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import UserLayout from "@/layouts/UserLayout.vue";
+import UserLayout from '@/layouts/UserLayout.vue';
 
 useHead({
-  title: "Add New Game - XGame Studio",
+  title: 'Add New Game - XGame Studio',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
-    { name: "ogTitle", content: "Register - XGame Studio" },
+    { name: 'ogTitle', content: 'Register - XGame Studio' },
     {
-      name: "ogDescription",
+      name: 'ogDescription',
       content:
-        "XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.",
+        'XGame Studio is the biggest broker of high quality, cross-platform games. We connect the best game developers to the biggest publishers.',
     },
   ],
 });
 
 definePageMeta({
-middleware: "auth-user",
+  middleware: 'auth-user',
 });
 </script>
 

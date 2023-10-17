@@ -10,7 +10,7 @@ import {
   PlusSmallIcon,
   TrashIcon,
 } from '@heroicons/vue/24/outline';
-import { PlusIcon } from '@heroicons/vue/24/solid';
+import { CubeIcon, PhotoIcon, PlusIcon } from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'User - XGame Studio',
@@ -182,6 +182,18 @@ const handleAddNewGame = async () => {
                       class="mr-2"
                     >
                       <PencilSquareIcon class="w-5 h-5 text-yellow-600" />
+                    </NuxtLink>
+                    <NuxtLink
+                      :to="`${ROUTE_NAMES.USER_GAME_ASSETS}/${game.id}`"
+                      class="mr-2"
+                    >
+                      <PhotoIcon class="w-5 h-5 text-blue-600" />
+                    </NuxtLink>
+                    <NuxtLink
+                      :to="`${ROUTE_NAMES.USER_GAME_UPLOAD}/${game.id}`"
+                      class="mr-2"
+                    >
+                      <CubeIcon class="w-5 h-5 text-green-600" />
                     </NuxtLink>
                     <TrashIcon
                       class="w-5 h-5 text-red-500 cursor-pointer"

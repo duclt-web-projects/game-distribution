@@ -5,7 +5,7 @@ import { useUrlConfig } from '@/composables/useUrlConfig';
 import { userGameUploadPageBreadcrumbs } from '@/config/breadcrumbs';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { IGame } from '@/types/game';
-import { ROUTE_NAMES } from '../../../../constants/routes';
+import axios from 'axios';
 
 useHead({
   title: 'Upload Game File - XGame Studio',
@@ -34,27 +34,22 @@ const { $toast } = useNuxtApp();
 
 const { data: game } = await useHttp<IGame>(() => `${API_URL}/game/${id}`);
 
-const gameData = reactive({
-  gameFile: '',
-});
-const errors = ref({
-  gameFile: '',
-});
+const gameFile = ref();
+const gameError = ref('');
+const progress = ref(0);
 
 const onUploadGameFile = (event) => {
-  gameData.gameFile = event.target.files[0];
+  gameFile.value = event.target.files[0];
 };
 
 const validate = () => {
-  errors.value = {
-    gameFile: '',
-  };
+  gameError.value = '';
 
-  if (!gameData.gameFile) {
-    errors.value.gameFile = 'GameFile is required.';
+  if (!gameFile.value) {
+    gameError.value = 'GameFile is required.';
   }
 
-  if (errors.value.gameFile) return false;
+  if (gameError.value) return false;
 
   return true;
 };
@@ -63,23 +58,39 @@ const handleAddNewGame = async () => {
   if (!validate()) return;
 
   const formData = new FormData();
+  const token = useCookie('access_token');
 
-  formData.append('gameFile', gameData.gameFile);
+  formData.append('gameFile', gameFile.value);
 
-  const { data, error } = await useHttp(`/game/upload-game/${id}`, {
-    method: 'POST',
-    body: formData,
-  });
+  const { data, status } = await axios.post(
+    `${API_URL}/game/upload-game/${id}`,
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
+      onUploadProgress: (progressEvent) => {
+        if (progressEvent.total) {
+          const percentCompleted = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total,
+          );
 
-  if (error.value) {
-    $toast.error(error.value.message);
+          progress.value = percentCompleted;
+        }
+      },
+    },
+  );
+
+  if (status !== 200) {
+    $toast.error(data.message);
+    return;
   }
 
   if (data.value) {
     $toast.success('Add game file successfully!!!');
 
     setTimeout(() => {
-      navigateTo(ROUTE_NAMES.USER_GAME);
+      // navigateTo(ROUTE_NAMES.USER_GAME);
     }, 500);
   }
 };
@@ -94,6 +105,17 @@ const handleAddNewGame = async () => {
     <user-game :is-loading="!game">
       <form @submit.prevent="handleAddNewGame">
         <div class="px-4 py-5 sm:p-6">
+          <div
+            v-show="progress > 0"
+            class="flex-start flex mt-5 h-4 w-full overflow-hidden rounded bg-gray-200 font-sans text-xs font-medium"
+          >
+            <div
+              class="flex h-full items-baseline justify-center overflow-hidden text-[10px] break-all bg-emerald-500 text-white transition-all"
+              :style="`width: ${progress}%`"
+            >
+              {{ progress }}% Completed
+            </div>
+          </div>
           <FormLabel for="gameFile" :required="true"> Game File </FormLabel>
 
           <label
@@ -103,7 +125,7 @@ const handleAddNewGame = async () => {
             <div class="flex flex-col items-center justify-center pt-4 pb-6">
               <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
               <p class="text-sm text-gray-500 dark:text-gray-400">
-                Click to upload
+                {{ gameFile ? gameFile.name : 'Click to upload' }}
               </p>
             </div>
             <input
@@ -114,11 +136,11 @@ const handleAddNewGame = async () => {
             />
           </label>
           <FormHelperMessage
-            v-if="errors.gameFile"
+            v-if="gameError"
             id="game-error"
             class="mt-1 text-sm text-gray-500"
           >
-            {{ errors.gameFile }}
+            {{ gameError }}
           </FormHelperMessage>
         </div>
         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">

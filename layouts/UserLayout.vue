@@ -8,6 +8,12 @@ import {
   TrashIcon,
 } from '@heroicons/vue/24/outline';
 
+useHead({
+  bodyAttrs: {
+    style: 'overflow: hidden',
+  },
+});
+
 const menus = [
   {
     path: '/user',

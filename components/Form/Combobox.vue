@@ -177,7 +177,7 @@ function clearSelection() {
         'border-red-300': !open && field.invalid,
         'border-gray-200': !open && !field.invalid,
       }"
-      class="min-h-[40px] relative flex w-full flex-wrap items-center gap-1 overflow-hidden rounded border bg-white py-1 pr-14 text-sm focus-within:border-blue-400 focus-within:border focus-within:!bg-white hover:bg-gray-100 hover:border-blue-400 focus:ring-0 px-4"
+      class="min-h-[40px] relative flex w-full flex-wrap items-center gap-1 overflow-hidden rounded border bg-white py-1 pr-14 text-sm focus-within:border-emerald-600 focus-within:border focus-within:!bg-white hover:bg-gray-100 hover:border-emerald-600 focus:ring-0 px-4"
     >
       <template v-if="props.multiple">
         <div
@@ -258,7 +258,7 @@ function clearSelection() {
           >
             <li
               :class="{
-                'bg-gray-200 shadow-[inset_2px_0px_0px] shadow-blue-600':
+                'bg-gray-200 shadow-[inset_2px_0px_0px] shadow-emerald-600':
                   active,
               }"
               class="relative cursor-default select-none whitespace-pre py-2 px-3 text-sm active:bg-gray-300"
@@ -276,7 +276,7 @@ function clearSelection() {
           >
             <li
               :class="{
-                'shadow-[inset_2px_0px_0px] shadow-blue-600':
+                'shadow-[inset_2px_0px_0px] shadow-emerald-600':
                   active || selected,
                 'bg-gray-100': selected,
                 'bg-gray-200': active,

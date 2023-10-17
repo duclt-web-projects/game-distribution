@@ -4,6 +4,12 @@ import { useHttp } from '@/composables/useHttp';
 import { ROUTE_NAMES } from '@/constants/routes';
 import { IOptions } from '@/types/common';
 import { ICategory } from '@/types/game';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue';
+import {
+  CubeIcon,
+  InformationCircleIcon,
+  PhotoIcon,
+} from '@heroicons/vue/24/solid';
 
 const props = defineProps({
   game: {
@@ -11,6 +17,21 @@ const props = defineProps({
     default: null,
   },
 });
+
+const tabs = [
+  {
+    name: 'Information',
+    icon: InformationCircleIcon,
+  },
+  {
+    name: 'Assets',
+    icon: PhotoIcon,
+  },
+  {
+    name: 'Games',
+    icon: CubeIcon,
+  },
+];
 
 const { $toast } = useNuxtApp();
 
@@ -158,147 +179,234 @@ const handleAddNewGame = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="handleAddNewGame">
-    <div class="shadow rounded overflow-hidden">
-      <div class="bg-white px-4 py-5 sm:p-6">
-        <div class="grid grid-cols-6 gap-1 md:gap-5">
-          <div class="col-span-6 sm:col-span-3">
-            <FormField label="Game Name" :error="errors.name" required>
-              <FormInput
-                v-model="gameData.name"
-                placeholder="John Doe"
-                type="text"
-              />
-            </FormField>
-          </div>
-
-          <div class="col-span-6 sm:col-span-3">
-            <FormField
-              label="Category"
-              :error="errors.category"
-              required
-              disable
-            >
-              <FormCombobox
-                v-model="gameData.category"
-                placeholder="Search category..."
-                multiple
-                :load-options="loadCategories"
-              />
-            </FormField>
-          </div>
-
-          <div class="col-span-6 sm:col-span-3">
-            <FormField label="Width" :error="errors.width" required>
-              <FormInput
-                v-model="gameData.width"
-                placeholder="John Doe"
-                type="text"
-                class-name="rounded-l"
-              >
-                <span
-                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
-                >
-                  px
-                </span>
-              </FormInput>
-            </FormField>
-          </div>
-
-          <div class="col-span-6 sm:col-span-3">
-            <FormField label="Height" :error="errors.height" required>
-              <FormInput
-                v-model="gameData.height"
-                placeholder="John Doe"
-                type="text"
-                class-name="rounded-l"
-              >
-                <span
-                  class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
-                >
-                  px
-                </span>
-              </FormInput>
-            </FormField>
-          </div>
-
-          <div class="col-span-6">
-            <FormField class="col-span-2">
-              <FormLabel for="message" :required="false">Description</FormLabel>
-              <FormTextArea
-                v-model="gameData.description"
-                placeholder="John Doe"
-                type="text"
-              />
-            </FormField>
-          </div>
-
-          <div class="col-span-6">
-            <FormField
-              class="mb-3"
-              label="Thumbnail"
-              required
-              :error="errors.thumbnail"
-            >
-              <label class="block">
-                <span class="sr-only">Choose profile photo</span>
-                <input
-                  type="file"
-                  class="block mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:h-10 file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600"
-                  @change="onUploadThumbnail($event)"
-                />
-              </label>
-              <div
-                class="preview-image h-64 w-full border-1 border-gray-200 border mt-4"
-              >
-                <img
-                  class="object-contain w-full h-full"
-                  :src="urlPreview"
-                  alt=""
-                />
-              </div>
-            </FormField>
-          </div>
-          <div class="col-span-6">
-            <FormLabel for="gameFile" :required="true"> Game File </FormLabel>
-
-            <label
-              for="dropzone-file"
-              class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50"
-            >
-              <div class="flex flex-col items-center justify-center pt-4 pb-6">
-                <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Click to upload
-                </p>
-              </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                class="hidden"
-                @change="onUploadGameFile($event)"
-              />
-            </label>
-            <FormHelperMessage
-              v-if="errors.gameFile"
-              id="game-error"
-              class="mt-1 text-sm text-gray-500"
-            >
-              {{ errors.gameFile }}
-            </FormHelperMessage>
-          </div>
-        </div>
-      </div>
-      <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-        <button
-          type="submit"
-          class="inline-flex justify-center rounded-md border border-transparent bg-emerald-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+  <div class="w-full px-2 sm:px-0 shadow rounded overflow-hidden bg-white">
+    <TabGroup>
+      <TabList class="border-b border-gray-200">
+        <Tab
+          v-for="(tab, index) in tabs"
+          v-slot="{ selected }"
+          :key="index"
+          as="template"
         >
-          Save
-        </button>
-      </div>
-    </div>
-  </form>
+          <button
+            :class="[
+              'inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg group font-normal text-sm',
+              selected
+                ? 'text-emerald-600 border-emerald-600'
+                : 'border-transparent hover:text-gray-600 hover:border-gray-300',
+            ]"
+          >
+            <component
+              :is="tab.icon"
+              :class="[
+                'w-4 h-4 mr-2 ',
+                selected
+                  ? 'text-emerald-600'
+                  : ' text-gray-400 group-hover:text-gray-500',
+              ]"
+            ></component>
+            {{ tab.name }}
+          </button>
+        </Tab>
+      </TabList>
+
+      <TabPanels class="mt-2">
+        <TabPanel
+          :class="[
+            'rounded-xl bg-white',
+            'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400',
+          ]"
+        >
+          <form @submit.prevent="handleAddNewGame">
+            <div class="px-4 py-5 sm:p-6">
+              <div class="grid grid-cols-6 gap-1 md:gap-5">
+                <div class="col-span-6 sm:col-span-3">
+                  <FormField label="Game Name" :error="errors.name" required>
+                    <FormInput
+                      v-model="gameData.name"
+                      placeholder="John Doe"
+                      type="text"
+                    />
+                  </FormField>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <FormField
+                    label="Category"
+                    :error="errors.category"
+                    required
+                    disable
+                  >
+                    <FormCombobox
+                      v-model="gameData.category"
+                      placeholder="Search category..."
+                      multiple
+                      :load-options="loadCategories"
+                    />
+                  </FormField>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <FormField label="Width" :error="errors.width" required>
+                    <FormInput
+                      v-model="gameData.width"
+                      placeholder="John Doe"
+                      type="text"
+                      class-name="rounded-l"
+                    >
+                      <span
+                        class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
+                      >
+                        px
+                      </span>
+                    </FormInput>
+                  </FormField>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <FormField label="Height" :error="errors.height" required>
+                    <FormInput
+                      v-model="gameData.height"
+                      placeholder="John Doe"
+                      type="text"
+                      class-name="rounded-l"
+                    >
+                      <span
+                        class="h-10 inline-flex items-center px-3 text-sm text-gray-700 bg-gray-200 border border-r-0 rounded-r"
+                      >
+                        px
+                      </span>
+                    </FormInput>
+                  </FormField>
+                </div>
+
+                <div class="col-span-6">
+                  <FormField class="col-span-2">
+                    <FormLabel for="message" :required="false"
+                      >Description</FormLabel
+                    >
+                    <FormTextArea
+                      v-model="gameData.description"
+                      placeholder="John Doe"
+                      type="text"
+                    />
+                  </FormField>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+              <button
+                type="submit"
+                class="inline-flex justify-center rounded-md border border-transparent bg-emerald-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </TabPanel>
+        <TabPanel
+          :class="[
+            'rounded-xl bg-white',
+            'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400',
+          ]"
+        >
+          <form @submit.prevent="handleAddNewGame">
+            <div class="px-4 py-5 sm:p-6">
+              <div class="grid grid-cols-6 gap-1 md:gap-5">
+                <div class="col-span-6">
+                  <FormField
+                    class="mb-3"
+                    label="Thumbnail"
+                    required
+                    :error="errors.thumbnail"
+                  >
+                    <label class="block">
+                      <span class="sr-only">Choose profile photo</span>
+                      <input
+                        type="file"
+                        class="block mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:h-10 file:border-0 file:text-sm file:font-semibold file:bg-gray-500 file:text-white hover:file:bg-gray-600"
+                        @change="onUploadThumbnail($event)"
+                      />
+                    </label>
+                    <div
+                      class="preview-image h-64 w-full border-1 border-gray-200 border mt-4"
+                    >
+                      <img
+                        class="object-contain w-full h-full"
+                        :src="urlPreview"
+                        alt=""
+                      />
+                    </div>
+                  </FormField>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+              <button
+                type="submit"
+                class="inline-flex justify-center rounded-md border border-transparent bg-emerald-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </TabPanel>
+        <TabPanel
+          :class="[
+            'rounded-xl bg-white',
+            'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400',
+          ]"
+        >
+          <form @submit.prevent="handleAddNewGame">
+            <div class="px-4 py-5 sm:p-6">
+              <div class="grid grid-cols-6 gap-1 md:gap-5">
+                <div class="col-span-6">
+                  <FormLabel for="gameFile" :required="true">
+                    Game File
+                  </FormLabel>
+
+                  <label
+                    for="dropzone-file"
+                    class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50"
+                  >
+                    <div
+                      class="flex flex-col items-center justify-center pt-4 pb-6"
+                    >
+                      <IconUploadZip class="fill-gray-400 w-10 h-10 mb-2" />
+                      <p class="text-sm text-gray-500 dark:text-gray-400">
+                        Click to upload
+                      </p>
+                    </div>
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      class="hidden"
+                      @change="onUploadGameFile($event)"
+                    />
+                  </label>
+                  <FormHelperMessage
+                    v-if="errors.gameFile"
+                    id="game-error"
+                    class="mt-1 text-sm text-gray-500"
+                  >
+                    {{ errors.gameFile }}
+                  </FormHelperMessage>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+              <button
+                type="submit"
+                class="inline-flex justify-center rounded-md border border-transparent bg-emerald-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </TabPanel>
+      </TabPanels>
+    </TabGroup>
+  </div>
 </template>
 
 <style scoped lang="scss">

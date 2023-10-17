@@ -21,7 +21,7 @@ const field = inject('field', props);
     :aria-describedby="field.ariaDescribedBy"
     :value="props.modelValue"
     :class="[
-      'block p-2.5 w-full min-h-[200px] text-sm text-gray-900 border border-gray-300 focus:border focus:border-blue-400',
+      'block p-2.5 w-full min-h-[200px] text-sm text-gray-900 border border-gray-300 focus:border focus:border-emerald-600',
       field.invalid ? 'border-red-400' : 'border-gray-200',
       typeSize ? 'rounded-l' : 'rounded',
     ]"

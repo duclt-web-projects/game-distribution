@@ -30,7 +30,7 @@ const field = inject('field', props);
       :aria-describedby="field.ariaDescribedBy"
       :value="props.modelValue"
       :class="[
-        'h-10 text-sm placeholder-gray-400 hover:bg-gray-100 border-1 w-full focus:border-blue-400 focus:border-1 focus:ring-0 focus:bg-white px-4',
+        'h-10 text-sm placeholder-gray-400 hover:bg-gray-100 border-1 w-full focus:border-emerald-600 focus:border-1 focus:ring-0 focus:bg-white px-4',
         className,
         field.invalid ? 'border-red-300' : 'border-gray-200',
       ]"

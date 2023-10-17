@@ -97,13 +97,12 @@ const handleAddNewGame = async () => {
     />
     <div class="bg-white rounded m-4 shadow overflow-hidden">
       <div class="flex justify-end items-center p-4">
-        <NuxtLink
-          :to="ROUTE_NAMES.USER_GAME_ADD"
+        <button
           class="flex items-center btn-search p-2 ml-2 text-xs font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
           @click="addNewGame"
         >
           <PlusSmallIcon class="w-5 h-5 text-white mr-1" /> Add game
-        </NuxtLink>
+        </button>
       </div>
       <div class="px-4">
         <div class="pb-5 overflow-x-auto">
@@ -207,27 +206,33 @@ const handleAddNewGame = async () => {
         </div>
       </div>
     </div>
-    <Modal :modal-active="modalActive" @close-modal="modalActive = false">
-      <div class="text-black">
-        <h3 class="text-3xl font-bold">Add new game</h3>
-
+    <Modal
+      :modal-active="modalActive"
+      title="Add new game"
+      @close-modal="modalActive = false"
+    >
+      <template #body>
         <form @submit.prevent="handleAddNewGame">
           <FormField label="Game Name" :error="gameError" required>
             <FormInput v-model="gameName" />
           </FormField>
-          <button
-            class="flex items-center btn-search p-2.5 text-sm font-medium text-white rounded border bg-emerald-600 border-emerald-700 hover:bg-emerald-700"
-          >
-            <div class="mr-1 flex items-center justify-center">
-              <Spinner v-if="false" />
-              <template v-else>
-                <PlusIcon class="w-4 h-4 text-white mr-1" />
-                Add
-              </template>
-            </div>
-          </button>
         </form>
-      </div>
+      </template>
+      <template #footer>
+        <button
+          type="submit"
+          class="flex items-center btn-search p-2 text-sm font-medium text-white rounded border bg-emerald-600 border-emerald-700 hover:bg-emerald-700"
+          @click="handleAddNewGame"
+        >
+          <div class="mr-1 flex items-center justify-center">
+            <Spinner v-if="false" />
+            <template v-else>
+              <PlusIcon class="w-4 h-4 text-white mr-1" />
+              Add
+            </template>
+          </div>
+        </button>
+      </template>
     </Modal>
   </UserLayout>
 </template>

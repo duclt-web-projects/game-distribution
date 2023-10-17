@@ -10,6 +10,7 @@ import {
   PlusSmallIcon,
   TrashIcon,
 } from '@heroicons/vue/24/outline';
+import { PlusIcon } from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'User - XGame Studio',
@@ -33,13 +34,18 @@ definePageMeta({
 });
 
 const userStore = useUserStore();
+const { $toast } = useNuxtApp();
 
 const currentPage = ref(1);
 const modalActive = ref(null);
+const gameName = ref('');
+const gameError = ref('');
+const isRefetch = ref(false);
 
 const { data: games } = await useHttp(
   () => `/games/user/${userStore.user.id}?page=${currentPage.value}`,
   {
+    watch: [isRefetch],
     server: false,
   },
 );
@@ -48,20 +54,53 @@ const onChangePage = (val) => {
   currentPage.value = val;
 };
 
+const addNewGame = () => {
+  gameName.value = '';
+  modalActive.value = true;
+};
+
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
+};
+
+const handleAddNewGame = async () => {
+  gameError.value = '';
+
+  if (gameName.value === '') {
+    gameError.value = 'Game name is required.';
+    return;
+  }
+
+  const { data, error } = await useHttp(`game/store`, {
+    method: 'POST',
+    body: {
+      name: gameName,
+    },
+  });
+
+  if (error.value) {
+    $toast.error(error.value.message);
+  }
+  if (data.value) {
+    $toast.success('Add game successfully!!!');
+    isRefetch.value = !isRefetch.value;
+    modalActive.value = false;
+  }
 };
 </script>
 
 <template>
   <UserLayout>
-    <Breadcrumb :breadcrumbs="userGamePageBreadcrumbs" />
-    <DashboardHeading title="List of Games" />
-    <div class="bg-white rounded mt-4 shadow overflow-hidden">
+    <DashboardHeading
+      title="List of Games"
+      :breadcrumbs="userGamePageBreadcrumbs"
+    />
+    <div class="bg-white rounded m-4 shadow overflow-hidden">
       <div class="flex justify-end items-center p-4">
         <NuxtLink
           :to="ROUTE_NAMES.USER_GAME_ADD"
           class="flex items-center btn-search p-2 ml-2 text-xs font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+          @click="addNewGame"
         >
           <PlusSmallIcon class="w-5 h-5 text-white mr-1" /> Add game
         </NuxtLink>
@@ -71,15 +110,6 @@ const toggleModal = () => {
           <table class="w-full">
             <thead class="bg-slate-200 border border-gray-200">
               <tr class="text-slate-900 text-sm text-left">
-                <th
-                  class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900"
-                >
-                  <input
-                    type="checkbox"
-                    class="border-gray-400"
-                    @click="toggleAllSelect"
-                  />
-                </th>
                 <th class="px-4 py-4 font-medium">Name</th>
                 <th class="px-4 py-4 font-medium">Thumbnail</th>
                 <th class="px-4 py-4 font-medium">Size</th>
@@ -90,13 +120,16 @@ const toggleModal = () => {
                 <th class="px-4 py-4 font-medium whitespace-nowrap">
                   Created at
                 </th>
+                <th class="px-4 py-4 font-medium whitespace-nowrap">
+                  Updated at
+                </th>
                 <th class="w-[60px] px-4 py-4 font-medium"></th>
               </tr>
             </thead>
             <tbody class="border">
               <tr v-if="!games || !games.data" class="loading-wrapper">
                 <td colSpan="7" class="text-center p-4">
-                  <Spinner />
+                  <Spinner class="w-10 h-10" />
                 </td>
               </tr>
               <tr v-else-if="games.data.length === 0" class="loading-wrapper">
@@ -110,13 +143,6 @@ const toggleModal = () => {
                   :key="index"
                   class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
                 >
-                  <td class="px-4 py-4 whitespace-nowrap">
-                    <input
-                      type="checkbox"
-                      class="rounded border-gray-400"
-                      data-id="v.id"
-                    />
-                  </td>
                   <td class="px-4 py-4">{{ game.name }}</td>
                   <td class="px-4 py-4 whitespace-nowrap">{{ game.title }}</td>
                   <td class="px-4 py-4 whitespace-nowrap">
@@ -148,6 +174,9 @@ const toggleModal = () => {
                   <td class="px-4 py-4 whitespace-nowrap">
                     {{ convertStringToDate(game.created_at) }}
                   </td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    {{ convertStringToDate(game.updated_at) }}
+                  </td>
                   <td class="h-[52px] px-4 flex items-center gap-1">
                     <NuxtLink
                       :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`"
@@ -178,9 +207,26 @@ const toggleModal = () => {
         </div>
       </div>
     </div>
-    <Modal :modal-active="modalActive" @close-modal="toggleModal">
+    <Modal :modal-active="modalActive" @close-modal="modalActive = false">
       <div class="text-black">
-        <h1 class="text-2xl mb-1">Delete Confirmation</h1>
+        <h3 class="text-3xl font-bold">Add new game</h3>
+
+        <form @submit.prevent="handleAddNewGame">
+          <FormField label="Game Name" :error="gameError" required>
+            <FormInput v-model="gameName" />
+          </FormField>
+          <button
+            class="flex items-center btn-search p-2.5 text-sm font-medium text-white rounded border bg-emerald-600 border-emerald-700 hover:bg-emerald-700"
+          >
+            <div class="mr-1 flex items-center justify-center">
+              <Spinner v-if="false" />
+              <template v-else>
+                <PlusIcon class="w-4 h-4 text-white mr-1" />
+                Add
+              </template>
+            </div>
+          </button>
+        </form>
       </div>
     </Modal>
   </UserLayout>

@@ -123,8 +123,10 @@ const handleAddCategory = async () => {
 
 <template>
   <AdminLayout>
-    <Breadcrumb :breadcrumbs="adminCategoryPageBreadcrumbs" />
-    <DashboardHeading title="Category List" />
+    <DashboardHeading
+      title="Category List"
+      :breadcrumbs="adminCategoryPageBreadcrumbs"
+    />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
       <div class="flex justify-end items-center p-4">
         <button

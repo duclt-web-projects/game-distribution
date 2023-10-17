@@ -7,8 +7,9 @@ export const ROUTE_NAMES = {
 
   // ========= User =============
   USER_GAME: '/user/games',
-  USER_GAME_ADD: '/user/games/add',
   USER_GAME_EDIT: '/user/games/edit',
+  USER_GAME_ASSETS: '/user/games/assets',
+  USER_GAME_UPLOAD: '/user/games/upload',
 
   // ========= Admin =============
   ADMIN_LOGIN: '/admin/login',

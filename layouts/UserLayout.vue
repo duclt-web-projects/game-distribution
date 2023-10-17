@@ -28,10 +28,6 @@ const menus = [
         name: 'List',
         path: '/user/games',
       },
-      {
-        name: 'Add new game',
-        path: '/user/games/add',
-      },
     ],
   },
 ];
@@ -110,7 +106,7 @@ onMounted(() => {
           </transition>
         </Menu>
       </dashboard-header>
-      <main class="p-4">
+      <main>
         <slot />
       </main>
     </div>

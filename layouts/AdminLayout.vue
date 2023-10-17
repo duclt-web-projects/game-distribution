@@ -117,7 +117,7 @@ const logout = async () => {
           </transition>
         </Menu>
       </dashboard-header>
-      <main class="p-4">
+      <main>
         <slot />
       </main>
     </div>

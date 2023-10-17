@@ -1,4 +1,5 @@
-import { ChevronDoubleRightIcon, HomeIcon } from '@heroicons/vue/24/outline';
+import { userGamePageBreadcrumbs } from './breadcrumbs';
+import { ChevronRightIcon, HomeIcon } from '@heroicons/vue/24/outline';
 
 export const userGamePageBreadcrumbs = [
   {
@@ -9,7 +10,7 @@ export const userGamePageBreadcrumbs = [
   {
     path: '/user/games',
     name: 'Games',
-    icon: ChevronDoubleRightIcon,
+    icon: ChevronRightIcon,
   },
 ];
 
@@ -22,30 +23,39 @@ export const userGameAddPageBreadcrumbs = [
   {
     path: '/user/games',
     name: 'Games',
-    icon: ChevronDoubleRightIcon,
+    icon: ChevronRightIcon,
   },
   {
     path: '',
     name: 'Add new game',
-    icon: ChevronDoubleRightIcon,
+    icon: ChevronRightIcon,
   },
 ];
 
 export const userGameEditPageBreadcrumbs = [
-  {
-    path: '/user',
-    name: 'Home',
-    icon: HomeIcon,
-  },
-  {
-    path: '/user/games',
-    name: 'Games',
-    icon: ChevronDoubleRightIcon,
-  },
+  ...userGamePageBreadcrumbs,
   {
     path: '',
-    name: 'Edit new game',
-    icon: ChevronDoubleRightIcon,
+    name: 'Edit game',
+    icon: ChevronRightIcon,
+  },
+];
+
+export const userGameAssetsPageBreadcrumbs = [
+  ...userGamePageBreadcrumbs,
+  {
+    path: '',
+    name: 'Assets game',
+    icon: ChevronRightIcon,
+  },
+];
+
+export const userGameUploadPageBreadcrumbs = [
+  ...userGamePageBreadcrumbs,
+  {
+    path: '',
+    name: 'Upload game file',
+    icon: ChevronRightIcon,
   },
 ];
 
@@ -58,7 +68,7 @@ export const adminGamePageBreadcrumbs = [
   {
     path: '/admin/games',
     name: 'Games',
-    icon: ChevronDoubleRightIcon,
+    icon: ChevronRightIcon,
   },
 ];
 
@@ -71,6 +81,6 @@ export const adminCategoryPageBreadcrumbs = [
   {
     path: '/admin/categories',
     name: 'Category',
-    icon: ChevronDoubleRightIcon,
+    icon: ChevronRightIcon,
   },
 ];

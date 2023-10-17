@@ -6,9 +6,9 @@
 
 <style lang="scss" scoped>
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #fff;
+  min-width: 1rem;
+  min-height: 1rem;
+  border-width: 2px;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;

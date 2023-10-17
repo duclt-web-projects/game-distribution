@@ -87,8 +87,10 @@ const toggleAllSelect = (e: MouseEvent) => {
 
 <template>
   <AdminLayout>
-    <Breadcrumb :breadcrumbs="adminGamePageBreadcrumbs" />
-    <DashboardHeading title="Games by User" />
+    <DashboardHeading
+      title="Games by User"
+      :breadcrumbs="adminGamePageBreadcrumbs"
+    />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
       <div class="overflow-x-auto p-4">
         <table class="w-full overflow-x-auto">

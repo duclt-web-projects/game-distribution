@@ -27,7 +27,7 @@
           </article>
         </header>
         <p class="mt-5 mb-10">
-          <NuxtLink href="/games" target="_self" class="text-[22px]"
+          <NuxtLink href="/games" target="_self" class="text-[22px] font-light"
             >XGame is the biggest broker of high quality, cross-platform games.
             We connect the best game developers to the biggest
             publishers.</NuxtLink

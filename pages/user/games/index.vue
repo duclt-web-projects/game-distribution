@@ -111,22 +111,30 @@ const handleAddNewGame = async () => {
       <div class="px-4">
         <div class="pb-5 overflow-x-auto">
           <table class="w-full">
-            <thead class="bg-gray-200 border border-gray-200">
-              <tr class="text-slate-900 text-sm text-left">
-                <th class="px-4 py-4 font-medium">Name</th>
-                <th class="px-4 py-4 font-medium">Thumbnail</th>
-                <th class="px-4 py-4 font-medium">Size</th>
-                <th class="px-4 py-4 font-medium">Status</th>
-                <th class="px-4 py-4 font-medium whitespace-nowrap">
+            <thead class="bg-gray-300 border border-gray-200">
+              <tr class="text-gray-900 text-sm text-left">
+                <th class="p-4 font-medium border-r border-gray-200">Name</th>
+                <th class="p-4 font-medium border-r border-gray-200">
+                  Thumbnail
+                </th>
+                <th class="p-4 font-medium border-r border-gray-200">Size</th>
+                <th class="p-4 font-medium border-r border-gray-200">Status</th>
+                <th
+                  class="p-4 font-medium whitespace-nowrap border-r border-gray-200"
+                >
                   Published at
                 </th>
-                <th class="px-4 py-4 font-medium whitespace-nowrap">
+                <th
+                  class="p-4 font-medium whitespace-nowrap border-r border-gray-200"
+                >
                   Created at
                 </th>
-                <th class="px-4 py-4 font-medium whitespace-nowrap">
+                <th
+                  class="p-4 font-medium whitespace-nowrap border-r border-gray-200"
+                >
                   Updated at
                 </th>
-                <th class="w-[60px] px-4 py-4 font-medium"></th>
+                <th class="w-[60px] p-4 font-medium"></th>
               </tr>
             </thead>
             <tbody class="border">
@@ -144,11 +152,15 @@ const handleAddNewGame = async () => {
                 <tr
                   v-for="(game, index) in games.data"
                   :key="index"
-                  class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
+                  class="odd:bg-white even:bg-gray-100 text-sm text-gray-900"
                 >
-                  <td class="px-4 py-4">{{ game.name }}</td>
-                  <td class="px-4 py-4 whitespace-nowrap">
-                    <div class="w-[80px] h-[60px]">
+                  <td class="p-4 border-r border-gray-200">
+                    {{ game.name }}
+                  </td>
+                  <td
+                    class="p-4 whitespace-nowrap border-r border-gray-200 flex justify-center"
+                  >
+                    <div class="w-[80px] h-full">
                       <img
                         class="w-full object-contain"
                         :src="`${BACKEND_URL}${game.thumbnail}`"
@@ -156,10 +168,12 @@ const handleAddNewGame = async () => {
                       />
                     </div>
                   </td>
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="p-4 whitespace-nowrap border-r border-gray-200">
                     {{ game.width }} x {{ game.height }}
                   </td>
-                  <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
+                  <td
+                    class="p-4 whitespace-nowrap text-xs font-medium border-r border-gray-200"
+                  >
                     <base-badge v-if="game.status === 0" intent="primary">
                       Pending
                     </base-badge>
@@ -168,13 +182,13 @@ const handleAddNewGame = async () => {
                     </base-badge>
                     <base-badge v-else intent="danger"> Accepted </base-badge>
                   </td>
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="p-4 whitespace-nowrap border-r border-gray-200">
                     {{ convertStringToDate(game.published_at) }}
                   </td>
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="p-4 whitespace-nowrap border-r border-gray-200">
                     {{ convertStringToDate(game.created_at) }}
                   </td>
-                  <td class="px-4 py-4">
+                  <td class="p-4 border-r border-gray-200">
                     {{ convertStringToDate(game.updated_at) }}
                   </td>
                   <td class="p-4">

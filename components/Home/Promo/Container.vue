@@ -1,6 +1,6 @@
 <script setup>
 import { useHttp } from '@/composables/useHttp';
-import { promoTags } from '@/data/tags';
+import { promoTags } from '@/config/tags';
 
 const { data: promo } = await useHttp('games/promo-feature');
 const { data: promoList } = await useHttp('games/promo-list');

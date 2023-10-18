@@ -8,7 +8,7 @@
 .spinner {
   min-width: 1rem;
   min-height: 1rem;
-  border-width: 2px;
+  border-width: 4px;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;

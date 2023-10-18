@@ -1,8 +1,14 @@
 <script setup>
+import { useHttp } from '@/composables/useHttp';
+
 const props = defineProps({
   title: String,
-  games: Array,
+  type: String,
 });
+
+const { data: games } = await useHttp(
+  () => `/games/featured-list?type=${props.type}&limit=20`,
+);
 </script>
 
 <template>

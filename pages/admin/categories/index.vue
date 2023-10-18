@@ -3,7 +3,7 @@ import { useHttp } from '@/composables/useHttp';
 import { adminCategoryPageBreadcrumbs } from '@/config/breadcrumbs';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import { PlusSmallIcon } from '@heroicons/vue/24/outline';
-import { PlusIcon } from '@heroicons/vue/24/solid';
+import { PencilSquareIcon } from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'Category - Admin - XGame Studio',
@@ -129,36 +129,48 @@ const handleAddCategory = async () => {
     />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
       <div class="flex justify-end items-center p-4">
-        <button
-          class="flex items-center btn-search p-2 ml-2 text-xs font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+        <base-button
+          :icon-left="PlusSmallIcon"
+          intent="primary"
           @click="addCategory"
         >
-          <PlusSmallIcon class="w-4 h-4 stroke-white" /> Add Category
-        </button>
+          Add
+        </base-button>
       </div>
       <div class="overflow-x-auto px-4 pb-5">
-        <table class="w-full overflow-x-auto">
-          <thead class="bg-slate-200 border border-gray-200">
-            <tr class="text-slate-900 text-sm text-left">
-              <th
-                class="w-5 px-4 py-4 text-left text-sm font-medium text-slate-900"
-              >
-                <input
-                  type="checkbox"
-                  class="border-gray-400"
-                  @click="toggleAllSelect"
-                />
+        <table class="w-full">
+          <thead class="bg-gray-300 border border-gray-200">
+            <tr class="text-gray-900 text-sm text-left">
+              <th class="px-4 py-4 font-medium border-r border-gray-200">
+                Name
               </th>
-              <th class="px-4 py-4 font-medium">Name</th>
-              <th class="px-4 py-4 font-medium">Status</th>
-              <th class="px-4 py-4 font-medium">Created at</th>
-              <th class="px-4 py-4 font-medium"></th>
+              <th
+                class="w-[120px] px-4 py-4 text-center font-medium border-r border-gray-200"
+              >
+                Status
+              </th>
+              <th
+                class="w-[150px] px-4 py-4 text-center font-medium border-r border-gray-200"
+              >
+                Total Games
+              </th>
+              <th
+                class="w-[150px] px-4 py-4 font-medium border-r border-gray-200"
+              >
+                Created at
+              </th>
+              <th
+                class="w-[150px] px-4 py-4 font-medium border-r border-gray-200"
+              >
+                Updated at
+              </th>
+              <th class="w-[150px] px-4 py-4 font-medium"></th>
             </tr>
           </thead>
           <tbody class="border">
             <tr v-if="!categories || !categories.data" class="loading-wrapper">
               <td colSpan="7" class="text-center p-4">
-                <Spinner />
+                <Spinner class="w-10 h-10" />
               </td>
             </tr>
             <tr
@@ -173,17 +185,16 @@ const handleAddCategory = async () => {
               <tr
                 v-for="(category, index) in categories.data"
                 :key="index"
-                class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
+                class="odd:bg-white even:bg-gray-100 text-sm text-gray-900"
               >
-                <td class="px-4 py-4 whitespace-nowrap">
-                  <input
-                    type="checkbox"
-                    class="rounded border-gray-400"
-                    data-id="v.id"
-                  />
+                <td
+                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
+                >
+                  {{ category.name }}
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap">{{ category.name }}</td>
-                <td class="px-4 py-4 whitespace-nowrap">
+                <td
+                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
+                >
                   <span
                     v-if="category.status === 1"
                     class="bg-emerald-100 text-green-700 px-2 py-0.5 rounded-full"
@@ -197,11 +208,23 @@ const handleAddCategory = async () => {
                     Inactive
                   </span>
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap">
+                <td
+                  class="px-4 py-4 text-center whitespace-nowrap border-r border-gray-200"
+                >
+                  {{ category.games_count }}
+                </td>
+                <td
+                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
+                >
                   {{ convertStringToDate(category.created_at) }}
                 </td>
-                <td class="h-[44px] flex items-center gap-1">
-                  <div class="flex items-center">
+                <td
+                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
+                >
+                  {{ convertStringToDate(category.updated_at) }}
+                </td>
+                <td class="h-[44px] px-4 gap-1">
+                  <div class="flex items-center justify-center">
                     <FormSwitch
                       :id="category.slug"
                       :value="category.status === 1"
@@ -230,12 +253,12 @@ const handleAddCategory = async () => {
         </div>
       </div>
     </div>
-    <base-modal :modal-active="modalActive" @close-modal="modalActive = false">
-      <div class="text-black">
-        <h3 class="text-3xl font-bold">
-          {{ currentCategory ? 'Edit category' : 'Add category' }}
-        </h3>
-
+    <base-modal
+      :modal-active="modalActive"
+      title="Add new category"
+      @close-modal="modalActive = false"
+    >
+      <template #body>
         <form @submit.prevent="handleAddCategory">
           <FormField label="Category Name" :error="categoryError" required>
             <FormInput
@@ -244,28 +267,17 @@ const handleAddCategory = async () => {
               type="text"
             />
           </FormField>
-          <button
-            class="flex items-center btn-search p-2.5 text-sm font-medium text-white rounded border"
-            :class="
-              currentCategory
-                ? 'bg-yellow-400 border-yellow-400 hover:bg-yellow-500'
-                : 'bg-emerald-600 border-emerald-700 hover:bg-emerald-700'
-            "
-          >
-            <div class="mr-1 flex items-center justify-center">
-              <Spinner v-if="false" />
-              <template v-else>
-                <PencilSquareIcon
-                  v-if="currentCategory"
-                  class="mr-1 fill-white w-5 h-5"
-                />
-                <PlusIcon class="w-4 h-4 text-white mr-1" />
-                {{ currentCategory ? 'Edit' : 'Add' }}
-              </template>
-            </div>
-          </button>
         </form>
-      </div>
+      </template>
+      <template #footer>
+        <base-button
+          :icon-left="PlusSmallIcon"
+          intent="success"
+          @click="handleAddCategory"
+        >
+          Add
+        </base-button>
+      </template>
     </base-modal>
   </AdminLayout>
 </template>
@@ -273,12 +285,5 @@ const handleAddCategory = async () => {
 <style scoped>
 .dropdown:hover .dropdown-menu {
   display: block;
-}
-
-:deep(.spinner) {
-  border-bottom-color: transparent;
-  width: 20px;
-  height: 20px;
-  border-width: 2px;
 }
 </style>

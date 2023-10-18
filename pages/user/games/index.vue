@@ -6,6 +6,7 @@ import UserLayout from '@/layouts/UserLayout.vue';
 import { useUserStore } from '@/stores/useUserStore';
 import { convertStringToDate } from '@/utils/functions';
 import {
+  EllipsisHorizontalIcon,
   PencilSquareIcon,
   PlusSmallIcon,
   TrashIcon,
@@ -177,30 +178,54 @@ const handleAddNewGame = async () => {
                     {{ convertStringToDate(game.updated_at) }}
                   </td>
                   <td class="p-4">
-                    <div class="flex items-center gap-1">
-                      <NuxtLink
-                        :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`"
-                        class="mr-1"
-                      >
-                        <PencilSquareIcon class="w-5 h-5 text-yellow-600" />
-                      </NuxtLink>
-                      <NuxtLink
-                        :to="`${ROUTE_NAMES.USER_GAME_ASSETS}/${game.id}`"
-                        class="mr-1"
-                      >
-                        <PhotoIcon class="w-5 h-5 text-sky-600" />
-                      </NuxtLink>
-                      <NuxtLink
-                        :to="`${ROUTE_NAMES.USER_GAME_UPLOAD}/${game.id}`"
-                        class="mr-1"
-                      >
-                        <CubeIcon class="w-5 h-5 text-green-600" />
-                      </NuxtLink>
-                      <TrashIcon
-                        class="w-5 h-5 text-red-500 cursor-pointer"
-                        @click="toggleModal"
-                      />
-                    </div>
+                    <BaseDropdown align="right">
+                      <template #button>
+                        <EllipsisHorizontalIcon
+                          class="h-5 w-5"
+                          aria-hidden="true"
+                        />
+                      </template>
+                      <template #items>
+                        <BaseDropdownItem>
+                          <NuxtLink
+                            :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`"
+                            class="flex items-center"
+                          >
+                            <PencilSquareIcon
+                              class="w-5 h-5 text-yellow-600 mr-2"
+                            />
+                            <span class="mt-1">Edit</span>
+                          </NuxtLink>
+                        </BaseDropdownItem>
+                        <BaseDropdownItem>
+                          <NuxtLink
+                            :to="`${ROUTE_NAMES.USER_GAME_ASSETS}/${game.id}`"
+                            class="flex items-center"
+                          >
+                            <PhotoIcon class="w-5 h-5 text-sky-600 mr-2" />
+                            <span class="mt-1">Assets</span>
+                          </NuxtLink>
+                        </BaseDropdownItem>
+                        <BaseDropdownItem>
+                          <NuxtLink
+                            :to="`${ROUTE_NAMES.USER_GAME_UPLOAD}/${game.id}`"
+                            class="flex items-center"
+                          >
+                            <CubeIcon class="w-5 h-5 text-green-600 mr-2" />
+                            <span class="mt-1">Games</span>
+                          </NuxtLink>
+                        </BaseDropdownItem>
+                        <BaseDropdownItem>
+                          <div class="flex items-center">
+                            <TrashIcon
+                              class="w-5 h-5 text-red-500 cursor-pointer mr-2"
+                              @click="toggleModal"
+                            />
+                            <span class="mt-1">Delete</span>
+                          </div>
+                        </BaseDropdownItem>
+                      </template>
+                    </BaseDropdown>
                   </td>
                 </tr>
               </template>

@@ -53,7 +53,7 @@ const register = async () => {
 
     setTimeout(() => {
       navigateTo(ROUTE_NAMES.USER_GAME);
-    }, 500);
+    }, 1000);
   } else {
     $toast.error(response.message, {
       autoClose: 2000,

@@ -10,7 +10,7 @@ import {
   PlusSmallIcon,
   TrashIcon,
 } from '@heroicons/vue/24/outline';
-import { CubeIcon, PhotoIcon, PlusIcon } from '@heroicons/vue/24/solid';
+import { CubeIcon, PhotoIcon } from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'User - XGame Studio',
@@ -35,6 +35,7 @@ definePageMeta({
 
 const userStore = useUserStore();
 const { $toast } = useNuxtApp();
+const { BACKEND_URL } = useUrlConfig();
 
 const currentPage = ref(1);
 const modalActive = ref(null);
@@ -42,13 +43,14 @@ const gameName = ref('');
 const gameError = ref('');
 const isRefetch = ref(false);
 
-const { data: games } = await useHttp(
-  () => `/games/user/${userStore.user.id}?page=${currentPage.value}`,
-  {
-    watch: [isRefetch],
-    server: false,
+const { data: games } = await useHttp(`/games/user/${userStore.user.id}`, {
+  query: {
+    page: currentPage,
   },
-);
+  watch: [isRefetch, currentPage],
+  server: false,
+  initialCache: false,
+});
 
 const onChangePage = (val) => {
   currentPage.value = val;
@@ -97,17 +99,18 @@ const handleAddNewGame = async () => {
     />
     <div class="bg-white rounded m-4 shadow overflow-hidden">
       <div class="flex justify-end items-center p-4">
-        <button
-          class="flex items-center btn-search p-2 ml-2 text-xs font-medium text-white bg-emerald-600 rounded-lg border border-emerald-700 hover:bg-emerald-700"
+        <base-button
+          :icon-left="PlusSmallIcon"
+          intent="primary"
           @click="addNewGame"
         >
-          <PlusSmallIcon class="w-5 h-5 text-white mr-1" /> Add game
-        </button>
+          Add Game
+        </base-button>
       </div>
       <div class="px-4">
         <div class="pb-5 overflow-x-auto">
           <table class="w-full">
-            <thead class="bg-slate-200 border border-gray-200">
+            <thead class="bg-gray-200 border border-gray-200">
               <tr class="text-slate-900 text-sm text-left">
                 <th class="px-4 py-4 font-medium">Name</th>
                 <th class="px-4 py-4 font-medium">Thumbnail</th>
@@ -143,29 +146,26 @@ const handleAddNewGame = async () => {
                   class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
                 >
                   <td class="px-4 py-4">{{ game.name }}</td>
-                  <td class="px-4 py-4 whitespace-nowrap">{{ game.title }}</td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    <div class="w-[80px] h-[60px]">
+                      <img
+                        class="w-full object-contain"
+                        :src="`${BACKEND_URL}${game.thumbnail}`"
+                        alt=""
+                      />
+                    </div>
+                  </td>
                   <td class="px-4 py-4 whitespace-nowrap">
                     {{ game.width }} x {{ game.height }}
                   </td>
                   <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
-                    <span
-                      v-if="game.status === 0"
-                      class="bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full"
-                    >
+                    <base-badge v-if="game.status === 0" intent="primary">
                       Pending
-                    </span>
-                    <span
-                      v-else-if="game.status === 1"
-                      class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full"
-                    >
+                    </base-badge>
+                    <base-badge v-else-if="game.status === 1" intent="success">
                       Accepted
-                    </span>
-                    <span
-                      v-else
-                      class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
-                    >
-                      Rejected
-                    </span>
+                    </base-badge>
+                    <base-badge v-else intent="danger"> Accepted </base-badge>
                   </td>
                   <td class="px-4 py-4 whitespace-nowrap">
                     {{ convertStringToDate(game.published_at) }}
@@ -173,32 +173,34 @@ const handleAddNewGame = async () => {
                   <td class="px-4 py-4 whitespace-nowrap">
                     {{ convertStringToDate(game.created_at) }}
                   </td>
-                  <td class="px-4 py-4 whitespace-nowrap">
+                  <td class="px-4 py-4">
                     {{ convertStringToDate(game.updated_at) }}
                   </td>
-                  <td class="h-[52px] px-4 flex items-center gap-1">
-                    <NuxtLink
-                      :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`"
-                      class="mr-2"
-                    >
-                      <PencilSquareIcon class="w-5 h-5 text-yellow-600" />
-                    </NuxtLink>
-                    <NuxtLink
-                      :to="`${ROUTE_NAMES.USER_GAME_ASSETS}/${game.id}`"
-                      class="mr-2"
-                    >
-                      <PhotoIcon class="w-5 h-5 text-blue-600" />
-                    </NuxtLink>
-                    <NuxtLink
-                      :to="`${ROUTE_NAMES.USER_GAME_UPLOAD}/${game.id}`"
-                      class="mr-2"
-                    >
-                      <CubeIcon class="w-5 h-5 text-green-600" />
-                    </NuxtLink>
-                    <TrashIcon
-                      class="w-5 h-5 text-red-500 cursor-pointer"
-                      @click="toggleModal"
-                    />
+                  <td class="p-4">
+                    <div class="flex items-center gap-1">
+                      <NuxtLink
+                        :to="`${ROUTE_NAMES.USER_GAME_EDIT}/${game.id}`"
+                        class="mr-1"
+                      >
+                        <PencilSquareIcon class="w-5 h-5 text-yellow-600" />
+                      </NuxtLink>
+                      <NuxtLink
+                        :to="`${ROUTE_NAMES.USER_GAME_ASSETS}/${game.id}`"
+                        class="mr-1"
+                      >
+                        <PhotoIcon class="w-5 h-5 text-sky-600" />
+                      </NuxtLink>
+                      <NuxtLink
+                        :to="`${ROUTE_NAMES.USER_GAME_UPLOAD}/${game.id}`"
+                        class="mr-1"
+                      >
+                        <CubeIcon class="w-5 h-5 text-green-600" />
+                      </NuxtLink>
+                      <TrashIcon
+                        class="w-5 h-5 text-red-500 cursor-pointer"
+                        @click="toggleModal"
+                      />
+                    </div>
                   </td>
                 </tr>
               </template>
@@ -218,7 +220,7 @@ const handleAddNewGame = async () => {
         </div>
       </div>
     </div>
-    <Modal
+    <base-modal
       :modal-active="modalActive"
       title="Add new game"
       @close-modal="modalActive = false"
@@ -231,21 +233,15 @@ const handleAddNewGame = async () => {
         </form>
       </template>
       <template #footer>
-        <button
-          type="submit"
-          class="flex items-center btn-search p-2 text-sm font-medium text-white rounded border bg-emerald-600 border-emerald-700 hover:bg-emerald-700"
+        <base-button
+          :icon-left="PlusSmallIcon"
+          intent="success"
           @click="handleAddNewGame"
         >
-          <div class="mr-1 flex items-center justify-center">
-            <Spinner v-if="false" />
-            <template v-else>
-              <PlusIcon class="w-4 h-4 text-white mr-1" />
-              Add
-            </template>
-          </div>
-        </button>
+          Add
+        </base-button>
       </template>
-    </Modal>
+    </base-modal>
   </UserLayout>
 </template>
 

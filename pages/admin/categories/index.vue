@@ -230,7 +230,7 @@ const handleAddCategory = async () => {
         </div>
       </div>
     </div>
-    <Modal :modal-active="modalActive" @close-modal="modalActive = false">
+    <base-modal :modal-active="modalActive" @close-modal="modalActive = false">
       <div class="text-black">
         <h3 class="text-3xl font-bold">
           {{ currentCategory ? 'Edit category' : 'Add category' }}
@@ -266,7 +266,7 @@ const handleAddCategory = async () => {
           </button>
         </form>
       </div>
-    </Modal>
+    </base-modal>
   </AdminLayout>
 </template>
 

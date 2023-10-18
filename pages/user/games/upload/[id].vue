@@ -3,9 +3,10 @@ import { IconUploadZip } from '@/assets/icon';
 import { useHttp } from '@/composables/useHttp';
 import { useUrlConfig } from '@/composables/useUrlConfig';
 import { userGameUploadPageBreadcrumbs } from '@/config/breadcrumbs';
+import { ROUTE_NAMES } from '@/constants/routes';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { IGame } from '@/types/game';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 useHead({
   title: 'Upload Game File - XGame Studio',
@@ -37,6 +38,7 @@ const { data: game } = await useHttp<IGame>(() => `${API_URL}/game/${id}`);
 const gameFile = ref();
 const gameError = ref('');
 const progress = ref(0);
+const isLoading = ref(false);
 
 const onUploadGameFile = (event) => {
   gameFile.value = event.target.files[0];
@@ -59,39 +61,46 @@ const handleAddNewGame = async () => {
 
   const formData = new FormData();
   const token = useCookie('access_token');
+  isLoading.value = true;
 
   formData.append('gameFile', gameFile.value);
 
-  const { data, status } = await axios.post(
-    `${API_URL}/game/upload-game/${id}`,
-    formData,
-    {
-      headers: {
-        Authorization: `Bearer ${token.value}`,
+  try {
+    const { data, status } = await axios.post(
+      `${API_URL}/game/upload-game/${id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token.value}`,
+        },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total,
+            );
+
+            progress.value = percentCompleted;
+          }
+        },
       },
-      onUploadProgress: (progressEvent) => {
-        if (progressEvent.total) {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total,
-          );
+    );
 
-          progress.value = percentCompleted;
-        }
-      },
-    },
-  );
+    isLoading.value = false;
+    if (status !== 200) {
+      $toast.error(data.message);
+    } else {
+      $toast.success('Add game file successfully!!!');
 
-  if (status !== 200) {
-    $toast.error(data.message);
-    return;
-  }
-
-  if (data.value) {
-    $toast.success('Add game file successfully!!!');
-
-    setTimeout(() => {
-      // navigateTo(ROUTE_NAMES.USER_GAME);
-    }, 500);
+      setTimeout(() => {
+        navigateTo(ROUTE_NAMES.USER_GAME);
+      }, 1000);
+    }
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      $toast.error(error.response?.data.message);
+    } else {
+      $toast.error('Something went wrong!!!');
+    }
   }
 };
 </script>
@@ -144,12 +153,9 @@ const handleAddNewGame = async () => {
           </FormHelperMessage>
         </div>
         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-          <button
-            type="submit"
-            class="inline-flex justify-center rounded-md border border-transparent bg-emerald-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-          >
+          <base-button intent="success" :loading="isLoading" type="submit">
             Save
-          </button>
+          </base-button>
         </div>
       </form>
     </user-game>

@@ -2,9 +2,9 @@
 import { useHttp } from '@/composables/useHttp';
 import { useUrlConfig } from '@/composables/useUrlConfig';
 import { userGameEditPageBreadcrumbs } from '@/config/breadcrumbs';
+import { ROUTE_NAMES } from '@/constants/routes';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { ICategory, IGame } from '@/types/game';
-import { ROUTE_NAMES } from '@/constants/routes';
 
 useHead({
   title: 'Edit Game - XGame Studio',
@@ -130,7 +130,7 @@ const handleEditGame = async () => {
 
     setTimeout(() => {
       navigateTo(ROUTE_NAMES.USER_GAME);
-    }, 500);
+    }, 1000);
   }
 };
 </script>
@@ -220,12 +220,7 @@ const handleEditGame = async () => {
           </div>
         </div>
         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-          <button
-            type="submit"
-            class="inline-flex justify-center rounded-md border border-transparent bg-emerald-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-          >
-            Save
-          </button>
+          <base-button intent="success" type="submit"> Save </base-button>
         </div>
       </form>
     </user-game>

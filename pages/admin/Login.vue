@@ -49,7 +49,7 @@ const login = async () => {
 
     setTimeout(() => {
       navigateTo(ROUTE_NAMES.ADMIN_GAME);
-    }, 500);
+    }, 1000);
   } else {
     $toast.error(response.message);
   }

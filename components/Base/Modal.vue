@@ -45,7 +45,7 @@ defineProps({
             </div>
             <!-- Modal footer -->
             <div
-              class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b"
+              class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b"
             >
               <slot name="footer" />
             </div>

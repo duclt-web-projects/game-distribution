@@ -74,7 +74,7 @@ const handleAddNewGame = async () => {
 
   formData.append('thumbnail', gameData.thumbnail);
 
-  const { data, error } = await useHttp(`/game/upload-thumbnail/${id}`, {
+  const { data, error } = await useHttp(`/user/game/upload-thumbnail/${id}`, {
     method: 'POST',
     body: formData,
   });

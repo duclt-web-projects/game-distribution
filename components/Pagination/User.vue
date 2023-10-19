@@ -42,16 +42,16 @@ const handleChangePage = (page) => {
 <template>
   <nav aria-label="Page navigation example">
     <ul class="flex items-center -space-x-px h-8 text-sm">
-      <li
-        class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 border border-gray-300"
-        :class="
-          isFirstPage
-            ? 'bg-gray-300 disabled'
-            : 'bg-white hover:bg-gray-100 hover:text-gray-700 '
-        "
-        @click="handleChangePage(currentPage - 1)"
-      >
-        <a disabled="disabled">
+      <li @click="handleChangePage(currentPage - 1)">
+        <a
+          disabled="disabled"
+          class="flex items-center justify-center w-8 h-8 ml-0 leading-tight text-gray-500 rounded"
+          :class="
+            isFirstPage
+              ? 'text-gray-300 disabled cursor-not-allowed'
+              : 'bg-white hover:bg-gray-200 hover:text-gray-700 cursor-pointer'
+          "
+        >
           <ChevronLeftIcon class="w-4 h-4" />
         </a>
       </li>
@@ -62,10 +62,10 @@ const handleChangePage = (page) => {
       >
         <a
           role="button"
-          class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300"
+          class="flex items-center justify-center w-8 h-8 leading-tight rounded mx-1"
           :class="
             isPageActive(page.name)
-              ? 'text-white border border-gray-300 bg-emerald-600'
+              ? 'text-emerald-700 border border-emerald-700 font-semibold'
               : 'text-gray-800 bg-white hover:text-gray-700 hover:bg-gray-200'
           "
           >{{ page.name }}</a
@@ -74,11 +74,11 @@ const handleChangePage = (page) => {
       <li>
         <a
           role="button"
-          class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 border border-gray-300"
+          class="flex items-center justify-center w-8 h-8 leading-tight text-gray-600 rounded"
           :class="
             isLastPage
-              ? 'bg-gray-300 disabled'
-              : 'bg-white hover:bg-gray-100 hover:text-gray-700 '
+              ? 'text-gray-300 disabled cursor-not-allowed'
+              : 'bg-white hover:bg-gray-200 hover:text-gray-700 cursor-pointer'
           "
           @click="handleChangePage(currentPage + 1)"
         >

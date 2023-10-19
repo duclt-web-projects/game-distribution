@@ -34,7 +34,7 @@ const buttonClass = computed(() => {
     {
       variants: {
         intent: {
-          primary: 'bg-blue-600 hover:bg-blue-700 text-white',
+          primary: 'bg-blue-500 hover:bg-blue-600 text-white',
           secondary: 'bg-gray-500 hover:bg-gray-600 text-white',
           success: 'bg-emerald-600 hover:bg-emerald-700 text-white',
           danger: 'bg-red-600 hover:bg-red-700 text-white',

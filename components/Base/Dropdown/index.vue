@@ -17,7 +17,7 @@ const props = defineProps({
 
 <template>
   <Menu as="div" class="relative inline-block text-left">
-    <div>
+    <div class="flex justify-center items-center">
       <MenuButton>
         <slot name="button" />
       </MenuButton>

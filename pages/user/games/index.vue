@@ -1,5 +1,6 @@
 <script setup>
 import { useHttp } from '@/composables/useHttp';
+import { useSortCol } from '@/composables/useSortCol';
 import { userGamePageBreadcrumbs } from '@/config/breadcrumbs';
 import { ROUTE_NAMES } from '@/constants';
 import UserLayout from '@/layouts/UserLayout.vue';
@@ -9,7 +10,6 @@ import {
   EllipsisHorizontalIcon,
   PencilSquareIcon,
   PlusSmallIcon,
-  TrashIcon,
 } from '@heroicons/vue/24/outline';
 import { CubeIcon, PhotoIcon } from '@heroicons/vue/24/solid';
 
@@ -43,10 +43,12 @@ const modalActive = ref(null);
 const gameName = ref('');
 const gameError = ref('');
 const isRefetch = ref(false);
+const { sort, onChangeSort } = useSortCol();
 
-const { data: games } = await useHttp(`/games/user/${userStore.user.id}`, {
+const { data: games } = await useHttp(`/user/games`, {
   query: {
     page: currentPage,
+    sort,
   },
   watch: [isRefetch, currentPage],
   server: false,
@@ -62,10 +64,6 @@ const addNewGame = () => {
   modalActive.value = true;
 };
 
-const toggleModal = () => {
-  modalActive.value = !modalActive.value;
-};
-
 const handleAddNewGame = async () => {
   gameError.value = '';
 
@@ -74,7 +72,7 @@ const handleAddNewGame = async () => {
     return;
   }
 
-  const { data, error } = await useHttp(`game/store`, {
+  const { data, error } = await useHttp(`/user/game`, {
     method: 'POST',
     body: {
       name: gameName,
@@ -113,7 +111,13 @@ const handleAddNewGame = async () => {
           <table class="w-full">
             <thead class="bg-gray-300 border border-gray-200">
               <tr class="text-gray-900 text-sm text-left">
-                <th class="p-4 font-medium border-r border-gray-200">Name</th>
+                <th class="p-4 font-medium border-r border-gray-200">
+                  <BaseSortCol
+                    label="Name"
+                    :sort="sort"
+                    @change-sort="onChangeSort"
+                  />
+                </th>
                 <th class="p-4 font-medium border-r border-gray-200">
                   Thumbnail
                 </th>
@@ -160,10 +164,14 @@ const handleAddNewGame = async () => {
                   <td
                     class="p-4 whitespace-nowrap border-r border-gray-200 flex justify-center"
                   >
-                    <div class="w-[80px] h-full">
+                    <div class="w-[80px] h-[60px]">
                       <img
-                        class="w-full object-contain"
-                        :src="`${BACKEND_URL}${game.thumbnail}`"
+                        class="w-full h-full object-cover"
+                        :src="
+                          game.thumbnail
+                            ? `${BACKEND_URL}${game.thumbnail}`
+                            : '/images/no-image-dashboard.jpg'
+                        "
                         alt=""
                       />
                     </div>
@@ -191,7 +199,7 @@ const handleAddNewGame = async () => {
                   <td class="p-4 border-r border-gray-200">
                     {{ convertStringToDate(game.updated_at) }}
                   </td>
-                  <td class="p-4">
+                  <td class="p-4 text-center">
                     <BaseDropdown align="right">
                       <template #button>
                         <EllipsisHorizontalIcon
@@ -228,15 +236,6 @@ const handleAddNewGame = async () => {
                             <CubeIcon class="w-5 h-5 text-green-600 mr-2" />
                             <span class="mt-1">Games</span>
                           </NuxtLink>
-                        </BaseDropdownItem>
-                        <BaseDropdownItem>
-                          <div class="flex items-center">
-                            <TrashIcon
-                              class="w-5 h-5 text-red-500 cursor-pointer mr-2"
-                              @click="toggleModal"
-                            />
-                            <span class="mt-1">Delete</span>
-                          </div>
                         </BaseDropdownItem>
                       </template>
                     </BaseDropdown>
@@ -288,5 +287,9 @@ const handleAddNewGame = async () => {
 :deep(.spinner) {
   border-color: #cbd5e1;
   border-bottom-color: transparent;
+}
+
+:deep(svg) {
+  cursor: pointer;
 }
 </style>

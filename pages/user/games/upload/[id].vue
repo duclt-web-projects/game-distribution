@@ -67,7 +67,7 @@ const handleAddNewGame = async () => {
 
   try {
     const { data, status } = await axios.post(
-      `${API_URL}/game/upload-game/${id}`,
+      `${API_URL}/user/game/upload-game/${id}`,
       formData,
       {
         headers: {

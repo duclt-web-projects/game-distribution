@@ -42,4 +42,3 @@ const { API_URL } = useUrlConfig();
   }
 }
 </style>
-~/config/catalog

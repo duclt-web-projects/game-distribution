@@ -8,5 +8,5 @@ export interface IOptions {
 export interface IBreadcrumb {
   path: string;
   name: string;
-  icon: FunctionalComponent;
+  icon: FunctionalComponent | null;
 }

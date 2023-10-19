@@ -116,7 +116,7 @@ const handleEditGame = async () => {
   formData.append('width', gameData.width + '');
   formData.append('height', gameData.height + '');
 
-  const { data, error } = await useHttp(`/game/edit/${id}`, {
+  const { data, error } = await useHttp(`/user/game/${id}`, {
     method: 'POST',
     body: formData,
   });

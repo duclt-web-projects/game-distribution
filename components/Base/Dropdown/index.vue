@@ -5,7 +5,7 @@ const props = defineProps({
   align: {
     type: String,
     validator: (value) => ['left', 'right'].includes(value),
-    default: 'right',
+    default: 'bottom-left',
   },
   width: {
     type: String,
@@ -33,8 +33,10 @@ const props = defineProps({
     >
       <MenuItems
         :class="{
-          'right-0 origin-top-right': props.align === 'right',
-          'left-0 origin-top-left': props.align === 'left',
+          'right-0 origin-top-right': props.align === 'bottom-left',
+          'left-0 origin-top-left': props.align === 'bottom-right',
+          'right-0 bottom-5 origin-bottom-right': props.align === 'top-left',
+          'left-0 origin-bottom-left': props.align === 'top-right',
         }"
         :style="{
           width: props.width,

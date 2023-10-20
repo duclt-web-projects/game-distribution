@@ -93,7 +93,7 @@ const toggleAllSelect = (e: MouseEvent) => {
     />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
       <div class="overflow-x-auto p-4">
-        <table class="w-full overflow-x-auto">
+        <table class="w-full mt-10">
           <thead class="bg-slate-200 border border-gray-300">
             <tr class="text-slate-900 text-sm text-left">
               <th
@@ -177,8 +177,14 @@ const toggleAllSelect = (e: MouseEvent) => {
                 <td class="p-4 whitespace-nowrap border-r border-gray-200">
                   {{ convertStringToDate(game.created_at) }}
                 </td>
-                <td class="text-center">
-                  <BaseDropdown align="right">
+                <td class="p-4 text-center">
+                  <BaseDropdown
+                    :align="
+                      index === games.data.length - 1
+                        ? 'top-left'
+                        : 'bottom-left'
+                    "
+                  >
                     <template #button>
                       <EllipsisHorizontalIcon
                         class="h-5 w-5"

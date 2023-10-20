@@ -4,7 +4,6 @@ import { useSortCol } from '@/composables/useSortCol';
 import { userGamePageBreadcrumbs } from '@/config/breadcrumbs';
 import { ROUTE_NAMES } from '@/constants';
 import UserLayout from '@/layouts/UserLayout.vue';
-import { useUserStore } from '@/stores/useUserStore';
 import { convertStringToDate } from '@/utils/functions';
 import {
   EllipsisHorizontalIcon,
@@ -34,7 +33,6 @@ definePageMeta({
   middleware: ['auth-user'],
 });
 
-const userStore = useUserStore();
 const { $toast } = useNuxtApp();
 const { BACKEND_URL } = useUrlConfig();
 
@@ -97,7 +95,7 @@ const handleAddNewGame = async () => {
       :breadcrumbs="userGamePageBreadcrumbs"
     />
     <div class="bg-white rounded m-4 shadow overflow-hidden">
-      <div class="flex justify-end items-center p-4">
+      <div class="flex justify-end items-center p-4 pb-0">
         <base-button
           :icon-left="PlusSmallIcon"
           intent="primary"
@@ -108,7 +106,7 @@ const handleAddNewGame = async () => {
       </div>
       <div class="px-4">
         <div class="pb-5 overflow-x-auto">
-          <table class="w-full">
+          <table class="w-full mt-10">
             <thead class="bg-slate-200 border border-gray-300">
               <tr class="text-gray-900 text-sm text-left">
                 <th class="p-4 font-medium border-r border-gray-300">
@@ -200,7 +198,11 @@ const handleAddNewGame = async () => {
                     {{ convertStringToDate(game.updated_at) }}
                   </td>
                   <td class="p-4 text-center">
-                    <BaseDropdown align="right">
+                    <BaseDropdown
+                      :align="
+                        index === games.length - 1 ? 'top-left' : 'bottom-left'
+                      "
+                    >
                       <template #button>
                         <EllipsisHorizontalIcon
                           class="h-5 w-5"
@@ -245,7 +247,6 @@ const handleAddNewGame = async () => {
             </tbody>
           </table>
         </div>
-
         <div
           v-if="games && games.data.length"
           class="flex justify-end p-4 bg-white"

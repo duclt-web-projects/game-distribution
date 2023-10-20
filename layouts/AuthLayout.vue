@@ -1091,7 +1091,7 @@ const isLogin = route.path.toLowerCase() === '/login';
 
 .form-container {
   display: flex;
-  padding: 36px 18px;
+  padding: 40px 20px;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
@@ -1099,7 +1099,7 @@ const isLogin = route.path.toLowerCase() === '/login';
 
 .form-wrapper {
   width: 100%;
-  max-width: 430px;
+  max-width: 440px;
 }
 
 .form-logo {
@@ -1173,7 +1173,7 @@ const isLogin = route.path.toLowerCase() === '/login';
   }
 
   &__content {
-    padding: 36px;
+    padding: 40px;
     box-shadow: 0 0 56px 0 rgba(46, 54, 78, 0.73);
     border-radius: 24px;
     background-color: #0b0f1d;

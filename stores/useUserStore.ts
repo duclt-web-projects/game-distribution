@@ -54,6 +54,28 @@ export const useUserStore = defineStore('user', () => {
     );
   }
 
+  async function loginWithProvider(loginInfo): Promise<IResponseReturn> {
+    const { data, error } = await useHttp<IAuthResponse>(
+      '/auth/login-with-provider',
+      {
+        method: 'POST',
+        body: loginInfo,
+      },
+    );
+
+    if (data.value) {
+      user.value = data.value.user;
+      token.value = data.value.access_token;
+    }
+
+    return handleResponse(
+      data,
+      error,
+      'Login successfully!!!',
+      'Login failed!!!',
+    );
+  }
+
   async function register(registerInfo: IRegister): Promise<IResponseReturn> {
     const { data, error } = await useHttp<IAuthResponse>('/auth/register', {
       method: 'POST',
@@ -100,6 +122,7 @@ export const useUserStore = defineStore('user', () => {
   return {
     user,
     login,
+    loginWithProvider,
     isLoggedIn,
     getProfile,
     logout,

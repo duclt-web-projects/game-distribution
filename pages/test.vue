@@ -1,12 +1,34 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/stores/useUserStore';
+import {
+  GoogleSignInButton,
+  decodeCredential,
+  type CredentialResponse,
+} from 'vue3-google-signin';
+
+const userStore = useUserStore();
+
+// handle success event
+const handleLoginSuccess = (response: CredentialResponse) => {
+  const { credential } = response;
+  if (credential) {
+    const decodedCredential = decodeCredential(credential);
+    userStore.loginWithProvider({
+      email: decodedCredential.email,
+      name: decodedCredential.name,
+    });
+  }
+};
+
+// handle an error event
+const handleLoginError = () => {
+  console.error('Login failed');
+};
+</script>
+
 <template>
-  <div class="w-full max-w-md px-2 py-16 sm:px-0">
-    <BaseDropdown align="left">
-      <template #button> Open menu </template>
-      <template #items>
-        <BaseDropdownItem href="#">Edit</BaseDropdownItem>
-        <BaseDropdownItem href="#">Duplicate</BaseDropdownItem>
-      </template>
-    </BaseDropdown>
-  </div>
+  <GoogleSignInButton
+    @success="handleLoginSuccess"
+    @error="handleLoginError"
+  ></GoogleSignInButton>
 </template>

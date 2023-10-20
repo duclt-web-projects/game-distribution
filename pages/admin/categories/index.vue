@@ -77,7 +77,6 @@ const onChangePage = (val) => {
 };
 
 const handleChangeStatus = async (id) => {
-  console.log(123);
   isRefetch.value = !isRefetch.value;
 
   const { data, error } = await useHttp(`admin/category/change-status/${id}`, {
@@ -146,7 +145,7 @@ const handleAddCategory = async () => {
         </base-button>
       </div>
       <div class="overflow-x-auto px-4 pb-5">
-        <table class="w-full">
+        <table class="w-full mt-10">
           <thead class="bg-slate-200 border border-gray-300">
             <tr class="text-gray-900 text-sm text-left">
               <th class="p-4 font-medium border-r border-gray-300">Name</th>
@@ -210,7 +209,13 @@ const handleAddCategory = async () => {
                   {{ convertStringToDate(category.updated_at) }}
                 </td>
                 <td class="text-center">
-                  <BaseDropdown align="right">
+                  <BaseDropdown
+                    :align="
+                      index === categories.data.length - 1
+                        ? 'top-left'
+                        : 'bottom-left'
+                    "
+                  >
                     <template #button>
                       <EllipsisHorizontalIcon
                         class="h-5 w-5"
@@ -253,17 +258,17 @@ const handleAddCategory = async () => {
             </template>
           </tbody>
         </table>
+      </div>
 
-        <div
-          v-if="categories && categories.data.length"
-          class="flex justify-end p-4 bg-white"
-        >
-          <PaginationUser
-            :current-page="currentPage"
-            :total-page="categories.last_page"
-            @change-page="onChangePage"
-          />
-        </div>
+      <div
+        v-if="categories && categories.data.length"
+        class="flex justify-end p-4 bg-white"
+      >
+        <PaginationUser
+          :current-page="currentPage"
+          :total-page="categories.last_page"
+          @change-page="onChangePage"
+        />
       </div>
     </div>
     <base-modal

@@ -3,6 +3,8 @@ import { RESPONSE_STATUS } from '@/constants';
 import { ROUTE_NAMES } from '@/constants/routes';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { useUserStore } from '@/stores/useUserStore';
+import axios from 'axios';
+import { type AuthCodeFlowSuccessResponse } from 'vue3-google-signin';
 
 useHead({
   title: 'Login - XGame Studio',
@@ -32,7 +34,7 @@ const errors = ref({
   password: '',
 });
 
-const login = async () => {
+const handleLogin = async () => {
   if (!validate()) return;
 
   isLoading.value = true;
@@ -74,6 +76,41 @@ const validate = () => {
 
   return true;
 };
+
+// handle success event
+const handleLoginSuccess = async (response: AuthCodeFlowSuccessResponse) => {
+  const { data } = await axios.get(
+    `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`,
+  );
+  if (data) {
+    const response = await userStore.loginWithProvider({
+      email: data.email,
+      name: data.name,
+    });
+
+    if (response.status === RESPONSE_STATUS.SUCCESS) {
+      isLoading.value = false;
+      $toast.success(response.message);
+
+      setTimeout(() => {
+        navigateTo(ROUTE_NAMES.USER_GAME);
+      }, 1000);
+    } else {
+      $toast.error(response.message);
+    }
+  }
+};
+
+// handle an error event
+const handleLoginError = () => {
+  $toast.error('Login failed!!!');
+};
+
+const { isReady, login } = useTokenClient({
+  onSuccess: handleLoginSuccess,
+  onError: handleLoginError,
+  // other options
+});
 </script>
 
 <template>
@@ -83,7 +120,7 @@ const validate = () => {
       <div id="stars2"></div>
       <div id="stars3"></div>
     </template>
-    <form @submit.prevent="login">
+    <form @submit.prevent="handleLogin">
       <InputTextAuth
         v-model:input="email"
         placeholder="Email"
@@ -104,10 +141,51 @@ const validate = () => {
         </button>
       </div>
     </form>
+    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+    <div class="mt-5">
+      <button class="google-btn" :disabled="!isReady" @click="() => login()">
+        <div class="google-icon-wrapper">
+          <img
+            class="google-icon"
+            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+          />
+        </div>
+        <p class="btn-text"><b>Sign in with google</b></p>
+      </button>
+    </div>
   </AuthLayout>
 </template>
 
 <style lang="scss" scoped>
+.google-btn {
+  width: 100%;
+  display: flex;
+  height: 40px;
+  background-color: #4285f4;
+  border-radius: 2px;
+
+  .google-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #fff;
+  }
+
+  .google-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    margin: 11px 11px 0 12px;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: 'Roboto';
+  }
+}
 #stars {
   position: absolute;
   width: 1px;

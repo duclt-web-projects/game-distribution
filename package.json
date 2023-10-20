@@ -34,6 +34,7 @@
     "@pinia/nuxt": "^0.4.11",
     "axios": "^1.5.1",
     "class-variance-authority": "^0.7.0",
+    "nuxt-vue3-google-signin": "^0.0.9",
     "pinia": "^2.1.6",
     "swiper": "^10.2.0",
     "vue3-toastify": "^0.1.12"

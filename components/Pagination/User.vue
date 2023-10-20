@@ -65,7 +65,7 @@ const handleChangePage = (page) => {
           class="flex items-center justify-center w-8 h-8 leading-tight rounded mx-1"
           :class="
             isPageActive(page.name)
-              ? 'text-emerald-700 border border-emerald-700 font-semibold'
+              ? 'text-emerald-600 border border-emerald-600 font-semibold'
               : 'text-gray-800 bg-white hover:text-gray-700 hover:bg-gray-200'
           "
           >{{ page.name }}</a

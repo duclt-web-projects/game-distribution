@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useHttp } from '@/composables/useHttp';
+import { adminGamePageBreadcrumbs } from '@/config/breadcrumbs';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import { IGame } from '@/types/game';
 import { IResponsePaginate } from '@/types/response';
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
-import { adminGamePageBreadcrumbs } from '@/config/breadcrumbs';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'Games - Admin - XGame Studio',
@@ -94,10 +94,10 @@ const toggleAllSelect = (e: MouseEvent) => {
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
       <div class="overflow-x-auto p-4">
         <table class="w-full overflow-x-auto">
-          <thead class="bg-slate-200 border border-gray-200">
+          <thead class="bg-slate-200 border border-gray-300">
             <tr class="text-slate-900 text-sm text-left">
               <th
-                class="px-4 py-4 text-left text-sm font-medium text-slate-900"
+                class="p-4 text-left text-sm font-medium border-r border-gray-300"
               >
                 <input
                   type="checkbox"
@@ -105,13 +105,19 @@ const toggleAllSelect = (e: MouseEvent) => {
                   @click="toggleAllSelect"
                 />
               </th>
-              <th class="px-4 py-4 font-medium">Name</th>
-              <th class="px-4 py-4 font-medium">Thumbnail</th>
-              <th class="px-4 py-4 font-medium">Size</th>
-              <th class="px-4 py-4 font-medium">Status</th>
-              <th class="px-4 py-4 font-medium">Published at</th>
-              <th class="px-4 py-4 font-medium">Created at</th>
-              <th class="px-4 py-4 font-medium"></th>
+              <th class="p-4 font-medium border-r border-gray-300">Name</th>
+              <th class="p-4 font-medium border-r border-gray-300">
+                Thumbnail
+              </th>
+              <th class="p-4 font-medium border-r border-gray-300">Size</th>
+              <th class="p-4 font-medium border-r border-gray-300">Status</th>
+              <th class="p-4 font-medium border-r border-gray-300">
+                Published at
+              </th>
+              <th class="p-4 font-medium border-r border-gray-300">
+                Created at
+              </th>
+              <th class="p-4 font-medium"></th>
             </tr>
           </thead>
           <tbody class="border">
@@ -129,95 +135,79 @@ const toggleAllSelect = (e: MouseEvent) => {
               <tr
                 v-for="(game, index) in games.data"
                 :key="index"
-                class="odd:bg-white even:bg-slate-50 text-sm text-slate-900"
+                class="odd:bg-white even:bg-gray-100 text-sm text-slate-900"
               >
-                <td class="px-4 py-4 whitespace-nowrap">
+                <td class="p-4 whitespace-nowrap border-r border-gray-200">
                   <input
                     type="checkbox"
                     class="rounded border-gray-400"
                     data-id="v.id"
                   />
                 </td>
-                <td class="px-4 py-4x">{{ game.name }}</td>
-                <td class="px-4 py-4x"></td>
-                <td class="px-4 py-4 whitespace-nowrap">
+                <td class="p-4 border-r border-gray-200">
+                  {{ game.name }}
+                </td>
+                <td class="p-4 border-r border-gray-200">
+                  <div class="w-[80px] h-[60px]">
+                    <img
+                      class="w-full h-full object-cover"
+                      :src="
+                        game.thumbnail
+                          ? `${BACKEND_URL}${game.thumbnail}`
+                          : '/images/no-image-dashboard.jpg'
+                      "
+                      alt=""
+                    />
+                  </div>
+                </td>
+                <td class="p-4 whitespace-nowrap border-r border-gray-200">
                   {{ game.width }} x {{ game.height }}
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
-                  <span
-                    v-if="game.status === 1"
-                    class="bg-green-100 text-green-600 px-2 py-0.5 rounded-full"
-                  >
+                <td
+                  class="p-4 whitespace-nowrap text-xs font-medium border-r border-gray-200"
+                >
+                  <base-badge v-if="game.status === 1" intent="success">
                     Accepted
-                  </span>
-                  <span
-                    v-else
-                    class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
-                  >
-                    Rejected
-                  </span>
+                  </base-badge>
+                  <base-badge v-else intent="danger"> Rejected </base-badge>
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap">
+                <td class="p-4 whitespace-nowrap border-r border-gray-200">
                   {{ convertStringToDate(game.published_at) }}
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap">
+                <td class="p-4 whitespace-nowrap border-r border-gray-200">
                   {{ convertStringToDate(game.created_at) }}
                 </td>
-                <td class="h-[44px] flex items-center gap-1">
-                  <Menu as="div" class="relative inline-block text-left">
-                    <div>
-                      <MenuButton
-                        class="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-bold"
-                      >
-                        <EllipsisHorizontalIcon
-                          class="h-5 w-5"
-                          aria-hidden="true"
-                        />
-                      </MenuButton>
-                    </div>
-
-                    <transition
-                      enter-active-class="transition duration-100 ease-out"
-                      enter-from-class="transform scale-95 opacity-0"
-                      enter-to-class="transform scale-100 opacity-100"
-                      leave-active-class="transition duration-75 ease-in"
-                      leave-from-class="transform scale-100 opacity-100"
-                      leave-to-class="transform scale-95 opacity-0"
-                    >
-                      <MenuItems
-                        class="absolute bg-white right-0 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
-                      >
-                        <div class="px-1 py-1">
-                          <MenuItem v-slot="{ active }">
-                            <button
-                              :class="[
-                                active
-                                  ? 'bg-gray-500 text-white'
-                                  : 'text-gray-900',
-                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                              ]"
-                              @click="changeStatus(game.id, game.status, 1)"
-                            >
-                              Approve
-                            </button>
-                          </MenuItem>
-                          <MenuItem v-slot="{ active }">
-                            <button
-                              :class="[
-                                active
-                                  ? 'bg-gray-500 text-white'
-                                  : 'text-gray-900',
-                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                              ]"
-                              @click="changeStatus(game.id, game.status, 2)"
-                            >
-                              Reject
-                            </button>
-                          </MenuItem>
-                        </div>
-                      </MenuItems>
-                    </transition>
-                  </Menu>
+                <td class="text-center">
+                  <BaseDropdown align="right">
+                    <template #button>
+                      <EllipsisHorizontalIcon
+                        class="h-5 w-5"
+                        aria-hidden="true"
+                      />
+                    </template>
+                    <template #items>
+                      <BaseDropdownItem>
+                        <button
+                          class="flex"
+                          @click="changeStatus(game.id, game.status, 1)"
+                        >
+                          <CheckCircleIcon
+                            class="w-5 h-5 text-green-600 mr-2"
+                          />
+                          Accept
+                        </button>
+                      </BaseDropdownItem>
+                      <BaseDropdownItem>
+                        <button
+                          class="flex"
+                          @click="changeStatus(game.id, game.status, 2)"
+                        >
+                          <XCircleIcon class="w-5 h-5 text-red-600 mr-2" />
+                          Reject
+                        </button>
+                      </BaseDropdownItem>
+                    </template>
+                  </BaseDropdown>
                 </td>
               </tr>
             </template>

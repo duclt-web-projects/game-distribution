@@ -1,4 +1,4 @@
-import { CubeIcon, HomeIcon } from '@heroicons/vue/24/outline';
+import { CubeIcon, HomeIcon, TagIcon } from '@heroicons/vue/24/outline';
 
 export const userGamePageBreadcrumbs = [
   {
@@ -49,7 +49,7 @@ export const adminGamePageBreadcrumbs = [
   {
     path: '/admin/games',
     name: 'Games',
-    icon: null,
+    icon: CubeIcon,
   },
 ];
 
@@ -62,6 +62,6 @@ export const adminCategoryPageBreadcrumbs = [
   {
     path: '/admin/categories',
     name: 'Category',
-    icon: null,
+    icon: TagIcon,
   },
 ];

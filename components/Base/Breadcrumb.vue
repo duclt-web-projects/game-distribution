@@ -31,12 +31,12 @@ defineProps({
               :is="breadcrumb.icon"
               class="h-4 w-4 mr-2 text-gray-400"
             />
-            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{
+            <span class="text-sm font-medium text-gray-500">{{
               breadcrumb.name
             }}</span>
           </div>
         </li>
-        <span v-if="index < breadcrumbs.length - 1" class="text-gray-400">
+        <span v-if="index < breadcrumbs.length - 1" class="text-gray-400 ml-0">
           /
         </span>
       </template>
@@ -44,4 +44,13 @@ defineProps({
   </nav>
 </template>
 
-<style scoped></style>
+<style scoped>
+li {
+  margin-left: 0 !important;
+}
+
+span {
+  margin-right: 4px !important;
+  margin-left: 4px !important;
+}
+</style>

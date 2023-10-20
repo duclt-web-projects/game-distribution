@@ -109,32 +109,32 @@ const handleAddNewGame = async () => {
       <div class="px-4">
         <div class="pb-5 overflow-x-auto">
           <table class="w-full">
-            <thead class="bg-gray-300 border border-gray-200">
+            <thead class="bg-slate-200 border border-gray-300">
               <tr class="text-gray-900 text-sm text-left">
-                <th class="p-4 font-medium border-r border-gray-200">
+                <th class="p-4 font-medium border-r border-gray-300">
                   <BaseSortCol
                     label="Name"
                     :sort="sort"
                     @change-sort="onChangeSort"
                   />
                 </th>
-                <th class="p-4 font-medium border-r border-gray-200">
+                <th class="p-4 font-medium border-r border-gray-300">
                   Thumbnail
                 </th>
-                <th class="p-4 font-medium border-r border-gray-200">Size</th>
-                <th class="p-4 font-medium border-r border-gray-200">Status</th>
+                <th class="p-4 font-medium border-r border-gray-300">Size</th>
+                <th class="p-4 font-medium border-r border-gray-300">Status</th>
                 <th
-                  class="p-4 font-medium whitespace-nowrap border-r border-gray-200"
+                  class="p-4 font-medium whitespace-nowrap border-r border-gray-300"
                 >
                   Published at
                 </th>
                 <th
-                  class="p-4 font-medium whitespace-nowrap border-r border-gray-200"
+                  class="p-4 font-medium whitespace-nowrap border-r border-gray-300"
                 >
                   Created at
                 </th>
                 <th
-                  class="p-4 font-medium whitespace-nowrap border-r border-gray-200"
+                  class="p-4 font-medium whitespace-nowrap border-r border-gray-300"
                 >
                   Updated at
                 </th>
@@ -158,11 +158,11 @@ const handleAddNewGame = async () => {
                   :key="index"
                   class="odd:bg-white even:bg-gray-100 text-sm text-gray-900"
                 >
-                  <td class="p-4 border-r border-gray-200">
+                  <td class="p-4 border-r border-gray-300">
                     {{ game.name }}
                   </td>
                   <td
-                    class="p-4 whitespace-nowrap border-r border-gray-200 flex justify-center"
+                    class="p-4 whitespace-nowrap border-r border-gray-300 flex justify-center"
                   >
                     <div class="w-[80px] h-[60px]">
                       <img
@@ -176,11 +176,11 @@ const handleAddNewGame = async () => {
                       />
                     </div>
                   </td>
-                  <td class="p-4 whitespace-nowrap border-r border-gray-200">
+                  <td class="p-4 whitespace-nowrap border-r border-gray-300">
                     {{ game.width }} x {{ game.height }}
                   </td>
                   <td
-                    class="p-4 whitespace-nowrap text-xs font-medium border-r border-gray-200"
+                    class="p-4 whitespace-nowrap text-xs font-medium border-r border-gray-300"
                   >
                     <base-badge v-if="game.status === 0" intent="primary">
                       Pending
@@ -190,13 +190,13 @@ const handleAddNewGame = async () => {
                     </base-badge>
                     <base-badge v-else intent="danger"> Accepted </base-badge>
                   </td>
-                  <td class="p-4 whitespace-nowrap border-r border-gray-200">
+                  <td class="p-4 whitespace-nowrap border-r border-gray-300">
                     {{ convertStringToDate(game.published_at) }}
                   </td>
-                  <td class="p-4 whitespace-nowrap border-r border-gray-200">
+                  <td class="p-4 whitespace-nowrap border-r border-gray-300">
                     {{ convertStringToDate(game.created_at) }}
                   </td>
-                  <td class="p-4 border-r border-gray-200">
+                  <td class="p-4 border-r border-gray-300">
                     {{ convertStringToDate(game.updated_at) }}
                   </td>
                   <td class="p-4 text-center">

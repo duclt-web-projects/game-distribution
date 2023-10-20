@@ -2,8 +2,15 @@
 import { useHttp } from '@/composables/useHttp';
 import { adminCategoryPageBreadcrumbs } from '@/config/breadcrumbs';
 import AdminLayout from '@/layouts/AdminLayout.vue';
-import { PlusSmallIcon } from '@heroicons/vue/24/outline';
-import { PencilSquareIcon } from '@heroicons/vue/24/solid';
+import {
+  EllipsisHorizontalIcon,
+  PlusSmallIcon,
+} from '@heroicons/vue/24/outline';
+import {
+  CheckCircleIcon,
+  PencilSquareIcon,
+  XCircleIcon,
+} from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'Category - Admin - XGame Studio',
@@ -70,6 +77,7 @@ const onChangePage = (val) => {
 };
 
 const handleChangeStatus = async (id) => {
+  console.log(123);
   isRefetch.value = !isRefetch.value;
 
   const { data, error } = await useHttp(`admin/category/change-status/${id}`, {
@@ -139,32 +147,26 @@ const handleAddCategory = async () => {
       </div>
       <div class="overflow-x-auto px-4 pb-5">
         <table class="w-full">
-          <thead class="bg-gray-300 border border-gray-200">
+          <thead class="bg-slate-200 border border-gray-300">
             <tr class="text-gray-900 text-sm text-left">
-              <th class="px-4 py-4 font-medium border-r border-gray-200">
-                Name
-              </th>
+              <th class="p-4 font-medium border-r border-gray-300">Name</th>
               <th
-                class="w-[120px] px-4 py-4 text-center font-medium border-r border-gray-200"
+                class="w-[120px] p-4 text-center font-medium border-r border-gray-300"
               >
                 Status
               </th>
               <th
-                class="w-[150px] px-4 py-4 text-center font-medium border-r border-gray-200"
+                class="w-[150px] p-4 text-center font-medium border-r border-gray-300"
               >
                 Total Games
               </th>
-              <th
-                class="w-[150px] px-4 py-4 font-medium border-r border-gray-200"
-              >
+              <th class="w-[150px] p-4 font-medium border-r border-gray-300">
                 Created at
               </th>
-              <th
-                class="w-[150px] px-4 py-4 font-medium border-r border-gray-200"
-              >
+              <th class="w-[150px] p-4 font-medium border-r border-gray-300">
                 Updated at
               </th>
-              <th class="w-[150px] px-4 py-4 font-medium"></th>
+              <th class="w-[150px] p-4 font-medium"></th>
             </tr>
           </thead>
           <tbody class="border">
@@ -187,54 +189,65 @@ const handleAddCategory = async () => {
                 :key="index"
                 class="odd:bg-white even:bg-gray-100 text-sm text-gray-900"
               >
-                <td
-                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
-                >
+                <td class="p-4 whitespace-nowrap border-r border-gray-300">
                   {{ category.name }}
                 </td>
-                <td
-                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
-                >
-                  <span
-                    v-if="category.status === 1"
-                    class="bg-emerald-100 text-green-700 px-2 py-0.5 rounded-full"
-                  >
+                <td class="p-4 whitespace-nowrap border-r border-gray-300">
+                  <base-badge v-if="category.status === 1" intent="success">
                     Active
-                  </span>
-                  <span
-                    v-else
-                    class="bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
-                  >
-                    Inactive
-                  </span>
+                  </base-badge>
+                  <base-badge v-else intent="danger"> Inactive </base-badge>
                 </td>
                 <td
-                  class="px-4 py-4 text-center whitespace-nowrap border-r border-gray-200"
+                  class="p-4 text-center whitespace-nowrap border-r border-gray-300"
                 >
                   {{ category.games_count }}
                 </td>
-                <td
-                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
-                >
+                <td class="p-4 whitespace-nowrap border-r border-gray-300">
                   {{ convertStringToDate(category.created_at) }}
                 </td>
-                <td
-                  class="px-4 py-4 whitespace-nowrap border-r border-gray-200"
-                >
+                <td class="p-4 whitespace-nowrap border-r border-gray-300">
                   {{ convertStringToDate(category.updated_at) }}
                 </td>
-                <td class="h-[44px] px-4 gap-1">
-                  <div class="flex items-center justify-center">
-                    <FormSwitch
-                      :id="category.slug"
-                      :value="category.status === 1"
-                      @update:model-value="handleChangeStatus(category.id)"
-                    />
-                    <PencilSquareIcon
-                      class="w-5 h-5 ml-4 fill-yellow-500 cursor-pointer"
-                      @click="editCategory(category.id)"
-                    />
-                  </div>
+                <td class="text-center">
+                  <BaseDropdown align="right">
+                    <template #button>
+                      <EllipsisHorizontalIcon
+                        class="h-5 w-5"
+                        aria-hidden="true"
+                      />
+                    </template>
+                    <template #items>
+                      <BaseDropdownItem>
+                        <button
+                          class="flex w-full"
+                          @click="handleChangeStatus(category.id)"
+                        >
+                          <template v-if="category.status === 1">
+                            <XCircleIcon class="w-5 h-5 text-red-600 mr-2" />
+                            Inactive
+                          </template>
+                          <template v-else>
+                            <CheckCircleIcon
+                              class="w-5 h-5 text-green-600 mr-2"
+                            />
+                            Active</template
+                          >
+                        </button>
+                      </BaseDropdownItem>
+                      <BaseDropdownItem>
+                        <button
+                          class="flex w-full"
+                          @click="editCategory(category.id)"
+                        >
+                          <PencilSquareIcon
+                            class="w-5 h-5 mr-2 fill-yellow-500 cursor-pointer"
+                          />
+                          Edit
+                        </button>
+                      </BaseDropdownItem>
+                    </template>
+                  </BaseDropdown>
                 </td>
               </tr>
             </template>
@@ -281,9 +294,3 @@ const handleAddCategory = async () => {
     </base-modal>
   </AdminLayout>
 </template>
-
-<style scoped>
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-</style>

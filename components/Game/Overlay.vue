@@ -1,60 +1,138 @@
-<script setup>
+<script setup lang="ts">
 import { useUrlConfig } from '@/composables/useUrlConfig';
 
-const { slug } = useRoute().params;
-const { API_URL, BACKEND_URL } = useUrlConfig();
+const props = defineProps({
+  width: {
+    type: String,
+    default: '100%',
+  },
+  height: {
+    type: String,
+    default: '100%',
+  },
+  image: {
+    type: String,
+    default: '',
+  },
+});
 
-const { data: game } = await useFetch(() => `${API_URL}/game/${slug}`);
+const { BACKEND_URL } = useUrlConfig();
 
 const isPlay = ref(false);
-
-useHead({
-  title: `Publish ${slug} on your website - XGame Studio`,
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
-    },
-    { name: 'ogTitle', content: 'Games Catalog - XGame Studio' },
-    {
-      name: 'ogDescription',
-      content:
-        'Games Catalog of XGame Studio. Browse through a collection of high quality, cross platform, HTML5 games and publish them on your website.',
-    },
-  ],
-});
 </script>
 
 <template>
-  <GameOverlay :image="game.thumbnail" />
-  <div class="iframe-wrapper">
-    <iframe
-      id="iframe"
-      class="iframe-close"
-      name="iframe"
-      :src="`${BACKEND_URL}/${game.source_link}`"
-      scrolling="no"
-      allowfullscreen
-      frameborder="0"
-      seamless="seamless"
-    ></iframe>
+  <div
+    v-show="!isPlay"
+    id="game-overlay"
+    :style="{
+      width: width,
+      height: height,
+    }"
+  >
+    <div class="h-100 d-flex align-items-center">
+      <div class="mh-100 w-100 overflow-auto p-2">
+        <div
+          class="container p-0 rounded overflow-hidden"
+          style="
+            max-width: 320px;
+            box-shadow:
+              rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+              rgba(0, 0, 0, 0.12) 0px 2px 1px -1px,
+              rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+          "
+        >
+          <div style="background-color: rgb(48, 48, 48)">
+            <div class="fullscreen-container">
+              <div id="fullscreen-abstract" class="fullscreen-abstract"></div>
+              <div
+                id="fullscreen-slot-top"
+                class="fullscreen-top"
+                style="display: none"
+              ></div>
+              <div class="fullscreen-center">
+                <div
+                  id="fullscreen-slot-left"
+                  class="fullscreen-left"
+                  style="display: none"
+                ></div>
+                <div id="fullscreen-game" class="fullscreen-game">
+                  <div class="fullscreen-game-metadata">
+                    <div class="fullscreen-game-thumbnail-play">
+                      <div class="fullscreen-game-thumbnail">
+                        <img
+                          :src="
+                            image
+                              ? `${BACKEND_URL}${image}`
+                              : '/images/no-image-dashboard.jpg'
+                          "
+                          alt=""
+                        />
+                      </div>
+                      <div class="fullscreen-game-play">
+                        <button
+                          id="fullscreen-button"
+                          style="display: block"
+                          @click="isPlay = true"
+                        >
+                          PLAY
+                        </button>
+                        <div class="pluto-loader" style="display: none">
+                          Loading...
+                        </div>
+                      </div>
+                    </div>
+                    <div class="fullscreen-game-title">
+                      <p>Super Snappy Collapse</p>
+                    </div>
+                    <div class="fullscreen-game-description">
+                      <p>
+                        Classic match game with a social element. Tap on groups
+                        of blocks of the same color to remove them, clear as
+                        many as you can before the time runs out!
+                      </p>
+                    </div>
+                  </div>
+                  <div class="fullscreen-game-consent" style="display: none">
+                    <p>
+                      We may show personalized ads provided by our partners, and
+                      our services can not be used by children under 16 years
+                      old without the consent of their legal guardian. By
+                      clicking "PLAY", you consent to transmit your data to our
+                      partners for advertising purposes and declare that you are
+                      16 years old or have the permission of your legal
+                      guardian. You can review our terms
+                      <a target="_blank">here</a>.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="fullscreen-slot-right"
+                  class="fullscreen-right"
+                  style="display: none"
+                ></div>
+              </div>
+              <div
+                id="fullscreen-slot-bottom"
+                class="fullscreen-bottom"
+                style="display: none"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.iframe-wrapper {
-  height: 100vh;
-  max-height: 100%;
-  width: 100vw;
-  max-width: 100%;
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+<style scoped lang="scss">
+#game-overlay {
+  z-index: 1010;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%);
 }
-iframe {
-  width: 100%;
-  height: 100%;
-}
-
 .fullscreen-container {
   display: flex;
   flex-direction: column;
@@ -157,6 +235,7 @@ iframe {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 8px;
   }
 }
 .fullscreen-game-play {

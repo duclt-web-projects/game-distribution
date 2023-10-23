@@ -46,12 +46,16 @@ useHead({
               <SearchBox />
             </div>
           </div>
-          <div class="game-container" style="max-height: 1000px">
+          <div class="game-container">
+            <GameOverlay
+              :width="`${game.width}px`"
+              :height="`${game.height}px`"
+            />
             <iframe
               id="iframe"
               class="iframe-close"
               name="iframe"
-              :src="`/games-fullscreen/${game.slug}`"
+              :src="`${BACKEND_URL}/${game.source_link}`"
               :width="game.width"
               :height="game.height"
               scrolling="no"

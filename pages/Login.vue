@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { RESPONSE_STATUS } from '@/constants';
 import { ROUTE_NAMES } from '@/constants/routes';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { useUserStore } from '@/stores/useUserStore';
 import axios from 'axios';
-import { type AuthCodeFlowSuccessResponse } from 'vue3-google-signin';
+import { IconFacebook, IconGoogle } from '~/assets/icon';
 
 useHead({
   title: 'Login - XGame Studio',
@@ -25,6 +25,7 @@ useHead({
 
 const userStore = useUserStore();
 const { $toast } = useNuxtApp();
+const config = useRuntimeConfig();
 
 const email = ref('');
 const password = ref('');
@@ -34,26 +35,14 @@ const errors = ref({
   password: '',
 });
 
-const handleLogin = async () => {
+const handleLoginAccount = async () => {
   if (!validate()) return;
 
   isLoading.value = true;
-
-  const response = await userStore.login({
+  await handleLogin({
     email: email.value,
     password: password.value,
   });
-
-  if (response.status === RESPONSE_STATUS.SUCCESS) {
-    isLoading.value = false;
-    $toast.success(response.message);
-
-    setTimeout(() => {
-      navigateTo(ROUTE_NAMES.USER_GAME);
-    }, 1000);
-  } else {
-    $toast.error(response.message);
-  }
 };
 
 const validate = () => {
@@ -78,39 +67,92 @@ const validate = () => {
 };
 
 // handle success event
-const handleLoginSuccess = async (response: AuthCodeFlowSuccessResponse) => {
+const handleLoginSuccess = async (response) => {
   const { data } = await axios.get(
     `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`,
   );
   if (data) {
-    const response = await userStore.loginWithProvider({
-      email: data.email,
-      name: data.name,
-    });
-
-    if (response.status === RESPONSE_STATUS.SUCCESS) {
-      isLoading.value = false;
-      $toast.success(response.message);
-
-      setTimeout(() => {
-        navigateTo(ROUTE_NAMES.USER_GAME);
-      }, 1000);
-    } else {
-      $toast.error(response.message);
-    }
+    await handleLogin(
+      {
+        email: data.email,
+        name: data.name,
+      },
+      true,
+    );
   }
-};
-
-// handle an error event
-const handleLoginError = () => {
-  $toast.error('Login failed!!!');
 };
 
 const { isReady, login } = useTokenClient({
   onSuccess: handleLoginSuccess,
-  onError: handleLoginError,
-  // other options
+  onError: () => {
+    $toast.error('Login failed!!!');
+  },
 });
+
+const handleLogin = async (data, isProvider = false) => {
+  const response = isProvider
+    ? await userStore.loginWithProvider({
+        email: data.email,
+        name: data.name,
+      })
+    : await userStore.login({
+        email: email.value,
+        password: password.value,
+      });
+
+  if (response.status === RESPONSE_STATUS.SUCCESS) {
+    isLoading.value = false;
+    $toast.success(response.message);
+
+    setTimeout(() => {
+      navigateTo(ROUTE_NAMES.USER_GAME);
+    }, 1000);
+  } else {
+    $toast.error(response.message);
+  }
+};
+
+const appID = '1043497990006888';
+const loginWithFacebook = () => {
+  (function (d, s, id) {
+    const fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+      return;
+    }
+    const js = d.createElement(s);
+    js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js';
+    fjs.parentNode?.insertBefore(js, fjs);
+  })(document, 'script', 'facebook-jssdk');
+
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: config.public.facebookClientId,
+      xfbml: true,
+      version: 'v18.0',
+    });
+    FB.login(
+      function (response) {
+        if (response.authResponse) {
+          FB.api('/me', { fields: 'name, email' }, function (response) {
+            if (response) {
+              handleLogin(
+                {
+                  email: response.email,
+                  name: response.name,
+                },
+                true,
+              );
+            }
+          });
+        } else {
+          $toast.error('Login failed!!!');
+        }
+      },
+      { scope: 'email' },
+    );
+  };
+};
 </script>
 
 <template>
@@ -120,7 +162,7 @@ const { isReady, login } = useTokenClient({
       <div id="stars2"></div>
       <div id="stars3"></div>
     </template>
-    <form @submit.prevent="handleLogin">
+    <form @submit.prevent="handleLoginAccount">
       <InputTextAuth
         v-model:input="email"
         placeholder="Email"
@@ -142,48 +184,42 @@ const { isReady, login } = useTokenClient({
       </div>
     </form>
     <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-    <div class="mt-5">
+    <div class="mt-5 flex gap-4 provider-btn">
       <button class="google-btn" :disabled="!isReady" @click="() => login()">
-        <div class="google-icon-wrapper">
-          <img
-            class="google-icon"
-            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-          />
-        </div>
-        <p class="btn-text"><b>Sign in with google</b></p>
+        <IconGoogle class="fill-white w-6 h-6" />
+      </button>
+      <button class="facebook-btn" @click="loginWithFacebook">
+        <IconFacebook class="fill-white w-6 h-6" />
       </button>
     </div>
   </AuthLayout>
 </template>
 
 <style lang="scss" scoped>
-.google-btn {
-  width: 100%;
-  display: flex;
-  height: 40px;
-  background-color: #4285f4;
-  border-radius: 2px;
-
-  .google-icon-wrapper {
+.provider-btn {
+  button {
+    width: 50%;
+    height: 40px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    background-color: #fff;
   }
 
-  .google-icon {
-    width: 18px;
-    height: 18px;
+  .google-btn {
+    background-color: #ea4335;
+
+    &:hover {
+      background-color: #bb3a2e;
+    }
   }
-  .btn-text {
-    margin: 11px 11px 0 12px;
-    color: #fff;
-    font-size: 14px;
-    letter-spacing: 0.2px;
-    font-family: 'Roboto';
+
+  .facebook-btn {
+    background-color: #3b5998;
+
+    &:hover {
+      background-color: #2a4174;
+    }
   }
 }
 #stars {

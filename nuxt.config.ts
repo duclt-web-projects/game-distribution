@@ -14,6 +14,7 @@ export default defineNuxtConfig({
       apiUrl: process.env.NUXT_PUBLIC_API_URL ?? 'https://kimlestudio.xyz/api',
       backendUrl:
         process.env.NUXT_PUBLIC_BACKEND_URL ?? 'https://kimlestudio.xyz',
+      facebookClientId: process.env.NUXT_PUBLIC_FACEBOOK_CLIENT_ID ?? '',
     },
   },
   spaLoadingTemplate: true,

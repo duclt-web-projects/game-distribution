@@ -135,7 +135,7 @@ const handleAddCategory = async () => {
       :breadcrumbs="adminCategoryPageBreadcrumbs"
     />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
-      <div class="flex justify-end items-center p-4">
+      <div class="flex justify-end items-center p-4 pb-0">
         <base-button
           :icon-left="PlusSmallIcon"
           intent="primary"
@@ -236,8 +236,8 @@ const handleAddCategory = async () => {
                             <CheckCircleIcon
                               class="w-5 h-5 text-green-600 mr-2"
                             />
-                            Active</template
-                          >
+                            Active
+                          </template>
                         </button>
                       </BaseDropdownItem>
                       <BaseDropdownItem>

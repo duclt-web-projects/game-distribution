@@ -109,19 +109,15 @@ const validate = () => {
             />
           </FormField>
 
-          <button
+          <base-button
+            intent="success"
             type="submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+            :loading="isLoading"
+            :icon-left="LockClosedIcon"
+            class="w-full font-medium"
           >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon
-                class="h-5 w-5 text-emerald-500 group-hover:text-emerald-400"
-                aria-hidden="true"
-              />
-            </span>
-            <Spinner v-show="isLoading" class="mr-2" />
-            Log In
-          </button>
+            Login
+          </base-button>
         </form>
       </div>
     </div>

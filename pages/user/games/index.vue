@@ -230,7 +230,7 @@ const handleAddNewGame = async () => {
                             <span class="mt-1">Assets</span>
                           </NuxtLink>
                         </BaseDropdownItem>
-                        <BaseDropdownItem>
+                        <BaseDropdownItem v-show="game.status !== 1">
                           <NuxtLink
                             :to="`${ROUTE_NAMES.USER_GAME_UPLOAD}/${game.id}`"
                             class="flex items-center"

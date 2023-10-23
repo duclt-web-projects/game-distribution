@@ -5,6 +5,7 @@ import { userGameAssetsPageBreadcrumbs } from '@/config/breadcrumbs';
 import { ROUTE_NAMES } from '@/constants/routes';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { IGame } from '@/types/game';
+import axios, { AxiosError } from 'axios';
 
 useHead({
   title: 'Edit Game - XGame Studio',
@@ -27,7 +28,7 @@ definePageMeta({
   middleware: 'auth-user',
 });
 
-const { API_URL } = useUrlConfig();
+const { API_URL, BACKEND_URL } = useUrlConfig();
 const { id } = useRoute().params;
 const { $toast } = useNuxtApp();
 
@@ -41,10 +42,13 @@ const errors = ref({
   thumbnail: '',
 });
 const urlPreview = ref('/images/no-image.png');
+const progress = ref(0);
+const isLoading = ref(false);
 
 onMounted(() => {
   if (game.value) {
     gameData.thumbnail = game.value.thumbnail;
+    urlPreview.value = BACKEND_URL + game.value.thumbnail;
   }
 });
 
@@ -71,24 +75,47 @@ const handleAddNewGame = async () => {
   if (!validate()) return;
 
   const formData = new FormData();
+  const token = useCookie('access_token');
+  isLoading.value = true;
 
   formData.append('thumbnail', gameData.thumbnail);
 
-  const { data, error } = await useHttp(`/user/game/upload-thumbnail/${id}`, {
-    method: 'POST',
-    body: formData,
-  });
+  try {
+    const { data, status } = await axios.post(
+      `${API_URL}/user/game/upload-thumbnail/${id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token.value}`,
+        },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total,
+            );
 
-  if (error.value) {
-    $toast.error(error.value.message);
-  }
+            progress.value = percentCompleted;
+          }
+        },
+      },
+    );
 
-  if (data.value) {
-    $toast.success('Add assets successfully!!!');
+    isLoading.value = false;
+    if (status !== 200) {
+      $toast.error(data.message);
+    } else {
+      $toast.success('Add game file successfully!!!');
 
-    setTimeout(() => {
-      navigateTo(ROUTE_NAMES.USER_GAME);
-    }, 1000);
+      setTimeout(() => {
+        navigateTo(ROUTE_NAMES.USER_GAME);
+      }, 1000);
+    }
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      $toast.error(error.response?.data.message);
+    } else {
+      $toast.error('Something went wrong!!!');
+    }
   }
 };
 </script>
@@ -102,6 +129,17 @@ const handleAddNewGame = async () => {
     <user-game :is-loading="!game">
       <form @submit.prevent="handleAddNewGame">
         <div class="px-4 py-5 sm:p-6">
+          <div
+            v-show="progress > 0"
+            class="flex-start flex mt-5 h-4 w-full overflow-hidden rounded bg-gray-200 font-sans text-xs font-medium"
+          >
+            <div
+              class="flex h-full items-baseline justify-center overflow-hidden text-[10px] break-all bg-emerald-500 text-white transition-all"
+              :style="`width: ${progress}%`"
+            >
+              {{ progress }}% Completed
+            </div>
+          </div>
           <FormField
             class="mb-3"
             label="Thumbnail"
@@ -128,7 +166,9 @@ const handleAddNewGame = async () => {
           </FormField>
         </div>
         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-          <base-button intent="success" type="submit"> Save </base-button>
+          <base-button intent="success" type="submit" :loading="isLoading">
+            Save
+          </base-button>
         </div>
       </form>
     </user-game>

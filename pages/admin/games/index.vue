@@ -5,7 +5,11 @@ import AdminLayout from '@/layouts/AdminLayout.vue';
 import { IGame } from '@/types/game';
 import { IResponsePaginate } from '@/types/response';
 import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/24/solid';
+import {
+  CheckCircleIcon,
+  InformationCircleIcon,
+  XCircleIcon,
+} from '@heroicons/vue/24/solid';
 
 useHead({
   title: 'Games - Admin - XGame Studio',
@@ -123,7 +127,7 @@ const toggleAllSelect = (e: MouseEvent) => {
           <tbody class="border">
             <tr v-if="!games || !games.data" class="loading-wrapper">
               <td colSpan="7" class="text-center p-4">
-                <Spinner />
+                <Spinner class="w-10 h-10" />
               </td>
             </tr>
             <tr v-else-if="games.data.length === 0" class="loading-wrapper">
@@ -166,7 +170,10 @@ const toggleAllSelect = (e: MouseEvent) => {
                 <td
                   class="p-4 whitespace-nowrap text-xs font-medium border-r border-gray-200"
                 >
-                  <base-badge v-if="game.status === 1" intent="success">
+                  <base-badge v-if="game.status === 0" intent="primary">
+                    Pending
+                  </base-badge>
+                  <base-badge v-else-if="game.status === 1" intent="success">
                     Accepted
                   </base-badge>
                   <base-badge v-else intent="danger"> Rejected </base-badge>
@@ -192,9 +199,9 @@ const toggleAllSelect = (e: MouseEvent) => {
                       />
                     </template>
                     <template #items>
-                      <BaseDropdownItem>
+                      <BaseDropdownItem v-show="game.status !== 1">
                         <button
-                          class="flex"
+                          class="flex w-full"
                           @click="changeStatus(game.id, game.status, 1)"
                         >
                           <CheckCircleIcon
@@ -203,13 +210,24 @@ const toggleAllSelect = (e: MouseEvent) => {
                           Accept
                         </button>
                       </BaseDropdownItem>
-                      <BaseDropdownItem>
+                      <BaseDropdownItem v-show="game.status !== 2">
                         <button
-                          class="flex"
+                          class="flex w-full"
                           @click="changeStatus(game.id, game.status, 2)"
                         >
-                          <XCircleIcon class="w-5 h-5 text-red-600 mr-2" />
+                          <XCircleIcon class="w-5 h-5 text-red-500 mr-2" />
                           Reject
+                        </button>
+                      </BaseDropdownItem>
+                      <BaseDropdownItem v-show="game.status !== 0">
+                        <button
+                          class="flex w-full"
+                          @click="changeStatus(game.id, game.status, 0)"
+                        >
+                          <InformationCircleIcon
+                            class="w-5 h-5 text-blue-500 mr-2"
+                          />
+                          Pending
                         </button>
                       </BaseDropdownItem>
                     </template>

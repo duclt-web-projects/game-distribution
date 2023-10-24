@@ -1,7 +1,7 @@
 import { FunctionalComponent } from 'nuxt/dist/app/compat/capi';
 
 export interface IOptions {
-  value: string;
+  value: string | number;
   label: string;
 }
 

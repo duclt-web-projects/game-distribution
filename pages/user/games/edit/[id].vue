@@ -4,7 +4,8 @@ import { useUrlConfig } from '@/composables/useUrlConfig';
 import { userGameEditPageBreadcrumbs } from '@/config/breadcrumbs';
 import { ROUTE_NAMES } from '@/constants/routes';
 import UserLayout from '@/layouts/UserLayout.vue';
-import { ICategory, IGame } from '@/types/game';
+import { IOptions } from '@/types/common';
+import { ICategory, IGameDetail } from '@/types/game';
 
 useHead({
   title: 'Edit Game - XGame Studio',
@@ -31,7 +32,13 @@ const { API_URL } = useUrlConfig();
 const { id } = useRoute().params;
 const { $toast } = useNuxtApp();
 
-const gameData = reactive({
+const gameData = reactive<{
+  name: string;
+  category: IOptions[];
+  description: string;
+  width: number;
+  height: number;
+}>({
   name: '',
   category: [],
   description: '',
@@ -46,7 +53,9 @@ const errors = ref({
   height: '',
 });
 
-const { data: game } = await useHttp<IGame>(() => `${API_URL}/game/${id}`);
+const { data: game } = await useHttp<IGameDetail>(
+  () => `${API_URL}/game/${id}`,
+);
 
 onMounted(() => {
   if (game.value) {
@@ -54,6 +63,12 @@ onMounted(() => {
     gameData.width = game.value.width;
     gameData.height = game.value.height;
     gameData.description = game.value.description;
+    gameData.category = game.value.categories.map((cate) => {
+      return {
+        value: cate.id,
+        label: cate.name,
+      };
+    });
   }
 });
 
@@ -112,9 +127,14 @@ const handleEditGame = async () => {
   const formData = new FormData();
 
   formData.append('name', gameData.name);
-  formData.append('description', gameData.description);
+  if (gameData.description) {
+    formData.append('description', gameData.description);
+  }
   formData.append('width', gameData.width + '');
   formData.append('height', gameData.height + '');
+
+  const categories = gameData.category.map((cate) => cate.value).join(',');
+  formData.append('categories', categories);
 
   const { data, error } = await useHttp(`/user/game/${id}`, {
     method: 'POST',
@@ -147,11 +167,7 @@ const handleEditGame = async () => {
           <div class="grid grid-cols-6 gap-1 md:gap-5">
             <div class="col-span-6 sm:col-span-3">
               <FormField label="Game Name" :error="errors.name" required>
-                <FormInput
-                  v-model="gameData.name"
-                  placeholder="John Doe"
-                  type="text"
-                />
+                <FormInput v-model="gameData.name" type="text" />
               </FormField>
             </div>
 
@@ -175,8 +191,7 @@ const handleEditGame = async () => {
               <FormField label="Width" :error="errors.width" required>
                 <FormInput
                   v-model="gameData.width"
-                  placeholder="John Doe"
-                  type="text"
+                  type="phone"
                   class-name="rounded-l"
                 >
                   <span
@@ -192,8 +207,7 @@ const handleEditGame = async () => {
               <FormField label="Height" :error="errors.height" required>
                 <FormInput
                   v-model="gameData.height"
-                  placeholder="John Doe"
-                  type="text"
+                  type="phone"
                   class-name="rounded-l"
                 >
                   <span

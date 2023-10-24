@@ -93,17 +93,12 @@ const validate = () => {
         </h2>
         <form class="mt-8 space-y-6" @submit.prevent="login">
           <FormField label="Email" :error="errors.email" required>
-            <FormInput
-              v-model="email"
-              placeholder="John Doe"
-              class-name="rounded-l"
-            />
+            <FormInput v-model="email" class-name="rounded-l" />
           </FormField>
 
           <FormField label="Password" :error="errors.password" required>
             <FormInput
               v-model="password"
-              placeholder="John Doe"
               class-name="rounded-l"
               type="password"
             />

@@ -279,11 +279,7 @@ const handleAddCategory = async () => {
       <template #body>
         <form @submit.prevent="handleAddCategory">
           <FormField label="Category Name" :error="categoryError" required>
-            <FormInput
-              v-model="categoryData"
-              placeholder="John Doe"
-              type="text"
-            />
+            <FormInput v-model="categoryData" type="text" />
           </FormField>
         </form>
       </template>

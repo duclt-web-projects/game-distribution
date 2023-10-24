@@ -14,6 +14,8 @@ export const ROUTE_NAMES = {
   USER_PROFILE: '/user/profile',
 
   // ========= Admin =============
+  ADMIN: '/admin',
+  ADMIN_PROFILE: '/admin/profile',
   ADMIN_LOGIN: '/admin/login',
   ADMIN_REGISTER: '/admin/register',
   ADMIN_LOGOUT: '/admin/logout',

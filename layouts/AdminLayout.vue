@@ -7,7 +7,11 @@ import {
   PuzzlePieceIcon,
   TagIcon,
   TrashIcon,
+  UserCircleIcon,
+  UserIcon,
 } from '@heroicons/vue/24/outline';
+import { RESPONSE_STATUS } from '../constants/response';
+import { ROUTE_NAMES } from '../constants/routes';
 
 useHead({
   bodyAttrs: {
@@ -17,7 +21,7 @@ useHead({
 
 const menus = [
   {
-    path: '/admin',
+    path: ROUTE_NAMES.ADMIN,
     name: 'Home',
     icon: HomeIcon,
   },
@@ -27,30 +31,37 @@ const menus = [
     child: [
       {
         name: 'Games By User',
-        path: '/admin/games',
+        path: ROUTE_NAMES.ADMIN_GAME,
       },
     ],
   },
   {
     name: 'Category',
     icon: TagIcon,
-    path: '/admin/categories',
+    path: ROUTE_NAMES.ADMIN_CATEGORY,
   },
-  // {
-  //   name: 'User',
-  //   icon: UserIcon,
-  //   path: '/admin',
-  // },
+  {
+    name: 'Profile',
+    icon: UserIcon,
+    path: ROUTE_NAMES.ADMIN_PROFILE,
+  },
 ];
 const adminStore = useAdminStore();
+const { BACKEND_URL } = useUrlConfig();
+const { $toast } = useNuxtApp();
 
 onMounted(() => {
   document.body.className = '';
 });
 
 const logout = async () => {
-  await adminStore.logout();
-  navigateTo('/admin/login');
+  const res = await adminStore.logout();
+
+  if (res.status === RESPONSE_STATUS.SUCCESS) {
+    navigateTo(ROUTE_NAMES.ADMIN_LOGIN);
+  } else {
+    $toast.error('Something went wrong!!!');
+  }
 };
 </script>
 
@@ -60,15 +71,16 @@ const logout = async () => {
     <div class="w-full h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
       <dashboard-header>
         <Menu as="div" class="relative mr-3">
-          <div class="flex items-center">
-            <MenuButton>
-              <img
-                class="w-8 h-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                alt="avatar"
-              />
-            </MenuButton>
-          </div>
+          <MenuButton class="flex items-center">
+            <img
+              v-if="adminStore.user && adminStore.user.avatar"
+              class="w-8 h-8 rounded-full"
+              :src="BACKEND_URL + adminStore.user.avatar"
+              alt="avatar"
+            />
+            <UserCircleIcon v-else class="w-7 h-7" />
+            <p class="ml-2">{{ adminStore.user?.name }}</p>
+          </MenuButton>
           <transition
             enter-active-class="transition duration-100 ease-out"
             enter-from-class="transform scale-95 opacity-0"

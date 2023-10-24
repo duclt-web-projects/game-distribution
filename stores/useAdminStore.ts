@@ -11,6 +11,8 @@ export const useAdminStore = defineStore('admin', () => {
   const isLoggedIn = computed(() => !!user.value);
 
   async function logout() {
+    console.log(123);
+
     const { error } = await useHttp('admin/auth/logout', {
       tokenKey: 'admin_access_token',
     });
@@ -31,7 +33,7 @@ export const useAdminStore = defineStore('admin', () => {
   }
 
   async function getProfile() {
-    const { data } = await useHttp('admin/auth/profile', {
+    const { data } = await useHttp('admin/profile', {
       tokenKey: 'admin_access_token',
     });
 

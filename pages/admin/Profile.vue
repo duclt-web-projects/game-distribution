@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useHttp } from '@/composables/useHttp';
+import { userProfileBreadcrumb } from '@/config/breadcrumbs';
 import AdminLayout from '@/layouts/AdminLayout.vue';
+import { useAdminStore } from '@/stores/useAdminStore';
 import { IUser } from '@/types/auth';
 import { CameraIcon, CloudArrowUpIcon } from '@heroicons/vue/24/solid';
-import { userProfileBreadcrumb } from '~/config/breadcrumbs';
 
 useHead({
   title: 'Admin Profile - XGame Studio',
@@ -28,6 +29,7 @@ definePageMeta({
 
 const { BACKEND_URL } = useUrlConfig();
 const { $toast } = useNuxtApp();
+const adminStore = useAdminStore();
 
 const avatarPreview = ref('/images/no-image-dashboard.jpg');
 const currentTab = ref('information');
@@ -93,6 +95,7 @@ const handleUploadAvatar = async () => {
 
   if (data.value) {
     $toast.success('Update successfully!!!');
+    adminStore.getProfile();
   }
 };
 
@@ -126,6 +129,7 @@ const handleEdit = async () => {
 
   if (data.value) {
     $toast.success('Update successfully!!!');
+    adminStore.getProfile();
   }
 };
 
@@ -214,7 +218,7 @@ const handleChangePassword = async () => {
               class="mr-2 inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg group cursor-pointer"
               :class="
                 currentTab === 'information'
-                  ? 'text-emerald-600 border-emerald-600'
+                  ? 'text-emerald-600 border-emerald-600 font-medium'
                   : 'border-transparent hover:text-gray-600 hover:border-gray-300'
               "
               @click="currentTab = 'information'"
@@ -225,7 +229,7 @@ const handleChangePassword = async () => {
               class="mr-2 inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg group cursor-pointer"
               :class="
                 currentTab === 'password'
-                  ? 'text-emerald-600 border-emerald-600'
+                  ? 'text-emerald-600 border-emerald-600 font-medium'
                   : 'border-transparent hover:text-gray-600 hover:border-gray-300'
               "
               @click="currentTab = 'password'"

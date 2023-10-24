@@ -7,8 +7,8 @@ import {
   PuzzlePieceIcon,
   TrashIcon,
 } from '@heroicons/vue/24/outline';
-import { UserIcon } from '@heroicons/vue/24/solid';
-import { ROUTE_NAMES } from '~/constants';
+import { UserCircleIcon, UserIcon } from '@heroicons/vue/24/solid';
+import { ROUTE_NAMES } from '@/constants';
 
 useHead({
   bodyAttrs: {
@@ -59,13 +59,13 @@ onMounted(() => {
         <Menu as="div" class="relative mr-3">
           <MenuButton class="flex items-center">
             <img
+              v-if="userStore.user && userStore.user.avatar"
               class="w-8 h-8 rounded-full"
-              :src="`${BACKEND_URL}${userStore.user?.avatar}`"
+              :src="BACKEND_URL + userStore.user.avatar"
               alt="avatar"
             />
-            <p class="ml-2">
-              {{ userStore.user?.name }}
-            </p>
+            <UserCircleIcon v-else class="w-7 h-7" />
+            <p class="ml-2">{{ userStore.user?.name }}</p>
           </MenuButton>
           <transition
             enter-active-class="transition duration-100 ease-out"

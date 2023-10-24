@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { useHttp } from '@/composables/useHttp';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { IUser } from '@/types/auth';
 import { CameraIcon, CloudArrowUpIcon } from '@heroicons/vue/24/solid';
-import { userProfileBreadcrumb } from '~/config/breadcrumbs';
-import { useHttp } from '@/composables/useHttp';
+import { userProfileBreadcrumb } from '@/config/breadcrumbs';
+import { useUserStore } from '@/stores/useUserStore';
 
 useHead({
   title: 'User Profile - XGame Studio',
@@ -28,6 +29,7 @@ definePageMeta({
 
 const { BACKEND_URL } = useUrlConfig();
 const { $toast } = useNuxtApp();
+const userStore = useUserStore();
 
 const avatarPreview = ref('/images/no-image-dashboard.jpg');
 const currentTab = ref('information');
@@ -90,6 +92,7 @@ const handleUploadAvatar = async () => {
 
   if (data.value) {
     $toast.success('Update successfully!!!');
+    userStore.getProfile();
   }
 };
 
@@ -122,6 +125,7 @@ const handleEdit = async () => {
 
   if (data.value) {
     $toast.success('Update successfully!!!');
+    userStore.getProfile();
   }
 };
 

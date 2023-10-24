@@ -9,6 +9,7 @@ const props = defineProps({
   },
   label: String,
   required: Boolean,
+  isDisabled: Boolean,
   error: String,
   help: String,
 });

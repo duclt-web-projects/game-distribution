@@ -15,11 +15,22 @@ const props = defineProps({
     type: String,
     default: 'rounded',
   },
+  isDisabled: Boolean,
 });
 
 const emit = defineEmits(['update:modelValue']);
 
 const field = inject('field', props);
+
+const onKeyPress = ($event) => {
+  if (props.type === 'phone') {
+    const keyCode = $event.keyCode ? $event.keyCode : $event.which;
+
+    if (keyCode < 48 || keyCode > 57) {
+      $event.preventDefault();
+    }
+  }
+};
 </script>
 
 <template>
@@ -29,6 +40,7 @@ const field = inject('field', props);
       :type="props.type"
       :aria-describedby="field.ariaDescribedBy"
       :value="props.modelValue"
+      :disabled="field.isDisabled"
       :class="[
         'h-10 text-sm placeholder-gray-400 hover:bg-gray-100 border-1 w-full focus:border-emerald-600 focus:border-1 focus:ring-0 focus:bg-white px-4',
         className,
@@ -38,6 +50,7 @@ const field = inject('field', props);
         ($event) =>
           emit('update:modelValue', ($event.target as HTMLInputElement).value)
       "
+      @keypress="onKeyPress"
     />
     <slot />
   </div>

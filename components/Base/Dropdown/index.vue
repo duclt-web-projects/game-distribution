@@ -4,7 +4,8 @@ import { Menu, MenuButton, MenuItems } from '@headlessui/vue';
 const props = defineProps({
   align: {
     type: String,
-    validator: (value) => ['left', 'right'].includes(value),
+    validator: (value) =>
+      ['bottom-left', 'bottom-right', 'top-left', 'top-right'].includes(value),
     default: 'bottom-left',
   },
   width: {

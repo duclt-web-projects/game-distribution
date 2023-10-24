@@ -6,10 +6,12 @@ export const ROUTE_NAMES = {
   LOGOUT: '/logout',
 
   // ========= User =============
+  USER: '/user',
   USER_GAME: '/user/games',
   USER_GAME_EDIT: '/user/games/edit',
   USER_GAME_ASSETS: '/user/games/assets',
   USER_GAME_UPLOAD: '/user/games/upload',
+  USER_PROFILE: '/user/profile',
 
   // ========= Admin =============
   ADMIN_LOGIN: '/admin/login',

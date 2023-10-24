@@ -7,6 +7,8 @@ import {
   PuzzlePieceIcon,
   TrashIcon,
 } from '@heroicons/vue/24/outline';
+import { UserIcon } from '@heroicons/vue/24/solid';
+import { ROUTE_NAMES } from '~/constants';
 
 useHead({
   bodyAttrs: {
@@ -26,12 +28,18 @@ const menus = [
     child: [
       {
         name: 'List',
-        path: '/user/games',
+        path: ROUTE_NAMES.USER_GAME,
       },
     ],
   },
+  {
+    path: ROUTE_NAMES.USER_PROFILE,
+    name: 'Profile',
+    icon: UserIcon,
+  },
 ];
 const userStore = useUserStore();
+const { BACKEND_URL } = useUrlConfig();
 
 const logout = async () => {
   await userStore.logout();
@@ -46,18 +54,19 @@ onMounted(() => {
 <template>
   <div class="flex">
     <dashboard-sidebar :nav-list="menus" />
-    <div class="w-full h-screen bg-gray-100 overflow-y-auto overflow-x-hidden">
+    <div class="w-full h-screen bg-gray-200 overflow-y-auto overflow-x-hidden">
       <dashboard-header>
         <Menu as="div" class="relative mr-3">
-          <div class="flex items-center">
-            <MenuButton>
-              <img
-                class="w-8 h-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                alt="avatar"
-              />
-            </MenuButton>
-          </div>
+          <MenuButton class="flex items-center">
+            <img
+              class="w-8 h-8 rounded-full"
+              :src="`${BACKEND_URL}${userStore.user?.avatar}`"
+              alt="avatar"
+            />
+            <p class="ml-2">
+              {{ userStore.user?.name }}
+            </p>
+          </MenuButton>
           <transition
             enter-active-class="transition duration-100 ease-out"
             enter-from-class="transform scale-95 opacity-0"
@@ -71,7 +80,8 @@ onMounted(() => {
             >
               <div class="px-1 py-1">
                 <MenuItem v-slot="{ active }">
-                  <button
+                  <NuxtLink
+                    :to="ROUTE_NAMES.USER_PROFILE"
                     :class="[
                       active ? 'bg-gray-500 text-white' : 'text-gray-900',
                       'group flex w-full items-center rounded-md px-2 py-2 text-sm',
@@ -82,7 +92,7 @@ onMounted(() => {
                       aria-hidden="true"
                     />
                     Profile
-                  </button>
+                  </NuxtLink>
                 </MenuItem>
               </div>
               <div class="px-1 py-1">

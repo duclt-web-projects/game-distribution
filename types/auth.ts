@@ -2,6 +2,9 @@ export interface IUser {
   id: string;
   email: string;
   name: string;
+  date_of_birth?: Date | string;
+  phone?: string;
+  avatar?: string;
 }
 
 export interface ILogin {

@@ -30,7 +30,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function getProfile() {
-    const { data } = await useHttp('auth/profile');
+    const { data } = await useHttp('user/profile');
 
     user.value = data.value as IUser;
   }

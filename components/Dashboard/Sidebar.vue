@@ -66,7 +66,7 @@ watch(route, () => {
   </aside>
   <div
     ref="asideMaskRef"
-    class="bg-black h-screen w-screen fixed top-0 left-0 z-10 opacity-0 invisible transition-all duration-500 lg:hidden"
+    class="bg-black h-screen w-screen fixed top-0 left-0 z-20 opacity-0 invisible transition-all duration-500 lg:hidden"
     @click="toggleAside"
   ></div>
 </template>

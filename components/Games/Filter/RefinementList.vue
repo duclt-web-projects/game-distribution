@@ -25,13 +25,13 @@ watch(props, () => {
 </script>
 
 <template>
-  <div class="algolia-multisearch-filter ais-refinement-list">
+  <div class="algolia-multisearch-filter">
     <span
       ><span class="refinement-list-header">{{ title }}</span>
       <SearchBox v-model="searchCategory" />
     </span>
-    <template v-for="item in categories" :key="item.id">
-      <div class="checkbox">
+    <div class="ais-refinement-list">
+      <div v-for="item in categories" :key="item.id" class="checkbox">
         <label class="checkbox__label">
           <input
             type="checkbox"
@@ -42,7 +42,7 @@ watch(props, () => {
           <span class="checkbox__value">{{ item.name }}</span>
         </label>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -97,9 +97,28 @@ watch(props, () => {
 }
 
 .ais-refinement-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  max-height: 540px;
+  overflow-y: auto;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #dedede;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+  }
 
   .footer {
     display: block;
@@ -107,14 +126,8 @@ watch(props, () => {
   }
 
   &:deep(.checkbox) {
-    display: none;
-
-    &:nth-child(-n + 11) {
-      display: block;
-    }
-
     &:first-of-type {
-      margin-top: 0.3rem;
+      margin-top: 1rem;
     }
   }
 

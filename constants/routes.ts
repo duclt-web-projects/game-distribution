@@ -23,6 +23,5 @@ export const ROUTE_NAMES = {
   ADMIN_GAME_ADD: '/admin/game/add',
   ADMIN_GAME_EDIT: '/admin/game/edit',
   ADMIN_CATEGORY: '/admin/categories',
-  ADMIN_CATEGORY_ADD: '/admin/category/add',
-  ADMIN_CATEGORY_EDIT: '/admin/category/edit',
+  ADMIN_TAG: '/admin/tags',
 };

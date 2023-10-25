@@ -1,6 +1,6 @@
 <script setup>
 import { useHttp } from '@/composables/useHttp';
-import { adminCategoryPageBreadcrumbs } from '@/config/breadcrumbs';
+import { adminTagPageBreadcrumbs } from '@/config/breadcrumbs';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import {
   EllipsisHorizontalIcon,
@@ -13,7 +13,7 @@ import {
 } from '@heroicons/vue/24/solid';
 
 useHead({
-  title: 'Category - Admin - XGame Studio',
+  title: 'Tag - Admin - XGame Studio',
   meta: [
     {
       name: 'description',
@@ -38,12 +38,12 @@ const { $toast } = useNuxtApp();
 const currentPage = ref(1);
 const isRefetch = ref(false);
 const modalActive = ref(null);
-const currentCategory = ref(null);
-const categoryData = ref('');
-const categoryError = ref('');
+const currentTag = ref(null);
+const tagData = ref('');
+const tagError = ref('');
 
-const { data: categories } = await useHttp(
-  () => `/admin/categories/list?page=${currentPage.value}`,
+const { data: tags } = await useHttp(
+  () => `/admin/tags/list?page=${currentPage.value}`,
   {
     server: false,
     watch: [isRefetch],
@@ -51,24 +51,24 @@ const { data: categories } = await useHttp(
   },
 );
 
-const editCategory = async (id) => {
-  const { data, error } = await useHttp(`/admin/category/${id}`, {
+const editTag = async (id) => {
+  const { data, error } = await useHttp(`/admin/tag/${id}`, {
     tokenKey: 'admin_access_token',
   });
 
   if (data.value) {
     modalActive.value = true;
-    currentCategory.value = data.value;
-    categoryData.value = data.value.name;
+    currentTag.value = data.value;
+    tagData.value = data.value.name;
     return;
   }
 
   $toast.error(error.value?.message ?? 'Something went wrong !!!');
 };
 
-const addCategory = () => {
-  currentCategory.value = null;
-  categoryData.value = '';
+const addTag = () => {
+  currentTag.value = null;
+  tagData.value = '';
   modalActive.value = true;
 };
 
@@ -79,7 +79,7 @@ const onChangePage = (val) => {
 const handleChangeStatus = async (id) => {
   isRefetch.value = !isRefetch.value;
 
-  const { data, error } = await useHttp(`admin/category/change-status/${id}`, {
+  const { data, error } = await useHttp(`admin/tag/change-status/${id}`, {
     method: 'POST',
     tokenKey: 'admin_access_token',
   });
@@ -92,11 +92,11 @@ const handleChangeStatus = async (id) => {
   }
 };
 
-const handleAddCategory = async () => {
-  categoryError.value = '';
+const handleAddTag = async () => {
+  tagError.value = '';
 
-  if (categoryData.value === '') {
-    categoryError.value = 'Category is required.';
+  if (tagData.value === '') {
+    tagError.value = 'Tag is required.';
     return;
   }
 
@@ -106,41 +106,35 @@ const handleAddCategory = async () => {
     method: 'POST',
     tokenKey: 'admin_access_token',
     body: {
-      name: categoryData,
+      name: tagData,
     },
     watch: false,
   };
 
-  const { data, error } = currentCategory.value
-    ? await useHttp(
-        `admin/category/edit/${currentCategory.value.id}`,
-        requestData,
-      )
-    : await useHttp(`admin/category`, requestData);
+  const { data, error } = currentTag.value
+    ? await useHttp(`admin/tag/edit/${currentTag.value.id}`, requestData)
+    : await useHttp(`admin/tag`, requestData);
 
   if (error.value) {
     $toast.error(error.value.message);
   }
   if (data.value) {
-    $toast.success('Change category successfully!!!');
+    $toast.success('Change tag successfully!!!');
     isRefetch.value = !isRefetch.value;
-    currentCategory.value = null;
+    currentTag.value = null;
   }
 };
 </script>
 
 <template>
   <AdminLayout>
-    <DashboardHeading
-      title="Category List"
-      :breadcrumbs="adminCategoryPageBreadcrumbs"
-    />
+    <DashboardHeading title="Tag List" :breadcrumbs="adminTagPageBreadcrumbs" />
     <div class="bg-white rounded mt-4 shadow overflow-hidden">
       <div class="flex justify-end items-center p-4 pb-0">
         <base-button
           :icon-left="PlusSmallIcon"
           intent="primary"
-          @click="addCategory"
+          @click="addTag"
         >
           Add
         </base-button>
@@ -170,30 +164,27 @@ const handleAddCategory = async () => {
             </tr>
           </thead>
           <tbody class="border">
-            <tr v-if="!categories || !categories.data" class="loading-wrapper">
+            <tr v-if="!tags || !tags.data" class="loading-wrapper">
               <td colSpan="7" class="text-center p-4">
                 <Spinner class="w-10 h-10" />
               </td>
             </tr>
-            <tr
-              v-else-if="categories.data.length === 0"
-              class="loading-wrapper"
-            >
+            <tr v-else-if="tags.data.length === 0" class="loading-wrapper">
               <td colSpan="7" class="text-center p-4">
                 <div>No data</div>
               </td>
             </tr>
             <template v-else>
               <tr
-                v-for="(category, index) in categories.data"
+                v-for="(tag, index) in tags.data"
                 :key="index"
                 class="odd:bg-white even:bg-gray-100 text-sm text-gray-900"
               >
                 <td class="p-4 whitespace-nowrap border-r border-gray-300">
-                  {{ category.name }}
+                  {{ tag.name }}
                 </td>
                 <td class="p-4 whitespace-nowrap border-r border-gray-300">
-                  <base-badge v-if="category.status === 1" intent="success">
+                  <base-badge v-if="tag.status === 1" intent="success">
                     Active
                   </base-badge>
                   <base-badge v-else intent="danger"> Inactive </base-badge>
@@ -201,18 +192,18 @@ const handleAddCategory = async () => {
                 <td
                   class="p-4 text-center whitespace-nowrap border-r border-gray-300"
                 >
-                  {{ category.games_count }}
+                  {{ tag.games_count }}
                 </td>
                 <td class="p-4 whitespace-nowrap border-r border-gray-300">
-                  {{ convertStringToDate(category.created_at) }}
+                  {{ convertStringToDate(tag.created_at) }}
                 </td>
                 <td class="p-4 whitespace-nowrap border-r border-gray-300">
-                  {{ convertStringToDate(category.updated_at) }}
+                  {{ convertStringToDate(tag.updated_at) }}
                 </td>
                 <td class="text-center">
                   <BaseDropdown
                     :align="
-                      index === categories.data.length - 1
+                      index === tags.data.length - 1
                         ? 'top-left'
                         : 'bottom-left'
                     "
@@ -227,9 +218,9 @@ const handleAddCategory = async () => {
                       <BaseDropdownItem>
                         <button
                           class="flex w-full"
-                          @click="handleChangeStatus(category.id)"
+                          @click="handleChangeStatus(tag.id)"
                         >
-                          <template v-if="category.status === 1">
+                          <template v-if="tag.status === 1">
                             <XCircleIcon class="w-5 h-5 text-red-600 mr-2" />
                             Inactive
                           </template>
@@ -242,10 +233,7 @@ const handleAddCategory = async () => {
                         </button>
                       </BaseDropdownItem>
                       <BaseDropdownItem>
-                        <button
-                          class="flex w-full"
-                          @click="editCategory(category.id)"
-                        >
+                        <button class="flex w-full" @click="editTag(tag.id)">
                           <PencilSquareIcon
                             class="w-5 h-5 mr-2 fill-yellow-500 cursor-pointer"
                           />
@@ -262,25 +250,25 @@ const handleAddCategory = async () => {
       </div>
 
       <div
-        v-if="categories && categories.data.length"
+        v-if="tags && tags.data.length"
         class="flex justify-end p-4 bg-white"
       >
         <PaginationUser
           :current-page="currentPage"
-          :total-page="categories.last_page"
+          :total-page="tags.last_page"
           @change-page="onChangePage"
         />
       </div>
     </div>
     <base-modal
       :modal-active="modalActive"
-      title="Add new category"
+      title="Add new tag"
       @close-modal="modalActive = false"
     >
       <template #body>
-        <form @submit.prevent="handleAddCategory">
-          <FormField label="Category Name" :error="categoryError" required>
-            <FormInput v-model="categoryData" type="text" />
+        <form @submit.prevent="">
+          <FormField label="Tag Name" :error="tagError" required>
+            <FormInput v-model="tagData" type="text" />
           </FormField>
         </form>
       </template>
@@ -288,7 +276,7 @@ const handleAddCategory = async () => {
         <base-button
           :icon-left="PlusSmallIcon"
           intent="success"
-          @click="handleAddCategory"
+          @click="handleAddTag"
         >
           Add
         </base-button>

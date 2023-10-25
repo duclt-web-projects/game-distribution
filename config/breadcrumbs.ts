@@ -1,5 +1,6 @@
 import {
   CubeIcon,
+  HashtagIcon,
   HomeIcon,
   TagIcon,
   UserIcon,
@@ -68,6 +69,19 @@ export const adminCategoryPageBreadcrumbs = [
     path: '/admin/categories',
     name: 'Category',
     icon: TagIcon,
+  },
+];
+
+export const adminTagPageBreadcrumbs = [
+  {
+    path: '/admin',
+    name: 'Home',
+    icon: HomeIcon,
+  },
+  {
+    path: '/admin/tags',
+    name: 'Tag',
+    icon: HashtagIcon,
   },
 ];
 

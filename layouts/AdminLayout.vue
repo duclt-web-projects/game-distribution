@@ -2,6 +2,7 @@
 import { useAdminStore } from '@/stores/useAdminStore';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import {
+  HashtagIcon,
   HomeIcon,
   PencilSquareIcon,
   PuzzlePieceIcon,
@@ -39,6 +40,11 @@ const menus = [
     name: 'Category',
     icon: TagIcon,
     path: ROUTE_NAMES.ADMIN_CATEGORY,
+  },
+  {
+    name: 'Tag',
+    icon: HashtagIcon,
+    path: ROUTE_NAMES.ADMIN_TAG,
   },
   {
     name: 'Profile',

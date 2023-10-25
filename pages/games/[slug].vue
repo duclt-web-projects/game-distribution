@@ -6,7 +6,28 @@ import MainLayout from '@/layouts/MainLayout.vue';
 const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
 
+const searchText = ref('');
+const suggestionGames = ref([]);
+
 const { data: game } = await useHttp(() => `${API_URL}/game/${slug}`);
+
+watch(searchText, async () => {
+  if (searchText.value) {
+    const { data } = await useHttp(`games`, {
+      query: {
+        limit: 5,
+        name: searchText,
+      },
+      watch: false,
+    });
+
+    if (data.value) {
+      suggestionGames.value = data.value;
+    }
+  } else {
+    suggestionGames.value = [];
+  }
+});
 
 useHead({
   title: `Publish ${game.name} on your website - XGame Studio`,
@@ -42,8 +63,19 @@ useHead({
                 <h1 class="custom-heading">{{ game.name }}</h1>
               </div>
             </div>
-            <div class="column" style="flex: 3 1 0%">
-              <SearchBox />
+            <div class="column relative" style="flex: 3 1 0%">
+              <SearchBox v-model="searchText" :debounce-delay="500" />
+              <div
+                class="suggest shadow-xl absolute w-full z-10"
+                :class="suggestionGames.length ? 'show' : 'hidden'"
+              >
+                <GameCard
+                  v-for="item in suggestionGames"
+                  :key="item.id"
+                  :item="item"
+                  :show-grid="false"
+                />
+              </div>
             </div>
           </div>
           <div class="game-container">

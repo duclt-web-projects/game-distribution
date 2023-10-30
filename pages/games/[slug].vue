@@ -7,7 +7,7 @@ const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
 
 const searchText = ref('');
-const suggestionGames = ref([]);
+const suggestionSearchGames = ref([]);
 
 const { data: game } = await useHttp(() => `${API_URL}/game/${slug}`);
 
@@ -22,15 +22,14 @@ watch(searchText, async () => {
     });
 
     if (data.value) {
-      suggestionGames.value = data.value;
+      suggestionSearchGames.value = data.value;
     }
   } else {
-    suggestionGames.value = [];
+    suggestionSearchGames.value = [];
   }
 });
 
 useHead({
-  title: `Publish ${game.name} on your website - XGame Studio`,
   meta: [
     {
       name: 'description',
@@ -52,6 +51,9 @@ useHead({
 
 <template>
   <MainLayout>
+    <Head>
+      <Title>Publish {{ game.name }} on your website - XGame Studio</Title>
+    </Head>
     <section class="pt-20">
       <div class="wrapper">
         <div v-if="!game">Loading ...</div>
@@ -66,11 +68,11 @@ useHead({
             <div class="column relative" style="flex: 3 1 0%">
               <SearchBox v-model="searchText" :debounce-delay="500" />
               <div
-                class="suggest shadow-xl absolute w-full z-10"
-                :class="suggestionGames.length ? 'show' : 'hidden'"
+                class="suggest shadow-xl absolute w-full z-100"
+                :class="suggestionSearchGames.length ? 'show' : 'hidden'"
               >
                 <GameCard
-                  v-for="item in suggestionGames"
+                  v-for="item in suggestionSearchGames"
                   :key="item.id"
                   :item="item"
                   :show-grid="false"
@@ -214,5 +216,12 @@ useHead({
   .game-container {
     margin: 1.364rem 0;
   }
+}
+
+h3 {
+  font-family: 'Squada One', cursive;
+  text-transform: uppercase;
+  color: #44a5ab;
+  font-size: 24px;
 }
 </style>

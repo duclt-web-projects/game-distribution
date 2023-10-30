@@ -7,9 +7,37 @@ const props = defineProps({
 });
 
 const { BACKEND_URL } = useUrlConfig();
+
+const { data: gamesSameCategory } = await useHttp(`games`, {
+  query: {
+    categories: props.game.categories.map((cate) => cate.id).toString(),
+    limit: 10,
+  },
+});
+
+const { data: gamesSameTag } = await useHttp(`games`, {
+  query: {
+    tags: props.game.tags.map((cate) => cate.id).toString(),
+    limit: 10,
+  },
+});
 </script>
 
 <template>
+  <div class="catalog-games-container">
+    <h3>Suggestion Games</h3>
+    <div class="games-container">
+      <GameCard v-for="item in gamesSameCategory" :key="item.id" :item="item" />
+    </div>
+  </div>
+
+  <div class="catalog-games-container">
+    <h3>Recommend Games</h3>
+    <div class="games-container">
+      <GameCard v-for="item in gamesSameTag" :key="item.id" :item="item" />
+    </div>
+  </div>
+
   <div class="description-area" v-html="game.description"></div>
   <div class="input-container input-location">
     <a
@@ -84,6 +112,7 @@ const { BACKEND_URL } = useUrlConfig();
     margin: 1.25rem 0;
     padding: 0.4rem 0.2rem;
     text-shadow: 0 0 0 transparent;
+    font-family: 'Squada One', cursive;
 
     &:first-of-type {
       margin-top: 0;
@@ -105,13 +134,7 @@ const { BACKEND_URL } = useUrlConfig();
     margin: -0.9375rem -0.9375rem 0 0;
 
     .game {
-      flex: 1;
-    }
-
-    .game.card {
-      display: block;
-      max-width: inherit;
-      min-width: 150px;
+      width: calc(100% / 7);
     }
   }
 
@@ -214,36 +237,6 @@ const { BACKEND_URL } = useUrlConfig();
   .input-container {
     border-top: 1px solid #dedede;
     padding: 0.6818rem;
-  }
-}
-
-@media (min-width: 1490px) and (max-width: 1640px) {
-  .catalog-games-container .games-container .game:nth-child(n + 7) {
-    display: none;
-  }
-}
-
-@media (min-width: 1025px) and (max-width: 1146px) {
-  .catalog-games-container .games-container .game:nth-child(n + 7) {
-    display: none;
-  }
-}
-
-@media (min-width: 1320px) and (max-width: 1490px) {
-  .catalog-games-container .games-container .game:nth-child(n + 6) {
-    display: none;
-  }
-}
-
-@media (min-width: 921px) and (max-width: 1025px) {
-  .catalog-games-container .games-container .game:nth-child(n + 6) {
-    display: none;
-  }
-}
-
-@media (min-width: 1147px) and (max-width: 1319px) {
-  .catalog-games-container .games-container .game:nth-child(n + 5) {
-    display: none;
   }
 }
 </style>

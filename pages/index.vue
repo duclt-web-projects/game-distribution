@@ -28,6 +28,7 @@ useHead({
 <template>
   <MainLayout>
     <HomeIntro />
+    <GoogleAds />
     <HomeCatalog />
   </MainLayout>
 </template>

@@ -236,9 +236,9 @@ const handleEditGame = async () => {
 
             <div class="col-span-6">
               <FormField class="col-span-2">
-                <FormLabel for="message" :required="false"
-                  >Description</FormLabel
-                >
+                <FormLabel for="message" :required="false">
+                  Description
+                </FormLabel>
                 <FormTextArea
                   v-model="gameData.description"
                   placeholder="Description your game ..."

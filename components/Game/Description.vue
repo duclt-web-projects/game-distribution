@@ -1,12 +1,48 @@
 <script setup>
 import IconArrowUpRightFromSquare from '@/assets/icon/ArrowUpRightFromSquare.vue';
-import { useUrlConfig } from '@/composables/useUrlConfig';
+import { useUserStore } from '@/stores/useUserStore';
+import { StarIcon } from '@heroicons/vue/24/outline';
+import { PencilIcon, UserCircleIcon } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
   game: Object,
 });
 
-const { BACKEND_URL } = useUrlConfig();
+const { $toast } = useNuxtApp();
+const userStore = useUserStore();
+const commentText = ref('');
+const commentError = ref('');
+const rating = ref(5);
+const fetchComment = ref(false);
+
+const addComment = async () => {
+  commentError.value = '';
+  if (commentText.value === '') {
+    commentError.value = 'Please enter comment.';
+    return;
+  }
+
+  const { data, error } = await useHttp(`game/${props.game.id}/comment`, {
+    method: 'POST',
+    body: {
+      comment: commentText.value,
+      rating: rating.value,
+    },
+  });
+
+  if (error.value) {
+    $toast.error(error.value.message);
+  }
+
+  if (data.value) {
+    fetchComment.value = !fetchComment.value;
+    $toast.success('Add comment successfully.');
+  }
+};
+
+const changeStarRate = (rate) => {
+  rating.value = rate;
+};
 
 const { data: gamesSameCategory } = await useHttp(`games`, {
   query: {
@@ -20,6 +56,11 @@ const { data: gamesSameTag } = await useHttp(`games`, {
     tags: props.game.tags.map((cate) => cate.id).toString(),
     limit: 10,
   },
+});
+
+const { data: comments } = await useHttp(`game/${props.game.id}/comments`, {
+  server: false,
+  watch: [fetchComment],
 });
 </script>
 
@@ -49,6 +90,60 @@ const { data: gamesSameTag } = await useHttp(`games`, {
       Open Game In New Tab
       <IconArrowUpRightFromSquare class="w-3 h-3 ml-2 mb-1" />
     </a>
+  </div>
+  <div v-if="comments" class="my-10">
+    <h3 class="mb-4 border-b border-b-gray-200 pb-2">
+      {{ comments.length }} Comments
+    </h3>
+    <div v-if="userStore.isLoggedIn" class="flex mb-4">
+      <div class="user w-10 h-10 mr-4">
+        <img
+          v-if="userStore.user && userStore.user.avatar"
+          class="rounded-full shadow object-contain"
+          :src="BACKEND_URL + userStore.user.avatar"
+          alt=""
+        />
+        <UserCircleIcon v-else class="w-10 h-10 fill-gray-400" />
+      </div>
+      <div class="grow">
+        <form @submit.prevent="addComment">
+          <p class="font-medium mb-1">{{ userStore.user.name }}</p>
+          <div class="flex mb-3 gap-1">
+            <StarIcon
+              v-for="index in 5"
+              :key="index"
+              class="w-5 h-5 stroke-yellow-400 hover:fill-yellow-400"
+              :class="{
+                'fill-yellow-400': rating >= index,
+              }"
+              @click="changeStarRate(index)"
+              @mouseover="changeStarRate(index)"
+            />
+          </div>
+          <FormTextArea
+            v-model="commentText"
+            placeholder="Enter your rating"
+            type="text"
+          />
+          <span v-if="commentError" class="text-xs text-red-500">
+            {{ commentError }}
+          </span>
+          <div class="flex justify-end mt-2">
+            <button
+              type="submit"
+              class="flex items-center text-xs p-2 border border-gray-400 rounded hover:bg-gray-400 hover:text-white transition-all"
+            >
+              Comment <PencilIcon class="w-3 h-3 ml-2" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <GameComment
+      v-for="comment in comments"
+      :key="comment.id"
+      :comment="comment"
+    />
   </div>
 </template>
 

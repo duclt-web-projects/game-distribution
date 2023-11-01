@@ -14,7 +14,7 @@ const headers = [
   {
     id: 3,
     name: 'About',
-    path: '',
+    path: 'v2',
     children: [],
   },
   {

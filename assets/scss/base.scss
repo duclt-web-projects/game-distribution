@@ -3,18 +3,12 @@ html {
   -webkit-text-size-adjust: 100%;
   font-family: sans-serif;
 }
-* {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-}
 body {
   margin: 0;
   background: #fff;
-  color: #333;
-  font-family: 'Roboto', sans-serif;
+  color: #222;
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  font-weight: 300;
-  letter-spacing: 1px;
   line-height: 180%;
   overflow-x: hidden;
 }
@@ -452,4 +446,8 @@ textarea {
   margin-top: 8px;
   color: #ca2f37;
   font-size: 12px;
+}
+
+.container {
+  margin: 0 auto;
 }

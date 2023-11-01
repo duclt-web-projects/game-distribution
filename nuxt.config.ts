@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['@pinia/nuxt', 'nuxt-vue3-google-signin'],
+  modules: ['@pinia/nuxt', 'nuxt-vue3-google-signin', 'vue3-carousel-nuxt'],
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL ?? 'https://kimlestudio.xyz/api',

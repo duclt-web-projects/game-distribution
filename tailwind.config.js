@@ -9,7 +9,21 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      container: {
+        screens: {
+          DEFAULT: '100%',
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1220px',
+          '2xl': '1220px',
+        },
+      },
+      colors: {
+        'main-color': '#FB8030',
+      },
+    },
   },
   plugins: [],
 };

@@ -451,3 +451,9 @@ textarea {
 .container {
   margin: 0 auto;
 }
+
+@media screen and (max-width: 640px) {
+  body {
+    font-size: 0.9rem;
+  }
+}

@@ -3,7 +3,10 @@ import { IGame } from '@/types/game';
 import { Carousel, Navigation, Slide } from 'vue3-carousel';
 
 const props = defineProps({
-  games: Array as PropType<IGame[]>,
+  games: {
+    type: Array as PropType<IGame[]>,
+    default: () => [],
+  },
   show: Number,
   breakpoints: Object,
   isEdit: {
@@ -11,37 +14,15 @@ const props = defineProps({
     default: false,
   },
 });
-
-const game = ref({
-  name: 'Eating Simulation',
-  thumbnail:
-    'https://avatars.mds.yandex.net/get-games/1892995/2a00000185f2767a81b77b2f2f48f620a4bf/pjpg480x270',
-});
 </script>
 
 <template>
-  <Carousel
-    :items-to-show="show"
-    class="mr-3"
-    snap-align="start"
-    :breakpoints="breakpoints"
-  >
-    <Slide :index="1">
-      <NuxtLink to="" class="cursor-pointer">
+  <Carousel :items-to-show="show" snap-align="start" :breakpoints="breakpoints">
+    <Slide v-for="game in games" :key="game.id" :index="game.id">
+      <NuxtLink to="" class="cursor-pointer w-full">
         <GameCardV2 :game="game" :can-remove="isEdit" />
       </NuxtLink>
     </Slide>
-    <Slide :index="2">
-      <NuxtLink to="" class="">
-        <GameCardV2 :game="game" :can-remove="isEdit" />
-      </NuxtLink>
-    </Slide>
-    <Slide :index="3">
-      <NuxtLink to="" class="">
-        <GameCardV2 :game="game" :can-remove="isEdit" />
-      </NuxtLink>
-    </Slide>
-
     <template #addons>
       <Navigation />
     </template>

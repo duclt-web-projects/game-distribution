@@ -23,7 +23,7 @@ const showSuggestionGame = ref(false);
             <input
               type="text"
               placeholder="Search for..."
-              class="w-full leading-5 py-3 px-6 rounded-[50px] outline-none border-none text-gray-400 bg-[#F2F1FA]"
+              class="w-full leading-5 py-2 px-6 rounded-[50px] outline-none border-none text-gray-400 text-[14px] bg-[#F2F1FA]"
             />
             <MagnifyingGlassIcon
               class="absolute w-5 h-5 top-1/2 transform -translate-y-1/2 right-6 text-gray-400"
@@ -44,10 +44,10 @@ const showSuggestionGame = ref(false);
             <SunIcon class="w-8 h-8 sm:mr-2 text-main-color" />
           </button>
           <NuxtLink
-            class="login-btn flex items-center p-4 bg-main-color h-5 box-content rounded-[76px] gap-2 text-white"
+            class="login-btn flex items-center px-4 py-3 bg-main-color h-5 box-content rounded-[76px] gap-2 text-white"
           >
             <UserCircleIcon class="w-6 h-6" />
-            <span class="uppercase whitespace-nowrap">Sign In</span>
+            <span class="uppercase whitespace-nowrap">Login</span>
           </NuxtLink>
         </div>
       </div>

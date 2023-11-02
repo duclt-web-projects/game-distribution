@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps({
-  icon: [Object, Function],
+  icon: String,
   label: String,
   count: {
     type: Number,
@@ -15,8 +15,8 @@ const props = defineProps({
 
 <template>
   <div :class="['category__item', props.isActive && 'category__item--active']">
-    <component :is="props.icon" :class="['h-4 w-4']" />
-    <span class="text-[14px] mx-2">{{ props.label }}</span>
+    <span class="w-4 h-4" v-html="props.icon"></span>
+    <span class="text-[14px] mx-2 whitespace-nowrap">{{ props.label }}</span>
     <span
       v-show="props.count > 0"
       class="bg-main-color text-[12px] leading-[16px] py-[2px] px-1 rounded-[8px]"
@@ -33,19 +33,40 @@ const props = defineProps({
   border-radius: 20px;
   cursor: pointer;
   margin-bottom: 4px;
-  color: #666666;
   transition: all 0.2s;
   height: 20px;
   box-sizing: content-box;
 
+  span {
+    color: #666;
+  }
+
+  :deep(svg) {
+    fill: #666;
+  }
+
   &:hover {
     background-color: rgba(102, 102, 102, 0.15);
-    color: #222222;
+
+    span {
+      color: #222;
+    }
+
+    :deep(svg) {
+      fill: #222;
+    }
   }
 
   &:active {
     background-color: #fb8030;
-    color: #fff;
+
+    span {
+      color: #fff;
+    }
+
+    :deep(svg) {
+      fill: #fff;
+    }
   }
 }
 

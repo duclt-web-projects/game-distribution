@@ -1,29 +1,25 @@
 <script setup lang="ts">
+import { IGame } from '@/types/game';
 import { Carousel, Pagination, Slide } from 'vue3-carousel';
+
+const { BACKEND_URL } = useUrlConfig();
+
+const { data: bannerGames } = await useHttp<IGame[]>('games/banner-list');
 </script>
 <template>
   <section class="banner mt-6">
     <div class="container">
-      <carousel :items-to-show="1" :autoplay="5000" :wrap-around="true">
-        <slide :index="1">
+      <carousel
+        v-if="bannerGames && bannerGames.length"
+        :items-to-show="1"
+        :autoplay="5000"
+        :wrap-around="true"
+      >
+        <slide v-for="game in bannerGames" :key="game.id" :index="game.id">
           <img
-            src="/images/banner/banner1.png"
+            :src="BACKEND_URL + game.thumbnail"
             alt=""
-            class="h-[310px] object-cover"
-          />
-        </slide>
-        <slide :index="2">
-          <img
-            src="/images/banner/banner2.png"
-            alt=""
-            class="h-[310px] object-cover"
-          />
-        </slide>
-        <slide :index="3">
-          <img
-            src="/images/banner/banner3.png"
-            alt=""
-            class="h-[310px] object-cover"
+            class="h-[310px] w-full object-cover"
           />
         </slide>
         <template #addons>

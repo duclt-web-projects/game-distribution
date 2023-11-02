@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XMarkIcon } from '@heroicons/vue/24/solid';
+import { StarIcon, XMarkIcon } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
   game: Object,
@@ -15,10 +15,13 @@ const { BACKEND_URL } = useUrlConfig();
   <div v-if="game" class="game">
     <div :class="['game__image relative', canRemove ? '' : 'game__image--up']">
       <span class="game__tag hidden">Promotion</span>
-      <img :src="game.thumbnail" :alt="game.name" />
+      <img :src="BACKEND_URL + game.thumbnail" :alt="game.name" />
       <div v-if="canRemove" class="remove-btn">
         <XMarkIcon class="w-4 h-4" />
       </div>
+      <span class="game__rating absolute flex items-center text-white px-1">
+        <StarIcon class="w-3 h-3 mr-1 mb-0.5" /> {{ game.rating ?? 5 }}</span
+      >
     </div>
     <div class="game__info">
       <span>{{ game.name }}</span>
@@ -44,6 +47,16 @@ const { BACKEND_URL } = useUrlConfig();
     line-height: 15px;
   }
 
+  &__rating {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    height: 18px;
+    background-color: #000000ce;
+    font-size: 11px;
+    border-radius: 4px;
+  }
+
   &__image {
     margin-bottom: 8px;
     transition: all 0.2s;
@@ -54,6 +67,7 @@ const { BACKEND_URL } = useUrlConfig();
       border-radius: 12px;
       min-height: 100%;
       object-fit: cover;
+      width: 100%;
     }
 
     .remove-btn {

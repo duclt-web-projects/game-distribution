@@ -2,12 +2,10 @@
 import { HeartIcon } from '@heroicons/vue/24/solid';
 import 'vue3-carousel/dist/carousel.css';
 import MainV2Layout from '~/layouts/MainV2Layout.vue';
+import { IGame } from '../../types/game';
 
-const game = ref({
-  name: 'Eating Simulation',
-  thumbnail:
-    'https://avatars.mds.yandex.net/get-games/1892995/2a00000185f2767a81b77b2f2f48f620a4bf/pjpg480x270',
-});
+const { data: popularGames } = await useHttp<IGame[]>('games/hot-list');
+const { data: recommendedGames } = await useHttp<IGame[]>('games?limit=10');
 </script>
 
 <template>
@@ -16,10 +14,12 @@ const game = ref({
     <section class="content mt-[36px]">
       <div class="container flex gap-6 relative px-4 md:px-0">
         <SidebarCategory />
-        <div class="content__main grow">
+        <div class="content__main grow px-4">
           <div class="mb-7">
             <Heading :icon="HeartIcon" title="Popular" />
             <GamesCarousel
+              v-if="popularGames"
+              :games="popularGames"
               :show="1"
               :breakpoints="{
                 480: {
@@ -43,8 +43,8 @@ const game = ref({
               class="games grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4"
             >
               <GameCardV2
-                v-for="index in 15"
-                :key="index"
+                v-for="game in recommendedGames"
+                :key="game.id"
                 :game="game"
                 class="col-span-1"
               />
@@ -57,19 +57,6 @@ const game = ref({
 </template>
 
 <style scoped lang="scss">
-.games {
-  /* display: flex; */
-  /* flex-wrap: wrap;
-  box-sizing: border-box;
-  margin: 0 -8px; */
-
-  :deep(.game) {
-    /* width: calc(100% / 5 - 16px);
-    margin: 8px;
-    box-sizing: border-box; */
-  }
-}
-
 @media screen and (max-width: 1024px) {
   .content {
     .container {

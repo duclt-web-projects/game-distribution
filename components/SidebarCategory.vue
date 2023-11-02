@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { HeartIcon, RocketLaunchIcon } from '@heroicons/vue/24/solid';
+import { ICategory } from '@/types/game';
+const { data: categories } = await useHttp<ICategory[]>('/categories');
 </script>
 <template>
   <div class="sidebar lg:sticky top-0 overflow-y-auto">
@@ -9,16 +10,8 @@ import { HeartIcon, RocketLaunchIcon } from '@heroicons/vue/24/solid';
       class="w-full h-8 rounded-[20px] bg-[#D9D9D9] px-4 text-[14px]"
     />
     <div class="my-3 categories">
-      <NuxtLink>
-        <SidebarCategoryItem
-          :icon="RocketLaunchIcon"
-          label="New"
-          :count="302"
-          :is-active="true"
-        />
-      </NuxtLink>
-      <NuxtLink v-for="index in 20" :key="index">
-        <SidebarCategoryItem :icon="HeartIcon" label="Popular" />
+      <NuxtLink v-for="category in categories" :key="category.id">
+        <SidebarCategoryItem :icon="category.icon" :label="category.name" />
       </NuxtLink>
     </div>
   </div>

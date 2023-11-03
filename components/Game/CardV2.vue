@@ -12,7 +12,7 @@ const props = defineProps({
 const { BACKEND_URL } = useUrlConfig();
 </script>
 <template>
-  <div v-if="game" class="game">
+  <NuxtLink v-if="game" :to="'/games/' + game.slug" class="game">
     <div :class="['game__image relative', canRemove ? '' : 'game__image--up']">
       <span class="game__tag hidden">Promotion</span>
       <img :src="BACKEND_URL + game.thumbnail" :alt="game.name" />
@@ -26,11 +26,12 @@ const { BACKEND_URL } = useUrlConfig();
     <div class="game__info">
       <span>{{ game.name }}</span>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <style scoped lang="scss">
 .game {
+  width: 100%;
   cursor: pointer;
 
   &__tag {
@@ -68,6 +69,7 @@ const { BACKEND_URL } = useUrlConfig();
       min-height: 100%;
       object-fit: cover;
       width: 100%;
+      aspect-ratio: 4 / 3;
     }
 
     .remove-btn {
@@ -94,7 +96,9 @@ const { BACKEND_URL } = useUrlConfig();
       font-size: 14px;
       text-align: left;
       line-height: 20px;
+      height: 40px;
       display: -webkit-box;
+      font-weight: 500;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
@@ -117,7 +121,7 @@ const { BACKEND_URL } = useUrlConfig();
   .game {
     &__info {
       span {
-        font-size: 12px;
+        font-size: 14px;
       }
     }
   }

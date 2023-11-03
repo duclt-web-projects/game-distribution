@@ -1,16 +1,53 @@
 <script setup lang="ts">
 import { ICategory } from '@/types/game';
+
 const { data: categories } = await useHttp<ICategory[]>('/categories');
+const searchCategories = ref<ICategory[]>([]);
+const searchCategoryText = ref('');
+const height = ref('calc(100vh - 24px)');
+
+if (categories.value) {
+  searchCategories.value = categories.value;
+}
+
+watch(searchCategoryText, () => {
+  const filter = categories.value?.filter((category) => {
+    return category.name
+      .toLocaleLowerCase()
+      .includes(searchCategoryText.value.toLocaleLowerCase());
+  });
+  if (filter) {
+    searchCategories.value = filter;
+  }
+});
+
+const handleScroll = () => {
+  if (document.body.offsetWidth <= 1024) return;
+
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    height.value = 'calc(100vh - 224px)';
+  } else {
+    height.value = 'calc(100vh - 24px)';
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 <template>
-  <div class="sidebar lg:sticky top-0 overflow-y-auto">
+  <div
+    class="sidebar relative lg:sticky top-0 overflow-y-auto"
+    :style="{ height }"
+  >
     <h2 class="text-[14px] font-medium px-4 mb-3">CATEGORY</h2>
-    <input
-      type="text"
-      class="w-full h-8 rounded-[20px] bg-[#D9D9D9] px-4 text-[14px]"
-    />
+    <SearchBoxV2 v-model="searchCategoryText" :debounce-delay="500" />
     <div class="my-3 categories">
-      <NuxtLink v-for="category in categories" :key="category.id">
+      <NuxtLink v-for="category in searchCategories" :key="category.id">
         <SidebarCategoryItem :icon="category.icon" :label="category.name" />
       </NuxtLink>
     </div>
@@ -21,12 +58,15 @@ const { data: categories } = await useHttp<ICategory[]>('/categories');
 .sidebar {
   min-width: 172px;
   max-width: 172px;
+  max-height: calc(100vh - 24px);
 }
 
 @media screen and (max-width: 1024px) {
   .sidebar {
     width: 100%;
     max-width: unset;
+    height: unset !important;
+    overflow-x: auto;
 
     input {
       display: none;
@@ -38,6 +78,14 @@ const { data: categories } = await useHttp<ICategory[]>('/categories');
       :deep(.category__item) {
         margin-bottom: 0;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .sidebar {
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 }

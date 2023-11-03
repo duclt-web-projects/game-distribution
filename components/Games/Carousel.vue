@@ -19,9 +19,7 @@ const props = defineProps({
 <template>
   <Carousel :items-to-show="show" snap-align="start" :breakpoints="breakpoints">
     <Slide v-for="game in games" :key="game.id" :index="game.id">
-      <NuxtLink to="" class="cursor-pointer w-full">
-        <GameCardV2 :game="game" :can-remove="isEdit" />
-      </NuxtLink>
+      <GameCardV2 :game="game" :can-remove="isEdit" />
     </Slide>
     <template #addons>
       <Navigation />
@@ -32,6 +30,12 @@ const props = defineProps({
 <style scoped lang="scss">
 :deep(.carousel__viewport) {
   padding-top: 16px;
+}
+
+:deep(.game) {
+  img {
+    max-height: 220px;
+  }
 }
 
 :deep(.carousel__slide) {

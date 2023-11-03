@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { IGame } from '@/types/game';
 import { HeartIcon } from '@heroicons/vue/24/solid';
 import 'vue3-carousel/dist/carousel.css';
 import MainV2Layout from '~/layouts/MainV2Layout.vue';
-import { IGame } from '../../types/game';
 
 const { data: popularGames } = await useHttp<IGame[]>('games/hot-list');
 const { data: recommendedGames } = await useHttp<IGame[]>('games?limit=10');
@@ -35,21 +35,10 @@ const { data: recommendedGames } = await useHttp<IGame[]>('games?limit=10');
             />
           </div>
           <HomeYourGame />
-          <div>
-            <h2 class="flex items-center text-[24px] font-medium mb-4">
-              <HeartIcon class="w-5 h-5 mr-4" />Recommended games
-            </h2>
-            <div
-              class="games grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4"
-            >
-              <GameCardV2
-                v-for="game in recommendedGames"
-                :key="game.id"
-                :game="game"
-                class="col-span-1"
-              />
-            </div>
-          </div>
+          <HomeRecommendGame />
+          <HomeRecommendGame sort="-is_hot" />
+          <HomeRecommendGame sort="-published_at" />
+          <HomeRecommendGame sort="-created_at" />
         </div>
       </div>
     </section>
@@ -57,6 +46,9 @@ const { data: recommendedGames } = await useHttp<IGame[]>('games?limit=10');
 </template>
 
 <style scoped lang="scss">
+.content__main {
+  margin-bottom: 80px;
+}
 @media screen and (max-width: 1024px) {
   .content {
     .container {

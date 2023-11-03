@@ -33,7 +33,6 @@
 
 <style lang="scss" scoped>
 footer {
-  margin-top: 80px;
   background-color: #fb8030;
 
   .social {

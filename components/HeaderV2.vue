@@ -3,12 +3,33 @@ import {
   ArrowLeftIcon,
   MagnifyingGlassIcon,
   UserCircleIcon,
-  XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { SunIcon } from '@heroicons/vue/24/solid';
+import { IGame } from '../types/game';
 
 const showMbSearch = ref(false);
-const showSuggestionGame = ref(false);
+const searchText = ref('');
+const suggestionSearchGames = ref<IGame[]>([]);
+
+const { BACKEND_URL } = useUrlConfig();
+
+watch(searchText, async () => {
+  if (searchText.value) {
+    const { data } = await useHttp<IGame[]>(`games`, {
+      query: {
+        limit: 5,
+        name: searchText,
+      },
+      watch: false,
+    });
+
+    if (data.value) {
+      suggestionSearchGames.value = data.value;
+    }
+  } else {
+    suggestionSearchGames.value = [];
+  }
+});
 </script>
 
 <template>
@@ -19,21 +40,26 @@ const showSuggestionGame = ref(false);
           <img src="/images/logos/logo.png" alt="" />
         </NuxtLink>
         <div class="p-4 grow relative">
-          <div class="header__search relative w-full max-w-[680px]">
-            <input
-              type="text"
-              placeholder="Search for..."
-              class="w-full leading-5 py-2 px-6 rounded-[50px] outline-none border-none text-gray-400 text-[14px] bg-[#F2F1FA]"
-            />
-            <MagnifyingGlassIcon
-              class="absolute w-5 h-5 top-1/2 transform -translate-y-1/2 right-6 text-gray-400"
-            />
-          </div>
-          <div class="suggestion-game absolute bg-white">
-            <div>Game 1</div>
-            <div>Game 1</div>
-            <div>Game 1</div>
-            <div>Game 1</div>
+          <div class="header__search relative max-w-[680px]">
+            <SearchBoxV2 v-model="searchText" :debounce-delay="500" />
+            <div
+              v-if="suggestionSearchGames.length"
+              class="suggestion-game absolute bg-white"
+            >
+              <NuxtLink
+                v-for="game in suggestionSearchGames"
+                :key="game.id"
+                target="_blank"
+                class="flex px-4 py-2 hover:bg-[#f2f2f2] cursor-pointer border-b border-[#f2f2f2]"
+              >
+                <img
+                  :src="BACKEND_URL + game.thumbnail"
+                  alt=""
+                  class="w-10 h-10 rounded mr-2"
+                />
+                <p>{{ game.name }}</p>
+              </NuxtLink>
+            </div>
           </div>
         </div>
         <div class="flex justify-end items-center gap-2">
@@ -58,21 +84,26 @@ const showSuggestionGame = ref(false);
       <button @click="showMbSearch = false">
         <ArrowLeftIcon class="w-6 h-6 mr-4 text-gray-400" />
       </button>
-      <input
-        type="text"
-        placeholder="Search for..."
-        class="w-full leading-5 py-3 px-6 rounded-[50px] outline-none border-none text-gray-400 bg-[#F2F1FA]"
-      />
-      <XMarkIcon
-        class="absolute w-5 h-5 top-1/2 transform -translate-y-1/2 right-7 text-gray-400"
-      />
+      <SearchBoxV2 v-model="searchText" :debounce-delay="500" class="grow" />
     </div>
     <div class="overlay" @click="showMbSearch = false"></div>
-    <div class="suggestion-game absolute bg-white">
-      <div>Game 1</div>
-      <div>Game 1</div>
-      <div>Game 1</div>
-      <div>Game 1</div>
+    <div
+      v-if="suggestionSearchGames.length"
+      class="suggestion-game absolute bg-white"
+    >
+      <NuxtLink
+        v-for="game in suggestionSearchGames"
+        :key="game.id"
+        target="_blank"
+        class="flex px-4 py-2 hover:bg-[#f2f2f2] cursor-pointer border-b border-[#f2f2f2]"
+      >
+        <img
+          :src="BACKEND_URL + game.thumbnail"
+          alt=""
+          class="w-10 h-10 rounded mr-2"
+        />
+        <p>{{ game.name }}</p>
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -80,7 +111,8 @@ const showSuggestionGame = ref(false);
 <style lang="scss" scoped>
 .header {
   .suggestion-game {
-    width: calc(100% - 32px);
+    width: 100%;
+    top: 48px;
   }
 }
 @media screen and (max-width: 640px) {
@@ -140,30 +172,23 @@ const showSuggestionGame = ref(false);
   }
 }
 .suggestion-game {
-  display: none;
   top: 72px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2000;
   border: 1px solid #ccc;
-  border-radius: 8px;
 
-  > div {
-    padding: 8px 16px;
-    cursor: pointer;
+  > a {
+    :deep(.game) {
+      &:first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
 
-    &:hover {
-      background-color: #f2f2f2;
-    }
-
-    &:first-child {
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-    }
-
-    &:last-child {
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
+      &:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
     }
   }
 }

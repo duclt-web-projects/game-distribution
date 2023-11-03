@@ -2,6 +2,7 @@
 import { useHttp } from '@/composables/useHttp';
 import { useUrlConfig } from '@/composables/useUrlConfig';
 import MainLayout from '@/layouts/MainLayout.vue';
+import { ArrowsPointingOutIcon } from '@heroicons/vue/24/solid';
 
 const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
@@ -28,6 +29,33 @@ watch(searchText, async () => {
     suggestionSearchGames.value = [];
   }
 });
+
+const handleFullscreen = () => {
+  if (process.client) {
+    if (
+      document.fullscreenEnabled ||
+      document.webkitFullscreenEnabled ||
+      document.mozFullScreenEnabled ||
+      document.msFullscreenEnabled
+    ) {
+      // which element will be fullscreen
+      const iframe = document.querySelector('#iframe');
+      // Do fullscreen
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    } else {
+      document.querySelector('.error').innerHTML =
+        'Your browser is not supported';
+    }
+  }
+};
 
 useHead({
   meta: [
@@ -65,7 +93,13 @@ useHead({
                 <h1 class="custom-heading">{{ game.name }}</h1>
               </div>
             </div>
-            <div class="column relative" style="flex: 3 1 0%">
+            <div class="column relative flex gap-4" style="flex: 3 1 0%">
+              <button
+                class="shadow flex justify-center items-center min-w-[40px] h-10 rounded bg-gray-200 hover:bg-gray-300"
+                @click="handleFullscreen"
+              >
+                <ArrowsPointingOutIcon class="w-5 h-5" />
+              </button>
               <SearchBox v-model="searchText" :debounce-delay="500" />
               <div
                 class="suggest shadow-xl absolute w-full z-100"
@@ -80,6 +114,9 @@ useHead({
               </div>
             </div>
           </div>
+          <div class="flex justify-end">
+            <div class="w-1/4"></div>
+          </div>
           <div class="game-container">
             <GameOverlay
               :width="`${game.width}px`"
@@ -93,6 +130,7 @@ useHead({
               :width="game.width"
               :height="game.height"
               scrolling="no"
+              seamless="seamless"
             ></iframe>
           </div>
           <div class="columns">

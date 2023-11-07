@@ -272,11 +272,10 @@ const handleAddCategory = async () => {
         />
       </div>
     </div>
-    <base-modal
-      :modal-active="modalActive"
-      title="Add new category"
-      @close-modal="modalActive = false"
-    >
+    <base-modal :modal-active="modalActive" @close-modal="modalActive = false">
+      <template #header>
+        <h3 class="text-xl font-semibold text-gray-900">Add new category</h3>
+      </template>
       <template #body>
         <form @submit.prevent="handleAddCategory">
           <FormField label="Category Name" :error="categoryError" required>

@@ -259,11 +259,10 @@ const handleAddNewGame = async () => {
         </div>
       </div>
     </div>
-    <base-modal
-      :modal-active="modalActive"
-      title="Add new game"
-      @close-modal="modalActive = false"
-    >
+    <base-modal :modal-active="modalActive" @close-modal="modalActive = false">
+      <template #header>
+        <h3 class="text-xl font-semibold text-gray-900">Add new game</h3>
+      </template>
       <template #body>
         <form @submit.prevent="handleAddNewGame">
           <FormField label="Game Name" :error="gameError" required>

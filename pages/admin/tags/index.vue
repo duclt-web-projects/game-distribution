@@ -260,11 +260,10 @@ const handleAddTag = async () => {
         />
       </div>
     </div>
-    <base-modal
-      :modal-active="modalActive"
-      title="Add new tag"
-      @close-modal="modalActive = false"
-    >
+    <base-modal :modal-active="modalActive" @close-modal="modalActive = false">
+      <template #header>
+        <h3 class="text-xl font-semibold text-gray-900">Add new tag</h3>
+      </template>
       <template #body>
         <form @submit.prevent="">
           <FormField label="Tag Name" :error="tagError" required>

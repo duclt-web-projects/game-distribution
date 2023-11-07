@@ -5,7 +5,13 @@ const props = defineProps({
   align: {
     type: String,
     validator: (value) =>
-      ['bottom-left', 'bottom-right', 'top-left', 'top-right'].includes(value),
+      [
+        'bottom-left',
+        'bottom-right',
+        'top-left',
+        'top-right',
+        'center',
+      ].includes(value),
     default: 'bottom-left',
   },
   width: {
@@ -38,11 +44,12 @@ const props = defineProps({
           'left-0 origin-top-left': props.align === 'bottom-right',
           'right-0 bottom-5 origin-bottom-right': props.align === 'top-left',
           'left-0 origin-bottom-left': props.align === 'top-right',
+          'left-1/2 top-1/2': props.align === 'center',
         }"
         :style="{
           width: props.width,
         }"
-        class="absolute z-50 mt-2 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="dropdown-menu absolute z-50 mt-2 divide-y divide-gray-100 rounded bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
         <slot name="items" />
       </MenuItems>

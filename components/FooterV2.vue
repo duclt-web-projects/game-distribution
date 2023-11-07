@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {
+  IconFacebook,
+  IconGoogle,
+  IconLinkedin,
+  IconYoutube,
+} from '@/assets/icon';
+</script>
 
 <template>
   <footer>
@@ -13,10 +20,10 @@
           />
         </NuxtLink>
         <div class="flex social gap-4 mt-4">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <div><IconFacebook /></div>
+          <div><IconGoogle /></div>
+          <div><IconYoutube /></div>
+          <div><IconLinkedin /></div>
         </div>
       </div>
       <hr class="h-px my-4 bg-[#d9d9d9] border-0" />
@@ -39,7 +46,15 @@ footer {
     div {
       width: 32px;
       height: 32px;
-      background-color: #d9d9d9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      :deep(svg) {
+        width: 24px;
+        height: 24px;
+        fill: #fff;
+      }
     }
   }
 }

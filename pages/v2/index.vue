@@ -15,10 +15,9 @@ const { data: recommendedGames } = await useHttp<IGame[]>('games?limit=10');
       <div class="container flex gap-6 relative px-4 md:px-0">
         <SidebarCategory />
         <div class="content__main grow px-4">
-          <div class="mb-7">
+          <div v-if="popularGames" class="mb-7">
             <Heading :icon="HeartIcon" title="Popular" />
             <GamesCarousel
-              v-if="popularGames"
               :games="popularGames"
               :show="1"
               :breakpoints="{

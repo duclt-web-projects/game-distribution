@@ -127,7 +127,7 @@ const isPlay = ref(false);
 
 <style scoped lang="scss">
 #game-overlay {
-  z-index: 1010;
+  z-index: 10;
   position: absolute;
   top: 0px;
   left: 50%;

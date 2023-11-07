@@ -20,6 +20,7 @@ const { data: recommendedGames } = await useHttp<IGame[]>(
       <HeartIcon class="w-5 h-5 mr-4" />Recommended games
     </h2>
     <div class="games grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+      <SkeletonGame />
       <GameCardV2
         v-for="game in recommendedGames"
         :key="game.id"

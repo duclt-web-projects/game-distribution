@@ -390,7 +390,7 @@ const { data: comments } = await useHttp(`game/${game.value.id}/comments`, {
       <div class="grid grid-cols-3 my-10 gap-10">
         <div class="col-span-3 lg:col-span-2">
           <div class="comments mb-5">
-            <h3 class="text-[32px] mb-4">Ratings and reviews</h3>
+            <h3 class="text-[24px] mb-4 font-medium">Ratings and reviews</h3>
             <div class="grid grid-cols-4 gap-5">
               <div class="col-span-4 md:col-span-1">
                 <p class="text-[24px] text-center mb-4">Average</p>
@@ -842,11 +842,11 @@ const { data: comments } = await useHttp(`game/${game.value.id}/comments`, {
 
   h3 {
     background-color: #eb8b3a;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     color: #fff;
     padding: 12px;
-    font-size: 24px;
+    font-size: 20px;
   }
 
   &__list {

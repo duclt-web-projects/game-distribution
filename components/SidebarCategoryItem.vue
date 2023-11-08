@@ -73,6 +73,12 @@ const props = defineProps({
 .category__item--active,
 .category__item--active:hover {
   background-color: #fb8030;
-  color: #fff;
+  span {
+    color: #fff;
+  }
+
+  :deep(svg) {
+    fill: #fff;
+  }
 }
 </style>

@@ -12,7 +12,7 @@ const { data: recommendedGames } = await useHttp<IGame[]>('games?limit=10');
   <MainV2Layout>
     <HomeBanner />
     <section class="content mt-[36px]">
-      <div class="container flex gap-6 relative px-4 md:px-0">
+      <div class="container flex gap-6 relative px-4">
         <SidebarCategory />
         <div class="content__main grow px-4">
           <div v-if="popularGames" class="mb-7">

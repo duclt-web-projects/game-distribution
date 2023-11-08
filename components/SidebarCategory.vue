@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ICategory } from '@/types/game';
 
+const props = defineProps({
+  currentCategory: String,
+});
+
 const { data: categories } = await useHttp<ICategory[]>('/categories');
 const searchCategories = ref<ICategory[]>([]);
 const searchCategoryText = ref('');
@@ -47,8 +51,16 @@ onUnmounted(() => {
     <h2 class="text-[14px] font-medium px-4 mb-3">CATEGORY</h2>
     <SearchBoxV2 v-model="searchCategoryText" :debounce-delay="500" />
     <div class="my-3 categories">
-      <NuxtLink v-for="category in searchCategories" :key="category.id">
-        <SidebarCategoryItem :icon="category.icon" :label="category.name" />
+      <NuxtLink
+        v-for="category in searchCategories"
+        :key="category.id"
+        :to="`/category/${category.slug}`"
+      >
+        <SidebarCategoryItem
+          :icon="category.icon"
+          :label="category.name"
+          :is-active="currentCategory === category.slug"
+        />
       </NuxtLink>
     </div>
   </div>

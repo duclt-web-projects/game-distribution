@@ -44,7 +44,7 @@ watch(searchText, async () => {
             <SearchBoxV2 v-model="searchText" :debounce-delay="500" />
             <div
               v-if="suggestionSearchGames.length"
-              class="suggestion-game absolute bg-white"
+              class="suggestion-game absolute bg-white rounded-none"
             >
               <NuxtLink
                 v-for="game in suggestionSearchGames"
@@ -176,7 +176,7 @@ watch(searchText, async () => {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2000;
-  border: 1px solid #ccc;
+  border: 1px solid #f2f2f2;
 
   > a {
     :deep(.game) {

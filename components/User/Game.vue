@@ -79,10 +79,6 @@ const { id } = route.params;
 </template>
 
 <style scoped lang="scss">
-h2 {
-  font-family: 'Roboto', sans-serif;
-}
-
 :deep(.multiselect-tags-search) {
   height: 0;
   border: none;

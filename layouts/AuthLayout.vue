@@ -14,45 +14,40 @@ const isLogin = route.path.toLowerCase() === '/login';
   <div id="stars2"></div>
   <div id="stars3"></div>
   <div class="form-container">
-    <div class="form-wrapper">
-      <div class="form-logo flex justify-center">
-        <NuxtLink class="logo" to="/"
-          ><img src="/images/logos/logo-white.png"
-        /></NuxtLink>
-      </div>
-      <div class="form">
-        <div class="form__tablist">
-          <div class="tablist-container">
-            <div class="tablist-wrapper" role="tablist">
-              <NuxtLink
-                to="/login"
-                class="tab tab-login"
-                :class="{ 'tab--active': isLogin }"
-                >Login</NuxtLink
-              >
-              <NuxtLink
-                to="/register"
-                class="tab tab-register"
-                :class="{ 'tab--active': !isLogin }"
-                >Register</NuxtLink
-              >
-            </div>
+    <div class="form">
+      <div class="form__tablist">
+        <div class="tablist-container">
+          <div class="tablist-wrapper" role="tablist">
+            <NuxtLink
+              to="/login"
+              class="tab tab-login"
+              :class="{ 'tab--active': isLogin }"
+              >Login</NuxtLink
+            >
+            <NuxtLink
+              to="/register"
+              class="tab tab-register"
+              :class="{ 'tab--active': !isLogin }"
+              >Register</NuxtLink
+            >
           </div>
         </div>
-        <div
-          class="form__content"
-          :style="
-            isLogin
-              ? 'border-radius: 0px 24px 24px;'
-              : 'border-radius: 24px 0px 24px 24px;'
-          "
-        >
-          <div class="form__title">{{ isLogin ? 'Login' : 'Register' }}</div>
-          <slot />
-        </div>
       </div>
-      <div class="form-footer flex justify-center">
-        <img src="/images/logos/logo-white.png" />
+      <div
+        class="form__content"
+        :style="
+          isLogin
+            ? 'border-radius: 0px 24px 24px;'
+            : 'border-radius: 24px 0px 24px 24px;'
+        "
+      >
+        <div class="form__logo">
+          <NuxtLink to="/">
+            <img src="/images/logos/logo-v2-white.png" alt="" />
+          </NuxtLink>
+          <h1>Welcome to XGame</h1>
+        </div>
+        <slot />
       </div>
     </div>
   </div>
@@ -1097,16 +1092,31 @@ const isLogin = route.path.toLowerCase() === '/login';
   justify-content: center;
 }
 
-.form-wrapper {
+.form {
   width: 100%;
-  max-width: 440px;
-}
+  max-width: 400px;
 
-.form-logo {
-  text-align: center;
+  &__logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
-  img {
-    width: 243px;
+    img {
+      width: 100px;
+      height: auto;
+    }
+
+    h1 {
+      margin-top: 8px;
+      margin-bottom: 32px;
+      font-size: 24px;
+    }
+  }
+
+  :deep(label) {
+    font-weight: 400;
+    font-size: 12px;
   }
 }
 
@@ -1136,7 +1146,6 @@ const isLogin = route.path.toLowerCase() === '/login';
       height: 64px;
       font-size: 18px;
       border-radius: 24px 24px 0 0;
-      font-family: Roboto, 'Open Sans';
       padding: 6px 12px;
       overflow: hidden;
       position: relative;
@@ -1146,7 +1155,6 @@ const isLogin = route.path.toLowerCase() === '/login';
       min-height: 48px;
       text-align: center;
       flex-shrink: 0;
-      font-family: Roboto, 'Open Sans';
       font-weight: 500;
       line-height: 1.75;
       white-space: normal;
@@ -1162,18 +1170,18 @@ const isLogin = route.path.toLowerCase() === '/login';
       border: none;
 
       &:hover {
-        color: #40a5b0;
+        color: #457afc;
       }
     }
 
     .tab--active {
-      color: #40a5b0;
+      color: #11c8f9;
       background-color: #0b0f1d;
     }
   }
 
   &__content {
-    padding: 40px;
+    padding: 60px 72px;
     box-shadow: 0 0 56px 0 rgba(46, 54, 78, 0.73);
     border-radius: 24px;
     background-color: #0b0f1d;
@@ -1243,7 +1251,6 @@ const isLogin = route.path.toLowerCase() === '/login';
 
     .checkbox-label {
       font-size: 1rem;
-      font-family: Roboto, 'Open Sans';
       font-weight: 400;
       line-height: 1.5;
     }
@@ -1266,32 +1273,15 @@ const isLogin = route.path.toLowerCase() === '/login';
       width: 100%;
       padding: 8px 22px;
       color: white;
-      height: 46px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       transform: skewX(0deg);
       font-weight: bold;
-      background-color: #40a5b0;
-      background-image: linear-gradient(
-        156deg,
-        rgba(80, 54, 134, 1) 35%,
-        rgba(64, 165, 176, 1) 80%,
-        rgba(64, 165, 176, 1) 100%
-      );
-      text-transform: uppercase;
-      border-radius: 4px;
-
-      &:hover {
-        background-color: rgb(44, 115, 123);
-        background-image: linear-gradient(
-          156deg,
-          rgba(60, 39, 106, 1) 35%,
-          rgba(40, 132, 142, 1) 80%,
-          rgba(44, 139, 149, 1) 100%
-        );
-      }
+      background: linear-gradient(96deg, #11c8f9 4.85%, #287cff 100%);
+      border-radius: 20px;
     }
 
     .spinner {

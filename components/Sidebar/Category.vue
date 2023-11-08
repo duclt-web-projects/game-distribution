@@ -49,7 +49,6 @@ onUnmounted(() => {
     :style="{ height }"
   >
     <h2 class="text-[14px] font-medium px-4 mb-3">CATEGORY</h2>
-    <SearchBoxV2 v-model="searchCategoryText" :debounce-delay="500" />
     <div class="my-3 categories">
       <NuxtLink
         v-for="category in searchCategories"

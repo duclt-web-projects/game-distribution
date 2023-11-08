@@ -19,7 +19,7 @@ const props = defineProps({
 <template>
   <Carousel :items-to-show="show" snap-align="start" :breakpoints="breakpoints">
     <Slide v-for="game in games" :key="game.id" :index="game.id">
-      <GameCardV2 :game="game" :can-remove="isEdit" />
+      <GameCard :game="game" :can-remove="isEdit" />
     </Slide>
     <template #addons>
       <Navigation />

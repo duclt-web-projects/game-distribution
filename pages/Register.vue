@@ -92,24 +92,16 @@ const validate = (): boolean => {
 <template>
   <AuthLayout>
     <form @submit.prevent="register">
-      <InputTextAuth
-        v-model:input="name"
-        placeholder="Name"
-        input-type="text"
-        :error="errors.name"
-      />
-      <InputTextAuth
-        v-model:input="email"
-        placeholder="Email"
-        input-type="email"
-        :error="errors.email"
-      />
-      <InputTextAuth
-        v-model:input="password"
-        placeholder="Password"
-        input-type="password"
-        :error="errors.password"
-      />
+      <FormField label="Name" :error="errors.name" required>
+        <FormInput v-model="name" type="text" />
+      </FormField>
+      <FormField label="Email" :error="errors.email" required>
+        <FormInput v-model="email" type="text" />
+      </FormField>
+      <FormField label="Password" :error="errors.password" required>
+        <FormInput v-model="password" type="password" />
+      </FormField>
+
       <div class="form__button">
         <button type="submit" name="login">
           <Spinner v-show="isLoading" />

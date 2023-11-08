@@ -1,380 +1,163 @@
+<script setup lang="ts"></script>
+
 <template>
   <footer>
-    <div class="wrapper">
-      <article>
-        <div class="footer-left">
+    <div class="container pt-9 pb-6 px-4 sm:px-0">
+      <div class="flex justify-center sm:justify-between items-end flex-wrap">
+        <NuxtLink>
           <img
             src="/images/logos/logo-white.png"
-            alt="XGame logo"
-            class="m-auto mb-5"
+            alt=""
+            width="176"
+            height="86"
           />
-          <p>
-            XGame offers a free service for developers and publishers. We help
-            game developers monetize and distribute their games. We offer
-            publishers a wide range of high quality cross platform games.
-          </p>
-          <p>
-            <a
-              href="https://www.google.nl/maps/place/OrangeGames/@52.2789942,4.7433615,17z/data=!3m1!4b1!4m5!3m4!1s0x47c60c686089387b:0x58146d40b5c1a299!8m2!3d52.2789942!4d4.7455502"
-              target="_blank"
-              title="Location of our office"
-              >The Nine, 9 Pham Van Dong, Mai Dich, Cau Giay, Ha Noi
-            </a>
-          </p>
-        </div>
-        <div class="footer-right">
-          <div class="info">
-            <small>Information</small>
-            <a href="/games" target="_self" title="Games">About Us</a>
-            <a href="/games" target="_self" title="Games">Games</a>
-            <a href="/games" target="_self" title="Publishers">Publishers</a>
-            <a href="/games" target="_self" title="Developers">Developers</a>
-            <a href="/games" target="_self" title="SDK">SDK</a>
-            <a href="/games" target="_blank" title="Blog">Blog</a>
-          </div>
-          <div class="contact">
-            <small>Support</small>
-            <a href="/games" target="_self" title="Contact Us">Contact Us</a>
-            <a href="/games" title="FAQ">FAQ</a>
-          </div>
-        </div>
-        <div class="copyright">
-          <p>
-            XGame Copyright 2023 |
-            <a
-              href="https://static.gamedistribution.com/policy/privacy-enduser.html"
-              target="_blank"
-              title="Privacy policy"
-              >Privacy policy</a
+        </NuxtLink>
+      </div>
+      <div class="flex justify-center gap-4">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_242_1907)">
+            <path
+              d="M32 16C32 7.1635 24.8365 0 16 0C7.1635 0 0 7.16337 0 16C0 23.986 5.851 30.6054 13.5 31.8056V20.625H9.4375V16H13.5V12.475C13.5 8.465 15.8888 6.25 19.5434 6.25C21.294 6.25 23.125 6.5625 23.125 6.5625V10.5H21.1075C19.1198 10.5 18.5 11.7334 18.5 12.9987V16H22.9375L22.2281 20.625H18.5V31.8056C26.149 30.6054 32 23.9861 32 16Z"
+              fill="#1877F2"
+            />
+            <path
+              d="M22.2281 20.625L22.9375 16H18.5V12.9987C18.5 11.7332 19.1199 10.5 21.1075 10.5H23.125V6.5625C23.125 6.5625 21.294 6.25 19.5434 6.25C15.8888 6.25 13.5 8.465 13.5 12.475V16H9.4375V20.625H13.5V31.8056C14.327 31.9352 15.1629 32.0002 16 32C16.8371 32.0002 17.673 31.9353 18.5 31.8056V20.625H22.2281Z"
+              fill="white"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_242_1907">
+              <rect width="32" height="32" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_242_1915)">
+            <path
+              d="M24.5 0H7.5C3.35786 0 0 3.35786 0 7.5V24.5C0 28.6421 3.35786 32 7.5 32H24.5C28.6421 32 32 28.6421 32 24.5V7.5C32 3.35786 28.6421 0 24.5 0Z"
+              fill="url(#paint0_radial_242_1915)"
+            />
+            <path
+              d="M24.5 0H7.5C3.35786 0 0 3.35786 0 7.5V24.5C0 28.6421 3.35786 32 7.5 32H24.5C28.6421 32 32 28.6421 32 24.5V7.5C32 3.35786 28.6421 0 24.5 0Z"
+              fill="url(#paint1_radial_242_1915)"
+            />
+            <path
+              d="M16.0011 3.5C12.6064 3.5 12.1803 3.51488 10.847 3.5755C9.51625 3.6365 8.60787 3.84712 7.81313 4.15625C6.99088 4.4755 6.2935 4.90262 5.59875 5.59762C4.90338 6.2925 4.47625 6.98987 4.156 7.81175C3.846 8.60675 3.63512 9.5155 3.57525 10.8456C3.51562 12.179 3.5 12.6053 3.5 16.0001C3.5 19.395 3.515 19.8197 3.5755 21.153C3.63675 22.4837 3.84738 23.3921 4.15625 24.1869C4.47575 25.0091 4.90288 25.7065 5.59788 26.4013C6.2925 27.0966 6.98988 27.5247 7.8115 27.844C8.60687 28.1531 9.51537 28.3637 10.8459 28.4247C12.1792 28.4854 12.605 28.5002 15.9996 28.5002C19.3948 28.5002 19.8195 28.4854 21.1528 28.4247C22.4835 28.3637 23.3929 28.1531 24.1882 27.844C25.0101 27.5247 25.7065 27.0966 26.401 26.4013C27.0964 25.7065 27.5234 25.0091 27.8438 24.1873C28.151 23.3921 28.362 22.4835 28.4245 21.1532C28.4844 19.82 28.5 19.395 28.5 16.0001C28.5 12.6053 28.4844 12.1792 28.4245 10.8459C28.362 9.51512 28.151 8.60688 27.8438 7.81213C27.5234 6.98988 27.0964 6.2925 26.401 5.59762C25.7057 4.90237 25.0104 4.47525 24.1875 4.15637C23.3906 3.84712 22.4817 3.63638 21.151 3.5755C19.8176 3.51488 19.3931 3.5 15.9972 3.5H16.0011ZM14.8798 5.75262C15.2126 5.75213 15.584 5.75262 16.0011 5.75262C19.3388 5.75262 19.7342 5.76463 21.0522 5.8245C22.271 5.88025 22.9325 6.08388 23.3731 6.255C23.9565 6.4815 24.3724 6.75238 24.8096 7.19C25.2471 7.6275 25.5179 8.04412 25.745 8.6275C25.9161 9.0675 26.12 9.729 26.1755 10.9478C26.2354 12.2655 26.2484 12.6612 26.2484 15.9972C26.2484 19.3333 26.2354 19.7291 26.1755 21.0467C26.1198 22.2655 25.9161 22.927 25.745 23.3671C25.5185 23.9505 25.2471 24.3659 24.8096 24.8031C24.3721 25.2406 23.9568 25.5114 23.3731 25.738C22.933 25.9099 22.271 26.113 21.0522 26.1688C19.7345 26.2286 19.3388 26.2416 16.0011 26.2416C12.6634 26.2416 12.2677 26.2286 10.9501 26.1688C9.73137 26.1125 9.06987 25.9089 8.62887 25.7377C8.04562 25.5111 7.62887 25.2404 7.19137 24.8029C6.75387 24.3654 6.48312 23.9498 6.256 23.3661C6.08488 22.926 5.881 22.2645 5.8255 21.0457C5.76562 19.728 5.75362 19.3323 5.75362 15.9941C5.75362 12.6561 5.76562 12.2624 5.8255 10.9446C5.88125 9.72587 6.08488 9.06437 6.256 8.62375C6.48263 8.04037 6.75388 7.62375 7.1915 7.18625C7.629 6.74875 8.04562 6.47787 8.629 6.25087C9.06962 6.079 9.73137 5.87587 10.9501 5.81987C12.1032 5.76775 12.5501 5.75212 14.8798 5.7495V5.75262ZM22.6736 7.82812C21.8455 7.82812 21.1736 8.49938 21.1736 9.32763C21.1736 10.1558 21.8455 10.8276 22.6736 10.8276C23.5018 10.8276 24.1736 10.1558 24.1736 9.32763C24.1736 8.4995 23.5018 7.82762 22.6736 7.82762V7.82812ZM16.0011 9.58075C12.4561 9.58075 9.58187 12.455 9.58187 16.0001C9.58187 19.5452 12.4561 22.4181 16.0011 22.4181C19.5462 22.4181 22.4195 19.5452 22.4195 16.0001C22.4195 12.4551 19.546 9.58075 16.0009 9.58075H16.0011ZM16.0011 11.8334C18.3022 11.8334 20.1679 13.6988 20.1679 16.0001C20.1679 18.3013 18.3022 20.1669 16.0011 20.1669C13.6999 20.1669 11.8345 18.3013 11.8345 16.0001C11.8345 13.6988 13.6999 11.8334 16.0011 11.8334Z"
+              fill="white"
+            />
+          </g>
+          <defs>
+            <radialGradient
+              id="paint0_radial_242_1915"
+              cx="0"
+              cy="0"
+              r="1"
+              gradientUnits="userSpaceOnUse"
+              gradientTransform="translate(8.5 34.4646) rotate(-90) scale(31.7144 29.4969)"
             >
-            -
-            <a
-              href="https://static.gamedistribution.com/policy/privacy-platform.html"
-              target="_blank"
-              title="Platform Privacy policy"
-              >Platform Privacy policy</a
+              <stop stop-color="#FFDD55" />
+              <stop offset="0.1" stop-color="#FFDD55" />
+              <stop offset="0.5" stop-color="#FF543E" />
+              <stop offset="1" stop-color="#C837AB" />
+            </radialGradient>
+            <radialGradient
+              id="paint1_radial_242_1915"
+              cx="0"
+              cy="0"
+              r="1"
+              gradientUnits="userSpaceOnUse"
+              gradientTransform="translate(-5.36012 2.30512) rotate(78.681) scale(14.1765 58.436)"
             >
-            -
-            <a
-              href="https://static.gamedistribution.com/terms/both.html"
-              target="_blank"
-              title="Terms &amp; conditions"
-              >Terms &amp; conditions</a
-            >
-          </p>
-        </div>
-      </article>
+              <stop stop-color="#3771C8" />
+              <stop offset="0.128" stop-color="#3771C8" />
+              <stop offset="1" stop-color="#6600FF" stop-opacity="0" />
+            </radialGradient>
+            <clipPath id="clip0_242_1915">
+              <rect width="32" height="32" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_242_1931)">
+            <path
+              d="M24.5 0H7.5C3.35786 0 0 3.35786 0 7.5V24.5C0 28.6421 3.35786 32 7.5 32H24.5C28.6421 32 32 28.6421 32 24.5V7.5C32 3.35786 28.6421 0 24.5 0Z"
+              fill="white"
+            />
+            <path
+              d="M24.5 0H7.5C3.35786 0 0 3.35786 0 7.5V24.5C0 28.6421 3.35786 32 7.5 32H24.5C28.6421 32 32 28.6421 32 24.5V7.5C32 3.35786 28.6421 0 24.5 0Z"
+              fill="#1D9BF0"
+            />
+            <path
+              d="M24.9465 11.4264C24.9603 11.6247 24.9603 11.8231 24.9603 12.0234C24.9603 18.123 20.3168 25.1577 11.8259 25.1577V25.154C9.31752 25.1576 6.86113 24.4392 4.75 23.0846C5.11475 23.1285 5.48125 23.1504 5.84875 23.1512C7.92771 23.1529 9.94685 22.4556 11.5817 21.1714C10.6185 21.1532 9.68501 20.8344 8.9118 20.2596C8.13859 19.6849 7.56431 18.8829 7.26925 17.9657C7.96085 18.0991 8.67382 18.0719 9.35325 17.8862C7.19975 17.4511 5.65037 15.559 5.65037 13.3615V13.303C6.29236 13.6606 7.01085 13.8587 7.74538 13.8807C5.71713 12.5251 5.09188 9.82674 6.31663 7.71699C7.47554 9.14312 8.92149 10.3095 10.5606 11.1404C12.1996 11.9712 13.9952 12.448 15.8305 12.5397C15.6475 11.752 15.6745 10.9301 15.9089 10.1561C16.1432 9.38215 16.5767 8.68327 17.1659 8.12937C19.0251 6.38162 21.9493 6.47124 23.697 8.32949C24.7308 8.1254 25.7221 7.74642 26.6284 7.20887C26.2838 8.2777 25.5626 9.18496 24.5991 9.76187C25.5142 9.65406 26.4078 9.40911 27.25 9.03524C26.6305 9.96299 25.8505 10.7726 24.9465 11.4264Z"
+              fill="white"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_242_1931">
+              <rect width="32" height="32" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_242_1936)">
+            <path
+              d="M24.5 0H7.5C3.35786 0 0 3.35786 0 7.5V24.5C0 28.6421 3.35786 32 7.5 32H24.5C28.6421 32 32 28.6421 32 24.5V7.5C32 3.35786 28.6421 0 24.5 0Z"
+              fill="white"
+            />
+            <path
+              d="M24.5 0H7.5C3.35786 0 0 3.35786 0 7.5V24.5C0 28.6421 3.35786 32 7.5 32H24.5C28.6421 32 32 28.6421 32 24.5V7.5C32 3.35786 28.6421 0 24.5 0Z"
+              fill="#0A66C2"
+            />
+            <path
+              d="M23.0894 27.2106H26.7481C26.8807 27.2106 27.0079 27.158 27.1016 27.0642C27.1954 26.9705 27.2481 26.8433 27.2481 26.7108L27.25 18.9805C27.25 14.9401 26.3794 11.8345 21.6577 11.8345C19.8629 11.7678 18.1702 12.693 17.2569 14.238C17.2524 14.2455 17.2456 14.2513 17.2375 14.2546C17.2294 14.2579 17.2205 14.2584 17.2121 14.2562C17.2036 14.2539 17.1962 14.2489 17.1908 14.242C17.1855 14.2351 17.1826 14.2266 17.1825 14.2179V12.7075C17.1825 12.5749 17.1298 12.4477 17.0361 12.3539C16.9423 12.2602 16.8151 12.2075 16.6825 12.2075H13.2104C13.0778 12.2075 12.9506 12.2602 12.8568 12.3539C12.7631 12.4477 12.7104 12.5749 12.7104 12.7075V26.71C12.7104 26.8426 12.7631 26.9698 12.8568 27.0636C12.9506 27.1573 13.0778 27.21 13.2104 27.21H16.8689C17.0015 27.21 17.1287 27.1573 17.2224 27.0636C17.3162 26.9698 17.3689 26.8426 17.3689 26.71V19.7884C17.3689 17.8313 17.7401 15.9359 20.1665 15.9359C22.5584 15.9359 22.5894 18.1754 22.5894 19.9151V26.7106C22.5894 26.8432 22.6421 26.9704 22.7358 27.0642C22.8296 27.1579 22.9568 27.2106 23.0894 27.2106ZM4.75 7.45337C4.75 8.9365 5.97088 10.1567 7.454 10.1567C8.93675 10.1566 10.1569 8.93563 10.1569 7.45288C10.1566 5.97013 8.93637 4.75 7.4535 4.75C5.97025 4.75 4.75 5.97037 4.75 7.45337ZM5.61987 27.2106H9.28325C9.41586 27.2106 9.54304 27.1579 9.6368 27.0642C9.73057 26.9704 9.78325 26.8432 9.78325 26.7106V12.7075C9.78325 12.5749 9.73057 12.4477 9.6368 12.3539C9.54304 12.2602 9.41586 12.2075 9.28325 12.2075H5.61987C5.48727 12.2075 5.36009 12.2602 5.26632 12.3539C5.17255 12.4477 5.11987 12.5749 5.11987 12.7075V26.7106C5.11987 26.8432 5.17255 26.9704 5.26632 27.0642C5.36009 27.1579 5.48727 27.2106 5.61987 27.2106Z"
+              fill="white"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_242_1936">
+              <rect width="32" height="32" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <hr class="h-px my-4 bg-[#d9d9d9] border-0" />
+      <div class="flex justify-center gap-4 flex-wrap pb-4">
+        <NuxtLink class="text-[#375FC6] text-[14px]"> User Agreement </NuxtLink>
+        <NuxtLink class="text-[#375FC6] text-[14px]"> Privacy policy </NuxtLink>
+        <NuxtLink class="text-[#375FC6] text-[14px]">
+          Technical assistance
+        </NuxtLink>
+      </div>
     </div>
   </footer>
 </template>
 
-<script setup></script>
-
 <style lang="scss" scoped>
 footer {
-  background: linear-gradient(90deg, #1b3786, #24b3c0);
-  color: #fff;
-
-  article {
-    font-size: 14px;
-    padding: 2.5em 0.313em;
-    text-align: center;
-
-    p {
-      padding: 0.625em;
-    }
-  }
-
-  .xg-button {
-    border-bottom: 0;
-    margin-top: 1em;
-    padding: 0.6em 1.2em !important;
-  }
-
-  .contactus-image {
-    margin-left: 1.5%;
-    width: 35%;
-  }
-
-  .footer-left {
-    p {
-      margin: 0 0 1rem;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-    }
-
-    img {
-      width: 80%;
-    }
-
-    a {
-      color: currentColor;
-      display: block;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:active {
-        color: #44a5ab;
-      }
-
-      &:first-of-type {
-        margin-top: 0.75em;
-      }
-    }
-
-    br {
-      display: none;
-    }
-  }
-
-  .footer-right {
-    small {
-      border-bottom: 1px solid #b7f9ff;
-      color: currentColor;
-      display: inline;
-      font-size: 1.75em;
-      padding: 0.15em 0.1em 0.2em;
-      text-shadow: 0 0.07em 0 rgba(0, 0, 0, 0.5);
-      text-transform: uppercase;
-      width: 100%;
-    }
-
-    span {
-      display: block;
-
-      &:first-of-type {
-        margin-top: 0.75em;
-      }
-    }
-
-    a {
-      color: currentColor;
-      display: block;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:active {
-        color: #b7f9ff;
-      }
-
-      &:first-of-type {
-        margin-top: 0.75em;
-      }
-    }
-
-    .info {
-      font-weight: 700;
-      margin-bottom: 2.5em;
-      margin-top: 1.25em;
-
-      li:before {
-        color: currentColor;
-        content: '-';
-      }
-    }
-
-    .contact {
-      font-weight: 700;
-      margin-bottom: 2.5em;
-      margin-top: 1.25em;
-
-      small {
-        width: 220px;
-      }
-
-      a {
-        color: #fff;
-        display: block;
-
-        &:hover {
-          text-decoration: underline;
-        }
-
-        &:active {
-          color: #b7f9ff;
-        }
-
-        &:first-of-type {
-          margin-top: 0;
-        }
-      }
-
-      p {
-        padding: 0;
-      }
-    }
-  }
-
-  .copyright {
-    color: currentColor;
-
-    a {
-      color: currentColor;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:active {
-        color: #b7f9ff;
-      }
-    }
-
-    p {
-      margin-bottom: 0;
-    }
-  }
-}
-
-@media (min-width: 640px) {
-  footer {
-    article {
-      p {
-        padding: 0;
-      }
-    }
-
-    .contactus-image {
-      margin-top: 50px;
-      width: 40%;
-    }
-
-    .footer-left {
-      img {
-        max-width: 250px;
-      }
-
-      a {
-        &:first-of-type {
-          margin-bottom: 1.25em;
-        }
-      }
-    }
-
-    .footer-right {
-      display: flex;
-      margin-top: 40px;
-
-      span {
-        &:first-of-type {
-          margin-top: 0;
-        }
-      }
-
-      a {
-        &:first-of-type {
-          margin-top: 1.25em;
-        }
-      }
-
-      .info {
-        flex: 1;
-        margin-bottom: 1.25em;
-        margin-right: 5em;
-        margin-top: 0;
-        order: 1;
-      }
-
-      .contact {
-        flex: 1;
-        margin-bottom: 1.25em;
-        margin-top: 0;
-        order: 2;
-
-        a {
-          &:first-of-type {
-            margin-top: 0;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (min-width: 750px) {
-  footer {
-    .contactus-image {
-      margin-left: 30%;
-      margin-top: 50px;
-    }
-  }
-}
-
-@media (min-width: 1366px) {
-  footer {
-    article {
-      display: flex;
-      flex: 1;
-      flex-flow: row wrap;
-      padding: 4.375em 1.563em;
-      text-align: left;
-    }
-
-    .contactus-image {
-      margin-left: 30%;
-      margin-top: 0;
-      width: 70%;
-    }
-
-    .footer-left {
-      flex: 1;
-      order: 1;
-      padding: 0 2.5em 0 0;
-
-      a {
-        &:first-of-type {
-          margin-top: 0;
-
-          br {
-            display: block;
-          }
-        }
-      }
-
-      br {
-        display: block;
-      }
-    }
-
-    .footer-right {
-      flex: 1;
-      order: 2;
-      padding: 0 0 0 2.5em;
-
-      small {
-        display: inline-block;
-        margin-bottom: 1.25em;
-      }
-
-      a {
-        :first-of-type {
-          margin-top: 0;
-        }
-      }
-
-      .contact {
-        a {
-          margin-bottom: 0;
-
-          &:first-of-type {
-            margin-top: inherit;
-          }
-        }
-      }
-    }
-
-    .copyright {
-      flex: 1 100%;
-      order: 3;
-      text-align: center;
-    }
-  }
+  margin-top: 40px;
 }
 </style>

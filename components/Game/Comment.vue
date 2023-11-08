@@ -22,8 +22,12 @@ const { BACKEND_URL } = useUrlConfig();
     <div class="comment grow">
       <p class="font-medium">{{ comment.user?.name }}</p>
       <GameRatingStar :rating="comment.rating" />
-      <p class="text-xs text-gray-400 mb-3">{{ comment.updated_at }}</p>
-      <p class="p-4 bg-gray-200 w-full rounded">{{ comment.comment }}</p>
+      <p class="text-xs text-gray-400 mb-3">
+        {{ convertStringToDate(comment.updated_at) }}
+      </p>
+      <p class="p-4 bg-gray-200 w-full rounded text-[14px]">
+        {{ comment.comment }}
+      </p>
     </div>
   </div>
 </template>

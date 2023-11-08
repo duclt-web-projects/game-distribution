@@ -45,7 +45,7 @@ const { data: bannerGames } = await useHttp<IGame[]>('games/banner-list');
   }
 
   .carousel__pagination-button--active::after {
-    background-color: #fb8030;
+    background-color: #287cff;
   }
 }
 </style>

@@ -1,10 +1,10 @@
 <script setup>
+import { IconFacebook, IconGoogle } from '@/assets/icon';
 import { RESPONSE_STATUS } from '@/constants';
 import { ROUTE_NAMES } from '@/constants/routes';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { useUserStore } from '@/stores/useUserStore';
 import axios from 'axios';
-import { IconFacebook, IconGoogle } from '@/assets/icon';
 
 useHead({
   title: 'Login - XGame Studio',
@@ -163,19 +163,13 @@ const loginWithFacebook = () => {
       <div id="stars3"></div>
     </template>
     <form @submit.prevent="handleLoginAccount">
-      <InputTextAuth
-        v-model:input="email"
-        placeholder="Email"
-        input-type="email"
-        :error="errors.email"
-      />
-      <InputTextAuth
-        v-model:input="password"
-        placeholder="Password"
-        input-type="password"
-        :error="errors.password"
-      />
-      <input type="hidden" name="credentialId" value="" />
+      <FormField label="Email" :error="errors.email" required>
+        <FormInput v-model="email" type="text" />
+      </FormField>
+      <FormField label="Password" :error="errors.password" required>
+        <FormInput v-model="password" type="password" />
+      </FormField>
+      <p class="text-[12px] font-bold">Forgot password ?</p>
       <div class="form__button">
         <button type="submit" name="login">
           <Spinner v-show="isLoading" />
@@ -183,13 +177,15 @@ const loginWithFacebook = () => {
         </button>
       </div>
     </form>
-    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-    <div class="mt-5 flex gap-4 provider-btn">
+    <div class="or">Or</div>
+    <div class="provider-btn">
       <button class="google-btn" :disabled="!isReady" @click="() => login()">
         <IconGoogle class="fill-white w-6 h-6" />
+        <span>Continue with Google</span>
       </button>
       <button class="facebook-btn" @click="loginWithFacebook">
         <IconFacebook class="fill-white w-6 h-6" />
+        <span>Continue with Facebook</span>
       </button>
     </div>
   </AuthLayout>
@@ -198,28 +194,64 @@ const loginWithFacebook = () => {
 <style lang="scss" scoped>
 .provider-btn {
   button {
-    width: 50%;
+    width: 100%;
     height: 40px;
-    border-radius: 4px;
+    border-radius: 20px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    font-weight: 500;
+
+    :deep(svg) {
+      margin-right: 24px;
+    }
+
+    span {
+      display: inline-block;
+      margin-bottom: -1px;
+    }
   }
 
   .google-btn {
-    background-color: #ea4335;
-
-    &:hover {
-      background-color: #bb3a2e;
-    }
+    background-color: #fff;
+    color: #222;
+    margin-bottom: 12px;
   }
 
   .facebook-btn {
-    background-color: #3b5998;
+    background-color: #1877f2;
+  }
+}
 
-    &:hover {
-      background-color: #2a4174;
-    }
+.or {
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  margin: 12px 0;
+  position: relative;
+  text-transform: uppercase;
+  color: #999;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: calc(50% - 60px);
+    height: 1px;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #666;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: calc(50% - 60px);
+    height: 1px;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #666;
   }
 }
 #stars {

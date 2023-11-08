@@ -41,3 +41,19 @@ export interface IPromo {
   hotGame: IGame;
   featureGame: IGame[];
 }
+
+export interface IComment {
+  id: number;
+  game_id: number;
+  user_id: number;
+  rating: number;
+  status: number;
+  comment: string;
+  created_at: string;
+  updated_at: string;
+  user: {
+    id: number;
+    name: string;
+    avatar: string;
+  };
+}

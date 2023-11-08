@@ -44,6 +44,10 @@ const props = defineProps({
     border-bottom-right-radius: 8px;
   }
 
+  &:hover {
+    background-color: #f0f2f5;
+  }
+
   > div :deep(> div) {
     width: 100%;
   }

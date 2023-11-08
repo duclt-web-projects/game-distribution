@@ -46,7 +46,7 @@ const props = defineProps({
   }
 
   &:hover {
-    background-color: rgba(102, 102, 102, 0.15);
+    background-color: rgba(102, 102, 102, 0.25);
 
     span {
       color: #222;
@@ -58,7 +58,7 @@ const props = defineProps({
   }
 
   &:active {
-    background-color: #fb8030;
+    background: linear-gradient(96deg, #11c8f9 4.85%, #287cff 100%);
 
     span {
       color: #fff;
@@ -72,7 +72,8 @@ const props = defineProps({
 
 .category__item--active,
 .category__item--active:hover {
-  background-color: #fb8030;
+  background: linear-gradient(96deg, #11c8f9 4.85%, #287cff 100%);
+
   span {
     color: #fff;
   }

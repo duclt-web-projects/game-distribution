@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHttp } from '@/composables/useHttp';
-import MainV2Layout from '@/layouts/MainV2Layout.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
 import { IGame } from '@/types/game';
 import { HeartIcon } from '@heroicons/vue/24/solid';
 import 'vue3-carousel/dist/carousel.css';
@@ -13,21 +13,21 @@ const { data: gamesByCategory } = await useHttp<IGame[]>(
 </script>
 
 <template>
-  <MainV2Layout>
-    <HomeBanner />
+  <MainLayout>
+    <Banner />
     <section class="content mt-[36px]">
       <div class="container flex gap-6 relative px-4">
         <SidebarCategory :current-category="slug + ''" />
         <div class="content__main grow px-4">
-          <HomeYourGame />
+          <YourGame />
           <div>
             <h2 class="flex items-center text-[24px] font-medium mb-4">
-              <HeartIcon class="w-5 h-5 mr-4" />Recommended games
+              <HeartIcon class="w-8 h-8 mr-4" />Recommended games
             </h2>
             <div
               class="games grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4"
             >
-              <GameCardV2
+              <GameCard
                 v-for="game in gamesByCategory"
                 :key="game.id"
                 :game="game"
@@ -38,7 +38,7 @@ const { data: gamesByCategory } = await useHttp<IGame[]>(
         </div>
       </div>
     </section>
-  </MainV2Layout>
+  </MainLayout>
 </template>
 
 <style scoped lang="scss">

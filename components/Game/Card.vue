@@ -12,7 +12,7 @@ const props = defineProps({
 const { BACKEND_URL } = useUrlConfig();
 </script>
 <template>
-  <NuxtLink v-if="game" :to="`/games/${game.slug}1`" class="game">
+  <NuxtLink v-if="game" :to="`/games/${game.slug}`" class="game">
     <div :class="['game__image relative', canRemove ? '' : 'game__image--up']">
       <span class="game__tag hidden">Promotion</span>
       <img :src="BACKEND_URL + game.thumbnail" :alt="game.name" />

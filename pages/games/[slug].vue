@@ -57,6 +57,8 @@ const { data: gamesSameTag } = await useHttp<IGame[]>(`games`, {
   },
 });
 
+const { data: gamesHot } = await useHttp<IGame[]>(`games/hot-list`);
+
 const addComment = async () => {
   commentError.value = '';
   if (commentText.value === '') {
@@ -579,13 +581,9 @@ useHead({
             />
           </template>
           <div class="suggest-game suggest-game--hot mt-10">
-            <h3>Related Game</h3>
+            <h3>Game Hot</h3>
             <div class="suggest-game__list">
-              <GameCard
-                v-for="item in gamesSameCategory"
-                :key="item.id"
-                :game="item"
-              />
+              <GameCard v-for="item in gamesHot" :key="item.id" :game="item" />
             </div>
           </div>
         </div>
@@ -616,6 +614,7 @@ useHead({
   </MainLayout>
   <ClientOnly>
     <base-modal
+      v-if="game"
       :modal-active="modalActive"
       width="798px"
       teleport=".game-screen"
@@ -626,7 +625,7 @@ useHead({
           <div class="flex popup-info">
             <div class="popup-info__img relative shadow mr-2">
               <img
-                src="/images/logo-x.png"
+                :src="`${BACKEND_URL}${game.thumbnail}`"
                 alt=""
                 class="rounded object-contain"
               />
@@ -635,7 +634,7 @@ useHead({
               </span>
             </div>
             <div>
-              <p class="font-semibold whitespace-nowrap">Game name</p>
+              <p class="font-semibold whitespace-nowrap">{{ game.name }}</p>
               <div class="flex items-center popup-info__company">
                 <span>XGame Studio</span>
                 <span class="dot"></span>
@@ -672,21 +671,9 @@ useHead({
           </template>
         </Carousel>
         <h3 class="text-2xl font-medium">Introduction to the game</h3>
-        <p class="text-[14px]">
-          Save The Dog is a fun online puzzle game where you need to protect a
-          cute dog from bee attacks in each of the game levels. To do so, you
-          will need to create a defense line by drawing it up. Aside from that,
-          you will need to protect the dog from lava, thorns and environmental
-          dangers. There's a whopping 50 levels of gameplay, with each level
-          being more difficult than the last. You will need to find the best
-          course of action, so come on, let’s play!
-        </p>
+        <div v-html="game.description"></div>
         <h3 class="text-2xl font-medium">How to play</h3>
-        <p class="text-[14px]">
-          Save The Dog is a fun online puzzle game where you need to protect a
-          cute dog from bee attacks in each of the game levels. To do so, you
-          will need to create a defense line by drawing it up.
-        </p>
+        <p class="text-[14px]"></p>
         <h3 class="text-2xl font-medium">Game information</h3>
         <div class="grid grid-cols-3 gap-4">
           <div class="col-span-1">
@@ -711,7 +698,9 @@ useHead({
           </div>
           <div class="col-span-1">
             <div>Release date</div>
-            <div class="font-light">March 20, 2023</div>
+            <div class="font-light">
+              {{ convertStringToDate(game.published_at) }}
+            </div>
           </div>
           <div class="col-span-1">
             <div>Save to cloud</div>

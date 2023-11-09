@@ -15,7 +15,7 @@ const props = defineProps({
 
 <template>
   <div :class="['category__item', props.isActive && 'category__item--active']">
-    <span class="w-4 h-4" v-html="props.icon"></span>
+    <span class="w-4 h-4 mb-1 mr-1" v-html="props.icon"></span>
     <span class="text-[14px] mx-2 whitespace-nowrap">{{ props.label }}</span>
     <span
       v-show="props.count > 0"
@@ -42,7 +42,7 @@ const props = defineProps({
   }
 
   :deep(svg) {
-    fill: #666;
+    fill: #777;
   }
 
   &:hover {

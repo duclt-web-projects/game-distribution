@@ -29,6 +29,15 @@ watch(searchText, async () => {
 
 <template>
   <header class="header shadow">
+    <div class="top-header">
+      <div class="container">
+        <div class="flex justify-end items-center">
+          <button class="font-bold">English</button>
+          <span class="line"></span>
+          <button>Tiếng Việt</button>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="flex items-center px-4 py-2 sm:px-0">
         <NuxtLink to="/" class="w-[142px] mr-8 header__logo">
@@ -153,6 +162,24 @@ watch(searchText, async () => {
 
 <style lang="scss" scoped>
 .header {
+  .top-header {
+    background-color: #f4f4f4;
+    padding: 8px 0;
+
+    button {
+      line-height: 20px;
+      font-size: 14px;
+    }
+
+    .line {
+      display: block;
+      width: 1px;
+      height: 20px;
+      background-color: #666666;
+      margin: 0 4px;
+    }
+  }
+
   .suggestion-game {
     width: 100%;
     top: 48px;
@@ -184,6 +211,10 @@ watch(searchText, async () => {
     .login-btn {
       padding: 0;
       background-color: #fff;
+      height: 32px;
+      width: 32px;
+      display: flex;
+      justify-content: center;
 
       svg {
         width: 28px;

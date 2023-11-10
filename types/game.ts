@@ -1,7 +1,11 @@
-export interface IGame {
+export interface IGameLocal {
   id: number;
   name: string;
   slug: string;
+  thumbnail: string;
+}
+
+export interface IGame extends IGameLocal {
   active: number;
   status: number;
   width: number;
@@ -10,7 +14,6 @@ export interface IGame {
   author_id: number;
   description: string;
   type: null;
-  thumbnail: string;
   images: null;
   video: string;
   hot: number;

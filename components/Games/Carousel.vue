@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { IGame } from '@/types/game';
+import { IGame, IGameLocal } from '@/types/game';
 import { Carousel, Navigation, Slide } from 'vue3-carousel';
 
 const props = defineProps({
   games: {
-    type: Array as PropType<IGame[]>,
+    type: Array as PropType<IGame[] | IGameLocal[]>,
     default: () => [],
   },
   show: Number,

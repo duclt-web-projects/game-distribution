@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useYourGamesStore } from '@/stores/useYourGamesStore';
 import { StarIcon, XMarkIcon } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
@@ -10,26 +11,56 @@ const props = defineProps({
 });
 
 const { BACKEND_URL } = useUrlConfig();
+const yourGamesStore = useYourGamesStore();
+
+const removeYourGames = () => {
+  if (props.game) {
+    yourGamesStore.removeGames(props.game.id);
+  }
+};
 </script>
 <template>
-  <NuxtLink v-if="game" :to="`/games/${game.slug}`" class="game">
-    <div :class="['game__image relative', canRemove ? '' : 'game__image--up']">
-      <span class="game__tag hidden">Promotion</span>
-      <img :src="BACKEND_URL + '/' + game.thumbnail" :alt="game.name" />
-      <div v-if="canRemove" class="remove-btn">
-        <XMarkIcon class="w-4 h-4" />
-      </div>
-      <span class="game__rating absolute flex items-center text-white px-1">
-        <StarIcon class="w-3 h-3 mr-1 mb-0.5" /> {{ game.rating ?? 5 }}</span
+  <div class="game relative">
+    <div v-if="canRemove" class="remove-btn" @click="removeYourGames">
+      <XMarkIcon class="w-4 h-4" />
+    </div>
+    <NuxtLink v-if="game" :to="`/games/${game.slug}`">
+      <div
+        :class="['game__image relative', canRemove ? '' : 'game__image--up']"
       >
-    </div>
-    <div class="game__info">
-      <span>{{ game.name }}</span>
-    </div>
-  </NuxtLink>
+        <span class="game__tag hidden">Promotion</span>
+        <img :src="BACKEND_URL + '/' + game.thumbnail" :alt="game.name" />
+        <span class="game__rating absolute flex items-center text-white px-1">
+          <StarIcon class="w-3 h-3 mr-1 mb-0.5" /> {{ game.rating ?? 5 }}</span
+        >
+      </div>
+      <div class="game__info">
+        <span>{{ game.name }}</span>
+      </div>
+    </NuxtLink>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.remove-btn {
+  position: absolute;
+  right: -12px;
+  top: -12px;
+  z-index: 10;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  z-index: 10;
+  cursor: pointer;
+
+  svg {
+    color: #222;
+  }
+}
 .game {
   width: 100%;
   cursor: pointer;
@@ -70,24 +101,6 @@ const { BACKEND_URL } = useUrlConfig();
       object-fit: cover;
       width: 100%;
       aspect-ratio: 4 / 3;
-    }
-
-    .remove-btn {
-      position: absolute;
-      right: -12px;
-      top: -12px;
-      z-index: 10;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background-color: #f5f5f5;
-
-      svg {
-        color: #222;
-      }
     }
   }
 

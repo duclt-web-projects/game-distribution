@@ -16,11 +16,13 @@ const { data: bannerGames } = await useHttp<IGame[]>('games/banner-list');
         :wrap-around="true"
       >
         <slide v-for="game in bannerGames" :key="game.id" :index="game.id">
-          <img
-            :src="BACKEND_URL + '/' + game.thumbnail"
-            alt=""
-            class="h-[360px] w-full object-cover"
-          />
+          <NuxtLink :to="`/games/${game.slug}`">
+            <img
+              :src="BACKEND_URL + '/' + game.thumbnail"
+              alt=""
+              class="h-[360px] w-full object-cover"
+            />
+          </NuxtLink>
         </slide>
         <template #addons>
           <pagination />
@@ -47,5 +49,10 @@ const { data: bannerGames } = await useHttp<IGame[]>('games/banner-list');
   .carousel__pagination-button--active::after {
     background-color: #287cff;
   }
+}
+
+a {
+  display: block;
+  width: 100%;
 }
 </style>

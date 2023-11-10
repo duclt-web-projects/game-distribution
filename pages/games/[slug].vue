@@ -3,6 +3,7 @@ import { useHttp } from '@/composables/useHttp';
 import { useUrlConfig } from '@/composables/useUrlConfig';
 import MainLayout from '@/layouts/MainLayout.vue';
 import { useUserStore } from '@/stores/useUserStore';
+import { IComment, IGame, IGameDetail, IGameLocal } from '@/types/game';
 import {
   Bars3Icon,
   EnvelopeIcon,
@@ -17,7 +18,6 @@ import {
   UserCircleIcon,
 } from '@heroicons/vue/24/solid';
 import { Carousel, Navigation, Slide } from 'vue3-carousel';
-import { IComment, IGame, IGameDetail } from '../../types/game';
 
 const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
@@ -93,6 +93,28 @@ const changeStarRate = (rate) => {
 
 onMounted(() => {
   (navigator as any).keyboard.lock();
+
+  if (process.client && game.value) {
+    const yourGamesLocal = localStorage.getItem('your-games');
+    let yourGames: IGameLocal[] = [];
+
+    if (yourGamesLocal) {
+      yourGames = JSON.parse(yourGamesLocal);
+    }
+
+    const isExist = yourGames.find((item) => item.id === game.value?.id);
+
+    if (!isExist) {
+      yourGames.push({
+        id: game.value.id,
+        name: game.value.name,
+        slug: game.value.slug,
+        thumbnail: game.value.thumbnail,
+      });
+
+      localStorage.setItem('your-games', JSON.stringify(yourGames));
+    }
+  }
 });
 
 const handleFullscreen = () => {
@@ -138,6 +160,10 @@ const { data: comments } = await useHttp<IComment[]>(
     watch: [fetchComment],
   },
 );
+
+await useHttp<IGame[]>(`game/${game.value.id}/play-times`, {
+  server: false,
+});
 
 useHead({
   meta: [

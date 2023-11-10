@@ -3,7 +3,6 @@ import { IconUploadZip } from '@/assets/icon';
 import { useHttp } from '@/composables/useHttp';
 import { useUrlConfig } from '@/composables/useUrlConfig';
 import { userGameUploadPageBreadcrumbs } from '@/config/breadcrumbs';
-import { ROUTE_NAMES } from '@/constants/routes';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { IGame } from '@/types/game';
 import axios, { AxiosError } from 'axios';
@@ -85,23 +84,24 @@ const handleAddNewGame = async () => {
       },
     );
 
-    isLoading.value = false;
     if (status !== 200) {
       $toast.error(data.message);
     } else {
       $toast.success('Add game file successfully!!!');
 
       setTimeout(() => {
-        navigateTo(ROUTE_NAMES.USER_GAME);
+        // navigateTo(ROUTE_NAMES.USER_GAME);
       }, 1000);
     }
   } catch (error: unknown) {
+    isLoading.value = false;
     if (error instanceof AxiosError) {
       $toast.error(error.response?.data.message);
     } else {
       $toast.error('Something went wrong!!!');
     }
   }
+  isLoading.value = false;
 };
 </script>
 
@@ -111,8 +111,9 @@ const handleAddNewGame = async () => {
       title="Upload game file"
       :breadcrumbs="userGameUploadPageBreadcrumbs"
     />
-    <user-game :is-loading="!game">
+    <user-game v-if="game" :is-loading="!game">
       <form @submit.prevent="handleAddNewGame">
+        <h1 class="px-6 pt-6 text-[32px]">{{ game.name }}</h1>
         <div class="px-4 py-5 sm:p-6">
           <div
             v-show="progress > 0"

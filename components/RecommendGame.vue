@@ -15,7 +15,7 @@ const { data: recommendedGames } = await useHttp<IGame[]>(
 );
 </script>
 <template>
-  <div>
+  <div v-if="recommendedGames && recommendedGames.length">
     <h2 class="flex items-center text-[24px] font-medium mb-4">
       <HeartIcon class="w-8 h-8 mr-4" />Recommended games
     </h2>

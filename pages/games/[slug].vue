@@ -46,14 +46,14 @@ const isFullscreen = ref(false);
 const { data: gamesSameCategory } = await useHttp<IGame[]>(`games`, {
   query: {
     categories: game.value.categories.map((cate) => cate.id).toString(),
-    limit: 10,
+    limit: 5,
   },
 });
 
 const { data: gamesSameTag } = await useHttp<IGame[]>(`games`, {
   query: {
     tags: game.value.tags.map((cate) => cate.id).toString(),
-    limit: 10,
+    limit: 5,
   },
 });
 
@@ -164,7 +164,7 @@ useHead({
     <div v-if="game" class="container px-4">
       <div id="game-full">
         <div
-          class="flex justify-between items-center mb-6"
+          class="flex justify-between items-center py-4"
           :class="isFullscreen ? 'mx-4' : ''"
         >
           <h1
@@ -186,7 +186,7 @@ useHead({
                   <div class="flex popup-info">
                     <div class="popup-info__img relative shadow mr-2">
                       <img
-                        src="/images/logo-x.png"
+                        :src="BACKEND_URL + '/' + game.thumbnail"
                         alt=""
                         class="rounded object-contain"
                       />
@@ -195,7 +195,9 @@ useHead({
                       </span>
                     </div>
                     <div>
-                      <p class="font-semibold whitespace-nowrap">Game name</p>
+                      <p class="font-semibold whitespace-nowrap">
+                        {{ game.name }}
+                      </p>
                       <div class="flex items-center popup-info__company">
                         <span>XGame Studio</span>
                         <span class="dot"></span>
@@ -222,7 +224,7 @@ useHead({
                   </div>
                 </BaseDropdownItem>
                 <BaseDropdownItem class="py-3">
-                  <BaseDropdown>
+                  <BaseDropdown align="center">
                     <template #button>
                       <div class="flex items-center w-full">
                         <ShareIcon class="w-6 h-6 mr-2 text-[#444]" /> Share
@@ -602,7 +604,7 @@ useHead({
             <h3>Related Game</h3>
             <div class="suggest-game__list">
               <GameCard
-                v-for="item in gamesSameCategory"
+                v-for="item in gamesSameTag"
                 :key="item.id"
                 :game="item"
               />
@@ -625,7 +627,7 @@ useHead({
           <div class="flex popup-info">
             <div class="popup-info__img relative shadow mr-2">
               <img
-                :src="`${BACKEND_URL}${game.thumbnail}`"
+                :src="`${BACKEND_URL}/${game.thumbnail}`"
                 alt=""
                 class="rounded object-contain"
               />
@@ -655,16 +657,7 @@ useHead({
           }"
         >
           <Slide :index="1">
-            <img src="/images/detail/detail-1.png" alt="" />
-          </Slide>
-          <Slide :index="2">
-            <img src="/images/detail/detail-2.png" alt="" />
-          </Slide>
-          <Slide :index="3">
-            <img src="/images/detail/detail-3.png" alt="" />
-          </Slide>
-          <Slide :index="4">
-            <img src="/images/detail/detail-1.png" alt="" />
+            <img :src="BACKEND_URL + '/' + game.thumbnail" alt="" />
           </Slide>
           <template #addons>
             <Navigation />
@@ -716,16 +709,32 @@ useHead({
 
 <style scoped lang="scss">
 .container {
-  margin: 32px auto;
+  margin: 16px auto;
 }
 
 .popup {
   :deep(> .dropdown-menu) {
-    padding: 16px;
     border-radius: 12px;
   }
 
   :deep(.dropdown-item) {
+    padding: 16px;
+    padding-bottom: 0;
+    border: none;
+
+    > div {
+      padding-bottom: 16px;
+      border-bottom: 1px solid #d9d9d9;
+    }
+
+    .dropdown-item {
+      padding: 8px 16px;
+      > div {
+        padding: 0;
+        border-bottom: none;
+      }
+    }
+
     svg {
       margin-right: 8px;
     }

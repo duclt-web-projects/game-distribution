@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ArrowLeftIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
+import { useUserStore } from '../stores/useUserStore';
 import { IGame } from '../types/game';
 
+const userStore = useUserStore();
 const showMbSearch = ref(false);
 const searchText = ref('');
 const suggestionSearchGames = ref<IGame[]>([]);
@@ -125,7 +127,9 @@ watch(searchText, async () => {
               />
             </svg>
 
-            <span class="whitespace-nowrap">Login</span>
+            <span class="whitespace-nowrap">
+              {{ userStore.user?.name ?? 'Login' }}
+            </span>
           </NuxtLink>
         </div>
       </div>

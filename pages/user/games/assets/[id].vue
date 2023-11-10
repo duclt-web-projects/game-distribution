@@ -46,9 +46,9 @@ const progress = ref(0);
 const isLoading = ref(false);
 
 onMounted(() => {
-  if (game.value) {
+  if (game.value && game.value.thumbnail) {
     gameData.thumbnail = game.value.thumbnail;
-    urlPreview.value = BACKEND_URL + game.value.thumbnail;
+    urlPreview.value = BACKEND_URL + '/' + game.value.thumbnail;
   }
 });
 
@@ -107,7 +107,7 @@ const handleAddNewGame = async () => {
       $toast.success('Add game file successfully!!!');
 
       setTimeout(() => {
-        navigateTo(ROUTE_NAMES.USER_GAME);
+        // navigateTo(ROUTE_NAMES.USER_GAME);
       }, 1000);
     }
   } catch (error: unknown) {
@@ -126,8 +126,9 @@ const handleAddNewGame = async () => {
       title="Upload assets"
       :breadcrumbs="userGameAssetsPageBreadcrumbs"
     />
-    <user-game :is-loading="!game">
+    <user-game v-if="game" :is-loading="!game">
       <form @submit.prevent="handleAddNewGame">
+        <h1 class="px-6 pt-6 text-[32px]">{{ game.name }}</h1>
         <div class="px-4 py-5 sm:p-6">
           <div
             v-show="progress > 0"

@@ -17,9 +17,9 @@ const { data: bannerGames } = await useHttp<IGame[]>('games/banner-list');
       >
         <slide v-for="game in bannerGames" :key="game.id" :index="game.id">
           <img
-            :src="BACKEND_URL + game.thumbnail"
+            :src="BACKEND_URL + '/' + game.thumbnail"
             alt=""
-            class="h-[310px] w-full object-cover"
+            class="h-[360px] w-full object-cover"
           />
         </slide>
         <template #addons>

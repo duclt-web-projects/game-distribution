@@ -15,7 +15,7 @@ const { BACKEND_URL } = useUrlConfig();
   <NuxtLink v-if="game" :to="`/games/${game.slug}`" class="game">
     <div :class="['game__image relative', canRemove ? '' : 'game__image--up']">
       <span class="game__tag hidden">Promotion</span>
-      <img :src="BACKEND_URL + game.thumbnail" :alt="game.name" />
+      <img :src="BACKEND_URL + '/' + game.thumbnail" :alt="game.name" />
       <div v-if="canRemove" class="remove-btn">
         <XMarkIcon class="w-4 h-4" />
       </div>

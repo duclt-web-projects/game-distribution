@@ -44,13 +44,27 @@ const props = defineProps({
           'left-0 origin-top-left': props.align === 'bottom-right',
           'right-0 bottom-5 origin-bottom-right': props.align === 'top-left',
           'left-0 origin-bottom-left': props.align === 'top-right',
-          'left-1/2 top-1/2': props.align === 'center',
+          'left-1/4 top-[48px]': props.align === 'center',
         }"
         :style="{
           width: props.width,
         }"
         class="dropdown-menu absolute z-50 mt-2 divide-y divide-gray-100 rounded bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
+        <div
+          class="absolute w-4 h-3 inline-block overflow-hidden"
+          :class="{
+            'right-5 top-[-12px]': props.align === 'bottom-left',
+            'left-0 origin-top-left': props.align === 'bottom-right',
+            'right-0 bottom-5 origin-bottom-right': props.align === 'top-left',
+            'left-0 origin-bottom-left': props.align === 'top-right',
+            'left-1/2 top-[-12px]': props.align === 'center',
+          }"
+        >
+          <div
+            class="h-3 w-3 origin-bottom-left rotate-45 transform border border-[#f0f2f5] bg-white"
+          ></div>
+        </div>
         <slot name="items" />
       </MenuItems>
     </transition>

@@ -34,7 +34,7 @@ const { data: popularGames } = await useHttp<IGame[]>('games/hot-list');
       <div class="container flex gap-6 relative px-4">
         <SidebarCategory />
         <div class="content__main grow px-4">
-          <div v-if="popularGames" class="mb-7">
+          <div v-if="popularGames && popularGames.length" class="mb-7">
             <Heading :icon="HeartIcon" title="Popular" />
             <GamesCarousel
               :games="popularGames"

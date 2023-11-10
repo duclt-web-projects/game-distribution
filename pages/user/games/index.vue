@@ -75,6 +75,7 @@ const handleAddNewGame = async () => {
     body: {
       name: gameName,
     },
+    watch: false,
   });
 
   if (error.value) {
@@ -164,10 +165,10 @@ const handleAddNewGame = async () => {
                   >
                     <div class="w-[80px] h-[60px]">
                       <img
-                        class="w-full h-full object-cover"
+                        class="w-full h-full object-cover rounded"
                         :src="
                           game.thumbnail
-                            ? `${BACKEND_URL}${game.thumbnail}`
+                            ? `${BACKEND_URL}/${game.thumbnail}`
                             : '/images/no-image-dashboard.jpg'
                         "
                         alt=""

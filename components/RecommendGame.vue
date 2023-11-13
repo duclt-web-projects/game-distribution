@@ -17,7 +17,7 @@ const { data: recommendedGames } = await useHttp<IGame[]>(
 <template>
   <div v-if="recommendedGames && recommendedGames.length">
     <h2 class="flex items-center text-[24px] font-medium mb-4">
-      <HeartIcon class="w-8 h-8 mr-4" />Recommended games
+      <HeartIcon class="w-8 h-8 mr-4" />{{ $t('recommend_games') }}
     </h2>
     <div class="games grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
       <GameCard

@@ -24,6 +24,10 @@ useHead({
   ],
 });
 
+definePageMeta({
+  middleware: ['locale'],
+});
+
 const { data: popularGames } = await useHttp<IGame[]>('games/hot-list');
 </script>
 
@@ -35,7 +39,7 @@ const { data: popularGames } = await useHttp<IGame[]>('games/hot-list');
         <SidebarCategory />
         <div class="content__main grow px-4">
           <div v-if="popularGames && popularGames.length" class="mb-7">
-            <Heading :icon="HeartIcon" title="Popular" />
+            <Heading :icon="HeartIcon" :title="$t('popular')" />
             <GamesCarousel
               :games="popularGames"
               :show="1"

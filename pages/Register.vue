@@ -23,6 +23,10 @@ useHead({
   },
 });
 
+definePageMeta({
+  middleware: ['locale'],
+});
+
 const userStore = useUserStore();
 const { $toast } = useNuxtApp();
 
@@ -92,20 +96,20 @@ const validate = (): boolean => {
 <template>
   <AuthLayout>
     <form @submit.prevent="register">
-      <FormField label="Name" :error="errors.name" required>
+      <FormField :label="$t('form.name')" :error="errors.name" required>
         <FormInput v-model="name" type="text" />
       </FormField>
-      <FormField label="Email" :error="errors.email" required>
+      <FormField :label="$t('form.email')" :error="errors.email" required>
         <FormInput v-model="email" type="text" />
       </FormField>
-      <FormField label="Password" :error="errors.password" required>
+      <FormField :label="$t('form.password')" :error="errors.password" required>
         <FormInput v-model="password" type="password" />
       </FormField>
 
       <div class="form__button">
         <button type="submit" name="login">
           <Spinner v-show="isLoading" />
-          <span>Register</span>
+          <span>{{ $t('register') }}</span>
         </button>
       </div>
     </form>

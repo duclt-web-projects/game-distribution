@@ -8,7 +8,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['@pinia/nuxt', 'nuxt-vue3-google-signin', 'vue3-carousel-nuxt'],
+  modules: [
+    '@pinia/nuxt',
+    'nuxt-vue3-google-signin',
+    'vue3-carousel-nuxt',
+    '@nuxtjs/i18n',
+  ],
   runtimeConfig: {
     public: {
       apiUrl: process.env.NUXT_PUBLIC_API_URL ?? 'https://kimlestudio.xyz/api',
@@ -23,5 +28,13 @@ export default defineNuxtConfig({
   },
   carousel: {
     prefix: 'nuxt',
+  },
+  i18n: {
+    vueI18n: './config/i18n.config.ts',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'lang',
+      redirectOn: 'root', // recommended
+    },
   },
 });

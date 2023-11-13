@@ -3,6 +3,8 @@ import { ArrowLeftIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 import { useUserStore } from '../stores/useUserStore';
 import { IGame } from '../types/game';
 
+const { locale, setLocale } = useI18n();
+
 const userStore = useUserStore();
 const showMbSearch = ref(false);
 const searchText = ref('');
@@ -34,9 +36,23 @@ watch(searchText, async () => {
     <div class="top-header">
       <div class="container">
         <div class="flex justify-end items-center">
-          <button class="font-bold">English</button>
+          <button
+            :class="{
+              'font-bold': locale === 'en',
+            }"
+            @click="setLocale('en')"
+          >
+            English
+          </button>
           <span class="line"></span>
-          <button>Tiếng Việt</button>
+          <button
+            :class="{
+              'font-bold': locale === 'vi',
+            }"
+            @click="setLocale('vi')"
+          >
+            Tiếng Việt
+          </button>
         </div>
       </div>
     </div>
@@ -128,7 +144,7 @@ watch(searchText, async () => {
             </svg>
 
             <span class="whitespace-nowrap">
-              {{ userStore.user?.name ?? 'Login' }}
+              {{ userStore.user?.name ?? $t('login') }}
             </span>
           </NuxtLink>
         </div>

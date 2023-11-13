@@ -22,7 +22,7 @@ import { Carousel, Navigation, Slide } from 'vue3-carousel';
 const { slug } = useRoute().params;
 const { API_URL, BACKEND_URL } = useUrlConfig();
 
-const { data: game, error } = await useHttp<IGameDetail>(
+const { data: game } = await useHttp<IGameDetail>(
   () => `${API_URL}/game/${slug}`,
 );
 
@@ -32,6 +32,10 @@ if (!game.value) {
     statusMessage: 'Game Not Found',
   });
 }
+
+definePageMeta({
+  middleware: ['locale'],
+});
 
 const { $toast } = useNuxtApp();
 const userStore = useUserStore();
@@ -227,7 +231,7 @@ useHead({
                       <div class="flex items-center popup-info__company">
                         <span>XGame Studio</span>
                         <span class="dot"></span>
-                        <span>2,1M+ playing</span>
+                        <span>2,1M+ {{ $t('playing') }}</span>
                       </div>
                     </div>
                   </div>
@@ -246,14 +250,15 @@ useHead({
                         fill="#555"
                       />
                     </svg>
-                    Disable ads
+                    {{ $t('disabled_ads') }}
                   </div>
                 </BaseDropdownItem>
                 <BaseDropdownItem class="py-3">
                   <BaseDropdown align="center">
                     <template #button>
                       <div class="flex items-center w-full">
-                        <ShareIcon class="w-6 h-6 mr-2 text-[#444]" /> Share
+                        <ShareIcon class="w-6 h-6 mr-2 text-[#444]" />
+                        {{ $t('share') }}
                       </div>
                     </template>
                     <template #items>
@@ -393,19 +398,19 @@ useHead({
                 <BaseDropdownItem class="py-3">
                   <div class="flex items-center">
                     <StarOutlineIcon class="w-6 h-6 text-[#444]" />
-                    Rate game
+                    {{ $t('rate_game') }}
                   </div>
                 </BaseDropdownItem>
                 <BaseDropdownItem class="py-3">
                   <div class="flex items-center">
                     <EnvelopeIcon class="w-6 h-6 text-[#444]" />
-                    Report
+                    {{ $t('report') }}
                   </div>
                 </BaseDropdownItem>
                 <BaseDropdownItem class="py-3">
                   <div class="flex items-center" @click="modalActive = true">
                     <QuestionMarkCircleIcon class="w-6 h-6 text-[#444]" />
-                    How to play
+                    {{ $t('how_to_play') }}
                   </div>
                 </BaseDropdownItem>
               </template>
@@ -445,10 +450,12 @@ useHead({
       <div class="grid grid-cols-3 my-10 gap-10">
         <div class="col-span-3 lg:col-span-2">
           <div class="comments mb-5">
-            <h3 class="text-[24px] mb-4 font-medium">Ratings and reviews</h3>
+            <h3 class="text-[24px] mb-4 font-medium">
+              {{ $t('rating_review') }}
+            </h3>
             <div class="grid grid-cols-4 gap-5">
               <div class="col-span-4 md:col-span-1">
-                <p class="text-[20px] text-center mb-4">Average</p>
+                <p class="text-[20px] text-center mb-4">{{ $t('average') }}</p>
                 <p class="text-[48px] text-center mb-4 font-medium">4,5</p>
                 <div class="flex items-center justify-center">
                   <StarIcon class="w-6 h-6 fill-[#F7A824]" />
@@ -520,12 +527,14 @@ useHead({
                     </div>
                   </div>
                 </div>
-                <div class="flex justify-end text-[#90919D]">336N Ratings</div>
+                <div class="flex justify-end text-[#90919D]">
+                  336N {{ $t('ratings') }}
+                </div>
               </div>
             </div>
           </div>
           <div class="tap-rate">
-            <span>Tap to Rate:</span>
+            <span>{{ $t('tap_to_rate') }}:</span>
             <StarIcon
               v-for="index in 5"
               :key="index"
@@ -539,13 +548,13 @@ useHead({
             <div
               class="flex justify-between mb-4 border-b border-b-gray-200 pb-2"
             >
-              <h3>{{ comments.length }} Comments</h3>
+              <h3>{{ comments.length }} {{ $t('comments') }}</h3>
               <div class="flex items-center">
-                <span class="text-[14px] mr-2">Sort by</span>
+                <span class="text-[14px] mr-2">{{ $t('sort_by') }}</span>
                 <select id="sort" name="" class="text-[14px] py-1 px-2 rounded">
-                  <option value="1">Default</option>
-                  <option value="1">Latest</option>
-                  <option value="1">Oldest</option>
+                  <option value="1">{{ $t('default') }}</option>
+                  <option value="1">{{ $t('latest') }}</option>
+                  <option value="1">{{ $t('oldest') }}</option>
                 </select>
               </div>
             </div>
@@ -579,7 +588,7 @@ useHead({
                       type="submit"
                       class="text-white bg-[#EB8B3A] py-1 px-4 rounded text-[14px]"
                     >
-                      Send
+                      {{ $t('send') }}
                     </button>
                   </div>
                 </form>
@@ -588,17 +597,18 @@ useHead({
             <div v-else>
               <div class="border p-4 rounded mb-10">
                 <p class="font-medium text-center text-[14px] mb-2">
-                  Please register or login to post a comment
+                  {{ $t('login_to_comment') }}
                 </p>
                 <div class="flex justify-center items-center gap-4">
-                  <NuxtLink to="/login" class="comment__btn comment__btn-login"
-                    >Login</NuxtLink
-                  >
+                  <NuxtLink to="/login" class="comment__btn comment__btn-login">
+                    {{ $t('login') }}
+                  </NuxtLink>
                   <NuxtLink
                     to="/register"
                     class="comment__btn comment__btn-register"
-                    >Register</NuxtLink
                   >
+                    {{ $t('register') }}
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -609,7 +619,7 @@ useHead({
             />
           </template>
           <div class="suggest-game suggest-game--hot mt-10">
-            <h3>Game Hot</h3>
+            <h3>{{ $t('games_hot') }}</h3>
             <div class="suggest-game__list">
               <GameCard v-for="item in gamesHot" :key="item.id" :game="item" />
             </div>
@@ -617,7 +627,7 @@ useHead({
         </div>
         <div class="col-span-3 lg:col-span-1">
           <div class="suggest-game">
-            <h3>Similar games</h3>
+            <h3>{{ $t('similar_games') }}</h3>
             <div class="suggest-game__list">
               <GameCard
                 v-for="item in gamesSameCategory"
@@ -627,7 +637,7 @@ useHead({
             </div>
           </div>
           <div class="suggest-game">
-            <h3>Related Game</h3>
+            <h3>{{ $t('related_games') }}</h3>
             <div class="suggest-game__list">
               <GameCard
                 v-for="item in gamesSameTag"
@@ -666,7 +676,7 @@ useHead({
               <div class="flex items-center popup-info__company">
                 <span>XGame Studio</span>
                 <span class="dot"></span>
-                <span>2,1M+ playing</span>
+                <span>2,1M+ {{ $t('playing') }}</span>
               </div>
             </div>
           </div>
@@ -689,41 +699,41 @@ useHead({
             <Navigation />
           </template>
         </Carousel>
-        <h3 class="text-2xl font-medium">Introduction to the game</h3>
+        <h3 class="text-2xl font-medium">{{ $t('introduction_to_game') }}</h3>
         <div v-html="game.description"></div>
-        <h3 class="text-2xl font-medium">How to play</h3>
+        <h3 class="text-2xl font-medium">{{ $t('how_to_play') }}</h3>
         <p class="text-[14px]"></p>
-        <h3 class="text-2xl font-medium">Game information</h3>
+        <h3 class="text-2xl font-medium">{{ $t('game_information') }}</h3>
         <div class="grid grid-cols-3 gap-4">
           <div class="col-span-1">
-            <div>Age assessment</div>
+            <div>{{ $t('game_information') }}</div>
             <div class="font-light">0+</div>
           </div>
           <div class="col-span-1">
-            <div>Communication</div>
+            <div>{{ $t('communication') }}</div>
             <div class="font-light"></div>
           </div>
           <div class="col-span-1">
-            <div>Authorization support</div>
-            <div class="font-light">Yes</div>
+            <div>{{ $t('authorization_support') }}</div>
+            <div class="font-light">{{ $t('yes') }}</div>
           </div>
           <div class="col-span-1">
-            <div>Language</div>
+            <div>{{ $t('language') }}</div>
             <div class="font-light">English, Russisan</div>
           </div>
           <div class="col-span-1">
-            <div>Screen orientation</div>
+            <div>{{ $t('screen_orientation') }}</div>
             <div class="font-light"></div>
           </div>
           <div class="col-span-1">
-            <div>Release date</div>
+            <div>{{ $t('release_date') }}</div>
             <div class="font-light">
               {{ convertStringToDate(game.published_at) }}
             </div>
           </div>
           <div class="col-span-1">
-            <div>Save to cloud</div>
-            <div class="font-light">Yes</div>
+            <div>{{ $t('save_to_cloud') }}</div>
+            <div class="font-light">{{ $t('yes') }}</div>
           </div>
         </div>
       </template>

@@ -23,6 +23,10 @@ useHead({
   ],
 });
 
+definePageMeta({
+  middleware: ['locale'],
+});
+
 const userStore = useUserStore();
 const { $toast } = useNuxtApp();
 const config = useRuntimeConfig();
@@ -66,7 +70,6 @@ const validate = () => {
   return true;
 };
 
-// handle success event
 const handleLoginSuccess = async (response) => {
   const { data } = await axios.get(
     `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.access_token}`,
@@ -163,17 +166,17 @@ const loginWithFacebook = () => {
       <div id="stars3"></div>
     </template>
     <form @submit.prevent="handleLoginAccount">
-      <FormField label="Email" :error="errors.email" required>
+      <FormField :label="$t('form.email')" :error="errors.email" required>
         <FormInput v-model="email" type="text" />
       </FormField>
-      <FormField label="Password" :error="errors.password" required>
+      <FormField :label="$t('form.password')" :error="errors.password" required>
         <FormInput v-model="password" type="password" />
       </FormField>
-      <p class="text-[12px] font-bold">Forgot password ?</p>
+      <p class="text-[12px] font-bold">{{ $t('form.forget_password') }}?</p>
       <div class="form__button">
         <button type="submit" name="login">
           <Spinner v-show="isLoading" />
-          <span>Login</span>
+          <span>{{ $t('login') }}</span>
         </button>
       </div>
     </form>
@@ -181,11 +184,11 @@ const loginWithFacebook = () => {
     <div class="provider-btn">
       <button class="google-btn" :disabled="!isReady" @click="() => login()">
         <IconGoogle class="fill-white w-6 h-6" />
-        <span>Continue with Google</span>
+        <span>{{ $t('form.continue_with') }} Google</span>
       </button>
       <button class="facebook-btn" @click="loginWithFacebook">
         <IconFacebook class="fill-white w-6 h-6" />
-        <span>Continue with Facebook</span>
+        <span>{{ $t('form.continue_with') }} Facebook</span>
       </button>
     </div>
   </AuthLayout>

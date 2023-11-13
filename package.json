@@ -17,6 +17,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@nuxtjs/i18n": "^8.0.0-rc.5",
     "autoprefixer": "^10.4.15",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",

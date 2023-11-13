@@ -146,10 +146,14 @@
       </div>
       <hr class="h-px my-4 bg-[#d9d9d9] border-0" />
       <div class="flex justify-center gap-4 flex-wrap pb-4">
-        <NuxtLink class="text-[#375FC6] text-[14px]"> User Agreement </NuxtLink>
-        <NuxtLink class="text-[#375FC6] text-[14px]"> Privacy policy </NuxtLink>
         <NuxtLink class="text-[#375FC6] text-[14px]">
-          Technical assistance
+          {{ $t('user_agreement') }}
+        </NuxtLink>
+        <NuxtLink class="text-[#375FC6] text-[14px]">
+          {{ $t('privacy_policy') }}
+        </NuxtLink>
+        <NuxtLink class="text-[#375FC6] text-[14px]">
+          {{ $t('technical_assistance') }}
         </NuxtLink>
       </div>
     </div>

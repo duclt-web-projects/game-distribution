@@ -14,9 +14,9 @@ yourGames.value = yourGamesStore.getGames();
   <ClientOnly>
     <div class="mb-7">
       <div class="flex justify-between">
-        <Heading :icon="HeartIcon" title="Your games" />
+        <Heading :icon="HeartIcon" :title="$t('your_games')" />
         <button class="text-[#00B2FF]" @click="isEdit = !isEdit">
-          {{ isEdit ? 'Done' : 'Edit' }}
+          {{ isEdit ? $t('done') : $t('edit') }}
         </button>
       </div>
       <GamesCarousel

@@ -22,14 +22,16 @@ const isLogin = route.path.toLowerCase() === '/login';
               to="/login"
               class="tab tab-login"
               :class="{ 'tab--active': isLogin }"
-              >Login</NuxtLink
             >
+              {{ $t('login') }}
+            </NuxtLink>
             <NuxtLink
               to="/register"
               class="tab tab-register"
               :class="{ 'tab--active': !isLogin }"
-              >Register</NuxtLink
             >
+              {{ $t('register') }}
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -45,7 +47,7 @@ const isLogin = route.path.toLowerCase() === '/login';
           <NuxtLink to="/">
             <img src="/images/logos/logo-v2-white.png" alt="" />
           </NuxtLink>
-          <h1>Welcome to XGame</h1>
+          <h1>{{ $t('welcome_to_xgame') }}</h1>
         </div>
         <slot />
       </div>
@@ -1108,7 +1110,7 @@ const isLogin = route.path.toLowerCase() === '/login';
     }
 
     h1 {
-      margin-top: 8px;
+      margin-top: 16px;
       margin-bottom: 32px;
       font-size: 24px;
     }

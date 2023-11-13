@@ -48,7 +48,9 @@ onUnmounted(() => {
     class="sidebar relative lg:sticky top-0 overflow-y-auto"
     :style="{ height }"
   >
-    <h2 class="text-[14px] font-medium px-4 mb-3">CATEGORY</h2>
+    <h2 class="text-[14px] font-medium px-4 mb-3 uppercase">
+      {{ $t('category') }}
+    </h2>
     <div class="my-3 categories">
       <NuxtLink
         v-for="category in searchCategories"

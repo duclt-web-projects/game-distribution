@@ -32,7 +32,7 @@ const clearSearch = () => {
       <XMarkIcon v-else class="w-5 h-5" @click="clearSearch" />
       <input
         type="text"
-        placeholder="Search for..."
+        :placeholder="$t('search_for')"
         class="w-full leading-5 py-2 px-6 rounded-[50px] outline-none border-none text-gray-400 text-[14px] bg-[#F2F1FA]"
         :value="searchQuery"
         @input="debouncedSearch"

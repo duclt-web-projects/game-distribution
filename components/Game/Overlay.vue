@@ -72,38 +72,16 @@ const isPlay = ref(false);
                       <div class="fullscreen-game-play">
                         <button
                           id="fullscreen-button"
-                          style="display: block"
+                          style="display: block; text-transform: uppercase"
                           @click="isPlay = true"
                         >
-                          PLAY
+                          {{ $t('play') }}
                         </button>
                         <div class="pluto-loader" style="display: none">
                           Loading...
                         </div>
                       </div>
                     </div>
-                    <div class="fullscreen-game-title">
-                      <p>Super Snappy Collapse</p>
-                    </div>
-                    <div class="fullscreen-game-description">
-                      <p>
-                        Classic match game with a social element. Tap on groups
-                        of blocks of the same color to remove them, clear as
-                        many as you can before the time runs out!
-                      </p>
-                    </div>
-                  </div>
-                  <div class="fullscreen-game-consent" style="display: none">
-                    <p>
-                      We may show personalized ads provided by our partners, and
-                      our services can not be used by children under 16 years
-                      old without the consent of their legal guardian. By
-                      clicking "PLAY", you consent to transmit your data to our
-                      partners for advertising purposes and declare that you are
-                      16 years old or have the permission of your legal
-                      guardian. You can review our terms
-                      <a target="_blank">here</a>.
-                    </p>
                   </div>
                 </div>
                 <div

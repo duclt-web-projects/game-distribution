@@ -46,6 +46,7 @@ const fetchComment = ref(false);
 const modalActive = ref(false);
 const gameHeight = ref('656px');
 const isFullscreen = ref(false);
+const { locale } = useI18n();
 
 const { data: gamesSameCategory } = await useHttp<IGame[]>(`games`, {
   query: {
@@ -112,6 +113,7 @@ onMounted(() => {
       yourGames.push({
         id: game.value.id,
         name: game.value.name,
+        name_vi: game.value.name,
         slug: game.value.slug,
         thumbnail: game.value.thumbnail,
       });
@@ -700,9 +702,14 @@ useHead({
           </template>
         </Carousel>
         <h3 class="text-2xl font-medium">{{ $t('introduction_to_game') }}</h3>
-        <div v-html="game.description"></div>
+        <p
+          v-html="locale === 'en' ? game.description : game.description_vi"
+        ></p>
         <h3 class="text-2xl font-medium">{{ $t('how_to_play') }}</h3>
-        <p class="text-[14px]"></p>
+        <p
+          class="text-[14px]"
+          v-html="locale === 'en' ? game.instruction : game.instruction_vi"
+        ></p>
         <h3 class="text-2xl font-medium">{{ $t('game_information') }}</h3>
         <div class="grid grid-cols-3 gap-4">
           <div class="col-span-1">

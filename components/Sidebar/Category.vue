@@ -5,6 +5,8 @@ const props = defineProps({
   currentCategory: String,
 });
 
+const { locale } = useI18n();
+
 const { data: categories } = await useHttp<ICategory[]>('/categories');
 const searchCategories = ref<ICategory[]>([]);
 const searchCategoryText = ref('');
@@ -59,7 +61,7 @@ onUnmounted(() => {
       >
         <SidebarCategoryItem
           :icon="category.icon"
-          :label="category.name"
+          :label="locale === 'en' ? category.name : category.name_vi"
           :is-active="currentCategory === category.slug"
         />
       </NuxtLink>

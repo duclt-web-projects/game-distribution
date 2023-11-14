@@ -1,6 +1,7 @@
 export interface IGameLocal {
   id: number;
   name: string;
+  name_vi: string;
   slug: string;
   thumbnail: string;
 }
@@ -13,6 +14,9 @@ export interface IGame extends IGameLocal {
   source_link: string;
   author_id: number;
   description: string;
+  description_vi: string;
+  instruction: string;
+  instruction_vi: string;
   type: null;
   images: null;
   video: string;
@@ -25,6 +29,7 @@ export interface IGame extends IGameLocal {
 export interface ICategory {
   id: number;
   name: string;
+  name_vi: string;
   slug: string;
   icon: string;
 }
@@ -32,6 +37,7 @@ export interface ICategory {
 export interface ITag {
   id: number;
   name: string;
+  name_vi: string;
   slug: string;
 }
 

@@ -12,6 +12,7 @@ const props = defineProps({
 
 const { BACKEND_URL } = useUrlConfig();
 const yourGamesStore = useYourGamesStore();
+const { locale } = useI18n();
 
 const removeYourGames = () => {
   if (props.game) {
@@ -35,7 +36,7 @@ const removeYourGames = () => {
         >
       </div>
       <div class="game__info">
-        <span>{{ game.name }}</span>
+        <span>{{ locale === 'en' ? game.name : game.name_vi }}</span>
       </div>
     </NuxtLink>
   </div>
